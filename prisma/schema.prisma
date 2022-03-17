@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Series {
+  id      Int      @id @default(autoincrement())
+  name    String
+  seasons Season[] @relation(name: "Season_Series")
+}
+
+model Season {
+  id       Int    @id @default(autoincrement())
+  name     String // ex.: Formula 1 2022 World Championsip
+  seriesId Int
+  series   Series @relation(name: "Season_Series", fields: [seriesId], references: [id])
+}
+
+model Circuit {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
+model Event {
+  id   Int    @id @default(autoincrement())
+  circuitId Int
+  name String
+  round Int // Which round in the season?
+  laps Int
+  lapDistance Float // in KM
+  url String?
+}
+
+model EventSession {
+  id   Int    @id @default(autoincrement())
+  name String
+  type String // free_practice, qualification, sprint_race, race, ...
+}
+
+model EventSessionLap {
+  id   Int    @id @default(autoincrement())
+  eventSessionId Int
+  seasonTeamDriver Int
+  time DateTime?
+  position Int?
+}
+
+model EventSessionStartingGrid {
+  id   Int    @id @default(autoincrement())
+  eventSessionId Int
+  seasonTeamDriver Int
+  time DateTime?
+  position Int?
+  note String? // if the racer for example starts in the pit or has a penalty
+}
+
+model EventSessionClassification {
+  id   Int    @id @default(autoincrement())
+  eventSessionId Int
+  seasonTeamDriver Int
+  status String // finished, dnf, dns, ...
+  position Int?
+}
+
+model Driver {
+  id        Int    @id @default(autoincrement())
+  firstName String
+  lastName  String
+}
+
+model Team {
+  id        Int    @id @default(autoincrement())
+  name String
+  predecessorTeamId Int?
+  debutAt DateTime
+  defunctAt DateTime
+}
+
+model SeasonTeam {
+  id   Int    @id @default(autoincrement())
+  seasonId Int
+  teamId Int
+  name String // Full name of the team, including the title sponsor name
+  vehiclePath String // The path to the vehicle data, including the 3D models, ...
+  // TODO: what if the team goes defunct mid-season?
+}
+
+model SeasonTeamDriver {
+  id   Int    @id @default(autoincrement())
+  seasonTeamId Int
+  number Int
+  code String
+  isTemporary Boolean
+}
