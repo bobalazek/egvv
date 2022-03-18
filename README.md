@@ -1,3 +1,3 @@
-# Egvv - Engine Goes Vroom Vroom
+# EGVV - Engine Goes Vroom Vroom
 
-The project of all automoto projects
+The one AutoMoto project to rule them all.
