@@ -39,51 +39,55 @@ model Event {
 }
 
 model EventSession {
-  id                          Int                          @id @default(autoincrement())
-  name                        String
-  type                        String // free_practice, qualification, sprint_race, race, ...
-  eventId                     Int
-  event                       Event                        @relation(name: "EventSession_Event", fields: [eventId], references: [id])
-  eventSessionLaps            EventSessionLap[]            @relation(name: "EventSessionLap_EventSession")
-  eventSessionStartingGrids   EventSessionStartingGrid[]   @relation(name: "EventSessionStartingGrid_EventSession")
-  eventSessionClassifications EventSessionClassification[] @relation(name: "EventSessionClassification_EventSession")
+  id                                Int                                @id @default(autoincrement())
+  name                              String
+  type                              String // free_practice, qualification, sprint_race, race, ...
+  eventId                           Int
+  event                             Event                              @relation(name: "EventSession_Event", fields: [eventId], references: [id])
+  eventSessionDriverLaps            EventSessionDriverLap[]            @relation(name: "EventSessionDriverLap_EventSession")
+  eventSessionDriverStartingGrids   EventSessionDriverStartingGrid[]   @relation(name: "EventSessionDriverStartingGrid_EventSession")
+  eventSessionDriverClassifications EventSessionDriverClassification[] @relation(name: "EventSessionDriverClassification_EventSession")
 }
 
-model EventSessionLap {
-  id                 Int              @id @default(autoincrement())
-  time               DateTime?
-  position           Int?
-  eventSessionId     Int
-  eventSession       EventSession     @relation(name: "EventSessionLap_EventSession", fields: [eventSessionId], references: [id])
-  seasonTeamDriverId Int
-  seasonTeamDriver   SeasonTeamDriver @relation(name: "EventSessionLap_SeasonTeamDriver", fields: [seasonTeamDriverId], references: [id])
+model EventSessionDriverLap {
+  id             Int          @id @default(autoincrement())
+  time           DateTime?
+  position       Int?
+  eventSessionId Int
+  eventSession   EventSession @relation(name: "EventSessionDriverLap_EventSession", fields: [eventSessionId], references: [id])
+  driverId       Int
+  driver         Driver       @relation(name: "EventSessionDriverLap_Driver", fields: [driverId], references: [id])
 }
 
-model EventSessionStartingGrid {
-  id                 Int              @id @default(autoincrement())
-  time               DateTime?
-  position           Int?
-  note               String? // if the racer for example starts in the pit or has a penalty
-  eventSessionId     Int
-  eventSession       EventSession     @relation(name: "EventSessionStartingGrid_EventSession", fields: [eventSessionId], references: [id])
-  seasonTeamDriverId Int
-  seasonTeamDriver   SeasonTeamDriver @relation(name: "EventSessionStartingGrid_SeasonTeamDriver", fields: [seasonTeamDriverId], references: [id])
+model EventSessionDriverStartingGrid {
+  id             Int          @id @default(autoincrement())
+  time           DateTime?
+  position       Int?
+  note           String? // if the racer for example starts in the pit or has a penalty
+  eventSessionId Int
+  eventSession   EventSession @relation(name: "EventSessionDriverStartingGrid_EventSession", fields: [eventSessionId], references: [id])
+  driverId       Int
+  driver         Driver       @relation(name: "EventSessionDriverStartingGrid_Driver", fields: [driverId], references: [id])
 }
 
-model EventSessionClassification {
-  id                 Int              @id @default(autoincrement())
-  status             String // finished, dnf, dns, ...
-  position           Int?
-  eventSessionId     Int
-  eventSession       EventSession     @relation(name: "EventSessionClassification_EventSession", fields: [eventSessionId], references: [id])
-  seasonTeamDriverId Int
-  seasonTeamDriver   SeasonTeamDriver @relation(name: "EventSessionClassification_SeasonTeamDriver", fields: [seasonTeamDriverId], references: [id])
+model EventSessionDriverClassification {
+  id             Int          @id @default(autoincrement())
+  status         String // finished, dnf, dns, ...
+  position       Int?
+  note           String?
+  eventSessionId Int
+  eventSession   EventSession @relation(name: "EventSessionDriverClassification_EventSession", fields: [eventSessionId], references: [id])
+  driverId       Int
+  driver         Driver       @relation(name: "EventSessionDriverClassification_Driver", fields: [driverId], references: [id])
 }
 
 model Driver {
-  id        Int    @id @default(autoincrement())
-  firstName String
-  lastName  String
+  id                                Int                                @id @default(autoincrement())
+  firstName                         String
+  lastName                          String
+  eventSessionDriverLaps            EventSessionDriverLap[]            @relation(name: "EventSessionDriverLap_Driver")
+  eventSessionDriverStartingGrids   EventSessionDriverStartingGrid[]   @relation(name: "EventSessionDriverStartingGrid_Driver")
+  eventSessionDriverClassifications EventSessionDriverClassification[] @relation(name: "EventSessionDriverClassification_Driver")
 }
 
 model Team {
@@ -104,13 +108,10 @@ model SeasonTeam {
 }
 
 model SeasonTeamDriver {
-  id                          Int                          @id @default(autoincrement())
-  number                      Int
-  code                        String
-  isTemporary                 Boolean
-  seasonTeamId                Int
-  seasonTeam                  SeasonTeam                   @relation(name: "SeasonTeamDriver_SeasonTeam", fields: [seasonTeamId], references: [id])
-  eventSessionLaps            EventSessionLap[]            @relation(name: "EventSessionLap_SeasonTeamDriver")
-  eventSessionStartingGrids   EventSessionStartingGrid[]   @relation(name: "EventSessionStartingGrid_SeasonTeamDriver")
-  eventSessionClassifications EventSessionClassification[] @relation(name: "EventSessionClassification_SeasonTeamDriver")
+  id           Int        @id @default(autoincrement())
+  number       Int
+  code         String
+  isTemporary  Boolean
+  seasonTeamId Int
+  seasonTeam   SeasonTeam @relation(name: "SeasonTeamDriver_SeasonTeam", fields: [seasonTeamId], references: [id])
 }
