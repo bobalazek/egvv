@@ -5,23 +5,19 @@
     "defaultBase": "master"
   },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
+    "defaultCollection": "@nrwl/nest"
   },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
   },
   "workspaceLayout": {
     "appsDir": "apps",
     "libsDir": "libs"
-  }
+  },
+  "defaultProject": "api"
 }

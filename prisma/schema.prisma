@@ -100,7 +100,7 @@ model Driver {
   firstName              String
   lastName               String
   nationalityCountryCode String
-  url                    String
+  url                    String?
 }
 
 model Team {
