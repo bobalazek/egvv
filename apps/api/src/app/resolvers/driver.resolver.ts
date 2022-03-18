@@ -15,8 +15,8 @@ export class DriverResolver {
   @Query(() => [Driver])
   async drivers(@Args() pagination: PaginationArgs) {
     return this._prismaService.driver.findMany({
-      skip: pagination.offset || 0,
-      take: pagination.limit || 10,
+      skip: pagination.offset,
+      take: pagination.limit,
     });
   }
 }
