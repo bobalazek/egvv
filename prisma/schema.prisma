@@ -16,11 +16,12 @@ model Series {
 }
 
 model Season {
-  id       Int    @id @default(autoincrement())
-  key      String
-  name     String // ex.: Formula 1 2022 World Championsip
-  seriesId Int
-  series   Series @relation(name: "Season_Series", fields: [seriesId], references: [id])
+  id          Int          @id @default(autoincrement())
+  key         String
+  name        String // ex.: Formula 1 2022 World Championship
+  seriesId    Int
+  series      Series       @relation(name: "Season_Series", fields: [seriesId], references: [id])
+  seasonTeams SeasonTeam[] @relation(name: "SeasonTeam_Season")
 }
 
 model Circuit {
@@ -99,48 +100,70 @@ model EventSessionTeamDriverClassification {
 }
 
 model Driver {
-  id                     Int     @id @default(autoincrement())
+  id                     Int                @id @default(autoincrement())
   key                    String
   firstName              String
   lastName               String
   nationalityCountryCode String
   url                    String?
+  seasonTeamDrivers      SeasonTeamDriver[] @relation(name: "SeasonTeamDriver_Driver")
 }
 
 model Team {
-  id                Int       @id @default(autoincrement())
+  id                Int          @id @default(autoincrement())
   key               String
   name              String // Short name of the team like "Mercedes", "Ferarri", "Redbull"
   baseCountryCode   String
   url               String
   debutAt           DateTime
   defunctAt         DateTime?
-  predecessorTeamId Int?      @unique
-  predecessorTeam   Team?     @relation("Team_PredecessorTeam", fields: [predecessorTeamId], references: [id])
-  successorTeam     Team?     @relation("Team_PredecessorTeam")
+  predecessorTeamId Int?         @unique
+  predecessorTeam   Team?        @relation("Team_PredecessorTeam", fields: [predecessorTeamId], references: [id])
+  successorTeam     Team?        @relation("Team_PredecessorTeam")
+  seasonTeams       SeasonTeam[] @relation(name: "SeasonTeam_Team")
 }
 
 model SeasonTeam {
-  id                Int                @id @default(autoincrement())
-  seasonId          Int
-  teamId            Int
-  name              String
-  fullName          String // Full name of the team, like "Mercedes-AMG Petronas F1 Team", "Scuderia Ferarri", ...
-  powerUnit         String
-  isDefunct         Boolean
-  vehicleId         Int                @unique
-  vehicle           Vehicle            @relation(name: "SeasonTeam_Vehicle", fields: [vehicleId], references: [id])
-  seasonTeamDrivers SeasonTeamDriver[] @relation(name: "SeasonTeamDriver_SeasonTeam")
+  id                     Int                     @id @default(autoincrement())
+  name                   String
+  fullName               String // Full name of the team, like "Mercedes-AMG Petronas F1 Team", "Scuderia Ferarri", ...
+  powerUnit              String
+  isDefunct              Boolean
+  seasonId               Int
+  season                 Season                  @relation(name: "SeasonTeam_Season", fields: [seasonId], references: [id])
+  teamId                 Int
+  team                   Team                    @relation(name: "SeasonTeam_Team", fields: [teamId], references: [id])
+  vehicleId              Int                     @unique
+  vehicle                Vehicle                 @relation(name: "SeasonTeam_Vehicle", fields: [vehicleId], references: [id])
+  seasonTeamDrivers      SeasonTeamDriver[]      @relation(name: "SeasonTeamDriver_SeasonTeam")
+  seasonTeamPointRewards SeasonTeamPointReward[] @relation(name: "SeasonTeamPointReward_SeasonTeam")
+}
+
+model SeasonTeamPointReward {
+  id           Int        @id @default(autoincrement())
+  points       Float? // Yes, as we've seen last season, there can be half points
+  seasonTeamId Int
+  seasonTeam   SeasonTeam @relation(name: "SeasonTeamPointReward_SeasonTeam", fields: [seasonTeamId], references: [id])
 }
 
 model SeasonTeamDriver {
-  id                      Int                      @id @default(autoincrement())
-  number                  Int
-  code                    String
-  isTemporary             Boolean
-  seasonTeamId            Int
-  seasonTeam              SeasonTeam               @relation(name: "SeasonTeamDriver_SeasonTeam", fields: [seasonTeamId], references: [id])
-  eventSessionTeamDrivers EventSessionTeamDriver[] @relation(name: "EventSessionTeamDriver_SeasonTeamDriver")
+  id                           Int                           @id @default(autoincrement())
+  number                       Int
+  code                         String
+  isTemporary                  Boolean
+  seasonTeamId                 Int
+  seasonTeam                   SeasonTeam                    @relation(name: "SeasonTeamDriver_SeasonTeam", fields: [seasonTeamId], references: [id])
+  driverId                     Int
+  driver                       Driver                        @relation(name: "SeasonTeamDriver_Driver", fields: [driverId], references: [id])
+  eventSessionTeamDrivers      EventSessionTeamDriver[]      @relation(name: "EventSessionTeamDriver_SeasonTeamDriver")
+  seasonTeamDriverPointRewards SeasonTeamDriverPointReward[] @relation(name: "SeasonTeamPointReward_SeasonTeamDriver")
+}
+
+model SeasonTeamDriverPointReward {
+  id                 Int              @id @default(autoincrement())
+  points             Float? // Yes, as we've seen last season, there can be half points
+  seasonTeamDriverId Int
+  seasonTeamDriver   SeasonTeamDriver @relation(name: "SeasonTeamPointReward_SeasonTeamDriver", fields: [seasonTeamDriverId], references: [id])
 }
 
 model Vehicle {
