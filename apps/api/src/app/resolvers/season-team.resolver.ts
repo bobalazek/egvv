@@ -27,28 +27,28 @@ export class SeasonTeamResolver {
   }
 
   @ResolveField('season', () => Season)
-  async season(@Parent() seasonTeam: SeasonTeam) {
+  async season(@Parent() parent: SeasonTeam) {
     return this._prismaService.season.findFirst({
       where: {
-        id: seasonTeam.seasonId,
+        id: parent.seasonId,
       },
     });
   }
 
   @ResolveField('team', () => Team)
-  async team(@Parent() seasonTeam: SeasonTeam) {
+  async team(@Parent() parent: SeasonTeam) {
     return this._prismaService.team.findFirst({
       where: {
-        id: seasonTeam.teamId,
+        id: parent.teamId,
       },
     });
   }
 
   @ResolveField('vehicle', () => Vehicle)
-  async vehicle(@Parent() seasonTeam: SeasonTeam) {
+  async vehicle(@Parent() parent: SeasonTeam) {
     return this._prismaService.vehicle.findFirst({
       where: {
-        id: seasonTeam.vehicleId,
+        id: parent.vehicleId,
       },
     });
   }
