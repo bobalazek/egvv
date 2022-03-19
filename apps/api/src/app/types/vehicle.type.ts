@@ -1,19 +1,19 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 @ObjectType()
-export class Driver {
+export class Vehicle {
   @Field(() => ID)
   id: string;
 
   @Field()
-  firstName: string;
+  slug: string;
 
   @Field()
-  lastName: string;
+  name: string;
 
   @Field()
-  nationalityCountryCode: string;
+  powerUnit: string;
 
-  @Field()
-  url: string;
+  @Field({ nullable: true })
+  note: string;
 }

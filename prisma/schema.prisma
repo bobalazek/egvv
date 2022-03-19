@@ -40,7 +40,7 @@ model Driver {
   firstName              String
   lastName               String
   nationalityCountryCode String
-  url                    String?
+  url                    String
   seasonTeamDrivers      SeasonTeamDriver[] @relation(name: "SeasonTeamDriver_Driver")
 }
 
@@ -48,7 +48,7 @@ model Team {
   id                Int          @id @default(autoincrement())
   slug              String
   name              String // Short name of the team like "Mercedes", "Ferarri", "Redbull"
-  baseCountryCode   String
+  countryCode       String
   url               String
   debutAt           DateTime
   defunctAt         DateTime?

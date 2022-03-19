@@ -6,6 +6,9 @@ import { SeriesResolver } from './resolvers/series.resolver';
 import { SeasonResolver } from './resolvers/season.resolver';
 import { DriverResolver } from './resolvers/driver.resolver';
 import { PrismaService } from '../services/prisma.service';
+import { CircuitResolver } from './resolvers/circuit.resolver';
+import { TeamResolver } from './resolvers/team.resolver';
+import { VehicleResolver } from './resolvers/vehicle.resolver';
 
 @Module({
   imports: [
@@ -15,6 +18,9 @@ import { PrismaService } from '../services/prisma.service';
     }),
   ],
   providers: [
+    CircuitResolver,
+    TeamResolver,
+    VehicleResolver,
     SeriesResolver,
     SeasonResolver,
     DriverResolver,
