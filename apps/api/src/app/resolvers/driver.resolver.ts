@@ -1,7 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
-import { PaginationArgs } from '../args/pagination.args';
+import { DriverArgs } from '../args/driver.args';
 import { Driver } from '../types/driver.type';
 
 @Resolver(Driver)
@@ -13,10 +13,10 @@ export class DriverResolver {
   }
 
   @Query(() => [Driver])
-  async drivers(@Args() pagination: PaginationArgs) {
+  async drivers(@Args() args: DriverArgs) {
     return this._prismaService.driver.findMany({
-      skip: pagination.offset,
-      take: pagination.limit,
+      skip: args.offset,
+      take: args.limit,
     });
   }
 }

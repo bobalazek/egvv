@@ -120,23 +120,26 @@ model SeasonTeamDriverStandingsEntry {
 }
 
 model Event {
-  id            Int            @id @default(autoincrement())
-  slug          String
-  name          String
-  round         Int // Which round in the season?
-  laps          Int
-  lapDistance   Float // in KM
-  url           String?
-  date          DateTime
-  circuitId     Int
-  circuit       Circuit        @relation(name: "Event_Circuit", fields: [circuitId], references: [id])
-  eventSessions EventSession[] @relation(name: "EventSession_Event")
+  id                Int            @id @default(autoincrement())
+  slug              String
+  name              String
+  round             Int // Which round in the season?
+  laps              Int
+  lapDistance       Float // in km
+  date              DateTime
+  url               String?
+  location          String?
+  locationLatitude  Float?
+  locationLongitude Float?
+  circuitId         Int
+  circuit           Circuit        @relation(name: "Event_Circuit", fields: [circuitId], references: [id])
+  eventSessions     EventSession[] @relation(name: "EventSession_Event")
 }
 
 model EventSession {
   id                                    Int                              @id @default(autoincrement())
   name                                  String
-  type                                  String // free_practice, qualification, sprint_race, race, ...
+  type                                  String // free_practice_1, qualifying, sprint_race, race, feature_race, ...
   eventId                               Int
   event                                 Event                            @relation(name: "EventSession_Event", fields: [eventId], references: [id])
   eventSessionTeamDrivers               EventSessionTeamDriver[]         @relation(name: "EventSessionTeamDriver_EventSession")
