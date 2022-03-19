@@ -17,6 +17,7 @@ model Series {
 
 model Season {
   id       Int    @id @default(autoincrement())
+  key      String
   name     String // ex.: Formula 1 2022 World Championsip
   seriesId Int
   series   Series @relation(name: "Season_Series", fields: [seriesId], references: [id])
@@ -24,6 +25,7 @@ model Season {
 
 model Circuit {
   id          Int     @id @default(autoincrement())
+  key         String
   name        String
   location    String
   countryCode String
@@ -33,6 +35,7 @@ model Circuit {
 
 model Event {
   id            Int            @id @default(autoincrement())
+  key           String
   name          String
   round         Int // Which round in the season?
   laps          Int
@@ -96,7 +99,8 @@ model EventSessionTeamDriverClassification {
 }
 
 model Driver {
-  id                     Int    @id @default(autoincrement())
+  id                     Int     @id @default(autoincrement())
+  key                    String
   firstName              String
   lastName               String
   nationalityCountryCode String
@@ -105,6 +109,7 @@ model Driver {
 
 model Team {
   id                Int       @id @default(autoincrement())
+  key               String
   name              String // Short name of the team like "Mercedes", "Ferarri", "Redbull"
   baseCountryCode   String
   url               String
@@ -140,6 +145,7 @@ model SeasonTeamDriver {
 
 model Vehicle {
   id                     Int                     @id @default(autoincrement())
+  key                    String
   name                   String
   powerUnit              String
   note                   String? // If the model has for example a specific livery
