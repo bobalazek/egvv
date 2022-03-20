@@ -1,7 +1,8 @@
-import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
+import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
-import { SeasonTeamArgs } from '../args/season-team.args';
+import { SeasonTeamDriver } from '../types/season-team-driver.type';
+import { SeasonTeamStandingsEntry } from '../types/season-team-standings-entry.type';
 import { SeasonTeam } from '../types/season-team.type';
 import { Season } from '../types/season.type';
 import { Team } from '../types/team.type';
@@ -15,13 +16,11 @@ export class SeasonTeamResolver {
     this._prismaService = prismaService;
   }
 
-  @Query(() => [SeasonTeam])
-  async seasonTeams(@Args() args: SeasonTeamArgs) {
-    return this._prismaService.seasonTeam.findMany({
+  @ResolveField('seasonTeamDrivers', () => [SeasonTeamDriver])
+  async seasonTeamDrivers(@Parent() parent: SeasonTeam) {
+    return this._prismaService.seasonTeamDriver.findMany({
       where: {
-        season: {
-          slug: args.seasonSlug,
-        },
+        seasonTeamId: parseInt(parent.id),
       },
     });
   }
@@ -49,6 +48,15 @@ export class SeasonTeamResolver {
     return this._prismaService.vehicle.findFirst({
       where: {
         id: parent.vehicleId,
+      },
+    });
+  }
+
+  @ResolveField('seasonTeamStandingsEntries', () => [SeasonTeamStandingsEntry])
+  async seasonTeamStandingsEntries(@Parent() parent: SeasonTeam) {
+    return this._prismaService.seasonTeamStandingsEntry.findMany({
+      where: {
+        seasonTeamId: parseInt(parent.id),
       },
     });
   }

@@ -143,6 +143,7 @@ model EventSession {
   id                               Int                              @id @default(autoincrement())
   name                             String
   type                             String // free_practice_1, qualifying, sprint_race, race, feature_race, ...
+  tyreChoices                      Json?
   eventId                          Int
   event                            Event                            @relation(name: "EventSession_Event", fields: [eventId], references: [id])
   eventSessionTeamDrivers          EventSessionTeamDriver[]         @relation(name: "EventSessionTeamDriver_EventSession")
@@ -167,6 +168,7 @@ model EventSessionTeamDriver {
 
 model EventSessionTeamDriverLap {
   id                       Int                    @id @default(autoincrement())
+  lap                      Int
   time                     DateTime?
   position                 Int?
   eventSessionTeamDriverId Int

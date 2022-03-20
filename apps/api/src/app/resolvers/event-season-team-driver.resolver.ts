@@ -1,7 +1,6 @@
-import { Resolver, Query, ResolveField, Parent, Args } from '@nestjs/graphql';
+import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
-import { EventSessionTeamDriverArgs } from '../args/event-session-team-driver.args';
 import { EventSessionTeamDriver } from '../types/event-session-team-driver.type';
 import { EventSession } from '../types/event-session.type';
 import { SeasonTeamDriver } from '../types/season-team-driver.type';
@@ -13,15 +12,6 @@ export class EventSessionTeamDriverResolver {
 
   constructor(prismaService: PrismaService) {
     this._prismaService = prismaService;
-  }
-
-  @Query(() => [EventSessionTeamDriver])
-  async eventSeasonTeamDrivers(@Args() args: EventSessionTeamDriverArgs) {
-    return this._prismaService.eventSessionTeamDriver.findMany({
-      where: {
-        eventSessionId: args.eventSessionId,
-      },
-    });
   }
 
   @ResolveField('eventSession', () => EventSession)
