@@ -37,7 +37,7 @@ CREATE TABLE "Driver" (
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "nationalityCountryCode" TEXT NOT NULL,
-    "url" TEXT,
+    "url" TEXT NOT NULL,
 
     CONSTRAINT "Driver_pkey" PRIMARY KEY ("id")
 );
@@ -47,7 +47,7 @@ CREATE TABLE "Team" (
     "id" SERIAL NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "baseCountryCode" TEXT NOT NULL,
+    "countryCode" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "debutAt" TIMESTAMP(3) NOT NULL,
     "defunctAt" TIMESTAMP(3),
@@ -82,18 +82,6 @@ CREATE TABLE "SeasonTeam" (
 );
 
 -- CreateTable
-CREATE TABLE "SeasonTeamPointStandingsEntry" (
-    "id" SERIAL NOT NULL,
-    "points" DOUBLE PRECISION NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
-    "note" TEXT,
-    "seasonTeamId" INTEGER NOT NULL,
-    "eventSessionId" INTEGER,
-
-    CONSTRAINT "SeasonTeamPointStandingsEntry_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "SeasonTeamDriver" (
     "id" SERIAL NOT NULL,
     "number" INTEGER NOT NULL,
@@ -103,6 +91,18 @@ CREATE TABLE "SeasonTeamDriver" (
     "driverId" INTEGER NOT NULL,
 
     CONSTRAINT "SeasonTeamDriver_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "SeasonTeamPointStandingsEntry" (
+    "id" SERIAL NOT NULL,
+    "points" DOUBLE PRECISION NOT NULL,
+    "date" TIMESTAMP(3) NOT NULL,
+    "note" TEXT,
+    "seasonTeamId" INTEGER NOT NULL,
+    "eventSessionId" INTEGER,
+
+    CONSTRAINT "SeasonTeamPointStandingsEntry_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -130,6 +130,7 @@ CREATE TABLE "Event" (
     "location" TEXT,
     "locationLatitude" DOUBLE PRECISION,
     "locationLongitude" DOUBLE PRECISION,
+    "seasonId" INTEGER NOT NULL,
     "circuitId" INTEGER NOT NULL,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
@@ -216,22 +217,25 @@ ALTER TABLE "SeasonTeam" ADD CONSTRAINT "SeasonTeam_teamId_fkey" FOREIGN KEY ("t
 ALTER TABLE "SeasonTeam" ADD CONSTRAINT "SeasonTeam_vehicleId_fkey" FOREIGN KEY ("vehicleId") REFERENCES "Vehicle"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SeasonTeamPointStandingsEntry" ADD CONSTRAINT "SeasonTeamPointStandingsEntry_seasonTeamId_fkey" FOREIGN KEY ("seasonTeamId") REFERENCES "SeasonTeam"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SeasonTeamPointStandingsEntry" ADD CONSTRAINT "SeasonTeamPointStandingsEntry_eventSessionId_fkey" FOREIGN KEY ("eventSessionId") REFERENCES "EventSession"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "SeasonTeamDriver" ADD CONSTRAINT "SeasonTeamDriver_driverId_fkey" FOREIGN KEY ("driverId") REFERENCES "Driver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SeasonTeamDriver" ADD CONSTRAINT "SeasonTeamDriver_seasonTeamId_fkey" FOREIGN KEY ("seasonTeamId") REFERENCES "SeasonTeam"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "SeasonTeamPointStandingsEntry" ADD CONSTRAINT "SeasonTeamPointStandingsEntry_seasonTeamId_fkey" FOREIGN KEY ("seasonTeamId") REFERENCES "SeasonTeam"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "SeasonTeamPointStandingsEntry" ADD CONSTRAINT "SeasonTeamPointStandingsEntry_eventSessionId_fkey" FOREIGN KEY ("eventSessionId") REFERENCES "EventSession"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "SeasonTeamDriverStandingsEntry" ADD CONSTRAINT "SeasonTeamDriverStandingsEntry_seasonTeamDriverId_fkey" FOREIGN KEY ("seasonTeamDriverId") REFERENCES "SeasonTeamDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SeasonTeamDriverStandingsEntry" ADD CONSTRAINT "SeasonTeamDriverStandingsEntry_eventSessionId_fkey" FOREIGN KEY ("eventSessionId") REFERENCES "EventSession"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Event" ADD CONSTRAINT "Event_seasonId_fkey" FOREIGN KEY ("seasonId") REFERENCES "Season"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Event" ADD CONSTRAINT "Event_circuitId_fkey" FOREIGN KEY ("circuitId") REFERENCES "Circuit"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

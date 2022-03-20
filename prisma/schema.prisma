@@ -22,6 +22,7 @@ model Season {
   seriesId    Int
   series      Series       @relation(name: "Season_Series", fields: [seriesId], references: [id])
   seasonTeams SeasonTeam[] @relation(name: "SeasonTeam_Season")
+  events      Event[]      @relation(name: "Event_Season")
 }
 
 model Circuit {
@@ -84,17 +85,6 @@ model SeasonTeam {
   seasonTeamPointStandingsEntries SeasonTeamPointStandingsEntry[] @relation(name: "SeasonTeamPointStandingsEntry_SeasonTeam")
 }
 
-model SeasonTeamPointStandingsEntry {
-  id             Int           @id @default(autoincrement())
-  points         Float
-  date           DateTime
-  note           String?
-  seasonTeamId   Int
-  seasonTeam     SeasonTeam    @relation(name: "SeasonTeamPointStandingsEntry_SeasonTeam", fields: [seasonTeamId], references: [id])
-  eventSessionId Int?
-  eventSession   EventSession? @relation(name: "SeasonTeamPointStandingsEntry_EventSession", fields: [eventSessionId], references: [id])
-}
-
 model SeasonTeamDriver {
   id                               Int                              @id @default(autoincrement())
   number                           Int
@@ -106,6 +96,17 @@ model SeasonTeamDriver {
   driver                           Driver                           @relation(name: "SeasonTeamDriver_Driver", fields: [driverId], references: [id])
   eventSessionTeamDrivers          EventSessionTeamDriver[]         @relation(name: "EventSessionTeamDriver_SeasonTeamDriver")
   seasonTeamDriverStandingsEntries SeasonTeamDriverStandingsEntry[] @relation(name: "SeasonTeamDriverStandingsEntry_SeasonTeamDriver")
+}
+
+model SeasonTeamPointStandingsEntry {
+  id             Int           @id @default(autoincrement())
+  points         Float
+  date           DateTime
+  note           String?
+  seasonTeamId   Int
+  seasonTeam     SeasonTeam    @relation(name: "SeasonTeamPointStandingsEntry_SeasonTeam", fields: [seasonTeamId], references: [id])
+  eventSessionId Int?
+  eventSession   EventSession? @relation(name: "SeasonTeamPointStandingsEntry_EventSession", fields: [eventSessionId], references: [id])
 }
 
 model SeasonTeamDriverStandingsEntry {
@@ -131,6 +132,8 @@ model Event {
   location          String?
   locationLatitude  Float?
   locationLongitude Float?
+  seasonId          Int
+  season            Season         @relation(name: "Event_Season", fields: [seasonId], references: [id])
   circuitId         Int
   circuit           Circuit        @relation(name: "Event_Circuit", fields: [circuitId], references: [id])
   eventSessions     EventSession[] @relation(name: "EventSession_Event")
