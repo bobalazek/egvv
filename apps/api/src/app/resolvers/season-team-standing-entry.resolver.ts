@@ -1,12 +1,12 @@
 import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
-import { SeasonTeamStandingsEntry } from '../types/season-team-standings-entry.type';
+import { SeasonTeamStandingEntry } from '../types/season-team-standing-entry.type';
 import { EventSession } from '../types/event-session.type';
 import { SeasonTeam } from '../types/season-team.type';
 
-@Resolver(SeasonTeamStandingsEntry)
-export class SeasonTeamStandingsEntryResolver {
+@Resolver(SeasonTeamStandingEntry)
+export class SeasonTeamStandingEntryResolver {
   private _prismaService: PrismaService;
 
   constructor(prismaService: PrismaService) {
@@ -14,7 +14,7 @@ export class SeasonTeamStandingsEntryResolver {
   }
 
   @ResolveField('seasonTeam', () => SeasonTeam)
-  async seasonTeam(@Parent() parent: SeasonTeamStandingsEntry) {
+  async seasonTeam(@Parent() parent: SeasonTeamStandingEntry) {
     return this._prismaService.seasonTeam.findFirst({
       where: {
         id: parent.seasonTeamId,
@@ -23,7 +23,7 @@ export class SeasonTeamStandingsEntryResolver {
   }
 
   @ResolveField('eventSession', () => EventSession)
-  async driver(@Parent() parent: SeasonTeamStandingsEntry) {
+  async driver(@Parent() parent: SeasonTeamStandingEntry) {
     return this._prismaService.eventSession.findFirst({
       where: {
         id: parent.eventSessionId,

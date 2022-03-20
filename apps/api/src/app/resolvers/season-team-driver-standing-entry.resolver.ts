@@ -1,12 +1,12 @@
 import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
-import { SeasonTeamDriverStandingsEntry } from '../types/season-team-driver-standings-entry.type';
+import { SeasonTeamDriverStandingEntry } from '../types/season-team-driver-standing-entry.type';
 import { EventSession } from '../types/event-session.type';
 import { SeasonTeam } from '../types/season-team.type';
 
-@Resolver(SeasonTeamDriverStandingsEntry)
-export class SeasonTeamDriverStandingsEntryResolver {
+@Resolver(SeasonTeamDriverStandingEntry)
+export class SeasonTeamDriverStandingEntryResolver {
   private _prismaService: PrismaService;
 
   constructor(prismaService: PrismaService) {
@@ -14,7 +14,7 @@ export class SeasonTeamDriverStandingsEntryResolver {
   }
 
   @ResolveField('seasonDriverTeam', () => SeasonTeam)
-  async seasonTeam(@Parent() parent: SeasonTeamDriverStandingsEntry) {
+  async seasonTeam(@Parent() parent: SeasonTeamDriverStandingEntry) {
     return this._prismaService.seasonTeamDriver.findFirst({
       where: {
         id: parent.seasonTeamDriverId,
@@ -23,7 +23,7 @@ export class SeasonTeamDriverStandingsEntryResolver {
   }
 
   @ResolveField('eventSession', () => EventSession)
-  async driver(@Parent() parent: SeasonTeamDriverStandingsEntry) {
+  async driver(@Parent() parent: SeasonTeamDriverStandingEntry) {
     return this._prismaService.eventSession.findFirst({
       where: {
         id: parent.eventSessionId,
@@ -31,9 +31,9 @@ export class SeasonTeamDriverStandingsEntryResolver {
     });
   }
 
-  @ResolveField('seasonTeamDriverStandingsEntries', () => [SeasonTeamDriverStandingsEntry])
-  async seasonTeamDriverStandingsEntries(@Parent() parent: SeasonTeam) {
-    return this._prismaService.seasonTeamDriverStandingsEntry.findMany({
+  @ResolveField('seasonTeamDriverStandingEntries', () => [SeasonTeamDriverStandingEntry])
+  async seasonTeamDriverStandingEntries(@Parent() parent: SeasonTeam) {
+    return this._prismaService.seasonTeamDriverStandingEntry.findMany({
       where: {
         seasonTeamDriverId: parseInt(parent.id),
       },

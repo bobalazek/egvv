@@ -2,7 +2,7 @@ import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
 import { SeasonTeamDriver } from '../types/season-team-driver.type';
-import { SeasonTeamStandingsEntry } from '../types/season-team-standings-entry.type';
+import { SeasonTeamStandingEntry } from '../types/season-team-standing-entry.type';
 import { SeasonTeam } from '../types/season-team.type';
 import { Season } from '../types/season.type';
 import { Team } from '../types/team.type';
@@ -52,9 +52,9 @@ export class SeasonTeamResolver {
     });
   }
 
-  @ResolveField('seasonTeamStandingsEntries', () => [SeasonTeamStandingsEntry])
-  async seasonTeamStandingsEntries(@Parent() parent: SeasonTeam) {
-    return this._prismaService.seasonTeamStandingsEntry.findMany({
+  @ResolveField('seasonTeamStandingEntries', () => [SeasonTeamStandingEntry])
+  async seasonTeamStandingEntries(@Parent() parent: SeasonTeam) {
+    return this._prismaService.seasonTeamStandingEntry.findMany({
       where: {
         seasonTeamId: parseInt(parent.id),
       },
