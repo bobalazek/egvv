@@ -1,8 +1,11 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
 import { EventArgs } from '../args/event.args';
+import { Circuit } from '../types/circuit.type';
+import { EventSession } from '../types/event-session.type';
 import { Event } from '../types/event.type';
+import { Season } from '../types/season.type';
 
 @Resolver(Event)
 export class EventResolver {
@@ -21,6 +24,33 @@ export class EventResolver {
             slug: args.seriesSlug,
           },
         },
+      },
+    });
+  }
+
+  @ResolveField('season', () => Season)
+  async season(@Parent() parent: Event) {
+    return this._prismaService.season.findFirst({
+      where: {
+        id: parent.seasonId,
+      },
+    });
+  }
+
+  @ResolveField('circuit', () => Circuit)
+  async circuit(@Parent() parent: Event) {
+    return this._prismaService.circuit.findFirst({
+      where: {
+        id: parent.circuitId,
+      },
+    });
+  }
+
+  @ResolveField('eventSessions', () => [EventSession])
+  async eventSessions(@Parent() parent: Event) {
+    return this._prismaService.eventSession.findMany({
+      where: {
+        eventId: parseInt(parent.id),
       },
     });
   }

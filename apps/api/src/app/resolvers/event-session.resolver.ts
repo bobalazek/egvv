@@ -1,8 +1,9 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
 import { EventSessionArgs } from '../args/event-session.args';
 import { EventSession } from '../types/event-session.type';
+import { Event } from '../types/event.type';
 
 @Resolver(EventSession)
 export class EventSessionResolver {
@@ -19,6 +20,15 @@ export class EventSessionResolver {
         event: {
           slug: args.eventSlug,
         },
+      },
+    });
+  }
+
+  @ResolveField('event', () => Event)
+  async event(@Parent() parent: EventSession) {
+    return this._prismaService.event.findFirst({
+      where: {
+        id: parent.eventId,
       },
     });
   }

@@ -7,7 +7,7 @@ import { Driver } from '../types/driver.type';
 import { SeasonTeamDriver } from '../types/season-team-driver.type';
 import { SeasonTeam } from '../types/season-team.type';
 
-@Resolver(SeasonTeam)
+@Resolver(SeasonTeamDriver)
 export class SeasonTeamDriverResolver {
   private _prismaService: PrismaService;
 
