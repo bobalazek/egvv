@@ -2,6 +2,7 @@ import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
 import { EventSessionArgs } from '../args/event-session.args';
+import { EventSessionTeamDriver } from '../types/event-session-team-driver.type';
 import { EventSession } from '../types/event-session.type';
 import { Event } from '../types/event.type';
 
@@ -29,6 +30,15 @@ export class EventSessionResolver {
     return this._prismaService.event.findFirst({
       where: {
         id: parent.eventId,
+      },
+    });
+  }
+
+  @ResolveField('eventSeasonTeamDrivers', () => EventSessionTeamDriver)
+  async eventSessionTeamDrivers(@Parent() parent: EventSession) {
+    return this._prismaService.eventSessionTeamDriver.findFirst({
+      where: {
+        eventSessionId: parseInt(parent.id),
       },
     });
   }

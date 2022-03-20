@@ -8,7 +8,7 @@ import { SeasonTeamDriver } from '../types/season-team-driver.type';
 import { Vehicle } from '../types/vehicle.type';
 
 @Resolver(EventSessionTeamDriver)
-export class EventSeasonTeamDriverResolver {
+export class EventSessionTeamDriverResolver {
   private _prismaService: PrismaService;
 
   constructor(prismaService: PrismaService) {
