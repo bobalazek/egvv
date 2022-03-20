@@ -132,6 +132,7 @@ model Event {
   location          String?
   locationLatitude  Float?
   locationLongitude Float?
+  circuitLayout     String? // Should probably be something like "2001-2015", "2018-present", ...
   seasonId          Int
   season            Season         @relation(name: "Event_Season", fields: [seasonId], references: [id])
   circuitId         Int

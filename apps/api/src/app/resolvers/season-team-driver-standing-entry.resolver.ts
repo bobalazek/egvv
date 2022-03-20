@@ -30,13 +30,4 @@ export class SeasonTeamDriverStandingEntryResolver {
       },
     });
   }
-
-  @ResolveField('seasonTeamDriverStandingEntries', () => [SeasonTeamDriverStandingEntry])
-  async seasonTeamDriverStandingEntries(@Parent() parent: SeasonTeam) {
-    return this._prismaService.seasonTeamDriverStandingEntry.findMany({
-      where: {
-        seasonTeamDriverId: parseInt(parent.id),
-      },
-    });
-  }
 }

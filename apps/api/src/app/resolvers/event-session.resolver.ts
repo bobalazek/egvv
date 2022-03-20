@@ -24,7 +24,7 @@ export class EventSessionResolver {
 
   @ResolveField('eventSeasonTeamDrivers', () => EventSessionTeamDriver)
   async eventSessionTeamDrivers(@Parent() parent: EventSession) {
-    return this._prismaService.eventSessionTeamDriver.findFirst({
+    return this._prismaService.eventSessionTeamDriver.findMany({
       where: {
         eventSessionId: parseInt(parent.id),
       },

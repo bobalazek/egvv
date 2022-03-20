@@ -1,4 +1,4 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
 import { Vehicle } from '../types/vehicle.type';
@@ -11,8 +11,5 @@ export class VehicleResolver {
     this._prismaService = prismaService;
   }
 
-  @Query(() => [Vehicle])
-  async vehicles() {
-    return this._prismaService.vehicle.findMany();
-  }
+  // TODO: do we need any ResolveField's?
 }

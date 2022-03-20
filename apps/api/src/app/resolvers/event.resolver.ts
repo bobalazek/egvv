@@ -18,6 +18,8 @@ export class EventResolver {
   @Query(() => [Event])
   async events(@Args() args: EventArgs) {
     return this._prismaService.event.findMany({
+      skip: args.offset,
+      take: args.limit,
       where: {
         season: {
           series: {

@@ -35,6 +35,9 @@ export class Event {
   @Field(() => Float)
   locationLongitude?: number;
 
+  @Field({ nullable: true })
+  circuitLayout?: string;
+
   @Field(() => Int)
   seasonId: number;
 

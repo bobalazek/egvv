@@ -1,6 +1,7 @@
 import { Resolver, Query, Parent, ResolveField } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
+import { SeasonTeam } from '../types/season-team.type';
 import { Team } from '../types/team.type';
 
 @Resolver(Team)
@@ -17,10 +18,19 @@ export class TeamResolver {
   }
 
   @ResolveField('predecessorTeam', () => Team, { nullable: true })
-  async seasonTeam(@Parent() parent: Team) {
+  async predecessorTeam(@Parent() parent: Team) {
     return this._prismaService.team.findFirst({
       where: {
         id: parent.predecessorTeamId,
+      },
+    });
+  }
+
+  @ResolveField('seasonTeams', () => [SeasonTeam])
+  async seasonTeams(@Parent() parent: Team) {
+    return this._prismaService.seasonTeam.findMany({
+      where: {
+        teamId: parseInt(parent.id),
       },
     });
   }
