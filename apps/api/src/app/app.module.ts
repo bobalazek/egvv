@@ -13,6 +13,7 @@ import { SeasonTeamResolver } from './resolvers/season-team.resolver';
 import { SeasonTeamDriverResolver } from './resolvers/season-team-driver.resolver';
 import { EventResolver } from './resolvers/event.resolver';
 import { EventSessionResolver } from './resolvers/event-session.resolver';
+import { EventSeasonTeamDriverResolver } from './resolvers/event-season-team-driver.resolver';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { EventSessionResolver } from './resolvers/event-session.resolver';
     DriverResolver,
     EventResolver,
     EventSessionResolver,
+    EventSeasonTeamDriverResolver,
   ],
 })
 export class AppModule {}
