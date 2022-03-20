@@ -11,6 +11,7 @@ import { TeamResolver } from './resolvers/team.resolver';
 import { VehicleResolver } from './resolvers/vehicle.resolver';
 import { SeasonTeamResolver } from './resolvers/season-team.resolver';
 import { SeasonTeamDriverResolver } from './resolvers/season-team-driver.resolver';
+import { EventResolver } from './resolvers/event.resolver';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { SeasonTeamDriverResolver } from './resolvers/season-team-driver.resolve
     SeasonTeamResolver,
     SeasonTeamDriverResolver,
     DriverResolver,
+    EventResolver,
     PrismaService,
   ],
 })
