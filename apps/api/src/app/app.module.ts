@@ -14,8 +14,8 @@ import { SeasonTeamDriverResolver } from './resolvers/season-team-driver.resolve
 import { EventResolver } from './resolvers/event.resolver';
 import { EventSessionResolver } from './resolvers/event-session.resolver';
 import { EventSessionTeamDriverResolver } from './resolvers/event-season-team-driver.resolver';
-import { SeasonTeamPointStandingsEntryResolver } from './resolvers/season-team-point-standings-entry.resolver';
-import { SeasonTeamDriverPointStandingsEntryResolver } from './resolvers/season-team-driver-point-standings-entry.resolver';
+import { SeasonTeamStandingsEntryResolver } from './resolvers/season-team-standings-entry.resolver';
+import { SeasonTeamDriverStandingsEntryResolver } from './resolvers/season-team-driver-standings-entry.resolver';
 
 @Module({
   imports: [
@@ -33,8 +33,8 @@ import { SeasonTeamDriverPointStandingsEntryResolver } from './resolvers/season-
     SeasonResolver,
     SeasonTeamResolver,
     SeasonTeamDriverResolver,
-    SeasonTeamPointStandingsEntryResolver,
-    SeasonTeamDriverPointStandingsEntryResolver,
+    SeasonTeamStandingsEntryResolver,
+    SeasonTeamDriverStandingsEntryResolver,
     DriverResolver,
     EventResolver,
     EventSessionResolver,

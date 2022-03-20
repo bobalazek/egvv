@@ -1,7 +1,7 @@
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 @ArgsType()
-export class SeasonTeamDriverPointStandingsEntryArgs {
+export class SeasonTeamDriverStandingsEntryArgs {
   @Field(() => Int)
   eventSessionId: number;
 }

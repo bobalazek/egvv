@@ -70,19 +70,19 @@ model Vehicle {
 }
 
 model SeasonTeam {
-  id                              Int                             @id @default(autoincrement())
-  name                            String
-  fullName                        String // Full name of the team, like "Mercedes-AMG Petronas F1 Team", "Scuderia Ferarri", ...
-  powerUnit                       String
-  isDefunct                       Boolean
-  seasonId                        Int
-  season                          Season                          @relation(name: "SeasonTeam_Season", fields: [seasonId], references: [id])
-  teamId                          Int
-  team                            Team                            @relation(name: "SeasonTeam_Team", fields: [teamId], references: [id])
-  vehicleId                       Int                             @unique
-  vehicle                         Vehicle                         @relation(name: "SeasonTeam_Vehicle", fields: [vehicleId], references: [id])
-  seasonTeamDrivers               SeasonTeamDriver[]              @relation(name: "SeasonTeamDriver_SeasonTeam")
-  seasonTeamPointStandingsEntries SeasonTeamPointStandingsEntry[] @relation(name: "SeasonTeamPointStandingsEntry_SeasonTeam")
+  id                         Int                        @id @default(autoincrement())
+  name                       String
+  fullName                   String // Full name of the team, like "Mercedes-AMG Petronas F1 Team", "Scuderia Ferarri", ...
+  powerUnit                  String
+  isDefunct                  Boolean
+  seasonId                   Int
+  season                     Season                     @relation(name: "SeasonTeam_Season", fields: [seasonId], references: [id])
+  teamId                     Int
+  team                       Team                       @relation(name: "SeasonTeam_Team", fields: [teamId], references: [id])
+  vehicleId                  Int                        @unique
+  vehicle                    Vehicle                    @relation(name: "SeasonTeam_Vehicle", fields: [vehicleId], references: [id])
+  seasonTeamDrivers          SeasonTeamDriver[]         @relation(name: "SeasonTeamDriver_SeasonTeam")
+  seasonTeamStandingsEntries SeasonTeamStandingsEntry[] @relation(name: "SeasonTeamStandingsEntry_SeasonTeam")
 }
 
 model SeasonTeamDriver {
@@ -98,15 +98,15 @@ model SeasonTeamDriver {
   seasonTeamDriverStandingsEntries SeasonTeamDriverStandingsEntry[] @relation(name: "SeasonTeamDriverStandingsEntry_SeasonTeamDriver")
 }
 
-model SeasonTeamPointStandingsEntry {
+model SeasonTeamStandingsEntry {
   id             Int           @id @default(autoincrement())
   points         Float
   date           DateTime
   note           String?
   seasonTeamId   Int
-  seasonTeam     SeasonTeam    @relation(name: "SeasonTeamPointStandingsEntry_SeasonTeam", fields: [seasonTeamId], references: [id])
+  seasonTeam     SeasonTeam    @relation(name: "SeasonTeamStandingsEntry_SeasonTeam", fields: [seasonTeamId], references: [id])
   eventSessionId Int?
-  eventSession   EventSession? @relation(name: "SeasonTeamPointStandingsEntry_EventSession", fields: [eventSessionId], references: [id])
+  eventSession   EventSession? @relation(name: "SeasonTeamStandingsEntry_EventSession", fields: [eventSessionId], references: [id])
 }
 
 model SeasonTeamDriverStandingsEntry {
@@ -140,14 +140,14 @@ model Event {
 }
 
 model EventSession {
-  id                                    Int                              @id @default(autoincrement())
-  name                                  String
-  type                                  String // free_practice_1, qualifying, sprint_race, race, feature_race, ...
-  eventId                               Int
-  event                                 Event                            @relation(name: "EventSession_Event", fields: [eventId], references: [id])
-  eventSessionTeamDrivers               EventSessionTeamDriver[]         @relation(name: "EventSessionTeamDriver_EventSession")
-  seasonTeamPointStandingsEntries       SeasonTeamPointStandingsEntry[]  @relation(name: "SeasonTeamPointStandingsEntry_EventSession")
-  seasonTeamDriverPointStandingsEntries SeasonTeamDriverStandingsEntry[] @relation(name: "SeasonTeamDriverStandingsEntry_EventSession")
+  id                               Int                              @id @default(autoincrement())
+  name                             String
+  type                             String // free_practice_1, qualifying, sprint_race, race, feature_race, ...
+  eventId                          Int
+  event                            Event                            @relation(name: "EventSession_Event", fields: [eventId], references: [id])
+  eventSessionTeamDrivers          EventSessionTeamDriver[]         @relation(name: "EventSessionTeamDriver_EventSession")
+  seasonTeamStandingsEntries       SeasonTeamStandingsEntry[]       @relation(name: "SeasonTeamStandingsEntry_EventSession")
+  seasonTeamDriverStandingsEntries SeasonTeamDriverStandingsEntry[] @relation(name: "SeasonTeamDriverStandingsEntry_EventSession")
 }
 
 model EventSessionTeamDriver {

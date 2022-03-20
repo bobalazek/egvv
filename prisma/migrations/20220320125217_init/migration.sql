@@ -94,7 +94,7 @@ CREATE TABLE "SeasonTeamDriver" (
 );
 
 -- CreateTable
-CREATE TABLE "SeasonTeamPointStandingsEntry" (
+CREATE TABLE "SeasonTeamStandingsEntry" (
     "id" SERIAL NOT NULL,
     "points" DOUBLE PRECISION NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE "SeasonTeamPointStandingsEntry" (
     "seasonTeamId" INTEGER NOT NULL,
     "eventSessionId" INTEGER,
 
-    CONSTRAINT "SeasonTeamPointStandingsEntry_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "SeasonTeamStandingsEntry_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -223,10 +223,10 @@ ALTER TABLE "SeasonTeamDriver" ADD CONSTRAINT "SeasonTeamDriver_driverId_fkey" F
 ALTER TABLE "SeasonTeamDriver" ADD CONSTRAINT "SeasonTeamDriver_seasonTeamId_fkey" FOREIGN KEY ("seasonTeamId") REFERENCES "SeasonTeam"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SeasonTeamPointStandingsEntry" ADD CONSTRAINT "SeasonTeamPointStandingsEntry_seasonTeamId_fkey" FOREIGN KEY ("seasonTeamId") REFERENCES "SeasonTeam"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "SeasonTeamStandingsEntry" ADD CONSTRAINT "SeasonTeamStandingsEntry_seasonTeamId_fkey" FOREIGN KEY ("seasonTeamId") REFERENCES "SeasonTeam"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SeasonTeamPointStandingsEntry" ADD CONSTRAINT "SeasonTeamPointStandingsEntry_eventSessionId_fkey" FOREIGN KEY ("eventSessionId") REFERENCES "EventSession"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "SeasonTeamStandingsEntry" ADD CONSTRAINT "SeasonTeamStandingsEntry_eventSessionId_fkey" FOREIGN KEY ("eventSessionId") REFERENCES "EventSession"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SeasonTeamDriverStandingsEntry" ADD CONSTRAINT "SeasonTeamDriverStandingsEntry_seasonTeamDriverId_fkey" FOREIGN KEY ("seasonTeamDriverId") REFERENCES "SeasonTeamDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
