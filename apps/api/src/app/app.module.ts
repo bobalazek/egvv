@@ -2,16 +2,17 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
+import { PrismaService } from '../services/prisma.service';
 import { SeriesResolver } from './resolvers/series.resolver';
 import { SeasonResolver } from './resolvers/season.resolver';
 import { DriverResolver } from './resolvers/driver.resolver';
-import { PrismaService } from '../services/prisma.service';
 import { CircuitResolver } from './resolvers/circuit.resolver';
 import { TeamResolver } from './resolvers/team.resolver';
 import { VehicleResolver } from './resolvers/vehicle.resolver';
 import { SeasonTeamResolver } from './resolvers/season-team.resolver';
 import { SeasonTeamDriverResolver } from './resolvers/season-team-driver.resolver';
 import { EventResolver } from './resolvers/event.resolver';
+import { EventSessionResolver } from './resolvers/event-session.resolver';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { EventResolver } from './resolvers/event.resolver';
     }),
   ],
   providers: [
+    PrismaService,
     CircuitResolver,
     TeamResolver,
     VehicleResolver,
@@ -30,7 +32,7 @@ import { EventResolver } from './resolvers/event.resolver';
     SeasonTeamDriverResolver,
     DriverResolver,
     EventResolver,
-    PrismaService,
+    EventSessionResolver,
   ],
 })
 export class AppModule {}
