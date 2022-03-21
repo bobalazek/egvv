@@ -1,7 +1,9 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
+import { SeriesSingleArgs } from '../args/series-single.args';
 import { SeriesArgs } from '../args/series.args';
+import { Season } from '../types/season.type';
 import { Series } from '../types/series.type';
 
 @Resolver(Series)
@@ -17,6 +19,24 @@ export class SeriesResolver {
     return this._prismaService.series.findMany({
       skip: args.offset,
       take: args.limit,
+    });
+  }
+
+  @Query(() => Series)
+  async seriesSingle(@Args() args: SeriesSingleArgs) {
+    return this._prismaService.series.findFirst({
+      where: {
+        id: args.id,
+      },
+    });
+  }
+
+  @ResolveField('seasons', () => [Season], { nullable: true })
+  async seasons(@Parent() parent: Series) {
+    return this._prismaService.season.findFirst({
+      where: {
+        seriesId: parseInt(parent.id),
+      },
     });
   }
 }

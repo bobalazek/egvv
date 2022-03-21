@@ -32,7 +32,9 @@ export class SeasonTeamDriverResolver {
     });
   }
 
-  @ResolveField('seasonTeamDriverStandingEntries', () => [SeasonTeamDriverStandingEntry])
+  @ResolveField('seasonTeamDriverStandingEntries', () => [
+    SeasonTeamDriverStandingEntry,
+  ])
   async seasonTeamDriverStandingEntries(@Parent() parent: SeasonTeam) {
     return this._prismaService.seasonTeamDriverStandingEntry.findMany({
       where: {
