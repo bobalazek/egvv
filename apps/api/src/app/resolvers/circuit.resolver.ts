@@ -1,6 +1,7 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver, Query, Args } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
+import { CircuitArgs } from '../args/circuit.args';
 import { Circuit } from '../types/circuit.type';
 
 @Resolver(Circuit)
@@ -12,7 +13,10 @@ export class CircuitResolver {
   }
 
   @Query(() => [Circuit])
-  async circuits() {
-    return this._prismaService.circuit.findMany();
+  async circuits(@Args() args: CircuitArgs) {
+    return this._prismaService.circuit.findMany({
+      skip: args.offset,
+      take: args.limit,
+    });
   }
 }

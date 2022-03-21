@@ -1,7 +1,7 @@
 import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
 
 import { PrismaService } from '../../services/prisma.service';
-import { EventArgs } from '../args/event.args';
+import { EventsArgs } from '../args/events.args';
 import { Circuit } from '../types/circuit.type';
 import { EventSession } from '../types/event-session.type';
 import { Event } from '../types/event.type';
@@ -16,7 +16,7 @@ export class EventResolver {
   }
 
   @Query(() => [Event])
-  async events(@Args() args: EventArgs) {
+  async events(@Args() args: EventsArgs) {
     return this._prismaService.event.findMany({
       skip: args.offset,
       take: args.limit,
