@@ -130,6 +130,7 @@ CREATE TABLE "Event" (
     "location" TEXT,
     "locationLatitude" DOUBLE PRECISION,
     "locationLongitude" DOUBLE PRECISION,
+    "circuitLayout" TEXT,
     "seasonId" INTEGER NOT NULL,
     "circuitId" INTEGER NOT NULL,
 
@@ -195,10 +196,31 @@ CREATE TABLE "EventSessionTeamDriverClassification" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Series_slug_key" ON "Series"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Season_slug_key" ON "Season"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Circuit_slug_key" ON "Circuit"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Driver_slug_key" ON "Driver"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Team_slug_key" ON "Team"("slug");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Team_predecessorTeamId_key" ON "Team"("predecessorTeamId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Vehicle_slug_key" ON "Vehicle"("slug");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "SeasonTeam_vehicleId_key" ON "SeasonTeam"("vehicleId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Event_slug_key" ON "Event"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "EventSessionTeamDriver_vehicleId_key" ON "EventSessionTeamDriver"("vehicleId");

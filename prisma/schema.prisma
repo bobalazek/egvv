@@ -9,7 +9,7 @@ datasource db {
 
 model Series {
   id      Int      @id @default(autoincrement())
-  slug    String // formula-1, formula-2, formula-3, formula-e
+  slug    String   @unique // formula-1, formula-2, formula-3, formula-e
   name    String
   url     String
   seasons Season[] @relation(name: "Season_Series")
@@ -17,7 +17,7 @@ model Series {
 
 model Season {
   id          Int          @id @default(autoincrement())
-  slug        String
+  slug        String       @unique
   name        String // ex.: Formula 1 2022 World Championship
   seriesId    Int
   series      Series       @relation(name: "Season_Series", fields: [seriesId], references: [id])
@@ -27,7 +27,7 @@ model Season {
 
 model Circuit {
   id          Int     @id @default(autoincrement())
-  slug        String
+  slug        String  @unique
   name        String
   location    String
   countryCode String
@@ -37,7 +37,7 @@ model Circuit {
 
 model Driver {
   id                     Int                @id @default(autoincrement())
-  slug                   String
+  slug                   String             @unique
   firstName              String
   lastName               String
   nationalityCountryCode String
@@ -47,7 +47,7 @@ model Driver {
 
 model Team {
   id                Int          @id @default(autoincrement())
-  slug              String
+  slug              String       @unique
   name              String // Short name of the team like "Mercedes", "Ferarri", "Redbull"
   countryCode       String
   url               String
@@ -61,7 +61,7 @@ model Team {
 
 model Vehicle {
   id                     Int                     @id @default(autoincrement())
-  slug                   String
+  slug                   String                  @unique
   name                   String
   powerUnit              String
   note                   String? // If the model has for example a specific livery
@@ -122,7 +122,7 @@ model SeasonTeamDriverStandingEntry {
 
 model Event {
   id                Int            @id @default(autoincrement())
-  slug              String
+  slug              String         @unique
   name              String
   round             Int // Which round in the season?
   laps              Int
