@@ -1,11 +1,25 @@
 import { PrismaClient } from '@prisma/client';
 
+import circuits from './data/circuits';
 import series from './data/series';
 import seasons from './data/seasons';
 
 const prisma = new PrismaClient();
 
 async function main() {
+  console.log('========== Circuits ==========');
+  for (const data of circuits) {
+    console.log(`Upserting ${data.slug} ...`);
+
+    await prisma.circuit.upsert({
+      where: {
+        slug: data.slug,
+      },
+      update: data,
+      create: data,
+    });
+  }
+
   console.log('========== Series ==========');
   for (const data of series) {
     console.log(`Upserting ${data.slug} ...`);
