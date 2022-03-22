@@ -25,6 +25,9 @@ export class SeasonResolver {
           slug: args.seriesSlug,
         },
       },
+      orderBy: {
+        startAt: 'desc',
+      },
     });
   }
 

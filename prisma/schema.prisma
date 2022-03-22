@@ -19,6 +19,7 @@ model Season {
   id          Int          @id @default(autoincrement())
   slug        String       @unique
   name        String // ex.: Formula 1 2022 World Championship
+  startAt     DateTime
   seriesId    Int
   series      Series       @relation(name: "Season_Series", fields: [seriesId], references: [id])
   seasonTeams SeasonTeam[] @relation(name: "SeasonTeam_Season")

@@ -13,6 +13,7 @@ CREATE TABLE "Season" (
     "id" SERIAL NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "startAt" TIMESTAMP(3) NOT NULL,
     "seriesId" INTEGER NOT NULL,
 
     CONSTRAINT "Season_pkey" PRIMARY KEY ("id")

@@ -52,7 +52,12 @@ async function main() {
       process.exit(1);
     }
 
-    const finalData = { slug: data.slug, name: data.name, seriesId: series.id };
+    const finalData = {
+      slug: data.slug,
+      name: data.name,
+      startAt: new Date(data.startAt),
+      seriesId: series.id,
+    };
 
     await prisma.season.upsert({
       where: {
