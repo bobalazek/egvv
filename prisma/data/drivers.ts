@@ -188,4 +188,11 @@ export default [
     countryCode: 'BR',
     url: 'https://en.wikipedia.org/wiki/Pietro_Fittipaldi',
   },
+  {
+    firstName: 'Zhou',
+    lastName: 'Guanyu',
+    slug: 'zhou-guanyu',
+    countryCode: 'CN',
+    url: 'https://en.wikipedia.org/wiki/Pietro_Fittipaldi',
+  },
 ];
