@@ -1,6 +1,6 @@
 import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
 
-import { PrismaService } from '../../services/prisma.service';
+import { PrismaService } from '../services/prisma.service';
 import { DriverArgs } from '../args/driver.args';
 import { DriversArgs } from '../args/drivers.args';
 import { Driver } from '../types/driver.type';

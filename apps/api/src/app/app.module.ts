@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { APP_GUARD } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerModule } from '@nestjs/throttler';
 
-import { PrismaService } from '../services/prisma.service';
+import { GqlThrottlerGuard } from './services/gql-throttler.guard';
+import { ComplexityPlugin } from './plugins/complexity.plugin';
+import { PrismaService } from './services/prisma.service';
 import { SeriesResolver } from './resolvers/series.resolver';
 import { SeasonResolver } from './resolvers/season.resolver';
 import { DriverResolver } from './resolvers/driver.resolver';
@@ -31,10 +33,14 @@ import { SeasonTeamDriverStandingEntryResolver } from './resolvers/season-team-d
     }),
   ],
   providers: [
+    /*
+    // TODO: not working yet
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard,
+      useClass: GqlThrottlerGuard,
     },
+    */
+    ComplexityPlugin,
     PrismaService,
     SeriesResolver,
     CircuitResolver,

@@ -1,6 +1,6 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
-import { PrismaService } from '../../services/prisma.service';
+import { PrismaService } from '../services/prisma.service';
 import { CircuitArgs } from '../args/circuit.args';
 import { CircuitsArgs } from '../args/circuits.args';
 import { Circuit } from '../types/circuit.type';
