@@ -79,7 +79,7 @@ export default [
   {
     firstName: 'Carlos',
     lastName: 'Sainz',
-    slug: 'carlos-sainz',
+    slug: 'carlos-sainz-jr',
     countryCode: 'ES',
     url: 'https://en.wikipedia.org/wiki/Carlos_Sainz_Jr.',
   },
