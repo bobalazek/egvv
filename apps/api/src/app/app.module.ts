@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { APP_GUARD } from '@nestjs/core';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
 import { PrismaService } from '../services/prisma.service';
 import { SeriesResolver } from './resolvers/series.resolver';
@@ -23,8 +25,16 @@ import { SeasonTeamDriverStandingEntryResolver } from './resolvers/season-team-d
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
+    ThrottlerModule.forRoot({
+      ttl: 60,
+      limit: 10,
+    }),
   ],
   providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
     PrismaService,
     SeriesResolver,
     CircuitResolver,
