@@ -9,10 +9,10 @@ export class SeasonTeam {
   name: string;
 
   @Field()
-  fullName: string;
+  powerUnit: string;
 
   @Field()
-  powerUnit: string;
+  chassis: string;
 
   @Field()
   isDefunct: boolean;

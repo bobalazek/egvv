@@ -50,7 +50,7 @@ model Driver {
 model Team {
   id                Int          @id @default(autoincrement())
   slug              String       @unique
-  name              String // Short name of the team like "Mercedes", "Ferarri", "Redbull"
+  name              String // Short name of the team like "Mercedes", "Ferrari", "Redbull"
   location          String
   countryCode       String
   url               String
@@ -74,31 +74,35 @@ model Vehicle {
 
 model SeasonTeam {
   id                        Int                       @id @default(autoincrement())
-  name                      String
-  fullName                  String // Full name of the team, like "Mercedes-AMG Petronas F1 Team", "Scuderia Ferarri", ...
+  name                      String // Full name of the team this season, like "Mercedes-AMG Petronas F1 Team", "Scuderia Ferrari", ...
   powerUnit                 String
-  isDefunct                 Boolean
+  chassis                   String
+  isDefunct                 Boolean                   @default(false)
   seasonId                  Int
   season                    Season                    @relation(name: "SeasonTeam_Season", fields: [seasonId], references: [id])
   teamId                    Int
   team                      Team                      @relation(name: "SeasonTeam_Team", fields: [teamId], references: [id])
-  vehicleId                 Int                       @unique
-  vehicle                   Vehicle                   @relation(name: "SeasonTeam_Vehicle", fields: [vehicleId], references: [id])
+  vehicleId                 Int?                      @unique
+  vehicle                   Vehicle?                  @relation(name: "SeasonTeam_Vehicle", fields: [vehicleId], references: [id])
   seasonTeamDrivers         SeasonTeamDriver[]        @relation(name: "SeasonTeamDriver_SeasonTeam")
   seasonTeamStandingEntries SeasonTeamStandingEntry[] @relation(name: "SeasonTeamStandingEntry_SeasonTeam")
+
+  @@unique([seasonId, teamId])
 }
 
 model SeasonTeamDriver {
   id                              Int                             @id @default(autoincrement())
   number                          Int
   code                            String
-  isTemporary                     Boolean
+  isTemporary                     Boolean                         @default(false)
   seasonTeamId                    Int
   seasonTeam                      SeasonTeam                      @relation(name: "SeasonTeamDriver_SeasonTeam", fields: [seasonTeamId], references: [id])
   driverId                        Int
   driver                          Driver                          @relation(name: "SeasonTeamDriver_Driver", fields: [driverId], references: [id])
   eventSessionTeamDrivers         EventSessionTeamDriver[]        @relation(name: "EventSessionTeamDriver_SeasonTeamDriver")
   seasonTeamDriverStandingEntries SeasonTeamDriverStandingEntry[] @relation(name: "SeasonTeamDriverStandingEntry_SeasonTeamDriver")
+
+  @@unique([seasonTeamId, driverId])
 }
 
 model SeasonTeamStandingEntry {

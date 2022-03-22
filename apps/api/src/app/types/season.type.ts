@@ -11,9 +11,6 @@ export class Season {
   @Field()
   name: string;
 
-  @Field()
-  url: string;
-
   @Field(() => Int)
   seriesId: number;
 }

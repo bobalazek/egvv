@@ -80,7 +80,7 @@ export default [
     debutAt: '1978-01-01',
   },
   {
-    name: 'Renault DP World F1 Team',
+    name: 'Renault F1 Team',
     slug: 'renault',
     location: 'Viry-Châtillon, Essonne',
     countryCode: 'FR',
