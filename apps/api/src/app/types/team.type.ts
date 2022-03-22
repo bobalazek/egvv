@@ -12,6 +12,9 @@ export class Team {
   name: string;
 
   @Field()
+  location: string;
+
+  @Field()
   countryCode: string;
 
   @Field()

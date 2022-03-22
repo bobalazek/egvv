@@ -12,7 +12,7 @@ export class Driver {
   lastName: string;
 
   @Field()
-  nationalityCountryCode: string;
+  countryCode: string;
 
   @Field()
   url: string;

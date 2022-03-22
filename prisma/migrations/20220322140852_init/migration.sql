@@ -24,6 +24,8 @@ CREATE TABLE "Circuit" (
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "location" TEXT NOT NULL,
+    "locationLatitude" DOUBLE PRECISION,
+    "locationLongitude" DOUBLE PRECISION,
     "countryCode" TEXT NOT NULL,
     "url" TEXT NOT NULL,
 
@@ -36,7 +38,7 @@ CREATE TABLE "Driver" (
     "slug" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
-    "nationalityCountryCode" TEXT NOT NULL,
+    "countryCode" TEXT NOT NULL,
     "url" TEXT NOT NULL,
 
     CONSTRAINT "Driver_pkey" PRIMARY KEY ("id")
@@ -47,6 +49,7 @@ CREATE TABLE "Team" (
     "id" SERIAL NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "location" TEXT NOT NULL,
     "countryCode" TEXT NOT NULL,
     "url" TEXT NOT NULL,
     "debutAt" TIMESTAMP(3) NOT NULL,
@@ -126,10 +129,7 @@ CREATE TABLE "Event" (
     "laps" INTEGER NOT NULL,
     "lapDistance" DOUBLE PRECISION NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
-    "url" TEXT,
-    "location" TEXT,
-    "locationLatitude" DOUBLE PRECISION,
-    "locationLongitude" DOUBLE PRECISION,
+    "url" TEXT NOT NULL,
     "circuitLayout" TEXT,
     "seasonId" INTEGER NOT NULL,
     "circuitId" INTEGER NOT NULL,

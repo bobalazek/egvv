@@ -3,6 +3,9 @@ import { PrismaClient } from '@prisma/client';
 import circuits from './data/circuits';
 import series from './data/series';
 import seasons from './data/seasons';
+import teams from './data/teams';
+import drivers from './data/drivers';
+import events from './data/events';
 
 const prisma = new PrismaClient();
 
@@ -48,9 +51,84 @@ async function main() {
       process.exit(1);
     }
 
-    let finalData = { slug: data.slug, name: data.name, seriesId: series.id };
+    const finalData = { slug: data.slug, name: data.name, seriesId: series.id };
 
     await prisma.season.upsert({
+      where: {
+        slug: data.slug,
+      },
+      update: finalData,
+      create: finalData,
+    });
+  }
+
+  console.log('========== Teams ==========');
+  for (const data of teams) {
+    console.log(`Upserting ${data.slug} ...`);
+
+    const finalData = { ...data, debutAt: new Date(data.debutAt) };
+
+    await prisma.team.upsert({
+      where: {
+        slug: data.slug,
+      },
+      update: finalData,
+      create: finalData,
+    });
+  }
+
+  console.log('========== Drivers ==========');
+  for (const data of drivers) {
+    console.log(`Upserting ${data.slug} ...`);
+
+    await prisma.driver.upsert({
+      where: {
+        slug: data.slug,
+      },
+      update: data,
+      create: data,
+    });
+  }
+
+  console.log('========== Events ==========');
+  for (const data of events) {
+    console.log(`Upserting ${data.slug} ...`);
+
+    const season = await prisma.season.findFirst({
+      where: {
+        slug: data.seasonSlug,
+      },
+    });
+    if (!season) {
+      console.error(`Season ${data.seasonSlug} not found`);
+
+      process.exit(1);
+    }
+
+    const circuit = await prisma.circuit.findFirst({
+      where: {
+        slug: data.circuitSlug,
+      },
+    });
+    if (!circuit) {
+      console.error(`Circuit ${data.circuitSlug} not found`);
+
+      process.exit(1);
+    }
+
+    const finalData = {
+      name: data.name,
+      slug: data.slug,
+      laps: data.laps,
+      lapDistance: data.lapDistance,
+      round: data.round,
+      date: new Date(data.date),
+      url: data.url ?? null,
+      seasonId: season.id,
+      circuitId: circuit.id,
+    };
+
+    await prisma.event.upsert({
       where: {
         slug: data.slug,
       },
