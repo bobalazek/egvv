@@ -140,9 +140,9 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Nicholas_Latifi',
   },
   {
-    firstName: 'Alex',
+    firstName: 'Alexander',
     lastName: 'Albon',
-    slug: 'alex-albon',
+    slug: 'alexander-albon',
     countryCode: 'TH',
     url: 'https://en.wikipedia.org/wiki/Alex_Albon',
   },

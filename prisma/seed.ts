@@ -7,6 +7,7 @@ import teams from './data/teams';
 import drivers from './data/drivers';
 import events from './data/events';
 import seasonTeams from './data/season-teams';
+import seasonTeamDrivers from './data/season-team-drivers';
 
 const prisma = new PrismaClient();
 
@@ -164,7 +165,7 @@ async function main() {
       },
     });
     if (!team) {
-      console.error(`TeamteamSlug ${data.teamSlug} not found`);
+      console.error(`Team ${data.teamSlug} not found`);
 
       process.exit(1);
     }
@@ -182,6 +183,75 @@ async function main() {
         seasonId_teamId: {
           seasonId: finalData.seasonId,
           teamId: finalData.teamId,
+        },
+      },
+      update: finalData,
+      create: finalData,
+    });
+  }
+
+  console.log('========== Season team drivers ==========');
+  for (const data of seasonTeamDrivers) {
+    console.log(`Upserting ${data.code} ...`);
+
+    const season = await prisma.season.findFirst({
+      where: {
+        slug: data.seasonSlug,
+      },
+    });
+    if (!season) {
+      console.error(`Season ${data.seasonSlug} not found`);
+
+      process.exit(1);
+    }
+
+    const team = await prisma.team.findFirst({
+      where: {
+        slug: data.teamSlug,
+      },
+    });
+    if (!team) {
+      console.error(`TeamteamSlug ${data.teamSlug} not found`);
+
+      process.exit(1);
+    }
+
+    const seasonTeam = await prisma.seasonTeam.findFirst({
+      where: {
+        seasonId: season.id,
+        teamId: team.id,
+      },
+    });
+    if (!seasonTeam) {
+      console.error(`Season team ${data.teamSlug} not found`);
+
+      process.exit(1);
+    }
+
+    const driver = await prisma.driver.findFirst({
+      where: {
+        slug: data.driverSlug,
+      },
+    });
+    if (!driver) {
+      console.error(`Driver ${data.driverSlug} not found`);
+
+      process.exit(1);
+    }
+
+    const finalData = {
+      number: data.number,
+      code: data.code,
+      seasonTeamId: seasonTeam.id,
+      driverId: driver.id,
+      isTemporary: data.isTemporary || false,
+    };
+
+    await prisma.seasonTeamDriver.upsert({
+      where: {
+        seasonTeamId_driverId: {
+          seasonTeamId: finalData.seasonTeamId,
+          driverId: finalData.driverId,
         },
       },
       update: finalData,
