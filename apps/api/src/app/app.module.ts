@@ -26,6 +26,7 @@ import { SeasonTeamDriverStandingEntryResolver } from './resolvers/season-team-d
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      context: ({ req, res }) => ({ req, res }),
     }),
     ThrottlerModule.forRoot({
       ttl: 60,
@@ -33,13 +34,10 @@ import { SeasonTeamDriverStandingEntryResolver } from './resolvers/season-team-d
     }),
   ],
   providers: [
-    /*
-    // TODO: not working yet
     {
       provide: APP_GUARD,
       useClass: GqlThrottlerGuard,
     },
-    */
     ComplexityPlugin,
     PrismaService,
     SeriesResolver,
