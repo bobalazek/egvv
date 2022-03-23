@@ -153,8 +153,8 @@ async function main() {
           name: eventSessionData.name,
           type: eventSessionData.type,
           startAt: new Date(eventSessionData.startAt),
-          endedAt: eventSessionData.endedAt
-            ? new Date(eventSessionData.endedAt)
+          endAt: eventSessionData.endAt
+            ? new Date(eventSessionData.endAt)
             : null,
           eventId: event.id,
         };
