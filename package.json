@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "build": "npx nx build",
-    "start": "npx nx serve"
+    "start": "npx nx serve",
+    "cli": "npx nx run cli:build && node dist/apps/cli/main.js"
   },
   "private": true,
   "dependencies": {
@@ -18,9 +19,11 @@
     "@prisma/client": "^3.11.0",
     "apollo-server-core": "^3.6.4",
     "apollo-server-express": "^3.6.4",
+    "commander": "^9.1.0",
     "graphql": "^16.3.0",
     "graphql-query-complexity": "^0.11.0",
     "prisma": "^3.11.0",
+    "puppeteer": "^13.5.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",
     "tslib": "^2.0.0"
@@ -40,6 +43,7 @@
     "@nrwl/workspace": "13.9.2",
     "@types/jest": "27.0.2",
     "@types/node": "16.11.7",
+    "@types/puppeteer": "^5.4.5",
     "@typescript-eslint/eslint-plugin": "~5.10.0",
     "@typescript-eslint/parser": "~5.10.0",
     "eslint": "~8.7.0",
