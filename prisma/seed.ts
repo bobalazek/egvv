@@ -129,19 +129,48 @@ async function main() {
       laps: data.laps,
       lapDistance: data.lapDistance,
       round: data.round,
-      date: new Date(data.date),
+      startedAt: new Date(data.startedAt),
       url: data.url ?? null,
       seasonId: season.id,
       circuitId: circuit.id,
     };
 
-    await prisma.event.upsert({
+    const event = await prisma.event.upsert({
       where: {
-        slug: data.slug,
+        slug: finalData.slug,
       },
       update: finalData,
       create: finalData,
     });
+
+    if (data.sessions) {
+      console.log(`===== Event sessions for ${event.slug} =====`);
+
+      for (const eventSessionData of data.sessions) {
+        console.log(`Upserting ${eventSessionData.type} ...`);
+
+        const eventSessionFinalData = {
+          name: eventSessionData.name,
+          type: eventSessionData.type,
+          startedAt: new Date(eventSessionData.startedAt),
+          endedAt: eventSessionData.endedAt
+            ? new Date(eventSessionData.endedAt)
+            : null,
+          eventId: event.id,
+        };
+
+        await prisma.eventSession.upsert({
+          where: {
+            eventId_type: {
+              eventId: eventSessionFinalData.eventId,
+              type: eventSessionFinalData.type,
+            },
+          },
+          update: eventSessionFinalData,
+          create: eventSessionFinalData,
+        });
+      }
+    }
   }
 
   console.log('========== Season teams ==========');

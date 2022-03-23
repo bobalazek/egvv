@@ -109,7 +109,7 @@ model SeasonTeamDriver {
 model SeasonTeamStandingEntry {
   id             Int           @id @default(autoincrement())
   points         Float
-  date           DateTime
+  dateAt         DateTime
   note           String?
   seasonTeamId   Int
   seasonTeam     SeasonTeam    @relation(name: "SeasonTeamStandingEntry_SeasonTeam", fields: [seasonTeamId], references: [id])
@@ -120,7 +120,7 @@ model SeasonTeamStandingEntry {
 model SeasonTeamDriverStandingEntry {
   id                 Int              @id @default(autoincrement())
   points             Float
-  date               DateTime
+  dateAt             DateTime
   note               String?
   seasonTeamDriverId Int
   seasonTeamDriver   SeasonTeamDriver @relation(name: "SeasonTeamDriverStandingEntry_SeasonTeamDriver", fields: [seasonTeamDriverId], references: [id])
@@ -135,7 +135,8 @@ model Event {
   round         Int // Which round in the season?
   laps          Int
   lapDistance   Float // in km
-  date          DateTime
+  startedAt     DateTime
+  endedAt       DateTime?
   url           String
   circuitLayout String? // Should probably be something like "2001-2015", "2018-present", ...
   seasonId      Int
@@ -150,11 +151,15 @@ model EventSession {
   name                            String
   type                            String // free_practice_1, qualifying, sprint_race, race, feature_race, ...
   tyreChoices                     Json?
+  startedAt                       DateTime
+  endedAt                         DateTime?
   eventId                         Int
   event                           Event                           @relation(name: "EventSession_Event", fields: [eventId], references: [id])
   eventSessionTeamDrivers         EventSessionTeamDriver[]        @relation(name: "EventSessionTeamDriver_EventSession")
   seasonTeamStandingEntries       SeasonTeamStandingEntry[]       @relation(name: "SeasonTeamStandingEntry_EventSession")
   seasonTeamDriverStandingEntries SeasonTeamDriverStandingEntry[] @relation(name: "SeasonTeamDriverStandingEntry_EventSession")
+
+  @@unique([eventId, type])
 }
 
 model EventSessionTeamDriver {

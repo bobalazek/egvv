@@ -101,7 +101,7 @@ CREATE TABLE "SeasonTeamDriver" (
 CREATE TABLE "SeasonTeamStandingEntry" (
     "id" SERIAL NOT NULL,
     "points" DOUBLE PRECISION NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
+    "dateAt" TIMESTAMP(3) NOT NULL,
     "note" TEXT,
     "seasonTeamId" INTEGER NOT NULL,
     "eventSessionId" INTEGER,
@@ -113,7 +113,7 @@ CREATE TABLE "SeasonTeamStandingEntry" (
 CREATE TABLE "SeasonTeamDriverStandingEntry" (
     "id" SERIAL NOT NULL,
     "points" DOUBLE PRECISION NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
+    "dateAt" TIMESTAMP(3) NOT NULL,
     "note" TEXT,
     "seasonTeamDriverId" INTEGER NOT NULL,
     "eventSessionId" INTEGER,
@@ -129,7 +129,8 @@ CREATE TABLE "Event" (
     "round" INTEGER NOT NULL,
     "laps" INTEGER NOT NULL,
     "lapDistance" DOUBLE PRECISION NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
+    "startedAt" TIMESTAMP(3) NOT NULL,
+    "endedAt" TIMESTAMP(3),
     "url" TEXT NOT NULL,
     "circuitLayout" TEXT,
     "seasonId" INTEGER NOT NULL,
@@ -144,6 +145,8 @@ CREATE TABLE "EventSession" (
     "name" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "tyreChoices" JSONB,
+    "startedAt" TIMESTAMP(3) NOT NULL,
+    "endedAt" TIMESTAMP(3),
     "eventId" INTEGER NOT NULL,
 
     CONSTRAINT "EventSession_pkey" PRIMARY KEY ("id")
@@ -228,6 +231,9 @@ CREATE UNIQUE INDEX "SeasonTeamDriver_seasonTeamId_driverId_key" ON "SeasonTeamD
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Event_slug_key" ON "Event"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "EventSession_eventId_type_key" ON "EventSession"("eventId", "type");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "EventSessionTeamDriver_vehicleId_key" ON "EventSessionTeamDriver"("vehicleId");

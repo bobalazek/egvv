@@ -9,7 +9,7 @@ export class SeasonTeamDriverStandingEntry {
   points: number;
 
   @Field()
-  date: Date;
+  dateAt: Date;
 
   @Field({ nullable: true })
   note?: string;

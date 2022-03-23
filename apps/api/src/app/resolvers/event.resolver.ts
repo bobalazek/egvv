@@ -29,7 +29,7 @@ export class EventResolver {
         },
       },
       orderBy: {
-        date: 'desc',
+        startedAt: 'desc',
       },
     });
   }
