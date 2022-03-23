@@ -4,19 +4,4 @@ import { ArgsType, Field, ID } from '@nestjs/graphql';
 export class CircuitArgs {
   @Field(() => ID)
   id: number;
-
-  @Field()
-  slug: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  location: string;
-
-  @Field()
-  countryCode: string;
-
-  @Field()
-  url: string;
 }
