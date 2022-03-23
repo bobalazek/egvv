@@ -129,7 +129,7 @@ async function main() {
       laps: data.laps,
       lapDistance: data.lapDistance,
       round: data.round,
-      startedAt: new Date(data.startedAt),
+      startAt: new Date(data.startAt),
       url: data.url ?? null,
       seasonId: season.id,
       circuitId: circuit.id,
@@ -152,7 +152,7 @@ async function main() {
         const eventSessionFinalData = {
           name: eventSessionData.name,
           type: eventSessionData.type,
-          startedAt: new Date(eventSessionData.startedAt),
+          startAt: new Date(eventSessionData.startAt),
           endedAt: eventSessionData.endedAt
             ? new Date(eventSessionData.endedAt)
             : null,

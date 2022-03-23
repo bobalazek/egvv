@@ -14,6 +14,7 @@ CREATE TABLE "Season" (
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "startAt" TIMESTAMP(3) NOT NULL,
+    "endAt" TIMESTAMP(3),
     "seriesId" INTEGER NOT NULL,
 
     CONSTRAINT "Season_pkey" PRIMARY KEY ("id")
@@ -129,8 +130,8 @@ CREATE TABLE "Event" (
     "round" INTEGER NOT NULL,
     "laps" INTEGER NOT NULL,
     "lapDistance" DOUBLE PRECISION NOT NULL,
-    "startedAt" TIMESTAMP(3) NOT NULL,
-    "endedAt" TIMESTAMP(3),
+    "startAt" TIMESTAMP(3) NOT NULL,
+    "endAt" TIMESTAMP(3),
     "url" TEXT NOT NULL,
     "circuitLayout" TEXT,
     "seasonId" INTEGER NOT NULL,
@@ -145,8 +146,8 @@ CREATE TABLE "EventSession" (
     "name" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "tyreChoices" JSONB,
-    "startedAt" TIMESTAMP(3) NOT NULL,
-    "endedAt" TIMESTAMP(3),
+    "startAt" TIMESTAMP(3) NOT NULL,
+    "endAt" TIMESTAMP(3),
     "eventId" INTEGER NOT NULL,
 
     CONSTRAINT "EventSession_pkey" PRIMARY KEY ("id")
