@@ -102,8 +102,8 @@ model SeasonTeamDriver {
   seasonTeam                      SeasonTeam                      @relation(name: "SeasonTeamDriver_SeasonTeam", fields: [seasonTeamId], references: [id])
   driverId                        Int
   driver                          Driver                          @relation(name: "SeasonTeamDriver_Driver", fields: [driverId], references: [id])
-  eventSessionTeamDrivers         EventSessionTeamDriver[]        @relation(name: "EventSessionTeamDriver_SeasonTeamDriver")
   seasonTeamDriverStandingEntries SeasonTeamDriverStandingEntry[] @relation(name: "SeasonTeamDriverStandingEntry_SeasonTeamDriver")
+  eventSessionTeamDrivers         EventSessionTeamDriver[]        @relation(name: "EventSessionTeamDriver_SeasonTeamDriver")
 
   @@unique([seasonTeamId, driverId])
 }
@@ -175,6 +175,7 @@ model EventSessionTeamDriver {
   vehicleId                             Int?                                   @unique
   vehicle                               Vehicle?                               @relation(name: "EventSessionTeamDriver_Vehicle", fields: [vehicleId], references: [id])
   eventSessionTeamDriverLaps            EventSessionTeamDriverLap[]            @relation(name: "EventSessionTeamDriverLap_EventSessionTeamDriver")
+  eventSessionTeamDriverPitStops        EventSessionTeamDriverPitStop[]        @relation(name: "EventSessionTeamDriverPitStop_EventSessionTeamDriver")
   eventSessionTeamDriverStartingGrids   EventSessionTeamDriverStartingGrid[]   @relation(name: "EventSessionTeamDriverStartingGrid_EventSessionTeamDriver")
   eventSessionTeamDriverClassifications EventSessionTeamDriverClassification[] @relation(name: "EventSessionTeamDriverClassification_EventSessionTeamDriver")
 }
@@ -189,10 +190,18 @@ model EventSessionTeamDriverLap {
   eventSessionTeamDriver   EventSessionTeamDriver @relation(name: "EventSessionTeamDriverLap_EventSessionTeamDriver", fields: [eventSessionTeamDriverId], references: [id])
 }
 
+model EventSessionTeamDriverPitStop {
+  id                       Int                    @id @default(autoincrement())
+  lap                      Int
+  timeMilliseconds         Int? // How long was the pitstop?
+  eventSessionTeamDriverId Int
+  eventSessionTeamDriver   EventSessionTeamDriver @relation(name: "EventSessionTeamDriverPitStop_EventSessionTeamDriver", fields: [eventSessionTeamDriverId], references: [id])
+}
+
 model EventSessionTeamDriverStartingGrid {
   id                       Int                    @id @default(autoincrement())
   position                 Int?
-  time                     DateTime?
+  time                     DateTime? // What was the time to reach the position?
   note                     String? // if the racer for example starts in the pit or has a penalty
   eventSessionTeamDriverId Int
   eventSessionTeamDriver   EventSessionTeamDriver @relation(name: "EventSessionTeamDriverStartingGrid_EventSessionTeamDriver", fields: [eventSessionTeamDriverId], references: [id])

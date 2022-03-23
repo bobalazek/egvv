@@ -179,6 +179,16 @@ CREATE TABLE "EventSessionTeamDriverLap" (
 );
 
 -- CreateTable
+CREATE TABLE "EventSessionTeamDriverPitStop" (
+    "id" SERIAL NOT NULL,
+    "lap" INTEGER NOT NULL,
+    "timeMilliseconds" INTEGER,
+    "eventSessionTeamDriverId" INTEGER NOT NULL,
+
+    CONSTRAINT "EventSessionTeamDriverPitStop_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "EventSessionTeamDriverStartingGrid" (
     "id" SERIAL NOT NULL,
     "position" INTEGER,
@@ -294,6 +304,9 @@ ALTER TABLE "EventSessionTeamDriver" ADD CONSTRAINT "EventSessionTeamDriver_even
 
 -- AddForeignKey
 ALTER TABLE "EventSessionTeamDriverLap" ADD CONSTRAINT "EventSessionTeamDriverLap_eventSessionTeamDriverId_fkey" FOREIGN KEY ("eventSessionTeamDriverId") REFERENCES "EventSessionTeamDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "EventSessionTeamDriverPitStop" ADD CONSTRAINT "EventSessionTeamDriverPitStop_eventSessionTeamDriverId_fkey" FOREIGN KEY ("eventSessionTeamDriverId") REFERENCES "EventSessionTeamDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "EventSessionTeamDriverStartingGrid" ADD CONSTRAINT "EventSessionTeamDriverStartingGrid_eventSessionTeamDriverI_fkey" FOREIGN KEY ("eventSessionTeamDriverId") REFERENCES "EventSessionTeamDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

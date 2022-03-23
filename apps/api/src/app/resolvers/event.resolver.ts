@@ -67,6 +67,9 @@ export class EventResolver {
       where: {
         eventId: parseInt(parent.id),
       },
+      orderBy: {
+        startAt: 'asc',
+      },
     });
   }
 }

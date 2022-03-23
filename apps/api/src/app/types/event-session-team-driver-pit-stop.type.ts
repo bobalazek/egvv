@@ -1,22 +1,16 @@
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
 
 @ObjectType()
-export class EventSession {
+export class EventSessionTeamDriverPitStop {
   @Field(() => ID)
   id: string;
 
-  @Field()
-  name: string;
-
-  @Field()
-  type: string;
-
-  @Field()
-  startAt: Date;
+  @Field(() => Int)
+  lap: number;
 
   @Field({ nullable: true })
-  endAt?: Date;
+  timeMilliseconds?: number;
 
   @Field(() => Int)
-  eventId: number;
+  eventSessionTeamDriverId: number;
 }

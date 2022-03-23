@@ -24,7 +24,7 @@ export class Event {
   startAt: Date;
 
   @Field({ nullable: true })
-  endAt?: string;
+  endAt?: Date;
 
   @Field({ nullable: true })
   url?: string;
