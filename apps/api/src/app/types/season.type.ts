@@ -15,5 +15,8 @@ export class Season {
   startAt: Date;
 
   @Field(() => Int)
+  year: number;
+
+  @Field(() => Int)
   seriesId: number;
 }

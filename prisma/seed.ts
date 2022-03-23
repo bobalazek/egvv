@@ -56,6 +56,7 @@ async function main() {
     const finalData = {
       slug: data.slug,
       name: data.name,
+      year: data.year,
       startAt: new Date(data.startAt),
       seriesId: series.id,
     };

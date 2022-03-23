@@ -13,6 +13,7 @@ CREATE TABLE "Season" (
     "id" SERIAL NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "year" INTEGER NOT NULL,
     "startAt" TIMESTAMP(3) NOT NULL,
     "endAt" TIMESTAMP(3),
     "seriesId" INTEGER NOT NULL,
@@ -169,6 +170,7 @@ CREATE TABLE "EventSessionTeamDriver" (
 CREATE TABLE "EventSessionTeamDriverLap" (
     "id" SERIAL NOT NULL,
     "lap" INTEGER NOT NULL,
+    "isDeleted" BOOLEAN NOT NULL DEFAULT false,
     "time" TIMESTAMP(3),
     "position" INTEGER,
     "eventSessionTeamDriverId" INTEGER NOT NULL,

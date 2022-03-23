@@ -19,6 +19,7 @@ model Season {
   id          Int          @id @default(autoincrement())
   slug        String       @unique
   name        String // ex.: Formula 1 2022 World Championship
+  year        Int
   startAt     DateTime
   endAt       DateTime?
   seriesId    Int
@@ -181,6 +182,7 @@ model EventSessionTeamDriver {
 model EventSessionTeamDriverLap {
   id                       Int                    @id @default(autoincrement())
   lap                      Int
+  isDeleted                Boolean                @default(false)
   time                     DateTime?
   position                 Int?
   eventSessionTeamDriverId Int
