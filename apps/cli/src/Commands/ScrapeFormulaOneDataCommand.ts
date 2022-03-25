@@ -4,13 +4,15 @@ import { Command } from 'commander';
 import puppeteer from 'puppeteer';
 
 export const addScrapeFormulaOneDataCommand = (program: Command) => {
-  const command = program
-    .command('scrape-formula-one-data')
-    .action(async (options: any) => {
-      const browser = await puppeteer.launch();
+  const command = program.command('scrape-formula-one-data').action(async (options: any) => {
+    const browser = await puppeteer.launch();
 
-      const events = await getEventsForYear(browser, 2020);
-    });
+    const events = await getEventsForYear(browser, 2020);
+
+    console.log(events);
+
+    await browser.close();
+  });
   program.addCommand(command);
 };
 
@@ -26,11 +28,36 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
       continue;
     }
 
+    console.log(`Getting event data for ${event.slug} ${year} ...`);
+
     const round = parseInt(event.type.replace('round ', ''));
     const eventData = await getEventData(browser, year, event.slug);
-    const sessions = await getEventSessions(browser, year, event.slug);
+    const eventSessions = await getEventSessions(browser, year, event.slug);
 
-    // TODO: Qualifying should be 3x
+    const sessions = [];
+    for (const eventSession of eventSessions) {
+      const name = eventData.name + ' - ' + eventSession.name;
+      const type = eventSession.name.toLowerCase().replace(/ /g, '-');
+      if (type === 'qualifying') {
+        for (let i = 1; i <= 3; i++) {
+          sessions.push({
+            name: name + ' ' + i,
+            type: type + '_' + i,
+            startDate: eventSession.startDate,
+            endDate: eventSession.endDate,
+          });
+        }
+
+        continue;
+      }
+
+      sessions.push({
+        name,
+        type,
+        startDate: eventSession.startDate,
+        endDate: eventSession.endDate,
+      });
+    }
 
     events.push({
       ...eventData,
@@ -39,20 +66,12 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
     });
   }
 
-  console.log(events);
-
   return events;
 }
 
-async function getEventSessions(
-  browser: puppeteer.Browser,
-  year: number,
-  event: string
-) {
+async function getEventSessions(browser: puppeteer.Browser, year: number, event: string) {
   const page = await browser.newPage();
-  page.goto(
-    `https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`
-  );
+  page.goto(`https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`);
 
   const sessions: { name: string; startDate: Date; endDate: Date }[] = [];
 
@@ -87,6 +106,9 @@ async function getEventSessions(
 
     if (
       !row[1].startsWith('Practice') &&
+      !row[1].startsWith('First Practice') &&
+      !row[1].startsWith('Second Practice') &&
+      !row[1].startsWith('Third Practice') &&
       !row[1].startsWith('Qualifying') &&
       !row[1].startsWith('Grand Prix') &&
       !row[1].startsWith('Sprint')
@@ -98,26 +120,25 @@ async function getEventSessions(
     const currentDateSplit = currentDate.split(' ');
 
     const startDate = new Date(
-      Date.parse(
-        `${parseInt(currentDateSplit[1])} ${parseInt(
-          currentDateSplit[1]
-        )} ${year} ${datesSplit[0]}`
-      )
+      Date.parse(`${parseInt(currentDateSplit[1])} ${currentDateSplit[2]} ${year} ${datesSplit[0]}`)
     );
     const endDate = new Date(
-      Date.parse(
-        `${parseInt(currentDateSplit[1])} ${parseInt(
-          currentDateSplit[1]
-        )} ${year} ${datesSplit[1]}`
-      )
+      Date.parse(`${parseInt(currentDateSplit[1])} ${parseInt(currentDateSplit[1])} ${year} ${datesSplit[1]}`)
     );
 
     let name = row[1];
     if (name.startsWith('Sprint')) {
       name = 'Sprint';
-    }
-    if (name.startsWith('Grand Prix')) {
+    } else if (name.startsWith('Grand Prix')) {
       name = 'Race';
+    } else if (name === 'First Practice Session') {
+      name = 'Practice 1';
+    } else if (name === 'Second Practice Session') {
+      name = 'Practice 2';
+    } else if (name === 'Third Practice Session') {
+      name = 'Practice 3';
+    } else if (name === 'Qualifying Session') {
+      name = 'Qualifying';
     }
 
     sessions.push({
@@ -126,8 +147,6 @@ async function getEventSessions(
       endDate,
     });
   }
-
-  await browser.close();
 
   return sessions;
 }
@@ -175,11 +194,7 @@ async function getEventsList(page: puppeteer.Page, year: number) {
   return events;
 }
 
-async function getEventData(
-  browser: puppeteer.Browser,
-  year: number,
-  slug: string
-) {
+async function getEventData(browser: puppeteer.Browser, year: number, slug: string) {
   const page = await browser.newPage();
   page.goto(`https://www.formula1.com/en/racing/${year}/${slug}.html`);
 
@@ -209,9 +224,7 @@ async function getEventData(
   // Exception for Sakihr 2020
   if (isNaN(lapDistance)) {
     const lapDistanceSplit = matches[lapDistanceIndex].split(' ');
-    lapDistance = parseInt(
-      lapDistanceSplit[lapDistanceSplit.length - 1].replace('.', '')
-    );
+    lapDistance = parseInt(lapDistanceSplit[lapDistanceSplit.length - 1].replace('.', ''));
 
     circuitNameIndex = lapDistanceIndex;
   }
