@@ -27,8 +27,8 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
     }
 
     const round = parseInt(event.type.replace('round ', ''));
-    const eventData = await getEventDataFromUrl(browser, year, event.slug);
-    const sessions = await getSessionsFromTable(browser, year, event.slug);
+    const eventData = await getEventData(browser, year, event.slug);
+    const sessions = await getEventSessions(browser, year, event.slug);
 
     // TODO: Qualifying should be 3x
 
@@ -44,7 +44,7 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
   return events;
 }
 
-async function getSessionsFromTable(
+async function getEventSessions(
   browser: puppeteer.Browser,
   year: number,
   event: string
@@ -175,7 +175,7 @@ async function getEventsList(page: puppeteer.Page, year: number) {
   return events;
 }
 
-async function getEventDataFromUrl(
+async function getEventData(
   browser: puppeteer.Browser,
   year: number,
   slug: string
