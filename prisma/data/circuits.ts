@@ -7,14 +7,14 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Bahrain_International_Circuit',
   },
   {
-    name: 'Imola Circuit',
+    name: 'Imola Circuit', // Autodromo Enzo e Dino Ferrari
     slug: 'imola',
     location: 'Imola, Emilia-Romagna',
     countryCode: 'IT',
     url: 'https://en.wikipedia.org/wiki/Imola_Circuit',
   },
   {
-    name: 'Algarve International Circuit',
+    name: 'Autodromo Internacional do Algarve',
     slug: 'algarve',
     location: 'Portimão, Algarve',
     countryCode: 'PT',
@@ -98,6 +98,13 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Autodromo_Nazionale_di_Monza',
   },
   {
+    name: 'Autodromo Nazionale del Mugello',
+    slug: 'monza',
+    location: 'Mugello',
+    countryCode: 'IT',
+    url: 'https://en.wikipedia.org/wiki/Mugello_Circuit',
+  },
+  {
     name: 'Sochi Autodrom',
     slug: 'sochi',
     location: 'Sochi, Krasnodar Krai',
@@ -154,21 +161,21 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Yas_Marina_Circuit',
   },
   {
-    name: 'Nürburgring',
+    name: 'Nurburgring',
     slug: 'nurburgring',
     location: 'Nürburg',
     countryCode: 'DE',
     url: 'https://en.wikipedia.org/wiki/N%C3%BCrburgring',
   },
   {
-    name: 'Istanbul Park',
+    name: 'Intercity Istanbul Park',
     slug: 'istanbul',
     location: 'Tuzla, Istanbul',
     countryCode: 'TR',
     url: 'https://en.wikipedia.org/wiki/Istanbul_Park',
   },
   {
-    name: 'Mugello Circuit',
+    name: 'Autodromo Internazionale del Mugello',
     slug: 'mugello',
     location: 'Scarperia e San Piero, Tuscany',
     countryCode: 'IT',
