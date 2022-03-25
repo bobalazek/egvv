@@ -10,7 +10,6 @@ export const addScrapeFormulaOneDataCommand = (program: Command) => {
       const browser = await puppeteer.launch();
 
       const events = await getEventsForYear(browser, 2020);
-      const sessions = await getSessionsFromTable(browser, 2020, 'Austria');
     });
   program.addCommand(command);
 };
@@ -27,11 +26,16 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
       continue;
     }
 
+    const round = parseInt(event.type.replace('round ', ''));
     const eventData = await getEventDataFromUrl(browser, year, event.slug);
+    const sessions = await getSessionsFromTable(browser, year, event.slug);
+
+    // TODO: Qualifying should be 3x
 
     events.push({
       ...eventData,
-      round: parseInt(event.type.replace('round ', '')),
+      round,
+      sessions,
     });
   }
 
