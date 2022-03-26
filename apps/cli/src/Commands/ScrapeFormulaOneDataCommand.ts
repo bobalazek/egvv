@@ -7,12 +7,11 @@ import { convertToDashCase } from '@egvv/shared';
 export const addScrapeFormulaOneDataCommand = (program: Command) => {
   const command = program.command('scrape-formula-one-data').action(async () => {
     const browser = await puppeteer.launch();
+    const prisma = new PrismaClient();
 
     const year = 2020;
 
-    const events = await getEventsForYear(browser, year);
-
-    await saveEvents(events, `${year}-formula-one-world-championship`);
+    await processEventsForYear(browser, prisma, year, `${year}-formula-one-world-championship`);
 
     await browser.close();
   });
@@ -20,7 +19,12 @@ export const addScrapeFormulaOneDataCommand = (program: Command) => {
 };
 
 /********** Functions **********/
-async function getEventsForYear(browser: puppeteer.Browser, year: number) {
+async function processEventsForYear(
+  browser: puppeteer.Browser,
+  prisma: PrismaClient,
+  year: number,
+  seasonSlug: string
+) {
   const page = await browser.newPage();
   page.goto(`https://www.formula1.com/en/racing/${year}.html`);
 
@@ -65,10 +69,14 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
       });
     }
 
-    events.push({
+    const finalEventData = {
       ...eventData,
       sessions,
-    });
+    };
+
+    events.push(finalEventData);
+
+    await saveEvent(prisma, finalEventData, seasonSlug);
   }
 
   return events;
@@ -284,97 +292,88 @@ async function getEventData(
   };
 }
 
-async function saveEvents(events: EventWithSessionsInterface[], seasonSlug: string) {
-  console.log(`========== Saving events ... ==========`);
+async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSessionsInterface, seasonSlug: string) {
+  console.log(`Saving ${eventRawData.slug} event ...`);
 
-  const prisma = new PrismaClient();
-
-  for (const eventRawData of events) {
-    console.log(`Upserting ${eventRawData.slug} ...`);
-
-    let raceAt: Date;
-    for (const eventSessionData of eventRawData.sessions) {
-      if (eventSessionData.type !== 'race') {
-        continue;
-      }
-
+  let raceAt: Date;
+  for (const eventSessionData of eventRawData.sessions) {
+    if (eventSessionData.type === 'race') {
       raceAt = eventSessionData.startAt;
       break;
     }
+  }
 
-    if (!raceAt) {
-      console.error(`Could not find raceAt for ${eventRawData.name}`);
+  if (!raceAt) {
+    console.error(`Could not find raceAt for ${eventRawData.name}`);
 
-      process.exit(1);
-    }
+    process.exit(1);
+  }
 
-    const season = await prisma.season.findFirst({
-      where: {
-        slug: seasonSlug,
-      },
-    });
-    if (!season) {
-      console.error(`Season ${seasonSlug} not found`);
+  const season = await prisma.season.findFirst({
+    where: {
+      slug: seasonSlug,
+    },
+  });
+  if (!season) {
+    console.error(`Season ${seasonSlug} not found`);
 
-      process.exit(1);
-    }
+    process.exit(1);
+  }
 
-    const circuitSlug = convertToDashCase(eventRawData.circuitName);
-    const circuit = await prisma.circuit.findFirst({
-      where: {
-        slug: circuitSlug,
-      },
-    });
-    if (!circuit) {
-      console.error(`Circuit ${circuitSlug} not found`);
+  const circuit = await prisma.circuit.findFirst({
+    where: {
+      name: eventRawData.circuitName,
+    },
+  });
+  if (!circuit) {
+    console.error(`Circuit ${eventRawData.circuitName} not found`);
 
-      process.exit(1);
-    }
+    process.exit(1);
+  }
 
-    const finalData: Prisma.EventUncheckedCreateInput = {
-      name: eventRawData.name,
-      slug: eventRawData.slug,
-      laps: eventRawData.laps,
-      lapDistance: eventRawData.lapDistance,
-      round: eventRawData.round,
-      url: eventRawData.url,
-      raceAt,
-      seasonId: season.id,
-      circuitId: circuit.id,
+  const finalData: Prisma.EventUncheckedCreateInput = {
+    name: eventRawData.name,
+    slug: eventRawData.slug,
+    laps: eventRawData.laps,
+    lapDistance: eventRawData.lapDistance,
+    round: eventRawData.round,
+    url: eventRawData.url,
+    raceAt,
+    seasonId: season.id,
+    circuitId: circuit.id,
+  };
+
+  const event = await prisma.event.upsert({
+    where: {
+      slug: finalData.slug,
+    },
+    update: finalData,
+    create: finalData,
+  });
+
+  console.log(`===== Event sessions for ${event.slug} =====`);
+
+  for (const eventSessionData of eventRawData.sessions) {
+    console.log(`Upserting ${eventSessionData.type} ...`);
+
+    const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
+      name: eventSessionData.name,
+      type: eventSessionData.type,
+      startAt: eventSessionData.startAt,
+      endAt: eventSessionData.endAt,
+      eventId: event.id,
     };
 
-    const event = await prisma.event.upsert({
+    await prisma.eventSession.upsert({
       where: {
-        slug: finalData.slug,
-      },
-      update: finalData,
-      create: finalData,
-    });
-
-    console.log(`===== Event sessions for ${event.slug} =====`);
-
-    for (const eventSessionData of eventRawData.sessions) {
-      console.log(`Upserting ${eventSessionData.type} ...`);
-
-      const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
-        name: eventSessionData.name,
-        type: eventSessionData.type,
-        startAt: eventSessionData.startAt,
-        endAt: eventSessionData.endAt,
-        eventId: event.id,
-      };
-
-      await prisma.eventSession.upsert({
-        where: {
-          eventId_type: {
-            eventId: eventSessionFinalData.eventId,
-            type: eventSessionFinalData.type,
-          },
+        eventId_type: {
+          eventId: eventSessionFinalData.eventId,
+          type: eventSessionFinalData.type,
         },
-        update: eventSessionFinalData,
-        create: eventSessionFinalData,
-      });
-    }
+      },
+      update: eventSessionFinalData,
+      create: eventSessionFinalData,
+    });
   }
 }
 
