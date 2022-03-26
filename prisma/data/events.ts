@@ -12,37 +12,37 @@ export default [
     sessions: [
       {
         name: '2020 Austrian Grand Prix - Practice 1',
-        type: 'practice_1',
+        type: 'practice-1',
         startAt: '2020-07-03 11:00:00',
         endAt: '2020-07-03 12:30:00',
       },
       {
         name: '2020 Austrian Grand Prix - Practice 2',
-        type: 'practice_2',
+        type: 'practice-2',
         startAt: '2020-07-03 15:00:00',
         endAt: '2020-07-03 16:30:00',
       },
       {
         name: '2020 Austrian Grand Prix - Practice 3',
-        type: 'practice_3',
+        type: 'practice-3',
         startAt: '2020-07-04 12:00:00',
         endAt: '2020-07-04 13:30:00',
       },
       {
         name: '2020 Austrian Grand Prix - Qualifying 1',
-        type: 'qualifying_1',
+        type: 'qualifying-1',
         startAt: '2020-07-04 15:00:00',
         endAt: '2020-07-04 16:30:00',
       },
       {
         name: '2020 Austrian Grand Prix - Qualifying 2',
-        type: 'qualifying_2',
+        type: 'qualifying-2',
         startAt: '2020-07-04 15:00:00',
         endAt: '2020-07-04 16:30:00',
       },
       {
         name: '2020 Austrian Grand Prix - Qualifying 3',
-        type: 'qualifying_3',
+        type: 'qualifying-3',
         startAt: '2020-07-04 15:00:00',
         endAt: '2020-07-04 16:30:00',
       },

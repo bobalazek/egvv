@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 import circuits from './data/circuits';
 import series from './data/series';
@@ -53,7 +53,7 @@ async function main() {
       process.exit(1);
     }
 
-    const finalData = {
+    const finalData: Prisma.SeasonUncheckedCreateInput = {
       slug: data.slug,
       name: data.name,
       year: data.year,
@@ -74,7 +74,10 @@ async function main() {
   for (const data of teams) {
     console.log(`Upserting ${data.slug} ...`);
 
-    const finalData = { ...data, debutAt: new Date(data.debutAt) };
+    const finalData: Prisma.TeamUncheckedCreateInput = {
+      ...data,
+      debutAt: new Date(data.debutAt),
+    };
 
     await prisma.team.upsert({
       where: {
@@ -124,7 +127,7 @@ async function main() {
       process.exit(1);
     }
 
-    const finalData = {
+    const finalData: Prisma.EventUncheckedCreateInput = {
       name: data.name,
       slug: data.slug,
       laps: data.laps,
@@ -150,7 +153,7 @@ async function main() {
       for (const eventSessionData of data.sessions) {
         console.log(`Upserting ${eventSessionData.type} ...`);
 
-        const eventSessionFinalData = {
+        const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
           name: eventSessionData.name,
           type: eventSessionData.type,
           startAt: new Date(eventSessionData.startAt),
@@ -198,7 +201,7 @@ async function main() {
       process.exit(1);
     }
 
-    const finalData = {
+    const finalData: Prisma.SeasonTeamUncheckedCreateInput = {
       name: data.name,
       powerUnit: data.powerUnit,
       chassis: data.chassis,

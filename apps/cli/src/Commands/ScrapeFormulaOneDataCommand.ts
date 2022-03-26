@@ -1,26 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import { Command } from 'commander';
 import puppeteer from 'puppeteer';
+import { Command } from 'commander';
+import { Prisma, PrismaClient } from '@prisma/client';
+
+import { convertToDashCase } from '@egvv/shared';
 
 export const addScrapeFormulaOneDataCommand = (program: Command) => {
-  const command = program.command('scrape-formula-one-data').action(async (options: any) => {
+  const command = program.command('scrape-formula-one-data').action(async () => {
     const browser = await puppeteer.launch();
 
-    const events = await getEventsForYear(browser, 2020);
+    const year = 2020;
 
-    console.log(events);
+    const events = await getEventsForYear(browser, year);
+
+    await saveEvents(events, `${year}-formula-one-world-championship`);
 
     await browser.close();
   });
   program.addCommand(command);
 };
 
+/********** Functions **********/
 async function getEventsForYear(browser: puppeteer.Browser, year: number) {
   const page = await browser.newPage();
   page.goto(`https://www.formula1.com/en/racing/${year}.html`);
 
-  const events: any[] = [];
+  console.log(`========== Getting events for ${year} ==========`);
+
+  const events: EventWithSessionsInterface[] = [];
 
   const eventsList = await getEventsList(page, year);
   for (const event of eventsList) {
@@ -31,10 +37,10 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
     console.log(`Getting event data for ${event.slug} ${year} ...`);
 
     const round = parseInt(event.type.replace('round ', ''));
-    const eventData = await getEventData(browser, year, event.slug);
+    const eventData = await getEventData(browser, year, event.slug, round);
     const eventSessions = await getEventSessions(browser, year, event.slug);
 
-    const sessions = [];
+    const sessions: EventSessionInterface[] = [];
     for (const eventSession of eventSessions) {
       const name = eventData.name + ' - ' + eventSession.name;
       const type = eventSession.type;
@@ -42,9 +48,9 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
         for (let i = 1; i <= 3; i++) {
           sessions.push({
             name: name + ' ' + i,
-            type: type + '_' + i,
-            startDate: eventSession.startDate,
-            endDate: eventSession.endDate,
+            type: type + '-' + i,
+            startAt: eventSession.startAt,
+            endAt: eventSession.endAt,
           });
         }
 
@@ -54,14 +60,13 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
       sessions.push({
         name,
         type,
-        startDate: eventSession.startDate,
-        endDate: eventSession.endDate,
+        startAt: eventSession.startAt,
+        endAt: eventSession.endAt,
       });
     }
 
     events.push({
       ...eventData,
-      round,
       sessions,
     });
   }
@@ -73,7 +78,7 @@ async function getEventSessions(browser: puppeteer.Browser, year: number, event:
   const page = await browser.newPage();
   page.goto(`https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`);
 
-  const sessions: { name: string; type: string; startDate: Date; endDate: Date }[] = [];
+  const sessions: EventSessionInterface[] = [];
 
   const table = await getEventTableData(page);
 
@@ -119,10 +124,10 @@ async function getEventSessions(browser: puppeteer.Browser, year: number, event:
     const datesSplit = row[2].split(' - ');
     const currentDateSplit = currentDate.split(' ');
 
-    const startDate = new Date(
+    const startAt = new Date(
       Date.parse(`${parseInt(currentDateSplit[1])} ${currentDateSplit[2]} ${year} ${datesSplit[0]}`)
     );
-    const endDate = new Date(
+    const endAt = new Date(
       Date.parse(`${parseInt(currentDateSplit[1])} ${parseInt(currentDateSplit[1])} ${year} ${datesSplit[1]}`)
     );
 
@@ -141,13 +146,13 @@ async function getEventSessions(browser: puppeteer.Browser, year: number, event:
       name = 'Qualifying';
     }
 
-    const type = name.toLowerCase().replace(/ /g, '-');
+    const type = convertToDashCase(name);
 
     sessions.push({
       name,
       type,
-      startDate,
-      endDate,
+      startAt,
+      endAt,
     });
   }
 
@@ -179,7 +184,7 @@ async function getEventTableData(page: puppeteer.Page) {
 async function getEventsList(page: puppeteer.Page, year: number) {
   await page.waitForSelector('.event-list');
 
-  const events: { slug: string; type: string }[] = [];
+  const events: EventsListInterface[] = [];
 
   const $events = await page.$$('.event-list .event-item-link');
   for (const $event of $events) {
@@ -197,9 +202,15 @@ async function getEventsList(page: puppeteer.Page, year: number) {
   return events;
 }
 
-async function getEventData(browser: puppeteer.Browser, year: number, slug: string) {
+async function getEventData(
+  browser: puppeteer.Browser,
+  year: number,
+  slug: string,
+  round: number
+): Promise<EventInterface> {
+  const url = `https://www.formula1.com/en/racing/${year}/${slug}.html`;
   const page = await browser.newPage();
-  page.goto(`https://www.formula1.com/en/racing/${year}/${slug}.html`);
+  page.goto(url);
 
   await page.waitForSelector('.f1-race-hub--content');
 
@@ -260,10 +271,136 @@ async function getEventData(browser: puppeteer.Browser, year: number, slug: stri
     circuitName = 'Intercity Istanbul Park';
   }
 
+  const eventSlug = convertToDashCase(name);
+
   return {
     name,
+    slug: eventSlug,
+    round,
     laps,
     lapDistance,
     circuitName,
+    url,
   };
+}
+
+async function saveEvents(events: EventWithSessionsInterface[], seasonSlug: string) {
+  console.log(`========== Saving events ... ==========`);
+
+  const prisma = new PrismaClient();
+
+  for (const eventRawData of events) {
+    console.log(`Upserting ${eventRawData.slug} ...`);
+
+    let raceAt: Date;
+    for (const eventSessionData of eventRawData.sessions) {
+      if (eventSessionData.type !== 'race') {
+        continue;
+      }
+
+      raceAt = eventSessionData.startAt;
+      break;
+    }
+
+    if (!raceAt) {
+      console.error(`Could not find raceAt for ${eventRawData.name}`);
+
+      process.exit(1);
+    }
+
+    const season = await prisma.season.findFirst({
+      where: {
+        slug: seasonSlug,
+      },
+    });
+    if (!season) {
+      console.error(`Season ${seasonSlug} not found`);
+
+      process.exit(1);
+    }
+
+    const circuitSlug = convertToDashCase(eventRawData.circuitName);
+    const circuit = await prisma.circuit.findFirst({
+      where: {
+        slug: circuitSlug,
+      },
+    });
+    if (!circuit) {
+      console.error(`Circuit ${circuitSlug} not found`);
+
+      process.exit(1);
+    }
+
+    const finalData: Prisma.EventUncheckedCreateInput = {
+      name: eventRawData.name,
+      slug: eventRawData.slug,
+      laps: eventRawData.laps,
+      lapDistance: eventRawData.lapDistance,
+      round: eventRawData.round,
+      url: eventRawData.url,
+      raceAt,
+      seasonId: season.id,
+      circuitId: circuit.id,
+    };
+
+    const event = await prisma.event.upsert({
+      where: {
+        slug: finalData.slug,
+      },
+      update: finalData,
+      create: finalData,
+    });
+
+    console.log(`===== Event sessions for ${event.slug} =====`);
+
+    for (const eventSessionData of eventRawData.sessions) {
+      console.log(`Upserting ${eventSessionData.type} ...`);
+
+      const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
+        name: eventSessionData.name,
+        type: eventSessionData.type,
+        startAt: eventSessionData.startAt,
+        endAt: eventSessionData.endAt,
+        eventId: event.id,
+      };
+
+      await prisma.eventSession.upsert({
+        where: {
+          eventId_type: {
+            eventId: eventSessionFinalData.eventId,
+            type: eventSessionFinalData.type,
+          },
+        },
+        update: eventSessionFinalData,
+        create: eventSessionFinalData,
+      });
+    }
+  }
+}
+
+/********** Interfaces **********/
+interface EventInterface {
+  name: string;
+  slug: string;
+  round: number;
+  laps: number;
+  lapDistance: number;
+  circuitName: string;
+  url: string;
+}
+
+interface EventWithSessionsInterface extends EventInterface {
+  sessions: EventSessionInterface[];
+}
+
+interface EventsListInterface {
+  slug: string;
+  type: string;
+}
+
+interface EventSessionInterface {
+  name: string;
+  type: string;
+  startAt: Date;
+  endAt: Date;
 }
