@@ -1,4 +1,15 @@
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "NAS EGVV",
+      "connectString": "postgresql://user:password@192.168.1.200:54321/egvv?schema=public"
+    }
+  ]
 }

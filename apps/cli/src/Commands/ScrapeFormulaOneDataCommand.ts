@@ -5,16 +5,19 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { convertToDashCase } from '@egvv/shared';
 
 export const addScrapeFormulaOneDataCommand = (program: Command) => {
-  const command = program.command('scrape-formula-one-data').action(async () => {
-    const browser = await puppeteer.launch();
-    const prisma = new PrismaClient();
+  const command = program
+    .command('scrape-formula-one-data')
+    .requiredOption('-y, --year <year>', 'For what year?')
+    .action(async (options: any) => {
+      const browser = await puppeteer.launch();
+      const prisma = new PrismaClient();
 
-    const year = 2020;
+      const year = parseInt(options.year);
 
-    await processEventsForYear(browser, prisma, year, `${year}-formula-one-world-championship`);
+      await processEventsForYear(browser, prisma, year, `${year}-formula-one-world-championship`);
 
-    await browser.close();
-  });
+      await browser.close();
+    });
   program.addCommand(command);
 };
 
@@ -275,7 +278,7 @@ async function getEventData(
   }
 
   // Exceptions
-  if (circuitName === 'Imola') {
+  if (circuitName === 'Imola' || circuitName === 'Autodromo Enzo e Dino Ferrari') {
     circuitName = 'Imola Circuit';
   } else if (circuitName === 'Intercity Istanbul Park circuit') {
     circuitName = 'Intercity Istanbul Park';
