@@ -77,6 +77,8 @@ async function processEventsForYear(
     events.push(finalEventData);
 
     await saveEvent(prisma, finalEventData, seasonSlug);
+
+    console.log('----------');
   }
 
   return events;
@@ -342,6 +344,8 @@ async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSessionsIn
     seasonId: season.id,
     circuitId: circuit.id,
   };
+
+  console.log(finalData);
 
   const event = await prisma.event.upsert({
     where: {

@@ -88,8 +88,8 @@ export default [
     seasonSlug: '2020-formula-one-world-championship',
   },
   {
-    name: '70th Anniversary Grand Prix 2020',
-    slug: '70th-anniversary-grand-prix-2020',
+    name: '2020 70th Anniversary Grand Prix',
+    slug: '2020-70th-anniversary-grand-prix',
     laps: 52,
     lapDistance: 5891,
     round: 5,
