@@ -146,7 +146,7 @@ async function getEventSessions(browser: puppeteer.Browser, year: number, event:
       name = 'Sprint';
     } else if (name.startsWith('Grand Prix')) {
       name = 'Race';
-    } else if (name === 'First Practice Session') {
+    } else if (name === 'First Practice Session' || name === 'Practice Session') {
       name = 'Practice 1';
     } else if (name === 'Second Practice Session') {
       name = 'Practice 2';
