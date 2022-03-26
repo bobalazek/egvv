@@ -6,6 +6,7 @@ export interface EventInterface {
   lapDistance: number;
   circuitName: string;
   url: string;
+  circuitLayout?: string;
 }
 
 export interface EventWithSessionsInterface extends EventInterface {

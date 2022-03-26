@@ -203,6 +203,7 @@ export async function getEventData(
   slug: string,
   round: number
 ): Promise<EventInterface> {
+  // Summary page
   const url = `https://www.formula1.com/en/racing/${year}/${slug}.html`;
   const page = await browser.newPage();
   page.goto(url);
@@ -212,58 +213,39 @@ export async function getEventData(
   const $paragraphs = await page.$$('.f1-race-hub--content p');
   const text = await page.evaluate((el) => el.textContent, $paragraphs[0]);
 
-  let regex =
-    /up to speed with everything you need to know about the (.*), which takes place over (.*) laps of the (.*)-kilometre (.*) /gm;
-  let matches = regex.exec(text);
-  let lapsIndex = 2;
-  let lapDistanceIndex = 3;
-  let circuitNameIndex = 4;
+  const regex = /up to speed with everything you need to know about the (.*), which/gm;
+  const matches = regex.exec(text);
 
-  if (!matches) {
-    regex =
-      /up to speed with everything you need to know about the (.*), which takes place in (.*), over (.*) laps of the (.*)-kilometre (.*) /gm;
-    matches = regex.exec(text);
-    lapsIndex = 3;
-    lapDistanceIndex = 4;
-    circuitNameIndex = 2;
-  }
+  const name = matches[1];
 
-  let lapDistance = parseInt(matches[lapDistanceIndex].replace('.', ''));
+  await page.waitForSelector('.f1-race-hub--timetable-links-wrapper');
 
-  // Exception for Sakihr 2020
-  if (isNaN(lapDistance)) {
-    const lapDistanceSplit = matches[lapDistanceIndex].split(' ');
-    lapDistance = parseInt(lapDistanceSplit[lapDistanceSplit.length - 1].replace('.', ''));
+  const $circuitName = await page.$('.f1-race-hub--timetable-links-wrapper .misc--tag');
+  let circuitName = await page.evaluate((el) => el.textContent, $circuitName);
 
-    circuitNameIndex = lapDistanceIndex;
-  }
+  let circuitLayout: string | null = null;
 
-  const laps = parseInt(matches[lapsIndex]);
+  // Circuit page
+  page.goto(`https://www.formula1.com/en/racing/${year}/${slug}/Circuit.html`);
 
-  let name = matches[1];
-  if (name.includes(',')) {
-    name = name.split(',')[0];
-  }
+  await page.waitForSelector('.f1-race-hub--map');
 
-  let circuitName = matches[circuitNameIndex];
-  if (circuitName.includes(',')) {
-    circuitName = circuitName.split(',')[0];
-  }
-  if (circuitName.includes("'s")) {
-    circuitName = circuitName.split("'s")[0];
-  }
-  if (circuitName.includes(' on ')) {
-    circuitName = circuitName.split(' on ')[0];
-  }
-  if (circuitName.includes(' in ')) {
-    circuitName = circuitName.split(' in ')[0];
-  }
+  const $stats = await page.$$('.f1-race-hub--map .f1-stat .f1-bold--stat');
+
+  const lapsStat = await page.evaluate((el) => el.textContent, $stats[1]);
+  const laps = parseInt(lapsStat);
+
+  const lapDistanceStat = await page.evaluate((el) => el.textContent, $stats[2]);
+  const lapDistance = parseInt(lapDistanceStat.replace('.', ''));
 
   // Exceptions
   if (circuitName === 'Imola' || circuitName === 'Autodromo Enzo e Dino Ferrari') {
     circuitName = 'Imola Circuit';
   } else if (circuitName === 'Intercity Istanbul Park circuit') {
     circuitName = 'Intercity Istanbul Park';
+  } else if (circuitName === 'Bahrain International Circuit – Outer Track') {
+    circuitName = 'Bahrain International Circuit';
+    circuitLayout = 'Outer Track';
   }
 
   const eventSlug = convertToDashCase(name);
@@ -275,6 +257,7 @@ export async function getEventData(
     laps,
     lapDistance,
     circuitName,
+    circuitLayout,
     url,
   };
 }
@@ -325,6 +308,7 @@ export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSes
     lapDistance: eventRawData.lapDistance,
     round: eventRawData.round,
     url: eventRawData.url,
+    circuitLayout: eventRawData.circuitLayout,
     raceAt,
     seasonId: season.id,
     circuitId: circuit.id,

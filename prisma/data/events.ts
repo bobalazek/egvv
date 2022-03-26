@@ -7,6 +7,7 @@ export default [
     round: 1,
     raceAt: '2020-07-05 15:10:00',
     url: 'https://en.wikipedia.org/wiki/2020_Austrian_Grand_Prix',
+    circuitLayout: null, // Just so the linter won't complain, about the non-existing key ...
     circuitSlug: 'red-bull-ring',
     seasonSlug: '2020-formula-one-world-championship',
     sessions: [

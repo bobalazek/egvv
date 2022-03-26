@@ -135,6 +135,7 @@ async function main() {
       round: data.round,
       raceAt: new Date(data.raceAt),
       url: data.url ?? null,
+      circuitLayout: data.circuitLayout ?? null,
       seasonId: season.id,
       circuitId: circuit.id,
     };

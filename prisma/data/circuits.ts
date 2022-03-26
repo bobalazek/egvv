@@ -14,8 +14,8 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Imola_Circuit',
   },
   {
-    name: 'Autodromo Internacional do Algarve',
-    slug: 'algarve',
+    name: 'Autódromo Internacional do Algarve',
+    slug: 'portimao',
     location: 'Portimão, Algarve',
     countryCode: 'PT',
     url: 'https://en.wikipedia.org/wiki/Algarve_International_Circuit',
