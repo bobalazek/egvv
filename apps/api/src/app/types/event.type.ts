@@ -21,10 +21,7 @@ export class Event {
   lapDistance: number;
 
   @Field()
-  startAt: Date;
-
-  @Field({ nullable: true })
-  endAt?: Date;
+  raceAt: Date;
 
   @Field({ nullable: true })
   url?: string;

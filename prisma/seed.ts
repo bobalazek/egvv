@@ -130,7 +130,7 @@ async function main() {
       laps: data.laps,
       lapDistance: data.lapDistance,
       round: data.round,
-      startAt: new Date(data.startAt),
+      raceAt: new Date(data.raceAt),
       url: data.url ?? null,
       seasonId: season.id,
       circuitId: circuit.id,
@@ -154,9 +154,7 @@ async function main() {
           name: eventSessionData.name,
           type: eventSessionData.type,
           startAt: new Date(eventSessionData.startAt),
-          endAt: eventSessionData.endAt
-            ? new Date(eventSessionData.endAt)
-            : null,
+          endAt: eventSessionData.endAt ? new Date(eventSessionData.endAt) : null,
           eventId: event.id,
         };
 

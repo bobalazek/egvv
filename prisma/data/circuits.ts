@@ -91,7 +91,7 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Circuit_Zandvoort',
   },
   {
-    name: 'Autodromo Nazionale di Monza',
+    name: 'Autodromo Nazionale Monza',
     slug: 'monza',
     location: 'Monza',
     countryCode: 'IT',

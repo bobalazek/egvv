@@ -137,8 +137,7 @@ model Event {
   round         Int // Which round in the season?
   laps          Int
   lapDistance   Float // in km
-  startAt       DateTime
-  endAt         DateTime?
+  raceAt        DateTime
   url           String
   circuitLayout String? // Should probably be something like "2001-2015", "2018-present", ...
   seasonId      Int

@@ -16,7 +16,7 @@
     "@nestjs/schematics": "^8.0.8",
     "@nestjs/testing": "^8.4.1",
     "@nestjs/throttler": "^2.0.1",
-    "@prisma/client": "^3.11.0",
+    "@prisma/client": "^3.11.1",
     "apollo-server-core": "^3.6.4",
     "apollo-server-express": "^3.6.4",
     "commander": "^9.1.0",

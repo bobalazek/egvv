@@ -37,7 +37,7 @@ async function getEventsForYear(browser: puppeteer.Browser, year: number) {
     const sessions = [];
     for (const eventSession of eventSessions) {
       const name = eventData.name + ' - ' + eventSession.name;
-      const type = eventSession.name.toLowerCase().replace(/ /g, '-');
+      const type = eventSession.type;
       if (type === 'qualifying') {
         for (let i = 1; i <= 3; i++) {
           sessions.push({
@@ -73,7 +73,7 @@ async function getEventSessions(browser: puppeteer.Browser, year: number, event:
   const page = await browser.newPage();
   page.goto(`https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`);
 
-  const sessions: { name: string; startDate: Date; endDate: Date }[] = [];
+  const sessions: { name: string; type: string; startDate: Date; endDate: Date }[] = [];
 
   const table = await getEventTableData(page);
 
@@ -141,8 +141,11 @@ async function getEventSessions(browser: puppeteer.Browser, year: number, event:
       name = 'Qualifying';
     }
 
+    const type = name.toLowerCase().replace(/ /g, '-');
+
     sessions.push({
       name,
+      type,
       startDate,
       endDate,
     });
