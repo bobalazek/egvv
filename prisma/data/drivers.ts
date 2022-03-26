@@ -189,10 +189,10 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Pietro_Fittipaldi',
   },
   {
-    firstName: 'Zhou',
-    lastName: 'Guanyu',
-    slug: 'zhou-guanyu',
+    firstName: 'Guanyu',
+    lastName: 'Zhou',
+    slug: 'guanyu-zhou',
     countryCode: 'CN',
-    url: 'https://en.wikipedia.org/wiki/Pietro_Fittipaldi',
+    url: 'https://en.wikipedia.org/wiki/Guanyu_Zhou',
   },
 ];
