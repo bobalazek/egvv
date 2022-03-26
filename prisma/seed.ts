@@ -243,7 +243,7 @@ async function main() {
       },
     });
     if (!team) {
-      console.error(`TeamteamSlug ${data.teamSlug} not found`);
+      console.error(`Team ${data.teamSlug} not found`);
 
       process.exit(1);
     }
