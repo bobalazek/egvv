@@ -131,14 +131,14 @@ async function getEventSessions(browser: puppeteer.Browser, year: number, event:
       continue;
     }
 
-    const datesSplit = row[2].split(' - ');
-    const currentDateSplit = currentDate.split(' ');
+    const datesSplit = row[2].replace(/\xA0/g, ' ').split(' - ');
+    const currentDateSplit = currentDate.replace(/\xA0/g, ' ').split(' ');
 
     const startAt = new Date(
       Date.parse(`${parseInt(currentDateSplit[1])} ${currentDateSplit[2]} ${year} ${datesSplit[0]}`)
     );
     const endAt = new Date(
-      Date.parse(`${parseInt(currentDateSplit[1])} ${parseInt(currentDateSplit[1])} ${year} ${datesSplit[1]}`)
+      Date.parse(`${parseInt(currentDateSplit[1])} ${currentDateSplit[2]} ${year} ${datesSplit[1]}`)
     );
 
     let name = row[1];
@@ -344,8 +344,6 @@ async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSessionsIn
     seasonId: season.id,
     circuitId: circuit.id,
   };
-
-  console.log(finalData);
 
   const event = await prisma.event.upsert({
     where: {

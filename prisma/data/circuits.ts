@@ -99,7 +99,7 @@ export default [
   },
   {
     name: 'Autodromo Nazionale del Mugello',
-    slug: 'monza',
+    slug: 'mugello',
     location: 'Mugello',
     countryCode: 'IT',
     url: 'https://en.wikipedia.org/wiki/Mugello_Circuit',
