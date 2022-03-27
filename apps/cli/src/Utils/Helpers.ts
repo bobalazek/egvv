@@ -66,8 +66,6 @@ export async function processEventsForYear(
     console.log('----------');
   }
 
-  console.log(JSON.stringify(events));
-
   return events;
 }
 
