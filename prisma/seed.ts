@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('========== Circuits ==========');
   for (const data of circuits) {
-    console.log(`Upserting ${data.slug} ...`);
+    console.log(`Upserting "${data.slug}" ...`);
 
     await prisma.circuit.upsert({
       where: {
@@ -27,7 +27,7 @@ async function main() {
 
   console.log('========== Series ==========');
   for (const data of series) {
-    console.log(`Upserting ${data.slug} ...`);
+    console.log(`Upserting "${data.slug}" ...`);
 
     await prisma.series.upsert({
       where: {
@@ -40,7 +40,7 @@ async function main() {
 
   console.log('========== Seasons ==========');
   for (const data of seasons) {
-    console.log(`Upserting ${data.slug} ...`);
+    console.log(`Upserting "${data.slug}" ...`);
 
     const series = await prisma.series.findFirst({
       where: {
@@ -48,7 +48,7 @@ async function main() {
       },
     });
     if (!series) {
-      console.error(`Series ${data.seriesSlug} not found`);
+      console.error(`Series "${data.seriesSlug}" not found`);
 
       process.exit(1);
     }
@@ -72,7 +72,7 @@ async function main() {
 
   console.log('========== Teams ==========');
   for (const data of teams) {
-    console.log(`Upserting ${data.slug} ...`);
+    console.log(`Upserting "${data.slug}" ...`);
 
     const finalData: Prisma.TeamUncheckedCreateInput = {
       ...data,
@@ -90,7 +90,7 @@ async function main() {
 
   console.log('========== Drivers ==========');
   for (const data of drivers) {
-    console.log(`Upserting ${data.slug} ...`);
+    console.log(`Upserting "${data.slug}" ...`);
 
     await prisma.driver.upsert({
       where: {
@@ -103,7 +103,7 @@ async function main() {
 
   console.log('========== Events ==========');
   for (const data of events) {
-    console.log(`Upserting ${data.slug} ...`);
+    console.log(`Upserting "${data.slug}" ...`);
 
     const season = await prisma.season.findFirst({
       where: {
@@ -111,7 +111,7 @@ async function main() {
       },
     });
     if (!season) {
-      console.error(`Season ${data.seasonSlug} not found`);
+      console.error(`Season "${data.seasonSlug}" not found`);
 
       process.exit(1);
     }
@@ -122,7 +122,7 @@ async function main() {
       },
     });
     if (!circuit) {
-      console.error(`Circuit ${data.circuitSlug} not found`);
+      console.error(`Circuit "${data.circuitSlug}" not found`);
 
       process.exit(1);
     }
@@ -149,7 +149,7 @@ async function main() {
     });
 
     if (data.sessions) {
-      console.log(`===== Event sessions for ${event.slug} =====`);
+      console.log(`===== Event sessions for "${event.slug}" =====`);
 
       for (const eventSessionData of data.sessions) {
         console.log(`Upserting ${eventSessionData.type} ...`);
@@ -178,7 +178,7 @@ async function main() {
 
   console.log('========== Season teams ==========');
   for (const data of seasonTeams) {
-    console.log(`Upserting ${data.name} ...`);
+    console.log(`Upserting "${data.name}" ...`);
 
     const season = await prisma.season.findFirst({
       where: {
@@ -186,7 +186,7 @@ async function main() {
       },
     });
     if (!season) {
-      console.error(`Season ${data.seasonSlug} not found`);
+      console.error(`Season "${data.seasonSlug}" not found`);
 
       process.exit(1);
     }
@@ -197,7 +197,7 @@ async function main() {
       },
     });
     if (!team) {
-      console.error(`Team ${data.teamSlug} not found`);
+      console.error(`Team "${data.teamSlug}" not found`);
 
       process.exit(1);
     }
@@ -224,7 +224,7 @@ async function main() {
 
   console.log('========== Season team drivers ==========');
   for (const data of seasonTeamDrivers) {
-    console.log(`Upserting ${data.code} ...`);
+    console.log(`Upserting "${data.code}" ...`);
 
     const season = await prisma.season.findFirst({
       where: {
@@ -232,7 +232,7 @@ async function main() {
       },
     });
     if (!season) {
-      console.error(`Season ${data.seasonSlug} not found`);
+      console.error(`Season "${data.seasonSlug}" not found`);
 
       process.exit(1);
     }
@@ -243,7 +243,7 @@ async function main() {
       },
     });
     if (!team) {
-      console.error(`Team ${data.teamSlug} not found`);
+      console.error(`Team "${data.teamSlug}" not found`);
 
       process.exit(1);
     }
@@ -255,7 +255,7 @@ async function main() {
       },
     });
     if (!seasonTeam) {
-      console.error(`Season team ${data.teamSlug} not found`);
+      console.error(`Season team "${data.teamSlug}" not found`);
 
       process.exit(1);
     }
@@ -266,7 +266,7 @@ async function main() {
       },
     });
     if (!driver) {
-      console.error(`Driver ${data.driverSlug} not found`);
+      console.error(`Driver "${data.driverSlug}" not found`);
 
       process.exit(1);
     }

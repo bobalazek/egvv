@@ -122,12 +122,23 @@ export async function getEventSessions(page: puppeteer.Page, year: number, event
     const datesSplit = row[2].replace(/\xA0/g, ' ').split(' - ');
     const currentDateSplit = currentDate.replace(/\xA0/g, ' ').split(' ');
 
+    let startTime = datesSplit[0];
+    let endTime = datesSplit[0];
+
+    // There's a typo (https://www.formula1.com/en/racing/2021/Qatar/Timetable.html)
+    // TODO: this data should probably be rather taken from the <script>
+    if (startTime.includes(';')) {
+      startTime = startTime.replace(';', ':');
+    }
+
+    if (endTime.includes(';')) {
+      endTime = endTime.replace(';', ':');
+    }
+
     const startAt = new Date(
-      Date.parse(`${parseInt(currentDateSplit[1])} ${currentDateSplit[2]} ${year} ${datesSplit[0]}`)
+      Date.parse(`${parseInt(currentDateSplit[1])} ${currentDateSplit[2]} ${year} ${startTime}`)
     );
-    const endAt = new Date(
-      Date.parse(`${parseInt(currentDateSplit[1])} ${currentDateSplit[2]} ${year} ${datesSplit[1]}`)
-    );
+    const endAt = new Date(Date.parse(`${parseInt(currentDateSplit[1])} ${currentDateSplit[2]} ${year} ${endTime}`));
 
     let name = row[1];
     if (name.startsWith('Sprint')) {
@@ -248,12 +259,16 @@ export async function getEventData(
   // Exceptions
   if (circuitName === 'Imola' || circuitName === 'Autodromo Enzo e Dino Ferrari') {
     circuitName = 'Imola Circuit';
+  } else if (circuitName === 'Mugello') {
+    circuitName = 'Autodromo Internazionale del Mugello';
   } else if (circuitName === 'Intercity Istanbul Park circuit') {
     circuitName = 'Intercity Istanbul Park';
   } else if (circuitName === 'Melbourne Grand Prix Circuit') {
     circuitName = 'Albert Park Circuit';
   } else if (circuitName === 'Autódromo José Carlos Pace') {
     circuitName = 'Interlagos Circuit';
+  } else if (circuitName === 'Nurburgring') {
+    circuitName = 'Nürburgring';
   } else if (circuitName === 'Bahrain International Circuit – Outer Track') {
     circuitName = 'Bahrain International Circuit';
     circuitLayout = 'Outer Track';
@@ -285,7 +300,7 @@ export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSes
   }
 
   if (!raceAt) {
-    console.error(`Could not find raceAt for ${eventRawData.name}`);
+    console.error(`Could not find raceAt for "${eventRawData.name}"`);
 
     process.exit(1);
   }
@@ -296,7 +311,7 @@ export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSes
     },
   });
   if (!season) {
-    console.error(`Season ${seasonSlug} not found`);
+    console.error(`Season "${seasonSlug}" not found`);
 
     process.exit(1);
   }
@@ -307,7 +322,7 @@ export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSes
     },
   });
   if (!circuit) {
-    console.error(`Circuit ${eventRawData.circuitName} not found`);
+    console.error(`Circuit "${eventRawData.circuitName}" not found`);
 
     process.exit(1);
   }

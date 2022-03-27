@@ -14,7 +14,7 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Imola_Circuit',
   },
   {
-    name: 'Autódromo Internacional do Algarve',
+    name: 'Autódromo Internacional do Algarve', // Portimão Circuit
     slug: 'portimao',
     location: 'Portimão, Algarve',
     countryCode: 'PT',
@@ -42,7 +42,7 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Baku_City_Circuit',
   },
   {
-    name: 'Circuit Gilles Villeneuve',
+    name: 'Circuit Gilles-Villeneuve',
     slug: 'gilles-villeneuve',
     location: 'Parc Jean-Drapeau, Montreal, Quebec',
     countryCode: 'CA',
@@ -98,7 +98,7 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Autodromo_Nazionale_di_Monza',
   },
   {
-    name: 'Autodromo Nazionale del Mugello',
+    name: 'Autodromo Internazionale del Mugello',
     slug: 'mugello',
     location: 'Mugello',
     countryCode: 'IT',
@@ -126,7 +126,7 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Suzuka_International_Racing_Course',
   },
   {
-    name: 'Circuit of the Americas',
+    name: 'Circuit of The Americas',
     slug: 'cota',
     location: 'Austin, Texas',
     countryCode: 'US',
@@ -161,7 +161,7 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Yas_Marina_Circuit',
   },
   {
-    name: 'Nurburgring',
+    name: 'Nürburgring',
     slug: 'nurburgring',
     location: 'Nürburg',
     countryCode: 'DE',
@@ -201,5 +201,19 @@ export default [
     location: 'Marina Bay',
     countryCode: 'SG',
     url: 'https://en.wikipedia.org/wiki/Marina_Bay_Street_Circuit',
+  },
+  {
+    name: 'Losail International Circuit',
+    slug: 'losail',
+    location: 'Lusail',
+    countryCode: 'QA',
+    url: 'https://en.wikipedia.org/wiki/Losail_International_Circuit',
+  },
+  {
+    name: 'Jeddah Corniche Circuit',
+    slug: 'jeddah',
+    location: 'Jeddah',
+    countryCode: 'SA',
+    url: 'https://en.wikipedia.org/wiki/Jeddah_Corniche_Circuit',
   },
 ];
