@@ -26,8 +26,8 @@ export async function processEventsForYear(
     console.log(`Getting event data for ${event.slug} ${year} ...`);
 
     const round = parseInt(event.type.replace('round ', ''));
-    const eventData = await getEventData(browser, year, event.slug, round);
-    const eventSessions = await getEventSessions(browser, year, event.slug);
+    const eventData = await getEventData(page, year, event.slug, round);
+    const eventSessions = await getEventSessions(page, year, event.slug);
 
     const sessions: EventSessionInterface[] = [];
     for (const eventSession of eventSessions) {
@@ -66,12 +66,17 @@ export async function processEventsForYear(
     console.log('----------');
   }
 
+  console.log(JSON.stringify(events));
+
   return events;
 }
 
-export async function getEventSessions(browser: puppeteer.Browser, year: number, event: string) {
-  const page = await browser.newPage();
-  page.goto(`https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`);
+export async function getEventSessions(page: puppeteer.Page, year: number, event: string) {
+  const url = `https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`;
+
+  console.log(`Goto URL: ${url} ...`);
+
+  page.goto(url);
 
   const sessions: EventSessionInterface[] = [];
 
@@ -198,25 +203,25 @@ export async function getEventsList(page: puppeteer.Page, year: number) {
 }
 
 export async function getEventData(
-  browser: puppeteer.Browser,
+  page: puppeteer.Page,
   year: number,
   slug: string,
   round: number
 ): Promise<EventInterface> {
   // Summary page
   const url = `https://www.formula1.com/en/racing/${year}/${slug}.html`;
-  const page = await browser.newPage();
+
+  console.log(`Goto URL: ${url} ...`);
+
   page.goto(url);
 
-  await page.waitForSelector('.f1-race-hub--content');
+  await page.waitForSelector('.race-hub-wrapper');
 
-  const $paragraphs = await page.$$('.f1-race-hub--content p');
-  const text = await page.evaluate((el) => el.textContent, $paragraphs[0]);
+  const $script = await page.$('script[type="application/ld+json"]');
+  const script = await page.evaluate((el) => el.innerText, $script);
+  const parsedScript = JSON.parse(script);
 
-  const regex = /up to speed with everything you need to know about the (.*), which/gm;
-  const matches = regex.exec(text);
-
-  const name = matches[1];
+  const name = year + ' ' + parsedScript.subEvent[0].name.split(' - ')[1];
 
   await page.waitForSelector('.f1-race-hub--timetable-links-wrapper');
 
@@ -226,7 +231,11 @@ export async function getEventData(
   let circuitLayout: string | null = null;
 
   // Circuit page
-  page.goto(`https://www.formula1.com/en/racing/${year}/${slug}/Circuit.html`);
+  const circuitUrl = `https://www.formula1.com/en/racing/${year}/${slug}/Circuit.html`;
+
+  console.log(`Goto URL: ${circuitUrl} ...`);
+
+  page.goto(circuitUrl);
 
   await page.waitForSelector('.f1-race-hub--map');
 
@@ -243,6 +252,10 @@ export async function getEventData(
     circuitName = 'Imola Circuit';
   } else if (circuitName === 'Intercity Istanbul Park circuit') {
     circuitName = 'Intercity Istanbul Park';
+  } else if (circuitName === 'Melbourne Grand Prix Circuit') {
+    circuitName = 'Albert Park Circuit';
+  } else if (circuitName === 'Autódromo José Carlos Pace') {
+    circuitName = 'Interlagos Circuit';
   } else if (circuitName === 'Bahrain International Circuit – Outer Track') {
     circuitName = 'Bahrain International Circuit';
     circuitLayout = 'Outer Track';

@@ -140,7 +140,7 @@ export default [
     url: 'https://en.wikipedia.org/wiki/Aut%C3%B3dromo_Hermanos_Rodr%C3%ADguez',
   },
   {
-    name: 'Interlagos Circuit',
+    name: 'Interlagos Circuit', // Autódromo José Carlos Pace
     slug: 'interlagos',
     location: 'São Paulo',
     countryCode: 'BR',
@@ -180,5 +180,26 @@ export default [
     location: 'Scarperia e San Piero, Tuscany',
     countryCode: 'IT',
     url: 'https://en.wikipedia.org/wiki/Mugello_Circuit',
+  },
+  {
+    name: 'Shanghai International Circuit',
+    slug: 'shanghai',
+    location: 'Shanghai',
+    countryCode: 'CN',
+    url: 'https://en.wikipedia.org/wiki/Shanghai_International_Circuit',
+  },
+  {
+    name: 'Hockenheimring',
+    slug: 'hockenheimring',
+    location: 'Hockenheim',
+    countryCode: 'DE',
+    url: 'https://en.wikipedia.org/wiki/Hockenheimring',
+  },
+  {
+    name: 'Marina Bay Street Circuit', // Singapore Street Circuit
+    slug: 'marina-bay',
+    location: 'Marina Bay',
+    countryCode: 'SG',
+    url: 'https://en.wikipedia.org/wiki/Marina_Bay_Street_Circuit',
   },
 ];
