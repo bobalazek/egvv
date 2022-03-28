@@ -15,8 +15,6 @@ export async function processEventsForYear(
 
   console.log(`========== Getting events for ${year} ==========`);
 
-  const events: EventWithSessionsInterface[] = [];
-
   const eventsList = await getEventsList(page, year);
   for (const event of eventsList) {
     if (!event.type.startsWith('round')) {
@@ -25,50 +23,18 @@ export async function processEventsForYear(
 
     console.log(`Getting event data for ${event.slug} ${year} ...`);
 
-    const round = parseInt(event.type.replace('round ', ''));
+    const round = parseInt(event.type.replace('round-', ''));
     const eventData = await getEventData(page, year, event.slug, round);
-    const eventSessions = await getEventSessions(page, year, event.slug);
 
-    const sessions: EventSessionInterface[] = [];
-    for (const eventSession of eventSessions) {
-      const name = eventData.name + ' - ' + eventSession.name;
-      const type = eventSession.type;
-      if (type === 'qualifying') {
-        for (let i = 1; i <= 3; i++) {
-          sessions.push({
-            name: name + ' ' + i,
-            type: type + '-' + i,
-            startAt: eventSession.startAt,
-            endAt: eventSession.endAt,
-          });
-        }
-
-        continue;
-      }
-
-      sessions.push({
-        name,
-        type,
-        startAt: eventSession.startAt,
-        endAt: eventSession.endAt,
-      });
-    }
-
-    const finalEventData = {
-      ...eventData,
-      sessions,
-    };
-
-    events.push(finalEventData);
-
-    await saveEvent(prisma, finalEventData, seasonSlug);
+    await saveEvent(prisma, eventData, seasonSlug);
 
     console.log('----------');
   }
 
-  return events;
+  return void 0;
 }
 
+// TODO: Keep in case we want some other data for other series
 export async function getEventSessions(page: puppeteer.Page, year: number, event: string) {
   const url = `https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`;
 
@@ -200,11 +166,15 @@ export async function getEventsList(page: puppeteer.Page, year: number) {
     const href = await page.evaluate((el) => el.getAttribute('href'), $event);
     const slug = href.replace(`/en/racing/${year}/`, '').replace('.html', '');
     const $type = await $event.$('.card-title');
-    const type = await page.evaluate((el) => el.textContent, $type);
+
+    let type = await page.evaluate((el) => el.textContent, $type);
+    if (type.includes('-')) {
+      type = type.split('-')[0].trim();
+    }
 
     events.push({
       slug,
-      type: type.toLowerCase(),
+      type: convertToDashCase(type),
     });
   }
 
@@ -216,7 +186,7 @@ export async function getEventData(
   year: number,
   slug: string,
   round: number
-): Promise<EventInterface> {
+): Promise<EventWithSessionsInterface> {
   // Summary page
   const url = `https://www.formula1.com/en/racing/${year}/${slug}.html`;
 
@@ -276,6 +246,32 @@ export async function getEventData(
 
   const eventSlug = convertToDashCase(name);
 
+  const sessions: EventSessionInterface[] = [];
+  for (const eventSession of parsedScript.subEvent) {
+    const eventSessionNameSplit = eventSession.name.split(' - ');
+    const eventSessionName = name + ' - ' + eventSessionNameSplit[0];
+    const type = convertToDashCase(eventSessionName);
+    if (type === 'qualifying') {
+      for (let i = 1; i <= 3; i++) {
+        sessions.push({
+          name: eventSessionName + ' ' + i,
+          type: type + '-' + i,
+          startAt: new Date(eventSession.startDate),
+          endAt: new Date(eventSession.endDate),
+        });
+      }
+
+      continue;
+    }
+
+    sessions.push({
+      name,
+      type,
+      startAt: eventSession.startAt,
+      endAt: eventSession.endAt,
+    });
+  }
+
   return {
     name,
     slug: eventSlug,
@@ -285,6 +281,7 @@ export async function getEventData(
     circuitName,
     circuitLayout,
     url,
+    sessions,
   };
 }
 
