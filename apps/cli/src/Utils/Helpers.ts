@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import { Prisma, PrismaClient } from '@prisma/client';
 
 import { convertToDashCase } from '@egvv/shared';
-import { EventInterface, EventSessionInterface, EventsListInterface, EventWithSessionsInterface } from './Interfaces';
+import { EventSessionInterface, EventsListInterface, EventWithSessionsInterface } from './Interfaces';
 
 export async function processEventsForYear(
   browser: puppeteer.Browser,
