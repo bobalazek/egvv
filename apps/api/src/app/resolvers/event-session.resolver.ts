@@ -22,7 +22,7 @@ export class EventSessionResolver {
     });
   }
 
-  @ResolveField('eventSeasonTeamDrivers', () => EventSessionTeamDriver)
+  @ResolveField('eventSessionTeamDrivers', () => [EventSessionTeamDriver])
   async eventSessionTeamDrivers(@Parent() parent: EventSession) {
     return this._prismaService.eventSessionTeamDriver.findMany({
       where: {
