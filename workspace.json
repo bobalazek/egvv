@@ -1,8 +1,10 @@
 {
   "version": 2,
   "projects": {
+    "shared": "libs/shared",
     "api": "apps/api",
     "cli": "apps/cli",
-    "shared": "libs/shared"
+    "web": "apps/web",
+    "web-e2e": "apps/web-e2e"
   }
 }
