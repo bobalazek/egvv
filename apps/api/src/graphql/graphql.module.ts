@@ -20,12 +20,14 @@ import { EventSessionResolver } from '../graphql/resolvers/event-session.resolve
 import { EventSessionTeamDriverResolver } from '../graphql/resolvers/event-season-team-driver.resolver';
 import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-team-standing-entry.resolver';
 import { SeasonTeamDriverStandingEntryResolver } from '../graphql/resolvers/season-team-driver-standing-entry.resolver';
+import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
 
 @Module({
   imports: [
     NestGraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      path: HTTP_SERVER_GRAPHQL_PATH,
       context: ({ req, res }) => ({ req, res }),
     }),
     ThrottlerModule.forRoot({
