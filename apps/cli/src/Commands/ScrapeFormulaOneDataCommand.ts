@@ -2,7 +2,7 @@ import puppeteer from 'puppeteer';
 import { Command } from 'commander';
 import { PrismaClient } from '@prisma/client';
 
-import { processEventsForYear } from '../Utils/Helpers';
+import { processEventsForYear } from '../Utils/FormulaOneWebsiteHelpers';
 
 export const addScrapeFormulaOneDataCommand = (program: Command) => {
   const command = program

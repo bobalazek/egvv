@@ -12,12 +12,6 @@
         "tsConfig": "apps/cli/tsconfig.app.json"
       }
     },
-    "serve": {
-      "executor": "@nrwl/node:node",
-      "options": {
-        "buildTarget": "cli:build"
-      }
-    },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
