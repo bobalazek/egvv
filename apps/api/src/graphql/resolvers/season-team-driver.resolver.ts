@@ -1,6 +1,6 @@
 import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
-import { PrismaService } from '../services/prisma.service';
+import { PrismaService } from '../../app/services/prisma.service';
 import { Driver } from '../types/driver.type';
 import { SeasonTeamDriverStandingEntry } from '../types/season-team-driver-standing-entry.type';
 import { SeasonTeamDriver } from '../types/season-team-driver.type';
@@ -32,9 +32,7 @@ export class SeasonTeamDriverResolver {
     });
   }
 
-  @ResolveField('seasonTeamDriverStandingEntries', () => [
-    SeasonTeamDriverStandingEntry,
-  ])
+  @ResolveField('seasonTeamDriverStandingEntries', () => [SeasonTeamDriverStandingEntry])
   async seasonTeamDriverStandingEntries(@Parent() parent: SeasonTeam) {
     return this._prismaService.seasonTeamDriverStandingEntry.findMany({
       where: {

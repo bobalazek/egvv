@@ -1,6 +1,6 @@
 import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
 
-import { PrismaService } from '../services/prisma.service';
+import { PrismaService } from '../../app/services/prisma.service';
 import { EventArgs } from '../args/event.args';
 import { EventsArgs } from '../args/events.args';
 import { Circuit } from '../types/circuit.type';

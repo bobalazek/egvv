@@ -1,6 +1,6 @@
 import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 
-import { PrismaService } from '../services/prisma.service';
+import { PrismaService } from '../../app/services/prisma.service';
 import { SeriesSingleArgs } from '../args/series-single.args';
 import { SeriesArgs } from '../args/series.args';
 import { Season } from '../types/season.type';

@@ -1,6 +1,6 @@
 import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
-import { PrismaService } from '../services/prisma.service';
+import { PrismaService } from '../../app/services/prisma.service';
 import { EventSessionTeamDriver } from '../types/event-session-team-driver.type';
 import { EventSession } from '../types/event-session.type';
 import { Event } from '../types/event.type';
