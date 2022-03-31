@@ -11,10 +11,15 @@ export async function processEventsForYear(
   year: number,
   seasonSlug: string
 ) {
-  const page = await browser.newPage();
-  page.goto(`https://www.formula1.com/en/racing/${year}.html`);
-
   console.log(`========== Getting events for ${year} ==========`);
+
+  const page = await browser.newPage();
+
+  const url = `https://www.formula1.com/en/racing/${year}.html`;
+
+  console.log(`Goto URL: ${url} ...`);
+
+  page.goto(url);
 
   const eventsList = await getEventsList(page, year);
   for (const event of eventsList) {
