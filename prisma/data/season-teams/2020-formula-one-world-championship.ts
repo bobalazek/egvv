@@ -1,6 +1,7 @@
 export default [
   {
     name: 'Mercedes-AMG Petronas F1 Team',
+    shortName: 'Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'W11',
     seasonSlug: '2020-formula-one-world-championship',
@@ -8,6 +9,7 @@ export default [
   },
   {
     name: 'Aston Martin Red Bull Racing',
+    shortName: 'Red Bull Racing Honda',
     powerUnit: 'Honda',
     chassis: 'RB16',
     seasonSlug: '2020-formula-one-world-championship',
@@ -15,6 +17,7 @@ export default [
   },
   {
     name: 'Scuderia Ferrari',
+    shortName: 'Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'SF1000',
     seasonSlug: '2020-formula-one-world-championship',
@@ -22,6 +25,7 @@ export default [
   },
   {
     name: 'McLaren F1 Team',
+    shortName: 'McLaren Renault',
     powerUnit: 'Renault',
     chassis: 'MCL35',
     seasonSlug: '2020-formula-one-world-championship',
@@ -29,6 +33,7 @@ export default [
   },
   {
     name: 'BWT Racing Point F1 Team',
+    shortName: 'Racing Point BWT Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'RP20',
     seasonSlug: '2020-formula-one-world-championship',
@@ -36,6 +41,7 @@ export default [
   },
   {
     name: 'Renault DP World F1 Team',
+    shortName: 'Renault',
     powerUnit: 'Renault',
     chassis: 'RS20',
     seasonSlug: '2020-formula-one-world-championship',
@@ -43,6 +49,7 @@ export default [
   },
   {
     name: 'Scuderia AlphaTauri Honda',
+    shortName: 'AlphaTauri Honda',
     powerUnit: 'Honda',
     chassis: 'AT01',
     seasonSlug: '2020-formula-one-world-championship',
@@ -50,6 +57,7 @@ export default [
   },
   {
     name: 'Alfa Romeo Racing Orlen',
+    shortName: 'Alfa Romeo Racing Honda',
     powerUnit: 'Ferrari',
     chassis: 'C39',
     seasonSlug: '2020-formula-one-world-championship',
@@ -57,6 +65,7 @@ export default [
   },
   {
     name: 'Haas F1 Team',
+    shortName: 'Haas Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'VF-20',
     seasonSlug: '2020-formula-one-world-championship',
@@ -64,6 +73,7 @@ export default [
   },
   {
     name: 'Williams Racing',
+    shortName: 'Williams Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'FW43',
     seasonSlug: '2020-formula-one-world-championship',

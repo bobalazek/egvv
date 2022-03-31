@@ -1,6 +1,7 @@
 export default [
   {
     name: 'Mercedes-AMG Petronas F1 Team',
+    shortName: 'Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'W12',
     seasonSlug: '2021-formula-one-world-championship',
@@ -8,6 +9,7 @@ export default [
   },
   {
     name: 'Red Bull Racing Honda',
+    shortName: 'Red Bull Racing Honda',
     powerUnit: 'Honda',
     chassis: 'RB16B',
     seasonSlug: '2021-formula-one-world-championship',
@@ -15,6 +17,7 @@ export default [
   },
   {
     name: 'Scuderia Ferrari Mission Winnow',
+    shortName: 'Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'SF21',
     seasonSlug: '2021-formula-one-world-championship',
@@ -22,6 +25,7 @@ export default [
   },
   {
     name: 'McLaren F1 Team',
+    shortName: 'McLaren Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'MCL35M',
     seasonSlug: '2021-formula-one-world-championship',
@@ -29,6 +33,7 @@ export default [
   },
   {
     name: 'Aston Martin Cognizant F1 Team',
+    shortName: 'Aston Martin Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'AMR21',
     seasonSlug: '2021-formula-one-world-championship',
@@ -36,6 +41,7 @@ export default [
   },
   {
     name: 'Alpine F1 Team',
+    shortName: 'Alpine Renault',
     powerUnit: 'Renault',
     chassis: 'A521',
     seasonSlug: '2021-formula-one-world-championship',
@@ -43,6 +49,7 @@ export default [
   },
   {
     name: 'Scuderia AlphaTauri Honda',
+    shortName: 'AlphaTauri Honda',
     powerUnit: 'Honda',
     chassis: 'AT02',
     seasonSlug: '2021-formula-one-world-championship',
@@ -50,6 +57,7 @@ export default [
   },
   {
     name: 'Alfa Romeo Racing Orlen',
+    shortName: 'Alfa Romeo Racing Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'C41',
     seasonSlug: '2021-formula-one-world-championship',
@@ -57,6 +65,7 @@ export default [
   },
   {
     name: 'Uralkali Haas F1 Team',
+    shortName: 'Haas Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'VF-21',
     seasonSlug: '2021-formula-one-world-championship',
@@ -64,6 +73,7 @@ export default [
   },
   {
     name: 'Williams Racing',
+    shortName: 'Williams Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'FW43B',
     seasonSlug: '2021-formula-one-world-championship',

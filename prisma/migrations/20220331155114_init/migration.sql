@@ -77,6 +77,7 @@ CREATE TABLE "Vehicle" (
 CREATE TABLE "SeasonTeam" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "shortName" TEXT NOT NULL,
     "powerUnit" TEXT NOT NULL,
     "chassis" TEXT NOT NULL,
     "isDefunct" BOOLEAN NOT NULL DEFAULT false,

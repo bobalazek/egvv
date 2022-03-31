@@ -204,6 +204,7 @@ async function main() {
 
     const finalData: Prisma.SeasonTeamUncheckedCreateInput = {
       name: data.name,
+      shortName: data.shortName,
       powerUnit: data.powerUnit,
       chassis: data.chassis,
       seasonId: season.id,
@@ -276,7 +277,7 @@ async function main() {
       code: data.code,
       seasonTeamId: seasonTeam.id,
       driverId: driver.id,
-      isTemporary: data.isTemporary || false,
+      isTemporary: (<any>data).isTemporary ?? false,
     };
 
     await prisma.seasonTeamDriver.upsert({

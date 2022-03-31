@@ -53,7 +53,7 @@ model Driver {
 model Team {
   id                Int          @id @default(autoincrement())
   slug              String       @unique
-  name              String // Short name of the team like "Mercedes", "Ferrari", "Redbull"
+  name              String
   location          String
   countryCode       String
   url               String
@@ -78,6 +78,7 @@ model Vehicle {
 model SeasonTeam {
   id                        Int                       @id @default(autoincrement())
   name                      String // Full name of the team this season, like "Mercedes-AMG Petronas F1 Team", "Scuderia Ferrari", ...
+  shortName                 String // "Mercedes", "Ferrari", "McLaren Mercedes", "Williams Mercedes", ...
   powerUnit                 String
   chassis                   String
   isDefunct                 Boolean                   @default(false)

@@ -1,6 +1,7 @@
 export default [
   {
     name: 'Mercedes-AMG Petronas F1 Team',
+    shortName: 'Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'W13',
     seasonSlug: '2022-formula-one-world-championship',
@@ -8,6 +9,7 @@ export default [
   },
   {
     name: 'Oracle Red Bull Racing',
+    shortName: 'Red Bull Racing RBPT',
     powerUnit: 'RBPT',
     chassis: 'RB18',
     seasonSlug: '2022-formula-one-world-championship',
@@ -15,6 +17,7 @@ export default [
   },
   {
     name: 'Scuderia Ferrari',
+    shortName: 'Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'F1-75',
     seasonSlug: '2022-formula-one-world-championship',
@@ -22,6 +25,7 @@ export default [
   },
   {
     name: 'McLaren F1 Team',
+    shortName: 'Mclaren Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'MCL35M',
     seasonSlug: '2022-formula-one-world-championship',
@@ -29,6 +33,7 @@ export default [
   },
   {
     name: 'Aston Martin Cognizant F1 Team',
+    shortName: 'Aston Martin Aramco Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'AMR21',
     seasonSlug: '2022-formula-one-world-championship',
@@ -36,6 +41,7 @@ export default [
   },
   {
     name: 'BWT Alpine F1 Team',
+    shortName: 'Alpine Renault',
     powerUnit: 'Renault',
     chassis: 'A522',
     seasonSlug: '2022-formula-one-world-championship',
@@ -43,6 +49,7 @@ export default [
   },
   {
     name: 'Scuderia AlphaTauri',
+    shortName: 'AlphaTauri RBPT',
     powerUnit: 'RBPT',
     chassis: 'AT03',
     seasonSlug: '2022-formula-one-world-championship',
@@ -50,6 +57,7 @@ export default [
   },
   {
     name: 'Alfa Romeo F1 Team Orlen',
+    shortName: 'Alfa Romeo Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'C42',
     seasonSlug: '2022-formula-one-world-championship',
@@ -57,6 +65,7 @@ export default [
   },
   {
     name: 'Haas F1 Team',
+    shortName: 'Haas Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'VF-22',
     seasonSlug: '2022-formula-one-world-championship',
@@ -64,6 +73,7 @@ export default [
   },
   {
     name: 'Williams Racing',
+    shortName: 'Williams Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'FW44',
     seasonSlug: '2022-formula-one-world-championship',

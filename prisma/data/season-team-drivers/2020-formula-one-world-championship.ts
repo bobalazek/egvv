@@ -61,7 +61,7 @@ export default [
     code: 'SAI',
     seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'mclaren',
-    driverSlug: 'carlos-sainz-jr',
+    driverSlug: 'carlos-sainz',
   },
   {
     number: 7,
