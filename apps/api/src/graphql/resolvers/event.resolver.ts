@@ -1,7 +1,7 @@
 import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { EventArgs } from '../args/event.args';
+import { IdArgs } from '../args/id.args';
 import { AllEventsArgs } from '../args/all-events.args';
 import { Circuit } from '../models/circuit.model';
 import { EventSession } from '../models/event-session.model';
@@ -19,8 +19,8 @@ export class EventResolver {
   @Query(() => [Event])
   async allEvents(@Args() args: AllEventsArgs) {
     return this._prismaService.event.findMany({
-      skip: args.offset,
-      take: args.limit,
+      skip: (args.page - 1) * args.perPage + 1,
+      take: args.perPage,
       where: {
         season: {
           series: {
@@ -35,7 +35,7 @@ export class EventResolver {
   }
 
   @Query(() => Event)
-  async Event(@Args() args: EventArgs) {
+  async Event(@Args() args: IdArgs) {
     return this._prismaService.event.findFirst({
       where: {
         id: args.id,

@@ -3,8 +3,14 @@ import { ArgsType, Field, Int } from '@nestjs/graphql';
 @ArgsType()
 export class PaginationArgs {
   @Field(() => Int)
-  offset = 0;
+  page = 1;
 
   @Field(() => Int)
-  limit = 10;
+  perPage = 10;
+
+  @Field({ nullable: true })
+  sortField?: string;
+
+  @Field({ nullable: true })
+  sortOrder?: string;
 }

@@ -1,7 +1,7 @@
 import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { SeasonArgs } from '../args/season.args';
+import { IdArgs } from '../args/id.args';
 import { AllSeasonsArgs } from '../args/all-seasons.args';
 import { SeasonTeam } from '../models/season-team.model';
 import { Season } from '../models/season.model';
@@ -18,8 +18,8 @@ export class SeasonResolver {
   @Query(() => [Season])
   async seasons(@Args() args: AllSeasonsArgs) {
     return this._prismaService.season.findMany({
-      skip: args.offset,
-      take: args.limit,
+      skip: (args.page - 1) * args.perPage + 1,
+      take: args.perPage,
       where: {
         series: {
           slug: args.seriesSlug,
@@ -32,7 +32,7 @@ export class SeasonResolver {
   }
 
   @Query(() => Season)
-  async season(@Args() args: SeasonArgs) {
+  async season(@Args() args: IdArgs) {
     return this._prismaService.season.findFirst({
       where: {
         id: args.id,

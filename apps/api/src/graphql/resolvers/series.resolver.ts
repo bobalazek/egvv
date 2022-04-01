@@ -1,7 +1,7 @@
 import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { SeriesArgs } from '../args/series.args';
+import { IdArgs } from '../args/id.args';
 import { AllSeriesArgs } from '../args/all-series.args';
 import { Season } from '../models/season.model';
 import { Series } from '../models/series.model';
@@ -17,13 +17,13 @@ export class SeriesResolver {
   @Query(() => [Series])
   async allSeries(@Args() args: AllSeriesArgs) {
     return this._prismaService.series.findMany({
-      skip: args.offset,
-      take: args.limit,
+      skip: (args.page - 1) * args.perPage + 1,
+      take: args.perPage,
     });
   }
 
   @Query(() => Series)
-  async Series(@Args() args: SeriesArgs) {
+  async Series(@Args() args: IdArgs) {
     return this._prismaService.series.findFirst({
       where: {
         id: args.id,
