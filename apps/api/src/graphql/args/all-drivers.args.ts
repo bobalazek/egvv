@@ -3,4 +3,4 @@ import { ArgsType } from '@nestjs/graphql';
 import { PaginationArgs } from './pagination.args';
 
 @ArgsType()
-export class DriversArgs extends PaginationArgs {}
+export class AllDriversArgs extends PaginationArgs {}

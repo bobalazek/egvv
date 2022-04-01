@@ -2,7 +2,7 @@ import { Resolver, Query, Parent, ResolveField, Args } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { TeamArgs } from '../args/team.args';
-import { TeamsArgs } from '../args/teams.args';
+import { AllTeamsArgs } from '../args/all-teams.args';
 import { SeasonTeam } from '../models/season-team.model';
 import { Team } from '../models/team.model';
 
@@ -15,7 +15,7 @@ export class TeamResolver {
   }
 
   @Query(() => [Team])
-  async allTeams(@Args() args: TeamsArgs) {
+  async allTeams(@Args() args: AllTeamsArgs) {
     return this._prismaService.team.findMany({
       skip: args.offset,
       take: args.limit,

@@ -3,7 +3,7 @@ import { ArgsType, Field } from '@nestjs/graphql';
 import { PaginationArgs } from './pagination.args';
 
 @ArgsType()
-export class EventsArgs extends PaginationArgs {
+export class AllEventsArgs extends PaginationArgs {
   @Field(() => String)
   seriesSlug: string;
 }
