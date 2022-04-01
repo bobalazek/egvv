@@ -1,0 +1,54 @@
+{
+  "root": "apps/admin-web",
+  "sourceRoot": "apps/admin-web/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/admin-web",
+        "index": "apps/admin-web/src/index.html",
+        "baseHref": "/",
+        "main": "apps/admin-web/src/main.tsx",
+        "polyfills": "apps/admin-web/src/polyfills.ts",
+        "tsConfig": "apps/admin-web/tsconfig.app.json",
+        "styles": ["apps/admin-web/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "admin-web:build",
+        "hmr": true,
+        "port": 4300
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "admin-web:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/admin-web/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/admin-web"],
+      "options": {
+        "jestConfig": "apps/admin-web/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
