@@ -15,7 +15,7 @@ export class SeriesResolver {
   }
 
   @Query(() => [Series])
-  async series(@Args() args: SeriesArgs) {
+  async allSeries(@Args() args: SeriesArgs) {
     return this._prismaService.series.findMany({
       skip: args.offset,
       take: args.limit,
@@ -23,7 +23,7 @@ export class SeriesResolver {
   }
 
   @Query(() => Series)
-  async seriesSingle(@Args() args: SeriesSingleArgs) {
+  async Series(@Args() args: SeriesSingleArgs) {
     return this._prismaService.series.findFirst({
       where: {
         id: args.id,

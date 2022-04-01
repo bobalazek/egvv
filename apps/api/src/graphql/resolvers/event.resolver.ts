@@ -17,7 +17,7 @@ export class EventResolver {
   }
 
   @Query(() => [Event])
-  async events(@Args() args: EventsArgs) {
+  async allEvents(@Args() args: EventsArgs) {
     return this._prismaService.event.findMany({
       skip: args.offset,
       take: args.limit,
@@ -35,7 +35,7 @@ export class EventResolver {
   }
 
   @Query(() => Event)
-  async event(@Args() args: EventArgs) {
+  async Event(@Args() args: EventArgs) {
     return this._prismaService.event.findFirst({
       where: {
         id: args.id,

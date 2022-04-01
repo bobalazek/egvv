@@ -15,7 +15,7 @@ export class DriverResolver {
   }
 
   @Query(() => [Driver])
-  async drivers(@Args() args: DriversArgs) {
+  async allDrivers(@Args() args: DriversArgs) {
     return this._prismaService.driver.findMany({
       skip: args.offset,
       take: args.limit,
@@ -23,7 +23,7 @@ export class DriverResolver {
   }
 
   @Query(() => Driver)
-  async driver(@Args() args: DriverArgs) {
+  async Driver(@Args() args: DriverArgs) {
     return this._prismaService.driver.findFirst({
       where: {
         id: args.id,

@@ -15,7 +15,7 @@ export class TeamResolver {
   }
 
   @Query(() => [Team])
-  async teams(@Args() args: TeamsArgs) {
+  async allTeams(@Args() args: TeamsArgs) {
     return this._prismaService.team.findMany({
       skip: args.offset,
       take: args.limit,
@@ -23,7 +23,7 @@ export class TeamResolver {
   }
 
   @Query(() => Team)
-  async team(@Args() args: TeamArgs) {
+  async Team(@Args() args: TeamArgs) {
     return this._prismaService.team.findFirst({
       where: {
         id: args.id,

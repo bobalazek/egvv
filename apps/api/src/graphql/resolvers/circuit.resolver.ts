@@ -14,7 +14,7 @@ export class CircuitResolver {
   }
 
   @Query(() => [Circuit])
-  async circuits(@Args() args: CircuitsArgs) {
+  async allCircuits(@Args() args: CircuitsArgs) {
     return this._prismaService.circuit.findMany({
       skip: args.offset,
       take: args.limit,
@@ -22,7 +22,7 @@ export class CircuitResolver {
   }
 
   @Query(() => Circuit)
-  async circuit(@Args() args: CircuitArgs) {
+  async Circuit(@Args() args: CircuitArgs) {
     return this._prismaService.circuit.findFirst({
       where: {
         id: args.id,
