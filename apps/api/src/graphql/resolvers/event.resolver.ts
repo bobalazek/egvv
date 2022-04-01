@@ -3,10 +3,10 @@ import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
 import { PrismaService } from '../../app/services/prisma.service';
 import { EventArgs } from '../args/event.args';
 import { EventsArgs } from '../args/events.args';
-import { Circuit } from '../types/circuit.type';
-import { EventSession } from '../types/event-session.type';
-import { Event } from '../types/event.type';
-import { Season } from '../types/season.type';
+import { Circuit } from '../models/circuit.model';
+import { EventSession } from '../models/event-session.model';
+import { Event } from '../models/event.model';
+import { Season } from '../models/season.model';
 
 @Resolver(Event)
 export class EventResolver {

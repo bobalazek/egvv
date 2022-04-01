@@ -3,8 +3,8 @@ import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
 import { PrismaService } from '../../app/services/prisma.service';
 import { DriverArgs } from '../args/driver.args';
 import { DriversArgs } from '../args/drivers.args';
-import { Driver } from '../types/driver.type';
-import { SeasonTeamDriver } from '../types/season-team-driver.type';
+import { Driver } from '../models/driver.model';
+import { SeasonTeamDriver } from '../models/season-team-driver.model';
 
 @Resolver(Driver)
 export class DriverResolver {

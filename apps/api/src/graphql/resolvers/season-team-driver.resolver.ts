@@ -1,10 +1,10 @@
 import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { Driver } from '../types/driver.type';
-import { SeasonTeamDriverStandingEntry } from '../types/season-team-driver-standing-entry.type';
-import { SeasonTeamDriver } from '../types/season-team-driver.type';
-import { SeasonTeam } from '../types/season-team.type';
+import { Driver } from '../models/driver.model';
+import { SeasonTeamDriverStandingEntry } from '../models/season-team-driver-standing-entry.model';
+import { SeasonTeamDriver } from '../models/season-team-driver.model';
+import { SeasonTeam } from '../models/season-team.model';
 
 @Resolver(SeasonTeamDriver)
 export class SeasonTeamDriverResolver {

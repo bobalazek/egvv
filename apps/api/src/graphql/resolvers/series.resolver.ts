@@ -3,8 +3,8 @@ import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 import { PrismaService } from '../../app/services/prisma.service';
 import { SeriesSingleArgs } from '../args/series-single.args';
 import { SeriesArgs } from '../args/series.args';
-import { Season } from '../types/season.type';
-import { Series } from '../types/series.type';
+import { Season } from '../models/season.model';
+import { Series } from '../models/series.model';
 
 @Resolver(Series)
 export class SeriesResolver {

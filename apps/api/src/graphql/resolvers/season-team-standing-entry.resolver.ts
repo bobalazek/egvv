@@ -1,9 +1,9 @@
 import { Resolver, ResolveField, Parent } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { SeasonTeamStandingEntry } from '../types/season-team-standing-entry.type';
-import { EventSession } from '../types/event-session.type';
-import { SeasonTeam } from '../types/season-team.type';
+import { SeasonTeamStandingEntry } from '../models/season-team-standing-entry.model';
+import { EventSession } from '../models/event-session.model';
+import { SeasonTeam } from '../models/season-team.model';
 
 @Resolver(SeasonTeamStandingEntry)
 export class SeasonTeamStandingEntryResolver {

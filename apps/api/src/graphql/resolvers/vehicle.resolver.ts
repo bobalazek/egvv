@@ -1,7 +1,7 @@
 import { Resolver } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { Vehicle } from '../types/vehicle.type';
+import { Vehicle } from '../models/vehicle.model';
 
 @Resolver(Vehicle)
 export class VehicleResolver {

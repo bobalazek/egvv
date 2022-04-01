@@ -3,8 +3,8 @@ import { Resolver, Query, Parent, ResolveField, Args } from '@nestjs/graphql';
 import { PrismaService } from '../../app/services/prisma.service';
 import { TeamArgs } from '../args/team.args';
 import { TeamsArgs } from '../args/teams.args';
-import { SeasonTeam } from '../types/season-team.type';
-import { Team } from '../types/team.type';
+import { SeasonTeam } from '../models/season-team.model';
+import { Team } from '../models/team.model';
 
 @Resolver(Team)
 export class TeamResolver {
