@@ -1,4 +1,4 @@
-import { List, Datagrid, TextField, ResourceComponentProps, DateField } from 'react-admin';
+import { List, Datagrid, TextField, ResourceComponentProps, DateField, ReferenceField } from 'react-admin';
 
 export const SeasonList = (props: ResourceComponentProps) => (
   <List {...props}>
@@ -9,6 +9,9 @@ export const SeasonList = (props: ResourceComponentProps) => (
       <TextField source="year" />
       <DateField source="startAt" />
       <DateField source="endAt" />
+      <ReferenceField source="seriesId" reference="Series">
+        <TextField source="name" />
+      </ReferenceField>
     </Datagrid>
   </List>
 );

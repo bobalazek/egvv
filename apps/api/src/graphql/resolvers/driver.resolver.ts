@@ -40,6 +40,11 @@ export class DriverResolver extends AbstractResolver {
     };
   }
 
+  @ResolveField('name', () => String)
+  async name(@Parent() parent: Driver) {
+    return parent.firstName + ' ' + parent.lastName;
+  }
+
   @ResolveField('seasonTeamDrivers', () => [SeasonTeamDriver])
   async seasonTeamDrivers(@Parent() parent: Driver) {
     return this._prismaService.seasonTeamDriver.findMany({

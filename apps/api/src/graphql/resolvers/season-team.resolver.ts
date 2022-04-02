@@ -24,7 +24,7 @@ export class SeasonTeamResolver extends AbstractResolver {
 
   @Query(() => SeasonTeam)
   async SeasonTeam(@Args() args: IdArgs) {
-    return this._prismaService.team.findFirst({
+    return this._prismaService.seasonTeam.findFirst({
       where: {
         id: args.id,
       },
