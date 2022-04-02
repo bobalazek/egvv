@@ -1,5 +1,24 @@
-import dataFormulaOne2020 from './season-teams/2020-formula-one-world-championship';
-import dataFormulaOne2021 from './season-teams/2021-formula-one-world-championship';
-import dataFormulaOne2022 from './season-teams/2022-formula-one-world-championship';
+import dataF12020 from './season-teams/f1-2020';
+import dataF12021 from './season-teams/f1-2021';
+import dataF12022 from './season-teams/f1-2022';
 
-export default [...dataFormulaOne2020, ...dataFormulaOne2021, ...dataFormulaOne2022];
+export default [
+  ...dataF12020.map((data) => {
+    return {
+      ...data,
+      seasonSlug: 'f1-2020',
+    };
+  }),
+  ...dataF12021.map((data) => {
+    return {
+      ...data,
+      seasonSlug: 'f1-2021',
+    };
+  }),
+  ...dataF12022.map((data) => {
+    return {
+      ...data,
+      seasonSlug: 'f1-2022',
+    };
+  }),
+];

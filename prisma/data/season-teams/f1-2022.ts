@@ -4,7 +4,6 @@ export default [
     shortName: 'Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'W13',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'mercedes',
   },
   {
@@ -12,7 +11,6 @@ export default [
     shortName: 'Red Bull Racing RBPT',
     powerUnit: 'RBPT',
     chassis: 'RB18',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'red-bull',
   },
   {
@@ -20,7 +18,6 @@ export default [
     shortName: 'Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'F1-75',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'ferrari',
   },
   {
@@ -28,7 +25,6 @@ export default [
     shortName: 'Mclaren Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'MCL35M',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'mclaren',
   },
   {
@@ -36,7 +32,6 @@ export default [
     shortName: 'Aston Martin Aramco Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'AMR21',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'aston-martin',
   },
   {
@@ -44,7 +39,6 @@ export default [
     shortName: 'Alpine Renault',
     powerUnit: 'Renault',
     chassis: 'A522',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'alpine',
   },
   {
@@ -52,7 +46,6 @@ export default [
     shortName: 'AlphaTauri RBPT',
     powerUnit: 'RBPT',
     chassis: 'AT03',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'alphatauri',
   },
   {
@@ -60,7 +53,6 @@ export default [
     shortName: 'Alfa Romeo Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'C42',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'alfa-romeo',
   },
   {
@@ -68,7 +60,6 @@ export default [
     shortName: 'Haas Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'VF-22',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'haas',
   },
   {
@@ -76,7 +67,6 @@ export default [
     shortName: 'Williams Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'FW44',
-    seasonSlug: '2022-formula-one-world-championship',
     teamSlug: 'williams',
   },
 ];

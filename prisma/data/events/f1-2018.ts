@@ -9,7 +9,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Australia.html',
     circuitLayout: null,
     circuitSlug: 'albert-park',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Australian Grand Prix - Practice 1',
@@ -65,7 +64,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Bahrain.html',
     circuitLayout: null,
     circuitSlug: 'bahrain',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Bahrain Grand Prix - Practice 1',
@@ -121,7 +119,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/China.html',
     circuitLayout: null,
     circuitSlug: 'shanghai',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Chinese Grand Prix - Practice 1',
@@ -177,7 +174,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Azerbaijan.html',
     circuitLayout: null,
     circuitSlug: 'baku',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Azerbaijan Grand Prix - Practice 1',
@@ -233,7 +229,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Spain.html',
     circuitLayout: null,
     circuitSlug: 'barcelona-catalunya',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Spanish Grand Prix - Practice 1',
@@ -289,7 +284,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Monaco.html',
     circuitLayout: null,
     circuitSlug: 'monaco',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Monaco Grand Prix - Practice 1',
@@ -345,7 +339,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Canada.html',
     circuitLayout: null,
     circuitSlug: 'gilles-villeneuve',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Canadian Grand Prix - Practice 1',
@@ -401,7 +394,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/France.html',
     circuitLayout: null,
     circuitSlug: 'paul-ricard',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 French Grand Prix - Practice 1',
@@ -457,7 +449,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Austria.html',
     circuitLayout: null,
     circuitSlug: 'red-bull-ring',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Austrian Grand Prix - Practice 1',
@@ -513,7 +504,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Great_Britain.html',
     circuitLayout: null,
     circuitSlug: 'silverstone',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 British Grand Prix - Practice 1',
@@ -569,7 +559,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Germany.html',
     circuitLayout: null,
     circuitSlug: 'hockenheimring',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 German Grand Prix - Practice 1',
@@ -625,7 +614,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Hungary.html',
     circuitLayout: null,
     circuitSlug: 'hungaroring',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Hungarian Grand Prix - Practice 1',
@@ -681,7 +669,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Belgium.html',
     circuitLayout: null,
     circuitSlug: 'spa',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Belgian Grand Prix - Practice 1',
@@ -737,7 +724,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Italy.html',
     circuitLayout: null,
     circuitSlug: 'monza',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Italian Grand Prix - Practice 1',
@@ -793,7 +779,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Singapore.html',
     circuitLayout: null,
     circuitSlug: 'marina-bay-street',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Singapore Grand Prix - Practice 1',
@@ -849,7 +834,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Russia.html',
     circuitLayout: null,
     circuitSlug: 'sochi',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Russian Grand Prix - Practice 1',
@@ -905,7 +889,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Japan.html',
     circuitLayout: null,
     circuitSlug: 'suzuka',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Japanese Grand Prix - Practice 1',
@@ -961,7 +944,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/United_States.html',
     circuitLayout: null,
     circuitSlug: 'cota',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 United States Grand Prix - Practice 1',
@@ -1017,7 +999,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Mexico.html',
     circuitLayout: null,
     circuitSlug: 'hermanos-rodriguez',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Mexican Grand Prix - Practice 1',
@@ -1073,7 +1054,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/Brazil.html',
     circuitLayout: null,
     circuitSlug: 'interlagos',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Brazilian Grand Prix - Practice 1',
@@ -1129,7 +1109,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2018/United_Arab_Emirates.html',
     circuitLayout: null,
     circuitSlug: 'yas-marina',
-    seasonSlug: '2018-formula-one-world-championship',
     sessions: [
       {
         name: '2018 Abu Dhabi Grand Prix - Practice 1',

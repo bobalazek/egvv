@@ -4,7 +4,6 @@ export default [
     shortName: 'Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'W11',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'mercedes',
   },
   {
@@ -12,7 +11,6 @@ export default [
     shortName: 'Red Bull Racing Honda',
     powerUnit: 'Honda',
     chassis: 'RB16',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'red-bull',
   },
   {
@@ -20,7 +18,6 @@ export default [
     shortName: 'Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'SF1000',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'ferrari',
   },
   {
@@ -28,7 +25,6 @@ export default [
     shortName: 'McLaren Renault',
     powerUnit: 'Renault',
     chassis: 'MCL35',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'mclaren',
   },
   {
@@ -36,7 +32,6 @@ export default [
     shortName: 'Racing Point BWT Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'RP20',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'racing-point',
   },
   {
@@ -44,7 +39,6 @@ export default [
     shortName: 'Renault',
     powerUnit: 'Renault',
     chassis: 'RS20',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'renault',
   },
   {
@@ -52,7 +46,6 @@ export default [
     shortName: 'AlphaTauri Honda',
     powerUnit: 'Honda',
     chassis: 'AT01',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'alphatauri',
   },
   {
@@ -60,7 +53,6 @@ export default [
     shortName: 'Alfa Romeo Racing Honda',
     powerUnit: 'Ferrari',
     chassis: 'C39',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'alfa-romeo',
   },
   {
@@ -68,7 +60,6 @@ export default [
     shortName: 'Haas Ferrari',
     powerUnit: 'Ferrari',
     chassis: 'VF-20',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'haas',
   },
   {
@@ -76,7 +67,6 @@ export default [
     shortName: 'Williams Mercedes',
     powerUnit: 'Mercedes',
     chassis: 'FW43',
-    seasonSlug: '2020-formula-one-world-championship',
     teamSlug: 'williams',
   },
 ];

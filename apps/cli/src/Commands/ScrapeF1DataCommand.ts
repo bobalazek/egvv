@@ -2,11 +2,11 @@ import puppeteer from 'puppeteer';
 import { Command } from 'commander';
 import { PrismaClient } from '@prisma/client';
 
-import { processEventsForYear } from '../Utils/FormulaOneWebsiteHelpers';
+import { processEventsForYear } from '../Utils/F1WebsiteHelpers';
 
-export const addScrapeFormulaOneDataCommand = (program: Command) => {
+export const addScrapeF1DataCommand = (program: Command) => {
   const command = program
-    .command('scrape-formula-one-data')
+    .command('scrape-f1-data')
     .requiredOption('-y, --year <year>', 'For what year?')
     .action(async (options: any) => {
       const browser = await puppeteer.launch();
@@ -14,7 +14,7 @@ export const addScrapeFormulaOneDataCommand = (program: Command) => {
 
       const year = parseInt(options.year);
 
-      await processEventsForYear(browser, prisma, year, `${year}-formula-one-world-championship`);
+      await processEventsForYear(browser, prisma, year, `f1-${year}`);
 
       await browser.close();
     });

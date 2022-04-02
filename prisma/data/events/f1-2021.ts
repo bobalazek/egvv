@@ -9,7 +9,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Bahrain.html',
     circuitLayout: null,
     circuitSlug: 'bahrain',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Bahrain Grand Prix - Practice 1',
@@ -65,7 +64,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/EmiliaRomagna.html',
     circuitLayout: null,
     circuitSlug: 'imola',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Emilia Romagna Grand Prix - Practice 1',
@@ -121,7 +119,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Portugal.html',
     circuitLayout: null,
     circuitSlug: 'portimao',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Portuguese Grand Prix - Practice 1',
@@ -177,7 +174,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Spain.html',
     circuitLayout: null,
     circuitSlug: 'barcelona-catalunya',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Spanish Grand Prix - Practice 1',
@@ -233,7 +229,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Monaco.html',
     circuitLayout: null,
     circuitSlug: 'monaco',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Monaco Grand Prix - Practice 1',
@@ -289,7 +284,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Azerbaijan.html',
     circuitLayout: null,
     circuitSlug: 'baku',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Azerbaijan Grand Prix - Practice 1',
@@ -345,7 +339,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/France.html',
     circuitLayout: null,
     circuitSlug: 'paul-ricard',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 French Grand Prix - Practice 1',
@@ -401,7 +394,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Styria.html',
     circuitLayout: null,
     circuitSlug: 'red-bull-ring',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Styrian Grand Prix - Practice 1',
@@ -457,7 +449,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Austria.html',
     circuitLayout: null,
     circuitSlug: 'red-bull-ring',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Austrian Grand Prix - Practice 1',
@@ -513,7 +504,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Great_Britain.html',
     circuitLayout: null,
     circuitSlug: 'silverstone',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 British Grand Prix - Practice 1',
@@ -575,7 +565,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Hungary.html',
     circuitLayout: null,
     circuitSlug: 'hungaroring',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Hungarian Grand Prix - Practice 1',
@@ -631,7 +620,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Belgium.html',
     circuitLayout: null,
     circuitSlug: 'spa',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Belgian Grand Prix - Practice 1',
@@ -687,7 +675,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Netherlands.html',
     circuitLayout: null,
     circuitSlug: 'zandvoort',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Dutch Grand Prix - Practice 1',
@@ -743,7 +730,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Italy.html',
     circuitLayout: null,
     circuitSlug: 'monza',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Italian Grand Prix - Practice 1',
@@ -805,7 +791,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Russia.html',
     circuitLayout: null,
     circuitSlug: 'sochi',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Russian Grand Prix - Practice 1',
@@ -855,7 +840,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Turkey.html',
     circuitLayout: null,
     circuitSlug: 'istanbul',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Turkish Grand Prix - Practice 1',
@@ -911,7 +895,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/United_States.html',
     circuitLayout: null,
     circuitSlug: 'cota',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 United States Grand Prix - Practice 1',
@@ -967,7 +950,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Mexico.html',
     circuitLayout: null,
     circuitSlug: 'hermanos-rodriguez',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Mexico City Grand Prix - Practice 1',
@@ -1023,7 +1005,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Brazil.html',
     circuitLayout: null,
     circuitSlug: 'interlagos',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 São Paulo Grand Prix - Practice 1',
@@ -1085,7 +1066,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Qatar.html',
     circuitLayout: null,
     circuitSlug: 'losail',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Qatar Grand Prix - Practice 1',
@@ -1141,7 +1121,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/Saudi_Arabia.html',
     circuitLayout: null,
     circuitSlug: 'jeddah',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Saudi Arabian Grand Prix - Practice 1',
@@ -1197,7 +1176,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2021/United_Arab_Emirates.html',
     circuitLayout: null,
     circuitSlug: 'yas-marina',
-    seasonSlug: '2021-formula-one-world-championship',
     sessions: [
       {
         name: '2021 Abu Dhabi Grand Prix - Practice 1',

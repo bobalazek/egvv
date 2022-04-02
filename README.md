@@ -4,4 +4,4 @@ The one AutoMoto project to rule them all.
 
 ## Commands
 
-- `yarn cli scrape-formula-one-data --year 2021`
+- `yarn cli scrape-f1-data --year 2021`

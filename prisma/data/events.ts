@@ -1,6 +1,31 @@
-import dataFormulaOne2018 from './events/2018-formula-one-world-championship';
-import dataFormulaOne2019 from './events/2019-formula-one-world-championship';
-import dataFormulaOne2020 from './events/2020-formula-one-world-championship';
-import dataFormulaOne2021 from './events/2021-formula-one-world-championship';
+import dataF12018 from './events/f1-2018';
+import dataF12019 from './events/f1-2019';
+import dataF12020 from './events/f1-2020';
+import dataF12021 from './events/f1-2021';
 
-export default [...dataFormulaOne2018, ...dataFormulaOne2019, ...dataFormulaOne2020, ...dataFormulaOne2021];
+export default [
+  ...dataF12018.map((data) => {
+    return {
+      ...data,
+      seasonSlug: 'f1-2018',
+    };
+  }),
+  ...dataF12019.map((data) => {
+    return {
+      ...data,
+      seasonSlug: 'f1-2019',
+    };
+  }),
+  ...dataF12020.map((data) => {
+    return {
+      ...data,
+      seasonSlug: 'f1-2020',
+    };
+  }),
+  ...dataF12021.map((data) => {
+    return {
+      ...data,
+      seasonSlug: 'f1-2021',
+    };
+  }),
+];

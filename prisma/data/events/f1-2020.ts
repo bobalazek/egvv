@@ -9,7 +9,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Austria.html',
     circuitLayout: null,
     circuitSlug: 'red-bull-ring',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Austrian Grand Prix - Practice 1',
@@ -65,7 +64,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Styria.html',
     circuitLayout: null,
     circuitSlug: 'red-bull-ring',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Styrian Grand Prix - Practice 1',
@@ -121,7 +119,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Hungary.html',
     circuitLayout: null,
     circuitSlug: 'hungaroring',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Hungarian Grand Prix - Practice 1',
@@ -177,7 +174,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Great_Britain.html',
     circuitLayout: null,
     circuitSlug: 'silverstone',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 British Grand Prix - Practice 1',
@@ -233,7 +229,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/70th_Anniversary.html',
     circuitLayout: null,
     circuitSlug: 'silverstone',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 70th Anniversary Grand Prix - Practice 1',
@@ -289,7 +284,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Spain.html',
     circuitLayout: null,
     circuitSlug: 'barcelona-catalunya',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Spanish Grand Prix - Practice 1',
@@ -345,7 +339,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Belgium.html',
     circuitLayout: null,
     circuitSlug: 'spa',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Belgian Grand Prix - Practice 1',
@@ -401,7 +394,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Italy.html',
     circuitLayout: null,
     circuitSlug: 'monza',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Italian Grand Prix - Practice 1',
@@ -457,7 +449,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Tuscany.html',
     circuitLayout: null,
     circuitSlug: 'mugello',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Tuscan Grand Prix - Practice 1',
@@ -513,7 +504,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Russia.html',
     circuitLayout: null,
     circuitSlug: 'sochi',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Russian Grand Prix - Practice 1',
@@ -569,7 +559,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Germany.html',
     circuitLayout: null,
     circuitSlug: 'nurburgring',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Eifel Grand Prix - Practice 1',
@@ -625,7 +614,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Portugal.html',
     circuitLayout: null,
     circuitSlug: 'portimao',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Portuguese Grand Prix - Practice 1',
@@ -681,7 +669,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/EmiliaRomagna.html',
     circuitLayout: null,
     circuitSlug: 'imola',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Emilia Romagna Grand Prix - Practice 1',
@@ -725,7 +712,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Turkey.html',
     circuitLayout: null,
     circuitSlug: 'istanbul',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Turkish Grand Prix - Practice 1',
@@ -781,7 +767,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Bahrain.html',
     circuitLayout: null,
     circuitSlug: 'bahrain',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Bahrain Grand Prix - Practice 1',
@@ -837,7 +822,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/Sakhir.html',
     circuitLayout: 'Outer Track',
     circuitSlug: 'bahrain',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Sakhir Grand Prix - Practice 1',
@@ -893,7 +877,6 @@ export default [
     url: 'https://www.formula1.com/en/racing/2020/United_Arab_Emirates.html',
     circuitLayout: null,
     circuitSlug: 'yas-marina',
-    seasonSlug: '2020-formula-one-world-championship',
     sessions: [
       {
         name: '2020 Abu Dhabi Grand Prix - Practice 1',
