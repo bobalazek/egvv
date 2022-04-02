@@ -20,6 +20,8 @@ import { EventSessionResolver } from '../graphql/resolvers/event-session.resolve
 import { EventSessionTeamDriverResolver } from './resolvers/event-session-team-driver.resolver';
 import { EventSessionTeamDriverLapResolver } from './resolvers/event-session-team-driver-lap.resolver';
 import { EventSessionTeamDriverPitStopResolver } from './resolvers/event-session-team-driver-pit-stop.resolver';
+import { EventSessionTeamDriverStartingGridResolver } from './resolvers/event-session-team-driver-starting-grid.resolver';
+import { EventSessionTeamDriverClassificationResolver } from './resolvers/event-session-team-driver-classification.resolver';
 import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-team-standing-entry.resolver';
 import { SeasonTeamDriverStandingEntryResolver } from '../graphql/resolvers/season-team-driver-standing-entry.resolver';
 import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
@@ -59,6 +61,8 @@ import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
     EventSessionTeamDriverResolver,
     EventSessionTeamDriverLapResolver,
     EventSessionTeamDriverPitStopResolver,
+    EventSessionTeamDriverStartingGridResolver,
+    EventSessionTeamDriverClassificationResolver,
   ],
 })
 export class GraphQLModule {}

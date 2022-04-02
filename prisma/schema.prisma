@@ -201,7 +201,7 @@ model EventSessionTeamDriverPitStop {
 model EventSessionTeamDriverStartingGrid {
   id                       Int                    @id @default(autoincrement())
   position                 Int?
-  time                     DateTime? // What was the time to reach the position?
+  time                     DateTime? // What was the time to reach the position in the qualification?
   note                     String? // if the racer for example starts in the pit or has a penalty
   eventSessionTeamDriverId Int
   eventSessionTeamDriver   EventSessionTeamDriver @relation(name: "EventSessionTeamDriverStartingGrid_EventSessionTeamDriver", fields: [eventSessionTeamDriverId], references: [id])

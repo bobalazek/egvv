@@ -18,6 +18,8 @@ import { EventSessionList } from './resources/event-session';
 import { EventSessionTeamDriverList } from './resources/event-session-team-driver';
 import { EventSessionTeamDriverLapList } from './resources/event-session-team-driver-lap';
 import { EventSessionTeamDriverPitStopList } from './resources/event-session-team-driver-pit-stop';
+import { EventSessionTeamDriverStartingGridList } from './resources/event-session-team-driver-starting-grid';
+import { EventSessionTeamDriverClassificationList } from './resources/event-session-team-driver-classification';
 
 export function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider>();
@@ -74,6 +76,16 @@ export function App() {
         name="EventSessionTeamDriverPitStop"
         list={EventSessionTeamDriverPitStopList}
         options={{ label: 'Event Session Team Driver Pit Stops' }}
+      />
+      <Resource
+        name="EventSessionTeamDriverStartingGrid"
+        list={EventSessionTeamDriverStartingGridList}
+        options={{ label: 'Event Session Team Driver Starting Grids' }}
+      />
+      <Resource
+        name="EventSessionTeamDriverClassification"
+        list={EventSessionTeamDriverClassificationList}
+        options={{ label: 'Event Session Team Driver Classifications' }}
       />
     </Admin>
   );
