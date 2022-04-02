@@ -10,6 +10,8 @@ import { DriverList } from './resources/driver';
 import { TeamList } from './resources/team';
 import { SeasonTeamList } from './resources/season-team';
 import { SeasonTeamDriverList } from './resources/season-team-driver';
+import { EventList } from './resources/event';
+import { EventSessionList } from './resources/event-session';
 
 export function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider>();
@@ -39,6 +41,8 @@ export function App() {
       <Resource name="Team" list={TeamList} options={{ label: 'Teams' }} />
       <Resource name="SeasonTeam" list={SeasonTeamList} options={{ label: 'Season Teams' }} />
       <Resource name="SeasonTeamDriver" list={SeasonTeamDriverList} options={{ label: 'Season Team Drivers' }} />
+      <Resource name="Event" list={EventList} options={{ label: 'Events' }} />
+      <Resource name="EventSession" list={EventSessionList} options={{ label: 'Event Sessions' }} />
     </Admin>
   );
 }

@@ -27,15 +27,6 @@ export class Event {
   url?: string;
 
   @Field({ nullable: true })
-  location?: string;
-
-  @Field(() => Float)
-  locationLatitude?: number;
-
-  @Field(() => Float)
-  locationLongitude?: number;
-
-  @Field({ nullable: true })
   circuitLayout?: string;
 
   @Field(() => Int)

@@ -8,6 +8,7 @@ import { EventSession } from '../models/event-session.model';
 import { Event } from '../models/event.model';
 import { Season } from '../models/season.model';
 import { AbstractResolver } from './abstract.resolver';
+import { ListMetadata } from '../models/list-metadata.model';
 
 @Resolver(Event)
 export class EventResolver extends AbstractResolver {
@@ -19,11 +20,6 @@ export class EventResolver extends AbstractResolver {
     this._prismaService = prismaService;
   }
 
-  @Query(() => [Event])
-  async allEvents(@Args() args: AllEventsArgs) {
-    return this._prismaService.event.findMany(this.getAllArgs(args));
-  }
-
   @Query(() => Event)
   async Event(@Args() args: IdArgs) {
     return this._prismaService.event.findFirst({
@@ -31,6 +27,19 @@ export class EventResolver extends AbstractResolver {
         id: args.id,
       },
     });
+  }
+
+  @Query(() => [Event])
+  async allEvents(@Args() args: AllEventsArgs) {
+    return this._prismaService.event.findMany(this.getAllArgs(args));
+  }
+
+  @Query(() => ListMetadata)
+  async _allEventsMeta(@Args() args: AllEventsArgs): Promise<ListMetadata> {
+    const count = await this._prismaService.event.count();
+    return {
+      count,
+    };
   }
 
   @ResolveField('season', () => Season)
