@@ -17,7 +17,7 @@ import { SeasonTeamResolver } from '../graphql/resolvers/season-team.resolver';
 import { SeasonTeamDriverResolver } from '../graphql/resolvers/season-team-driver.resolver';
 import { EventResolver } from '../graphql/resolvers/event.resolver';
 import { EventSessionResolver } from '../graphql/resolvers/event-session.resolver';
-import { EventSessionTeamDriverResolver } from '../graphql/resolvers/event-season-team-driver.resolver';
+import { EventSessionTeamDriverResolver } from './resolvers/event-session-team-driver.resolver';
 import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-team-standing-entry.resolver';
 import { SeasonTeamDriverStandingEntryResolver } from '../graphql/resolvers/season-team-driver-standing-entry.resolver';
 import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
