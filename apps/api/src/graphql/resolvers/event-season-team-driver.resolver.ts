@@ -32,8 +32,12 @@ export class EventSessionTeamDriverResolver {
     });
   }
 
-  @ResolveField('vehicle', () => Vehicle)
+  @ResolveField('vehicle', () => Vehicle, { nullable: true })
   async vehicle(@Parent() parent: EventSessionTeamDriver) {
+    if (!parent.vehicleId) {
+      return null;
+    }
+
     return this._prismaService.vehicle.findFirst({
       where: {
         id: parent.vehicleId,

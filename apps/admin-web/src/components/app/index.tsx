@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Admin, DataProvider } from 'react-admin';
+import { Admin, DataProvider, Resource } from 'react-admin';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 
-import { HTTP_SERVER_PORT } from '@egvv/shared';
+import { DriverList } from '../resources/drivers';
+import { HTTP_SERVER_GRAPHQL_PATH, HTTP_SERVER_PORT } from '@egvv/shared';
 
 import './app.module.css';
 
@@ -13,7 +14,7 @@ export function App() {
     (async () => {
       const newDataProvider = await buildGraphQLProvider({
         clientOptions: {
-          uri: 'http://localhost:' + HTTP_SERVER_PORT,
+          uri: 'http://localhost:' + HTTP_SERVER_PORT + HTTP_SERVER_GRAPHQL_PATH,
         },
       });
 
@@ -25,7 +26,11 @@ export function App() {
     return <>Loading ...</>;
   }
 
-  return <Admin dataProvider={dataProvider}></Admin>;
+  return (
+    <Admin dataProvider={dataProvider}>
+      <Resource name="Driver" list={DriverList} />
+    </Admin>
+  );
 }
 
 export default App;

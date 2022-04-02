@@ -17,7 +17,7 @@ export class SeriesResolver {
   @Query(() => [Series])
   async allSeries(@Args() args: AllSeriesArgs) {
     return this._prismaService.series.findMany({
-      skip: (args.page - 1) * args.perPage + 1,
+      skip: args.page * args.perPage,
       take: args.perPage,
     });
   }

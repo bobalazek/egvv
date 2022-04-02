@@ -17,6 +17,6 @@ export class EventSessionTeamDriver {
   @Field(() => Int)
   seasonTeamDriverId: number;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   vehicleId?: number;
 }

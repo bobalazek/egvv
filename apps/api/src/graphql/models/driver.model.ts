@@ -6,6 +6,9 @@ export class Driver {
   id: string;
 
   @Field()
+  slug: string;
+
+  @Field()
   firstName: string;
 
   @Field()

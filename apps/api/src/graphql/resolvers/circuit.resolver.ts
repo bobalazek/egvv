@@ -16,7 +16,7 @@ export class CircuitResolver {
   @Query(() => [Circuit])
   async allCircuits(@Args() args: AllCircuitsArgs) {
     return this._prismaService.circuit.findMany({
-      skip: (args.page - 1) * args.perPage + 1,
+      skip: args.page * args.perPage,
       take: args.perPage,
     });
   }

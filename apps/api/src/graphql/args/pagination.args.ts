@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 
 @ArgsType()
@@ -8,9 +10,9 @@ export class PaginationArgs {
   @Field(() => Int)
   perPage = 10;
 
-  @Field({ nullable: true })
-  sortField?: string;
+  @Field()
+  sortField: string = 'id';
 
-  @Field({ nullable: true })
-  sortOrder?: string;
+  @Field()
+  sortOrder: string = 'DESC';
 }

@@ -43,8 +43,12 @@ export class SeasonTeamResolver {
     });
   }
 
-  @ResolveField('vehicle', () => Vehicle)
+  @ResolveField('vehicle', () => Vehicle, { nullable: true })
   async vehicle(@Parent() parent: SeasonTeam) {
+    if (!parent.vehicleId) {
+      return null;
+    }
+
     return this._prismaService.vehicle.findFirst({
       where: {
         id: parent.vehicleId,

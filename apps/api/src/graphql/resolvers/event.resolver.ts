@@ -19,7 +19,7 @@ export class EventResolver {
   @Query(() => [Event])
   async allEvents(@Args() args: AllEventsArgs) {
     return this._prismaService.event.findMany({
-      skip: (args.page - 1) * args.perPage + 1,
+      skip: args.page * args.perPage,
       take: args.perPage,
       where: {
         season: {

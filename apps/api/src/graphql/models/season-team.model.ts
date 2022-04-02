@@ -23,6 +23,6 @@ export class SeasonTeam {
   @Field(() => Int)
   teamId: number;
 
-  @Field(() => Int)
-  vehicleId: number;
+  @Field(() => Int, { nullable: true })
+  vehicleId?: number;
 }

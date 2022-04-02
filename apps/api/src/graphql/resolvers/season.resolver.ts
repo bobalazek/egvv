@@ -18,7 +18,7 @@ export class SeasonResolver {
   @Query(() => [Season])
   async seasons(@Args() args: AllSeasonsArgs) {
     return this._prismaService.season.findMany({
-      skip: (args.page - 1) * args.perPage + 1,
+      skip: args.page * args.perPage,
       take: args.perPage,
       where: {
         series: {

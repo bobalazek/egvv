@@ -17,7 +17,7 @@ export class TeamResolver {
   @Query(() => [Team])
   async allTeams(@Args() args: AllTeamsArgs) {
     return this._prismaService.team.findMany({
-      skip: (args.page - 1) * args.perPage + 1,
+      skip: args.page * args.perPage,
       take: args.perPage,
     });
   }
