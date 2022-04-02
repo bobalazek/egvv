@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { Admin, DataProvider, Resource } from 'react-admin';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 
-import { SeriesList } from '../resources/series';
-import { SeasonList } from '../resources/season';
-import { DriverList } from '../resources/drivers';
+import { SeriesList } from './resources/series';
+import { SeasonList } from './resources/season';
+import { DriverList } from './resources/drivers';
+import { CircuitList } from './resources/circuit';
 import { HTTP_SERVER_GRAPHQL_PATH, HTTP_SERVER_PORT } from '@egvv/shared';
-
-import './app.module.css';
 
 export function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider>();
@@ -32,6 +31,7 @@ export function App() {
     <Admin dataProvider={dataProvider}>
       <Resource name="Series" list={SeriesList} />
       <Resource name="Season" list={SeasonList} />
+      <Resource name="Circuit" list={CircuitList} />
       <Resource name="Driver" list={DriverList} />
     </Admin>
   );
