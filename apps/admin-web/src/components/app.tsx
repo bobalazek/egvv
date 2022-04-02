@@ -16,6 +16,8 @@ import { SeasonTeamDriverStandingEntryList } from './resources/season-team-drive
 import { EventList } from './resources/event';
 import { EventSessionList } from './resources/event-session';
 import { EventSessionTeamDriverList } from './resources/event-session-team-driver';
+import { EventSessionTeamDriverLapList } from './resources/event-session-team-driver-lap';
+import { EventSessionTeamDriverPitStopList } from './resources/event-session-team-driver-pit-stop';
 
 export function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider>();
@@ -62,6 +64,16 @@ export function App() {
         name="EventSessionTeamDriver"
         list={EventSessionTeamDriverList}
         options={{ label: 'Event Session Team Drivers' }}
+      />
+      <Resource
+        name="EventSessionTeamDriverLap"
+        list={EventSessionTeamDriverLapList}
+        options={{ label: 'Event Session Team Driver Laps' }}
+      />
+      <Resource
+        name="EventSessionTeamDriverPitStop"
+        list={EventSessionTeamDriverPitStopList}
+        options={{ label: 'Event Session Team Driver Pit Stops' }}
       />
     </Admin>
   );

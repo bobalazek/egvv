@@ -42,6 +42,11 @@ export class SeasonTeamDriverResolver extends AbstractResolver {
     };
   }
 
+  @ResolveField('name', () => String)
+  async name(@Parent() parent: SeasonTeamDriver) {
+    return `${parent.code} (${parent.number})`;
+  }
+
   @ResolveField('seasonTeam', () => SeasonTeam)
   async seasonTeam(@Parent() parent: SeasonTeamDriver) {
     return this._prismaService.seasonTeam.findFirst({

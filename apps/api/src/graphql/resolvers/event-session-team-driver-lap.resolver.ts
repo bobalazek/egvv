@@ -18,7 +18,7 @@ export class EventSessionTeamDriverLapResolver extends AbstractResolver {
   }
 
   @Query(() => EventSessionTeamDriverLap)
-  async EventSessionTeamDriver(@Args() args: IdArgs) {
+  async EventSessionTeamDriverLap(@Args() args: IdArgs) {
     return this._prismaService.eventSessionTeamDriverLap.findFirst({
       where: {
         id: args.id,
@@ -27,12 +27,12 @@ export class EventSessionTeamDriverLapResolver extends AbstractResolver {
   }
 
   @Query(() => [EventSessionTeamDriverLap])
-  async allEventSessionTeamDrivers(@Args() args: AllEventSessionTeamDriverLapsArgs) {
+  async allEventSessionTeamDriverLaps(@Args() args: AllEventSessionTeamDriverLapsArgs) {
     return this._prismaService.eventSessionTeamDriverLap.findMany(this.getAllArgs(args));
   }
 
   @Query(() => ListMetadata)
-  async _allEventSessionTeamDriversMeta(@Args() args: AllEventSessionTeamDriverLapsArgs): Promise<ListMetadata> {
+  async _allEventSessionTeamDriverLapsMeta(@Args() args: AllEventSessionTeamDriverLapsArgs): Promise<ListMetadata> {
     const count = await this._prismaService.eventSessionTeamDriverLap.count();
     return {
       count,
