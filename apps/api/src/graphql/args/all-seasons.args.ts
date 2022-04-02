@@ -1,9 +1,6 @@
-import { ArgsType, Field } from '@nestjs/graphql';
+import { ArgsType } from '@nestjs/graphql';
 
 import { PaginationArgs } from './pagination.args';
 
 @ArgsType()
-export class AllSeasonsArgs extends PaginationArgs {
-  @Field(() => String)
-  seriesSlug: string;
-}
+export class AllSeasonsArgs extends PaginationArgs {}

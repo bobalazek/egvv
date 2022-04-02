@@ -6,6 +6,7 @@ import { AllSeasonsArgs } from '../args/all-seasons.args';
 import { SeasonTeam } from '../models/season-team.model';
 import { Season } from '../models/season.model';
 import { Series } from '../models/series.model';
+import { ListMetadata } from '../models/list-metadata.model';
 
 @Resolver(Season)
 export class SeasonResolver {
@@ -15,29 +16,32 @@ export class SeasonResolver {
     this._prismaService = prismaService;
   }
 
-  @Query(() => [Season])
-  async seasons(@Args() args: AllSeasonsArgs) {
-    return this._prismaService.season.findMany({
-      skip: args.page * args.perPage,
-      take: args.perPage,
-      where: {
-        series: {
-          slug: args.seriesSlug,
-        },
-      },
-      orderBy: {
-        startAt: 'desc',
-      },
-    });
-  }
-
   @Query(() => Season)
-  async season(@Args() args: IdArgs) {
+  async Season(@Args() args: IdArgs) {
     return this._prismaService.season.findFirst({
       where: {
         id: args.id,
       },
     });
+  }
+
+  @Query(() => [Season])
+  async allSeasons(@Args() args: AllSeasonsArgs) {
+    return this._prismaService.season.findMany({
+      skip: args.page * args.perPage,
+      take: args.perPage,
+      orderBy: {
+        [args.sortField]: args.sortOrder.toLowerCase(),
+      },
+    });
+  }
+
+  @Query(() => ListMetadata)
+  async _allSeasonsMeta(@Args() args: AllSeasonsArgs): Promise<ListMetadata> {
+    const count = await this._prismaService.season.count();
+    return {
+      count,
+    };
   }
 
   @ResolveField('seasonTeams', () => [SeasonTeam])

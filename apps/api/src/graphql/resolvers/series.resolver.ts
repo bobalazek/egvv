@@ -29,6 +29,9 @@ export class SeriesResolver {
     return this._prismaService.series.findMany({
       skip: args.page * args.perPage,
       take: args.perPage,
+      orderBy: {
+        [args.sortField]: args.sortOrder.toLowerCase(),
+      },
     });
   }
 
