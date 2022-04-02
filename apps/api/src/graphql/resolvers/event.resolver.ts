@@ -7,31 +7,21 @@ import { Circuit } from '../models/circuit.model';
 import { EventSession } from '../models/event-session.model';
 import { Event } from '../models/event.model';
 import { Season } from '../models/season.model';
+import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(Event)
-export class EventResolver {
+export class EventResolver extends AbstractResolver {
   private _prismaService: PrismaService;
 
   constructor(prismaService: PrismaService) {
+    super();
+
     this._prismaService = prismaService;
   }
 
   @Query(() => [Event])
   async allEvents(@Args() args: AllEventsArgs) {
-    return this._prismaService.event.findMany({
-      skip: args.page * args.perPage,
-      take: args.perPage,
-      where: {
-        season: {
-          series: {
-            slug: args.seriesSlug,
-          },
-        },
-      },
-      orderBy: {
-        raceAt: 'desc',
-      },
-    });
+    return this._prismaService.event.findMany(this.getAllArgs(args));
   }
 
   @Query(() => Event)

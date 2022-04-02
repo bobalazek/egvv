@@ -6,12 +6,15 @@ import { AllDriversArgs } from '../args/all-drivers.args';
 import { Driver } from '../models/driver.model';
 import { SeasonTeamDriver } from '../models/season-team-driver.model';
 import { ListMetadata } from '../models/list-metadata.model';
+import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(Driver)
-export class DriverResolver {
+export class DriverResolver extends AbstractResolver {
   private _prismaService: PrismaService;
 
   constructor(prismaService: PrismaService) {
+    super();
+
     this._prismaService = prismaService;
   }
 
@@ -26,13 +29,7 @@ export class DriverResolver {
 
   @Query(() => [Driver])
   async allDrivers(@Args() args: AllDriversArgs) {
-    return this._prismaService.driver.findMany({
-      skip: args.page * args.perPage,
-      take: args.perPage,
-      orderBy: {
-        [args.sortField]: args.sortOrder.toLowerCase(),
-      },
-    });
+    return this._prismaService.driver.findMany(this.getAllArgs(args));
   }
 
   @Query(() => ListMetadata)

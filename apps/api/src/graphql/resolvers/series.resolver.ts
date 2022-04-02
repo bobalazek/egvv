@@ -6,12 +6,15 @@ import { AllSeriesArgs } from '../args/all-series.args';
 import { Season } from '../models/season.model';
 import { Series } from '../models/series.model';
 import { ListMetadata } from '../models/list-metadata.model';
+import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(Series)
-export class SeriesResolver {
+export class SeriesResolver extends AbstractResolver {
   private _prismaService: PrismaService;
 
   constructor(prismaService: PrismaService) {
+    super();
+
     this._prismaService = prismaService;
   }
 
@@ -26,13 +29,7 @@ export class SeriesResolver {
 
   @Query(() => [Series])
   async allSeries(@Args() args: AllSeriesArgs) {
-    return this._prismaService.series.findMany({
-      skip: args.page * args.perPage,
-      take: args.perPage,
-      orderBy: {
-        [args.sortField]: args.sortOrder.toLowerCase(),
-      },
-    });
+    return this._prismaService.series.findMany(this.getAllArgs(args));
   }
 
   @Query(() => ListMetadata)

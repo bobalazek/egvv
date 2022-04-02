@@ -5,12 +5,15 @@ import { IdArgs } from '../args/id.args';
 import { AllCircuitsArgs } from '../args/all-circuits.args';
 import { Circuit } from '../models/circuit.model';
 import { ListMetadata } from '../models/list-metadata.model';
+import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(Circuit)
-export class CircuitResolver {
+export class CircuitResolver extends AbstractResolver {
   private _prismaService: PrismaService;
 
   constructor(prismaService: PrismaService) {
+    super();
+
     this._prismaService = prismaService;
   }
 
@@ -25,13 +28,7 @@ export class CircuitResolver {
 
   @Query(() => [Circuit])
   async allCircuits(@Args() args: AllCircuitsArgs) {
-    return this._prismaService.circuit.findMany({
-      skip: args.page * args.perPage,
-      take: args.perPage,
-      orderBy: {
-        [args.sortField]: args.sortOrder.toLowerCase(),
-      },
-    });
+    return this._prismaService.circuit.findMany(this.getAllArgs(args));
   }
 
   @Query(() => ListMetadata)

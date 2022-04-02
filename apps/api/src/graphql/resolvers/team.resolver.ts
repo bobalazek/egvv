@@ -6,12 +6,15 @@ import { AllTeamsArgs } from '../args/all-teams.args';
 import { SeasonTeam } from '../models/season-team.model';
 import { Team } from '../models/team.model';
 import { ListMetadata } from '../models/list-metadata.model';
+import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(Team)
-export class TeamResolver {
+export class TeamResolver extends AbstractResolver {
   private _prismaService: PrismaService;
 
   constructor(prismaService: PrismaService) {
+    super();
+
     this._prismaService = prismaService;
   }
 
@@ -26,10 +29,7 @@ export class TeamResolver {
 
   @Query(() => [Team])
   async allTeams(@Args() args: AllTeamsArgs) {
-    return this._prismaService.team.findMany({
-      skip: args.page * args.perPage,
-      take: args.perPage,
-    });
+    return this._prismaService.team.findMany(this.getAllArgs(args));
   }
 
   @Query(() => ListMetadata)

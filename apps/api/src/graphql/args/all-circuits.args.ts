@@ -1,6 +1,6 @@
 import { ArgsType } from '@nestjs/graphql';
 
-import { PaginationArgs } from './pagination.args';
+import { AllArgs } from './all';
 
 @ArgsType()
-export class AllCircuitsArgs extends PaginationArgs {}
+export class AllCircuitsArgs extends AllArgs {}

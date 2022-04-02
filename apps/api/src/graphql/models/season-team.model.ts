@@ -9,6 +9,9 @@ export class SeasonTeam {
   name: string;
 
   @Field()
+  shortName: string;
+
+  @Field()
   powerUnit: string;
 
   @Field()
