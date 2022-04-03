@@ -11,12 +11,12 @@ export class EventSessionTeamDriver {
   @Field()
   code: string;
 
-  @Field(() => Int)
-  eventSessionId: number;
+  @Field()
+  eventSessionId: string;
 
-  @Field(() => Int)
-  seasonTeamDriverId: number;
+  @Field()
+  seasonTeamDriverId: string;
 
-  @Field(() => Int, { nullable: true })
-  vehicleId?: number;
+  @Field({ nullable: true })
+  vehicleId?: string;
 }

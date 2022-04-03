@@ -17,6 +17,6 @@ export class EventSessionTeamDriverStartingGrid {
   @Field({ nullable: true })
   note?: string;
 
-  @Field(() => Int)
-  eventSessionTeamDriverId: number;
+  @Field()
+  eventSessionTeamDriverId: string;
 }

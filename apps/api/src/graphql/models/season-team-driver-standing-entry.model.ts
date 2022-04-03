@@ -14,9 +14,9 @@ export class SeasonTeamDriverStandingEntry {
   @Field({ nullable: true })
   note?: string;
 
-  @Field(() => Int)
-  seasonTeamDriverId: number;
+  @Field()
+  seasonTeamDriverId: string;
 
-  @Field(() => Int)
-  eventSessionId: number;
+  @Field()
+  eventSessionId: string;
 }

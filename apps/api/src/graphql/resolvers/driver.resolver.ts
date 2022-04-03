@@ -22,7 +22,7 @@ export class DriverResolver extends AbstractResolver {
   async Driver(@Args() args: IdArgs) {
     return this._prismaService.driver.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -49,7 +49,7 @@ export class DriverResolver extends AbstractResolver {
   async seasonTeamDrivers(@Parent() parent: Driver) {
     return this._prismaService.seasonTeamDriver.findMany({
       where: {
-        driverId: parseInt(parent.id),
+        driverId: parent.id,
       },
     });
   }

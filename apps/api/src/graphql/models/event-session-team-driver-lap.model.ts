@@ -14,6 +14,6 @@ export class EventSessionTeamDriverLap {
   @Field({ nullable: true })
   position?: number;
 
-  @Field(() => Int)
-  eventSessionTeamDriverId: number;
+  @Field()
+  eventSessionTeamDriverId: string;
 }

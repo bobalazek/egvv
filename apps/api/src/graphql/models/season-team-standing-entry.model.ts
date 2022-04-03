@@ -14,9 +14,9 @@ export class SeasonTeamStandingEntry {
   @Field({ nullable: true })
   note?: string;
 
-  @Field(() => Int)
-  seasonTeamId: number;
+  @Field()
+  seasonTeamId: string;
 
-  @Field(() => Int)
-  eventSessionId: number;
+  @Field()
+  eventSessionId: string;
 }

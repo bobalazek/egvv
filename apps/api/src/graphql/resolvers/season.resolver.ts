@@ -25,7 +25,7 @@ export class SeasonResolver extends AbstractResolver {
   async Season(@Args() args: IdArgs) {
     return this._prismaService.season.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -52,11 +52,9 @@ export class SeasonResolver extends AbstractResolver {
 
   @Mutation(() => Season)
   async updateSeason(@Args() args: UpdateSeasonArgs) {
-    console.log(args);
-
     return this._prismaService.season.update({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
       data: {
         slug: args.slug,
@@ -73,7 +71,7 @@ export class SeasonResolver extends AbstractResolver {
   async deleteSeason(@Args() args: IdArgs) {
     return this._prismaService.season.delete({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -82,7 +80,7 @@ export class SeasonResolver extends AbstractResolver {
   async seasonTeams(@Parent() parent: Season) {
     return this._prismaService.seasonTeam.findMany({
       where: {
-        seasonId: parseInt(parent.id),
+        seasonId: parent.id,
       },
     });
   }

@@ -24,7 +24,7 @@ export class EventResolver extends AbstractResolver {
   async Event(@Args() args: IdArgs) {
     return this._prismaService.event.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -64,7 +64,7 @@ export class EventResolver extends AbstractResolver {
   async eventSessions(@Parent() parent: Event) {
     return this._prismaService.eventSession.findMany({
       where: {
-        eventId: parseInt(parent.id),
+        eventId: parent.id,
       },
       orderBy: {
         startAt: 'asc',

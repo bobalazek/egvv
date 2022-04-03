@@ -21,7 +21,7 @@ export class CircuitResolver extends AbstractResolver {
   async Circuit(@Args() args: IdArgs) {
     return this._prismaService.circuit.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }

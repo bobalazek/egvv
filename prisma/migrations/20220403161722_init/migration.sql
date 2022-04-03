@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "Series" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "url" TEXT NOT NULL,
@@ -10,20 +10,20 @@ CREATE TABLE "Series" (
 
 -- CreateTable
 CREATE TABLE "Season" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "year" INTEGER NOT NULL,
     "startAt" TIMESTAMP(3) NOT NULL,
     "endAt" TIMESTAMP(3),
-    "seriesId" INTEGER NOT NULL,
+    "seriesId" TEXT NOT NULL,
 
     CONSTRAINT "Season_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Circuit" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "location" TEXT NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE "Circuit" (
 
 -- CreateTable
 CREATE TABLE "Driver" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE "Driver" (
 
 -- CreateTable
 CREATE TABLE "Team" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "location" TEXT NOT NULL,
@@ -57,14 +57,14 @@ CREATE TABLE "Team" (
     "url" TEXT NOT NULL,
     "debutAt" TIMESTAMP(3) NOT NULL,
     "defunctAt" TIMESTAMP(3),
-    "predecessorTeamId" INTEGER,
+    "predecessorTeamId" TEXT,
 
     CONSTRAINT "Team_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Vehicle" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "powerUnit" TEXT NOT NULL,
@@ -75,58 +75,58 @@ CREATE TABLE "Vehicle" (
 
 -- CreateTable
 CREATE TABLE "SeasonTeam" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "shortName" TEXT NOT NULL,
     "powerUnit" TEXT NOT NULL,
     "chassis" TEXT NOT NULL,
     "isDefunct" BOOLEAN NOT NULL DEFAULT false,
-    "seasonId" INTEGER NOT NULL,
-    "teamId" INTEGER NOT NULL,
-    "vehicleId" INTEGER,
+    "seasonId" TEXT NOT NULL,
+    "teamId" TEXT NOT NULL,
+    "vehicleId" TEXT,
 
     CONSTRAINT "SeasonTeam_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "SeasonTeamDriver" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "number" INTEGER NOT NULL,
     "code" TEXT NOT NULL,
     "isTemporary" BOOLEAN NOT NULL DEFAULT false,
-    "seasonTeamId" INTEGER NOT NULL,
-    "driverId" INTEGER NOT NULL,
+    "seasonTeamId" TEXT NOT NULL,
+    "driverId" TEXT NOT NULL,
 
     CONSTRAINT "SeasonTeamDriver_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "SeasonTeamStandingEntry" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "points" DOUBLE PRECISION NOT NULL,
     "dateAt" TIMESTAMP(3) NOT NULL,
     "note" TEXT,
-    "seasonTeamId" INTEGER NOT NULL,
-    "eventSessionId" INTEGER,
+    "seasonTeamId" TEXT NOT NULL,
+    "eventSessionId" TEXT,
 
     CONSTRAINT "SeasonTeamStandingEntry_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "SeasonTeamDriverStandingEntry" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "points" DOUBLE PRECISION NOT NULL,
     "dateAt" TIMESTAMP(3) NOT NULL,
     "note" TEXT,
-    "seasonTeamDriverId" INTEGER NOT NULL,
-    "eventSessionId" INTEGER,
+    "seasonTeamDriverId" TEXT NOT NULL,
+    "eventSessionId" TEXT,
 
     CONSTRAINT "SeasonTeamDriverStandingEntry_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Event" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "round" INTEGER NOT NULL,
@@ -135,79 +135,79 @@ CREATE TABLE "Event" (
     "raceAt" TIMESTAMP(3) NOT NULL,
     "url" TEXT NOT NULL,
     "circuitLayout" TEXT,
-    "seasonId" INTEGER NOT NULL,
-    "circuitId" INTEGER NOT NULL,
+    "seasonId" TEXT NOT NULL,
+    "circuitId" TEXT NOT NULL,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "EventSession" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "tyreChoices" JSONB,
     "startAt" TIMESTAMP(3) NOT NULL,
     "endAt" TIMESTAMP(3),
-    "eventId" INTEGER NOT NULL,
+    "eventId" TEXT NOT NULL,
 
     CONSTRAINT "EventSession_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "EventSessionTeamDriver" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "number" INTEGER NOT NULL,
     "code" TEXT NOT NULL,
-    "eventSessionId" INTEGER NOT NULL,
-    "seasonTeamDriverId" INTEGER NOT NULL,
-    "vehicleId" INTEGER,
+    "eventSessionId" TEXT NOT NULL,
+    "seasonTeamDriverId" TEXT NOT NULL,
+    "vehicleId" TEXT,
 
     CONSTRAINT "EventSessionTeamDriver_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "EventSessionTeamDriverLap" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "lap" INTEGER NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
     "time" TIMESTAMP(3),
     "position" INTEGER,
-    "eventSessionTeamDriverId" INTEGER NOT NULL,
+    "eventSessionTeamDriverId" TEXT NOT NULL,
 
     CONSTRAINT "EventSessionTeamDriverLap_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "EventSessionTeamDriverPitStop" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "lap" INTEGER NOT NULL,
     "timeMilliseconds" INTEGER,
-    "eventSessionTeamDriverId" INTEGER NOT NULL,
+    "eventSessionTeamDriverId" TEXT NOT NULL,
 
     CONSTRAINT "EventSessionTeamDriverPitStop_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "EventSessionTeamDriverStartingGrid" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "position" INTEGER,
     "time" TIMESTAMP(3),
     "note" TEXT,
-    "eventSessionTeamDriverId" INTEGER NOT NULL,
+    "eventSessionTeamDriverId" TEXT NOT NULL,
 
     CONSTRAINT "EventSessionTeamDriverStartingGrid_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "EventSessionTeamDriverClassification" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "position" INTEGER,
     "time" TIMESTAMP(3),
     "points" DOUBLE PRECISION,
     "note" TEXT,
-    "eventSessionTeamDriverId" INTEGER NOT NULL,
+    "eventSessionTeamDriverId" TEXT NOT NULL,
 
     CONSTRAINT "EventSessionTeamDriverClassification_pkey" PRIMARY KEY ("id")
 );

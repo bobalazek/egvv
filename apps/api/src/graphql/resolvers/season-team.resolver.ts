@@ -26,7 +26,7 @@ export class SeasonTeamResolver extends AbstractResolver {
   async SeasonTeam(@Args() args: IdArgs) {
     return this._prismaService.seasonTeam.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -48,7 +48,7 @@ export class SeasonTeamResolver extends AbstractResolver {
   async seasonTeamDrivers(@Parent() parent: SeasonTeam) {
     return this._prismaService.seasonTeamDriver.findMany({
       where: {
-        seasonTeamId: parseInt(parent.id),
+        seasonTeamId: parent.id,
       },
     });
   }
@@ -88,7 +88,7 @@ export class SeasonTeamResolver extends AbstractResolver {
   async seasonTeamStandingEntries(@Parent() parent: SeasonTeam) {
     return this._prismaService.seasonTeamStandingEntry.findMany({
       where: {
-        seasonTeamId: parseInt(parent.id),
+        seasonTeamId: parent.id,
       },
     });
   }

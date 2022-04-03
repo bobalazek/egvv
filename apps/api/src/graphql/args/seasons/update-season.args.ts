@@ -20,6 +20,6 @@ export class UpdateSeasonArgs {
   @Field({ nullable: true })
   endAt?: Date;
 
-  @Field(() => Int)
-  seriesId: number;
+  @Field()
+  seriesId: string;
 }

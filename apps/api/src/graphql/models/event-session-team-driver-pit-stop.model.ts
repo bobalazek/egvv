@@ -11,6 +11,6 @@ export class EventSessionTeamDriverPitStop {
   @Field({ nullable: true })
   timeMilliseconds?: number;
 
-  @Field(() => Int)
-  eventSessionTeamDriverId: number;
+  @Field()
+  eventSessionTeamDriverId: string;
 }

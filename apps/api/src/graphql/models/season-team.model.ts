@@ -20,12 +20,12 @@ export class SeasonTeam {
   @Field()
   isDefunct: boolean;
 
-  @Field(() => Int)
-  seasonId: number;
+  @Field()
+  seasonId: string;
 
-  @Field(() => Int)
-  teamId: number;
+  @Field()
+  teamId: string;
 
-  @Field(() => Int, { nullable: true })
-  vehicleId?: number;
+  @Field({ nullable: true })
+  vehicleId?: string;
 }

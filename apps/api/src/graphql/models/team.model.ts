@@ -26,6 +26,6 @@ export class Team {
   @Field({ nullable: true })
   defunctAt?: Date;
 
-  @Field(() => Int, { nullable: true })
-  predecessorTeamId?: number;
+  @Field({ nullable: true })
+  predecessorTeamId?: string;
 }

@@ -23,7 +23,7 @@ export class SeasonTeamDriverStandingEntryResolver extends AbstractResolver {
   async SeasonTeamDriverStandingEntry(@Args() args: IdArgs) {
     return this._prismaService.seasonTeamDriverStandingEntry.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }

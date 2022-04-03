@@ -23,7 +23,7 @@ export class EventSessionResolver extends AbstractResolver {
   async EventSession(@Args() args: IdArgs) {
     return this._prismaService.eventSession.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -54,7 +54,7 @@ export class EventSessionResolver extends AbstractResolver {
   async eventSessionTeamDrivers(@Parent() parent: EventSession) {
     return this._prismaService.eventSessionTeamDriver.findMany({
       where: {
-        eventSessionId: parseInt(parent.id),
+        eventSessionId: parent.id,
       },
     });
   }

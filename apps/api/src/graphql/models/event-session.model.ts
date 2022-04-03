@@ -17,6 +17,6 @@ export class EventSession {
   @Field({ nullable: true })
   endAt?: Date;
 
-  @Field(() => Int)
-  eventId: number;
+  @Field()
+  eventId: string;
 }

@@ -24,7 +24,7 @@ export class SeriesResolver extends AbstractResolver {
   async Series(@Args() args: IdArgs) {
     return this._prismaService.series.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -53,7 +53,7 @@ export class SeriesResolver extends AbstractResolver {
   async updateSeries(@Args() args: UpdateSeriesArgs) {
     return this._prismaService.series.update({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
       data: {
         slug: args.slug,
@@ -67,7 +67,7 @@ export class SeriesResolver extends AbstractResolver {
   async deleteSeries(@Args() args: IdArgs) {
     return this._prismaService.series.delete({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -76,7 +76,7 @@ export class SeriesResolver extends AbstractResolver {
   async seasons(@Parent() parent: Series) {
     return this._prismaService.season.findMany({
       where: {
-        seriesId: parseInt(parent.id),
+        seriesId: parent.id,
       },
     });
   }

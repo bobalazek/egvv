@@ -29,9 +29,9 @@ export class Event {
   @Field({ nullable: true })
   circuitLayout?: string;
 
-  @Field(() => Int)
-  seasonId: number;
+  @Field()
+  seasonId: string;
 
-  @Field(() => Int)
-  circuitId: number;
+  @Field()
+  circuitId: string;
 }

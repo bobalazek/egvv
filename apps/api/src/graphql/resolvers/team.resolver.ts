@@ -22,7 +22,7 @@ export class TeamResolver extends AbstractResolver {
   async Team(@Args() args: IdArgs) {
     return this._prismaService.team.findFirst({
       where: {
-        id: parseInt(args.id),
+        id: args.id,
       },
     });
   }
@@ -57,7 +57,7 @@ export class TeamResolver extends AbstractResolver {
   async seasonTeams(@Parent() parent: Team) {
     return this._prismaService.seasonTeam.findMany({
       where: {
-        teamId: parseInt(parent.id),
+        teamId: parent.id,
       },
     });
   }

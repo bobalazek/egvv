@@ -14,9 +14,9 @@ export class SeasonTeamDriver {
   @Field()
   isTemporary: boolean;
 
-  @Field(() => Int)
-  seasonTeamId: number;
+  @Field()
+  seasonTeamId: string;
 
-  @Field(() => Int)
-  driverId: number;
+  @Field()
+  driverId: string;
 }
