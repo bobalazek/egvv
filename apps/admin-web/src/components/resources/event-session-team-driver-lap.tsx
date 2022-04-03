@@ -9,7 +9,13 @@ import {
 } from 'react-admin';
 
 export const EventSessionTeamDriverLapList = (props: ResourceComponentProps) => (
-  <List {...props}>
+  <List
+    sort={{
+      field: 'lap',
+      order: 'asc',
+    }}
+    {...props}
+  >
     <Datagrid>
       <TextField source="id" />
       <TextField source="lap" />

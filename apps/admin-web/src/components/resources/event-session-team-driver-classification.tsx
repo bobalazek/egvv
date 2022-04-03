@@ -1,11 +1,17 @@
 import { List, Datagrid, TextField, ResourceComponentProps, DateField, ReferenceField, NumberField } from 'react-admin';
 
 export const EventSessionTeamDriverClassificationList = (props: ResourceComponentProps) => (
-  <List {...props}>
+  <List
+    sort={{
+      field: 'position',
+      order: 'asc',
+    }}
+    {...props}
+  >
     <Datagrid>
       <TextField source="id" />
       <TextField source="status" />
-      <NumberField source="position" />
+      <TextField source="position" />
       <DateField source="time" />
       <NumberField source="points" />
       <TextField source="note" />

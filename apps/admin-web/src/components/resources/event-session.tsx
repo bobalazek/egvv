@@ -1,7 +1,13 @@
 import { List, Datagrid, TextField, ResourceComponentProps, DateField, ReferenceField } from 'react-admin';
 
 export const EventSessionList = (props: ResourceComponentProps) => (
-  <List {...props}>
+  <List
+    sort={{
+      field: 'name',
+      order: 'asc',
+    }}
+    {...props}
+  >
     <Datagrid>
       <TextField source="id" />
       <TextField source="name" />

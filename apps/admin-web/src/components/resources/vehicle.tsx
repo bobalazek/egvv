@@ -1,7 +1,13 @@
 import { List, Datagrid, TextField, ResourceComponentProps } from 'react-admin';
 
 export const VehicleList = (props: ResourceComponentProps) => (
-  <List {...props}>
+  <List
+    sort={{
+      field: 'name',
+      order: 'asc',
+    }}
+    {...props}
+  >
     <Datagrid>
       <TextField source="id" />
       <TextField source="slug" />

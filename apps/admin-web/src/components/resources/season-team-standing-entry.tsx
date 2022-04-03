@@ -1,7 +1,13 @@
 import { List, Datagrid, TextField, ResourceComponentProps, ReferenceField, DateField } from 'react-admin';
 
 export const SeasonTeamStandingEntryList = (props: ResourceComponentProps) => (
-  <List {...props}>
+  <List
+    sort={{
+      field: 'dateAt',
+      order: 'asc',
+    }}
+    {...props}
+  >
     <Datagrid>
       <TextField source="id" />
       <TextField source="points" />

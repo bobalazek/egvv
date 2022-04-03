@@ -16,7 +16,13 @@ import {
 } from 'react-admin';
 
 export const SeriesList = (props: ResourceComponentProps) => (
-  <List {...props}>
+  <List
+    sort={{
+      field: 'name',
+      order: 'asc',
+    }}
+    {...props}
+  >
     <Datagrid>
       <TextField source="id" />
       <TextField source="slug" />
