@@ -5,7 +5,7 @@ import buildGraphQLProvider from 'ra-data-graphql-simple';
 import { HTTP_SERVER_GRAPHQL_PATH, HTTP_SERVER_PORT } from '@egvv/shared';
 import { SeriesCreate, SeriesEdit, SeriesList, SeriesShow } from './resources/series';
 import { SeasonCreate, SeasonEdit, SeasonList, SeasonShow } from './resources/season';
-import { CircuitList } from './resources/circuit';
+import { CircuitCreate, CircuitEdit, CircuitList, CircuitShow } from './resources/circuit';
 import { DriverList } from './resources/driver';
 import { TeamList } from './resources/team';
 import { VehicleList } from './resources/vehicle';
@@ -58,7 +58,14 @@ export function App() {
         edit={SeasonEdit}
         options={{ label: 'Seasons' }}
       />
-      <Resource name="Circuit" list={CircuitList} options={{ label: 'Circuits' }} />
+      <Resource
+        name="Circuit"
+        list={CircuitList}
+        show={CircuitShow}
+        create={CircuitCreate}
+        edit={CircuitEdit}
+        options={{ label: 'Circuits' }}
+      />
       <Resource name="Driver" list={DriverList} options={{ label: 'Drivers' }} />
       <Resource name="Team" list={TeamList} options={{ label: 'Teams' }} />
       <Resource name="Vehicle" list={VehicleList} options={{ label: 'Vehicles' }} />

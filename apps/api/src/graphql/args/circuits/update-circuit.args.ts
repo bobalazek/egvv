@@ -1,7 +1,7 @@
-import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
+import { ArgsType, Field, Float, ID } from '@nestjs/graphql';
 
-@ObjectType()
-export class Circuit {
+@ArgsType()
+export class UpdateCircuitArgs {
   @Field(() => ID)
   id: string;
 

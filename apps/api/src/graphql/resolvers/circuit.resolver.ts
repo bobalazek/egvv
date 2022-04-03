@@ -1,11 +1,13 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
-import { AllCircuitsArgs } from '../args/all-circuits.args';
+import { AllCircuitsArgs } from '../args/circuits/all-circuits.args';
 import { Circuit } from '../models/circuit.model';
 import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateCircuitArgs } from '../args/circuits/create-circuit.args';
+import { UpdateCircuitArgs } from '../args/circuits/update-circuit.args';
 
 @Resolver(Circuit)
 export class CircuitResolver extends AbstractResolver {
@@ -37,5 +39,37 @@ export class CircuitResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => Circuit)
+  async createCircuit(@Args() args: CreateCircuitArgs) {
+    return this._prismaService.circuit.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => Circuit)
+  async updateCircuit(@Args() args: UpdateCircuitArgs) {
+    return this._prismaService.circuit.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        slug: args.slug,
+        name: args.name,
+        location: args.location,
+        countryCode: args.countryCode,
+        url: args.url,
+      },
+    });
+  }
+
+  @Mutation(() => Circuit)
+  async deleteCircuit(@Args() args: IdArgs) {
+    return this._prismaService.circuit.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 }
