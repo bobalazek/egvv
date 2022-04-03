@@ -11,6 +11,8 @@ import {
   TextInput,
   required,
   EditButton,
+  Create,
+  DeleteButton,
 } from 'react-admin';
 
 export const SeriesList = (props: ResourceComponentProps) => (
@@ -22,6 +24,7 @@ export const SeriesList = (props: ResourceComponentProps) => (
       <TextField source="url" />
       <ShowButton />
       <EditButton />
+      <DeleteButton />
     </Datagrid>
   </List>
 );
@@ -35,6 +38,16 @@ export const SeriesShow = (props: ResourceComponentProps) => (
       <TextField source="url" />
     </SimpleShowLayout>
   </Show>
+);
+
+export const SeriesCreate = (props: ResourceComponentProps) => (
+  <Create {...props}>
+    <SimpleForm>
+      <TextInput source="slug" validate={required()} />
+      <TextInput source="name" validate={required()} />
+      <TextInput source="url" validate={required()} />
+    </SimpleForm>
+  </Create>
 );
 
 export const SeriesEdit = (props: ResourceComponentProps) => (

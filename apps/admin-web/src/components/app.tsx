@@ -3,7 +3,7 @@ import { Admin, DataProvider, Resource } from 'react-admin';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 
 import { HTTP_SERVER_GRAPHQL_PATH, HTTP_SERVER_PORT } from '@egvv/shared';
-import { SeriesEdit, SeriesList, SeriesShow } from './resources/series';
+import { SeriesCreate, SeriesEdit, SeriesList, SeriesShow } from './resources/series';
 import { SeasonList } from './resources/season';
 import { CircuitList } from './resources/circuit';
 import { DriverList } from './resources/driver';
@@ -42,7 +42,14 @@ export function App() {
 
   return (
     <Admin dataProvider={dataProvider}>
-      <Resource name="Series" list={SeriesList} show={SeriesShow} edit={SeriesEdit} options={{ label: 'Series' }} />
+      <Resource
+        name="Series"
+        list={SeriesList}
+        show={SeriesShow}
+        create={SeriesCreate}
+        edit={SeriesEdit}
+        options={{ label: 'Series' }}
+      />
       <Resource name="Season" list={SeasonList} options={{ label: 'Seasons' }} />
       <Resource name="Circuit" list={CircuitList} options={{ label: 'Circuits' }} />
       <Resource name="Driver" list={DriverList} options={{ label: 'Drivers' }} />
