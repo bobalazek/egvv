@@ -36,7 +36,7 @@ import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
     }),
     ThrottlerModule.forRoot({
       ttl: 60,
-      limit: 10,
+      limit: 30,
     }),
   ],
   providers: [

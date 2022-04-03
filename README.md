@@ -6,12 +6,12 @@ The one AutoMoto project to rule them all.
 
 - NX for the monorepo
 - Prisma as the ORM
-- Postgress as the database
+- PostgreSQL as the database
 - React & React admin for the admin area
-- NestJS for the api
+- NestJS + GraphQL (Apollo) for the api
 - NextJS for the actual web app
 - Puppeteer for scrapping data
-- Jest for testing
+- Jest for unit & integration testing
 - Cypress for e2e testing
 
 ## Commands
