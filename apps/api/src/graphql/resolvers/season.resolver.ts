@@ -23,7 +23,7 @@ export class SeasonResolver extends AbstractResolver {
   async Season(@Args() args: IdArgs) {
     return this._prismaService.season.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

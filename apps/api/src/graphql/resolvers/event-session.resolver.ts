@@ -23,7 +23,7 @@ export class EventSessionResolver extends AbstractResolver {
   async EventSession(@Args() args: IdArgs) {
     return this._prismaService.eventSession.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

@@ -21,7 +21,7 @@ export class VehicleResolver extends AbstractResolver {
   async Vehicle(@Args() args: IdArgs) {
     return this._prismaService.vehicle.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

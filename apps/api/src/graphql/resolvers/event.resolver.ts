@@ -24,7 +24,7 @@ export class EventResolver extends AbstractResolver {
   async Event(@Args() args: IdArgs) {
     return this._prismaService.event.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

@@ -22,7 +22,7 @@ export class SeriesResolver extends AbstractResolver {
   async Series(@Args() args: IdArgs) {
     return this._prismaService.series.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

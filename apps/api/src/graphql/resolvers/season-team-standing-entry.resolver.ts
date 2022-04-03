@@ -23,7 +23,7 @@ export class SeasonTeamStandingEntryResolver extends AbstractResolver {
   async SeasonTeamStandingEntry(@Args() args: IdArgs) {
     return this._prismaService.seasonTeamStandingEntry.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

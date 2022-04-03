@@ -22,7 +22,7 @@ export class DriverResolver extends AbstractResolver {
   async Driver(@Args() args: IdArgs) {
     return this._prismaService.driver.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

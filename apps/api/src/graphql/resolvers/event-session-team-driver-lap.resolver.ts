@@ -21,7 +21,7 @@ export class EventSessionTeamDriverLapResolver extends AbstractResolver {
   async EventSessionTeamDriverLap(@Args() args: IdArgs) {
     return this._prismaService.eventSessionTeamDriverLap.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

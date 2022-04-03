@@ -24,7 +24,7 @@ export class SeasonTeamDriverResolver extends AbstractResolver {
   async SeasonTeamDriver(@Args() args: IdArgs) {
     return this._prismaService.seasonTeamDriver.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

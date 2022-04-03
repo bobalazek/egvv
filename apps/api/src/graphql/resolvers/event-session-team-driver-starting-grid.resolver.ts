@@ -21,7 +21,7 @@ export class EventSessionTeamDriverStartingGridResolver extends AbstractResolver
   async EventSessionTeamDriverStartingGrid(@Args() args: IdArgs) {
     return this._prismaService.eventSessionTeamDriverStartingGrid.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }

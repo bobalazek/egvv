@@ -22,7 +22,7 @@ export class TeamResolver extends AbstractResolver {
   async Team(@Args() args: IdArgs) {
     return this._prismaService.team.findFirst({
       where: {
-        id: args.id,
+        id: parseInt(args.id),
       },
     });
   }
