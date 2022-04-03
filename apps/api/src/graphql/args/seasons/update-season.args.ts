@@ -1,7 +1,7 @@
-import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
+import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
 
-@ObjectType()
-export class Season {
+@ArgsType()
+export class UpdateSeasonArgs {
   @Field(() => ID)
   id: string;
 

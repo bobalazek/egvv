@@ -53,7 +53,7 @@ export const SeriesCreate = (props: ResourceComponentProps) => (
 export const SeriesEdit = (props: ResourceComponentProps) => (
   <Edit {...props}>
     <SimpleForm>
-      <TextInput disabled source="id" />
+      <TextInput source="id" disabled />
       <TextInput source="slug" validate={required()} />
       <TextInput source="name" validate={required()} />
       <TextInput source="url" validate={required()} />
