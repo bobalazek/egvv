@@ -1,12 +1,14 @@
-import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
+import { Resolver, Query, Args, Parent, ResolveField, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
-import { AllDriversArgs } from '../args/all-drivers.args';
+import { AllDriversArgs } from '../args/driver/all-drivers.args';
 import { Driver } from '../models/driver.model';
 import { SeasonTeamDriver } from '../models/season-team-driver.model';
 import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateDriverArgs } from '../args/driver/create-driver.args';
+import { UpdateDriverArgs } from '../args/driver/update-driver.args';
 
 @Resolver(Driver)
 export class DriverResolver extends AbstractResolver {
@@ -38,6 +40,38 @@ export class DriverResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => Driver)
+  async createDriver(@Args() args: CreateDriverArgs) {
+    return this._prismaService.driver.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => Driver)
+  async updateDriver(@Args() args: UpdateDriverArgs) {
+    return this._prismaService.driver.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        slug: args.slug,
+        firstName: args.firstName,
+        lastName: args.lastName,
+        countryCode: args.countryCode,
+        url: args.url,
+      },
+    });
+  }
+
+  @Mutation(() => Driver)
+  async deleteDriver(@Args() args: IdArgs) {
+    return this._prismaService.driver.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 
   @ResolveField('name', () => String)
