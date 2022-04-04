@@ -1,7 +1,7 @@
-import { Resolver, ResolveField, Parent, Query, Args } from '@nestjs/graphql';
+import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { AllSeasonTeamDriversArgs } from '../args/all-season-team-drivers.args';
+import { AllSeasonTeamDriversArgs } from '../args/season-team-drivers/all-season-team-drivers.args';
 import { IdArgs } from '../args/id.args';
 import { Driver } from '../models/driver.model';
 import { ListMetadata } from '../models/list-metadata.model';
@@ -9,6 +9,8 @@ import { SeasonTeamDriverStandingEntry } from '../models/season-team-driver-stan
 import { SeasonTeamDriver } from '../models/season-team-driver.model';
 import { SeasonTeam } from '../models/season-team.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateSeasonTeamDriverArgs } from '../args/season-team-drivers/create-season-team-driver.args';
+import { UpdateSeasonTeamDriverArgs } from '../args/season-team-drivers/update-season-team-driver.args';
 
 @Resolver(SeasonTeamDriver)
 export class SeasonTeamDriverResolver extends AbstractResolver {
@@ -40,6 +42,38 @@ export class SeasonTeamDriverResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => SeasonTeamDriver)
+  async createEvent(@Args() args: CreateSeasonTeamDriverArgs) {
+    return this._prismaService.seasonTeamDriver.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => SeasonTeamDriver)
+  async updateSeasonTeamDriver(@Args() args: UpdateSeasonTeamDriverArgs) {
+    return this._prismaService.seasonTeamDriver.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        number: args.number,
+        code: args.code,
+        isTemporary: args.isTemporary,
+        seasonTeamId: args.seasonTeamId,
+        driverId: args.driverId,
+      },
+    });
+  }
+
+  @Mutation(() => SeasonTeamDriver)
+  async deleteSeasonTeamDriver(@Args() args: IdArgs) {
+    return this._prismaService.seasonTeamDriver.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 
   @ResolveField('name', () => String)

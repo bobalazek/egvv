@@ -10,7 +10,12 @@ import { DriverCreate, DriverEdit, DriverList, DriverShow } from './resources/dr
 import { TeamCreate, TeamEdit, TeamList, TeamShow } from './resources/team';
 import { VehicleCreate, VehicleEdit, VehicleList, VehicleShow } from './resources/vehicle';
 import { SeasonTeamCreate, SeasonTeamEdit, SeasonTeamList, SeasonTeamShow } from './resources/season-team';
-import { SeasonTeamDriverList } from './resources/season-team-driver';
+import {
+  SeasonTeamDriverCreate,
+  SeasonTeamDriverEdit,
+  SeasonTeamDriverList,
+  SeasonTeamDriverShow,
+} from './resources/season-team-driver';
 import { SeasonTeamStandingEntryList } from './resources/season-team-standing-entry';
 import { SeasonTeamDriverStandingEntryList } from './resources/season-team-driver-standing-entry';
 import { EventCreate, EventEdit, EventList, EventShow } from './resources/event';
@@ -98,7 +103,14 @@ export function App() {
         edit={SeasonTeamEdit}
         options={{ label: 'Season Teams' }}
       />
-      <Resource name="SeasonTeamDriver" list={SeasonTeamDriverList} options={{ label: 'Season Team Drivers' }} />
+      <Resource
+        name="SeasonTeamDriver"
+        list={SeasonTeamDriverList}
+        show={SeasonTeamDriverShow}
+        create={SeasonTeamDriverCreate}
+        edit={SeasonTeamDriverEdit}
+        options={{ label: 'Season Team Drivers' }}
+      />
       <Resource
         name="SeasonTeamStandingEntry"
         list={SeasonTeamStandingEntryList}

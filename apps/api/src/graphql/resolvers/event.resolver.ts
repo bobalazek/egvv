@@ -52,7 +52,7 @@ export class EventResolver extends AbstractResolver {
   }
 
   @Mutation(() => Event)
-  async updateDriver(@Args() args: UpdateEventArgs) {
+  async updateEvent(@Args() args: UpdateEventArgs) {
     return this._prismaService.event.update({
       where: {
         id: args.id,
