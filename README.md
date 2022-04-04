@@ -1,6 +1,6 @@
-# EGVV - Engine Goes Vroom Vroom (or Engines Go Vroom Vroom)
+# EGVV - Engine Goes Vroom Vroom
 
-The one AutoMoto project to rule them all.
+The number one AutoMoto project.
 
 ## Stack
 
@@ -8,7 +8,7 @@ The one AutoMoto project to rule them all.
 - Prisma as the ORM
 - PostgreSQL as the database
 - React & React admin for the admin area
-- NestJS + GraphQL (Apollo) for the api
+- NestJS + GraphQL (Apollo) for the API
 - NextJS for the actual web app
 - Puppeteer for scrapping data
 - Jest for unit & integration testing

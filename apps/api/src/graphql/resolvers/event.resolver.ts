@@ -1,14 +1,16 @@
-import { Resolver, Query, Args, Parent, ResolveField } from '@nestjs/graphql';
+import { Resolver, Query, Args, Parent, ResolveField, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
-import { AllEventsArgs } from '../args/all-events.args';
+import { AllEventsArgs } from '../args/event/all-events.args';
 import { Circuit } from '../models/circuit.model';
 import { EventSession } from '../models/event-session.model';
 import { Event } from '../models/event.model';
 import { Season } from '../models/season.model';
 import { AbstractResolver } from './abstract.resolver';
 import { ListMetadata } from '../models/list-metadata.model';
+import { CreateEventArgs } from '../args/event/create-event.args';
+import { UpdateEventArgs } from '../args/event/update-event.args';
 
 @Resolver(Event)
 export class EventResolver extends AbstractResolver {
@@ -40,6 +42,43 @@ export class EventResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => Event)
+  async createEvent(@Args() args: CreateEventArgs) {
+    return this._prismaService.event.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => Event)
+  async updateDriver(@Args() args: UpdateEventArgs) {
+    return this._prismaService.event.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        slug: args.slug,
+        name: args.name,
+        round: args.round,
+        laps: args.laps,
+        lapDistance: args.lapDistance,
+        raceAt: args.raceAt,
+        url: args.url,
+        circuitLayout: args.circuitLayout,
+        seasonId: args.seasonId,
+        circuitId: args.circuitId,
+      },
+    });
+  }
+
+  @Mutation(() => Event)
+  async deleteEvent(@Args() args: IdArgs) {
+    return this._prismaService.event.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 
   @ResolveField('season', () => Season)

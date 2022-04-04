@@ -1,7 +1,7 @@
-import { ObjectType, Field, ID, Int, Float } from '@nestjs/graphql';
+import { ArgsType, Field, Float, ID, Int } from '@nestjs/graphql';
 
-@ObjectType()
-export class Event {
+@ArgsType()
+export class UpdateEventArgs {
   @Field(() => ID)
   id: string;
 

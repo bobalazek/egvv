@@ -13,7 +13,7 @@ import { SeasonTeamList } from './resources/season-team';
 import { SeasonTeamDriverList } from './resources/season-team-driver';
 import { SeasonTeamStandingEntryList } from './resources/season-team-standing-entry';
 import { SeasonTeamDriverStandingEntryList } from './resources/season-team-driver-standing-entry';
-import { EventList } from './resources/event';
+import { EventCreate, EventEdit, EventList, EventShow } from './resources/event';
 import { EventSessionList } from './resources/event-session';
 import { EventSessionTeamDriverList } from './resources/event-session-team-driver';
 import { EventSessionTeamDriverLapList } from './resources/event-session-team-driver-lap';
@@ -102,7 +102,14 @@ export function App() {
         list={SeasonTeamDriverStandingEntryList}
         options={{ label: 'Season Team Driver Standing Entries' }}
       />
-      <Resource name="Event" list={EventList} options={{ label: 'Events' }} />
+      <Resource
+        name="Event"
+        list={EventList}
+        show={EventShow}
+        create={EventCreate}
+        edit={EventEdit}
+        options={{ label: 'Events' }}
+      />
       <Resource name="EventSession" list={EventSessionList} options={{ label: 'Event Sessions' }} />
       <Resource
         name="EventSessionTeamDriver"
