@@ -1,4 +1,4 @@
-import { Resolver, Query, Parent, ResolveField, Args } from '@nestjs/graphql';
+import { Resolver, Query, Parent, ResolveField, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
@@ -7,6 +7,8 @@ import { SeasonTeam } from '../models/season-team.model';
 import { Team } from '../models/team.model';
 import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateTeamArgs } from '../args/team/create-team.args';
+import { UpdateTeamArgs } from '../args/team/update-team.args';
 
 @Resolver(Team)
 export class TeamResolver extends AbstractResolver {
@@ -38,6 +40,41 @@ export class TeamResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => Team)
+  async createTeam(@Args() args: CreateTeamArgs) {
+    return this._prismaService.team.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => Team)
+  async updateTeam(@Args() args: UpdateTeamArgs) {
+    return this._prismaService.team.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        slug: args.slug,
+        name: args.name,
+        location: args.location,
+        countryCode: args.countryCode,
+        url: args.url,
+        debutAt: args.debutAt,
+        defunctAt: args.defunctAt,
+        predecessorTeamId: args.predecessorTeamId,
+      },
+    });
+  }
+
+  @Mutation(() => Team)
+  async deleteTeam(@Args() args: IdArgs) {
+    return this._prismaService.team.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 
   @ResolveField('predecessorTeam', () => Team, { nullable: true })

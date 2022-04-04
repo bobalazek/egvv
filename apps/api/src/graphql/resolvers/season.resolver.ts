@@ -2,14 +2,14 @@ import { Resolver, Query, Args, ResolveField, Parent, Mutation } from '@nestjs/g
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
-import { AllSeasonsArgs } from '../args/seasons/all-seasons.args';
+import { AllSeasonsArgs } from '../args/season/all-seasons.args';
 import { SeasonTeam } from '../models/season-team.model';
 import { Season } from '../models/season.model';
 import { Series } from '../models/series.model';
 import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
-import { CreateSeasonArgs } from '../args/seasons/create-season.args';
-import { UpdateSeasonArgs } from '../args/seasons/update-season.args';
+import { CreateSeasonArgs } from '../args/season/create-season.args';
+import { UpdateSeasonArgs } from '../args/season/update-season.args';
 
 @Resolver(Season)
 export class SeasonResolver extends AbstractResolver {

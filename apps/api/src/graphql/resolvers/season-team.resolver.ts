@@ -1,7 +1,7 @@
 import { Resolver, ResolveField, Parent, Query, Args } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { AllSeasonTeamsArgs } from '../args/all-season-teams.args';
+import { AllSeasonTeamsArgs } from '../args/team/all-season-teams.args';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { SeasonTeamDriver } from '../models/season-team-driver.model';

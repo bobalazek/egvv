@@ -7,7 +7,7 @@ import { SeriesCreate, SeriesEdit, SeriesList, SeriesShow } from './resources/se
 import { SeasonCreate, SeasonEdit, SeasonList, SeasonShow } from './resources/season';
 import { CircuitCreate, CircuitEdit, CircuitList, CircuitShow } from './resources/circuit';
 import { DriverList } from './resources/driver';
-import { TeamList } from './resources/team';
+import { TeamCreate, TeamEdit, TeamList, TeamShow } from './resources/team';
 import { VehicleList } from './resources/vehicle';
 import { SeasonTeamList } from './resources/season-team';
 import { SeasonTeamDriverList } from './resources/season-team-driver';
@@ -67,7 +67,14 @@ export function App() {
         options={{ label: 'Circuits' }}
       />
       <Resource name="Driver" list={DriverList} options={{ label: 'Drivers' }} />
-      <Resource name="Team" list={TeamList} options={{ label: 'Teams' }} />
+      <Resource
+        name="Team"
+        list={TeamList}
+        show={TeamShow}
+        create={TeamCreate}
+        edit={TeamEdit}
+        options={{ label: 'Teams' }}
+      />
       <Resource name="Vehicle" list={VehicleList} options={{ label: 'Vehicles' }} />
       <Resource name="SeasonTeam" list={SeasonTeamList} options={{ label: 'Season Teams' }} />
       <Resource name="SeasonTeamDriver" list={SeasonTeamDriverList} options={{ label: 'Season Team Drivers' }} />
