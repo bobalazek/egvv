@@ -55,16 +55,7 @@ export class TeamResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        slug: args.slug,
-        name: args.name,
-        location: args.location,
-        countryCode: args.countryCode,
-        url: args.url,
-        debutAt: args.debutAt,
-        defunctAt: args.defunctAt,
-        predecessorTeamId: args.predecessorTeamId,
-      },
+      data: args,
     });
   }
 

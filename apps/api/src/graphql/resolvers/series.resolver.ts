@@ -55,11 +55,7 @@ export class SeriesResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        slug: args.slug,
-        name: args.name,
-        url: args.url,
-      },
+      data: args,
     });
   }
 

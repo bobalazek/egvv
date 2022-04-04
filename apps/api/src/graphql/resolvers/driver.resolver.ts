@@ -55,13 +55,7 @@ export class DriverResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        slug: args.slug,
-        firstName: args.firstName,
-        lastName: args.lastName,
-        countryCode: args.countryCode,
-        url: args.url,
-      },
+      data: args,
     });
   }
 

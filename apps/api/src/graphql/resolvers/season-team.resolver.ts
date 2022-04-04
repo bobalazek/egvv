@@ -59,16 +59,7 @@ export class SeasonTeamResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        name: args.name,
-        shortName: args.shortName,
-        powerUnit: args.powerUnit,
-        chassis: args.chassis,
-        isDefunct: args.isDefunct,
-        seasonId: args.seasonId,
-        teamId: args.teamId,
-        vehicleId: args.vehicleId,
-      },
+      data: args,
     });
   }
 

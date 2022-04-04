@@ -56,14 +56,7 @@ export class SeasonResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        slug: args.slug,
-        name: args.name,
-        startAt: args.startAt,
-        endAt: args.endAt,
-        year: args.year,
-        seriesId: args.seriesId,
-      },
+      data: args,
     });
   }
 

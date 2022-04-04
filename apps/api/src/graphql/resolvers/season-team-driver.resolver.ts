@@ -57,13 +57,7 @@ export class SeasonTeamDriverResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        number: args.number,
-        code: args.code,
-        isTemporary: args.isTemporary,
-        seasonTeamId: args.seasonTeamId,
-        driverId: args.driverId,
-      },
+      data: args,
     });
   }
 

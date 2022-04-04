@@ -58,13 +58,7 @@ export class SeasonTeamDriverStandingEntryResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        points: args.points,
-        dateAt: args.dateAt,
-        note: args.note,
-        seasonTeamDriverId: args.seasonTeamDriverId,
-        eventSessionId: args.eventSessionId,
-      },
+      data: args,
     });
   }
 

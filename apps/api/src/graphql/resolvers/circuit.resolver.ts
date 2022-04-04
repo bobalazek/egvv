@@ -54,15 +54,7 @@ export class CircuitResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        slug: args.slug,
-        name: args.name,
-        location: args.location,
-        locationLatitude: args.locationLatitude,
-        locationLongitude: args.locationLongitude,
-        countryCode: args.countryCode,
-        url: args.url,
-      },
+      data: args,
     });
   }
 

@@ -57,18 +57,7 @@ export class EventResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        slug: args.slug,
-        name: args.name,
-        round: args.round,
-        laps: args.laps,
-        lapDistance: args.lapDistance,
-        raceAt: args.raceAt,
-        url: args.url,
-        circuitLayout: args.circuitLayout,
-        seasonId: args.seasonId,
-        circuitId: args.circuitId,
-      },
+      data: args,
     });
   }
 

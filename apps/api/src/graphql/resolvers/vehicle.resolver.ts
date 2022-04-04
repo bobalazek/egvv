@@ -54,13 +54,7 @@ export class VehicleResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        slug: args.slug,
-        name: args.name,
-        powerUnit: args.powerUnit,
-        modelUrl: args.modelUrl,
-        note: args.note,
-      },
+      data: args,
     });
   }
 

@@ -56,13 +56,7 @@ export class SeasonTeamStandingEntryResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        points: args.points,
-        dateAt: args.dateAt,
-        note: args.note,
-        seasonTeamId: args.seasonTeamId,
-        eventSessionId: args.eventSessionId,
-      },
+      data: args,
     });
   }
 

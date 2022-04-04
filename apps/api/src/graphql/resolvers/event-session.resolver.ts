@@ -56,13 +56,7 @@ export class EventSessionResolver extends AbstractResolver {
       where: {
         id: args.id,
       },
-      data: {
-        name: args.name,
-        type: args.type,
-        startAt: args.startAt,
-        endAt: args.endAt,
-        eventId: args.eventId,
-      },
+      data: args,
     });
   }
 
