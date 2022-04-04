@@ -1,7 +1,9 @@
-import { Resolver, ResolveField, Parent, Query, Args } from '@nestjs/graphql';
+import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { AllEventSessionsArgs } from '../args/all-event-sessions.args';
+import { AllEventSessionsArgs } from '../args/event-session/all-event-sessions.args';
+import { CreateEventSessionArgs } from '../args/event-session/create-event-session.args';
+import { UpdateEventSessionArgs } from '../args/event-session/update-event-session.args';
 import { IdArgs } from '../args/id.args';
 import { EventSessionTeamDriver } from '../models/event-session-team-driver.model';
 import { EventSession } from '../models/event-session.model';
@@ -39,6 +41,38 @@ export class EventSessionResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => EventSession)
+  async createEventSession(@Args() args: CreateEventSessionArgs) {
+    return this._prismaService.eventSession.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => EventSession)
+  async updateEventSession(@Args() args: UpdateEventSessionArgs) {
+    return this._prismaService.eventSession.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        name: args.name,
+        type: args.type,
+        startAt: args.startAt,
+        endAt: args.endAt,
+        eventId: args.eventId,
+      },
+    });
+  }
+
+  @Mutation(() => EventSession)
+  async deleteEventSession(@Args() args: IdArgs) {
+    return this._prismaService.event.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 
   @ResolveField('event', () => Event)

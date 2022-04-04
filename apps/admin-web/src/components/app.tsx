@@ -29,7 +29,7 @@ import {
   SeasonTeamDriverStandingEntryShow,
 } from './resources/season-team-driver-standing-entry';
 import { EventCreate, EventEdit, EventList, EventShow } from './resources/event';
-import { EventSessionList } from './resources/event-session';
+import { EventSessionCreate, EventSessionEdit, EventSessionList, EventSessionShow } from './resources/event-session';
 import { EventSessionTeamDriverList } from './resources/event-session-team-driver';
 import { EventSessionTeamDriverLapList } from './resources/event-session-team-driver-lap';
 import { EventSessionTeamDriverPitStopList } from './resources/event-session-team-driver-pit-stop';
@@ -145,7 +145,14 @@ export function App() {
         edit={EventEdit}
         options={{ label: 'Events' }}
       />
-      <Resource name="EventSession" list={EventSessionList} options={{ label: 'Event Sessions' }} />
+      <Resource
+        name="EventSession"
+        list={EventSessionList}
+        show={EventSessionShow}
+        create={EventSessionCreate}
+        edit={EventSessionEdit}
+        options={{ label: 'Event Sessions' }}
+      />
       <Resource
         name="EventSessionTeamDriver"
         list={EventSessionTeamDriverList}

@@ -1,7 +1,7 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
 
-@ObjectType()
-export class EventSession {
+@ArgsType()
+export class UpdateEventSessionArgs {
   @Field(() => ID)
   id: string;
 
