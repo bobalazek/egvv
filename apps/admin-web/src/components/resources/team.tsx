@@ -14,7 +14,7 @@ import {
   DateInput,
   ReferenceField,
   ReferenceInput,
-  SelectInput,
+  AutocompleteInput,
   ShowButton,
   EditButton,
   DeleteButton,
@@ -76,7 +76,7 @@ export const TeamCreate = (props: ResourceComponentProps) => (
       <DateInput source="debutAt" validate={required()} />
       <DateInput source="defunctAt" />
       <ReferenceInput source="predecessorTeamId" reference="Team">
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Create>
@@ -94,7 +94,7 @@ export const TeamEdit = (props: ResourceComponentProps) => (
       <DateInput source="debutAt" validate={required()} />
       <DateInput source="defunctAt" />
       <ReferenceInput source="predecessorTeamId" reference="Team">
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Edit>

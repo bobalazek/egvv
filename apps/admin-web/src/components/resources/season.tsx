@@ -17,7 +17,7 @@ import {
   EditButton,
   DeleteButton,
   ReferenceInput,
-  SelectInput,
+  AutocompleteInput,
 } from 'react-admin';
 
 export const SeasonList = (props: ResourceComponentProps) => (
@@ -70,7 +70,7 @@ export const SeasonCreate = (props: ResourceComponentProps) => (
       <DateInput source="startAt" validate={required()} />
       <DateInput source="endAt" />
       <ReferenceInput source="seriesId" reference="Series">
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Create>
@@ -86,7 +86,7 @@ export const SeasonEdit = (props: ResourceComponentProps) => (
       <DateInput source="startAt" validate={required()} />
       <DateInput source="endAt" />
       <ReferenceInput source="seriesId" reference="Series">
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Edit>

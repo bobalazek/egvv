@@ -15,7 +15,7 @@ import {
   TextInput,
   required,
   ReferenceInput,
-  SelectInput,
+  AutocompleteInput,
   Edit,
 } from 'react-admin';
 
@@ -84,10 +84,10 @@ export const EventCreate = (props: ResourceComponentProps) => (
       <TextInput source="url" validate={required()} />
       <TextInput source="circuitLayout" />
       <ReferenceInput source="seasonId" reference="Season">
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="circuitId" reference="Circuit">
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Create>
@@ -106,10 +106,10 @@ export const EventEdit = (props: ResourceComponentProps) => (
       <TextInput source="url" validate={required()} />
       <TextInput source="circuitLayout" />
       <ReferenceInput source="seasonId" reference="Season">
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="circuitId" reference="Circuit">
-        <SelectInput optionText="name" />
+        <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
   </Edit>

@@ -1,7 +1,7 @@
-import { Resolver, ResolveField, Parent, Query, Args } from '@nestjs/graphql';
+import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { AllSeasonTeamsArgs } from '../args/team/all-season-teams.args';
+import { AllSeasonTeamsArgs } from '../args/season-team/all-season-teams.args';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { SeasonTeamDriver } from '../models/season-team-driver.model';
@@ -11,6 +11,8 @@ import { Season } from '../models/season.model';
 import { Team } from '../models/team.model';
 import { Vehicle } from '../models/vehicle.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateSeasonTeamArgs } from '../args/season-team/create-season-team.args';
+import { UpdateSeasonTeamArgs } from '../args/season-team/update-season-team.args';
 
 @Resolver(SeasonTeam)
 export class SeasonTeamResolver extends AbstractResolver {
@@ -42,6 +44,41 @@ export class SeasonTeamResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => SeasonTeam)
+  async createSeasonTeam(@Args() args: CreateSeasonTeamArgs) {
+    return this._prismaService.seasonTeam.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => SeasonTeam)
+  async updateSeasonTeam(@Args() args: UpdateSeasonTeamArgs) {
+    return this._prismaService.seasonTeam.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        name: args.name,
+        shortName: args.shortName,
+        powerUnit: args.powerUnit,
+        chassis: args.chassis,
+        isDefunct: args.isDefunct,
+        seasonId: args.seasonId,
+        teamId: args.teamId,
+        vehicleId: args.vehicleId,
+      },
+    });
+  }
+
+  @Mutation(() => SeasonTeam)
+  async deleteSeasonTeam(@Args() args: IdArgs) {
+    return this._prismaService.seasonTeam.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 
   @ResolveField('seasonTeamDrivers', () => [SeasonTeamDriver])

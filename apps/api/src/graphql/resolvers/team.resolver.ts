@@ -2,7 +2,7 @@ import { Resolver, Query, Parent, ResolveField, Args, Mutation } from '@nestjs/g
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
-import { AllTeamsArgs } from '../args/all-teams.args';
+import { AllTeamsArgs } from '../args/team/all-teams.args';
 import { SeasonTeam } from '../models/season-team.model';
 import { Team } from '../models/team.model';
 import { ListMetadata } from '../models/list-metadata.model';
