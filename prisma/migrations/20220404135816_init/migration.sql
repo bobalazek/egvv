@@ -68,6 +68,7 @@ CREATE TABLE "Vehicle" (
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "powerUnit" TEXT NOT NULL,
+    "modelUrl" TEXT NOT NULL,
     "note" TEXT,
 
     CONSTRAINT "Vehicle_pkey" PRIMARY KEY ("id")

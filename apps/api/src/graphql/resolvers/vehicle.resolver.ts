@@ -1,11 +1,13 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { AllVehiclesArgs } from '../args/all-vehicles.args';
+import { AllVehiclesArgs } from '../args/vehicle/all-vehicles.args';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { Vehicle } from '../models/vehicle.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateVehicleArgs } from '../args/vehicle/create-vehicle.args';
+import { UpdateVehicleArgs } from '../args/vehicle/update-team.args';
 
 @Resolver(Vehicle)
 export class VehicleResolver extends AbstractResolver {
@@ -37,5 +39,37 @@ export class VehicleResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => Vehicle)
+  async createVehicle(@Args() args: CreateVehicleArgs) {
+    return this._prismaService.vehicle.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => Vehicle)
+  async updateVehicle(@Args() args: UpdateVehicleArgs) {
+    return this._prismaService.vehicle.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        slug: args.slug,
+        name: args.name,
+        powerUnit: args.powerUnit,
+        modelUrl: args.modelUrl,
+        note: args.note,
+      },
+    });
+  }
+
+  @Mutation(() => Vehicle)
+  async deleteVehicle(@Args() args: IdArgs) {
+    return this._prismaService.vehicle.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 }
