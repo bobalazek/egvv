@@ -1,4 +1,4 @@
-import { Resolver, ResolveField, Parent, Query, Args } from '@nestjs/graphql';
+import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { SeasonTeamDriverStandingEntry } from '../models/season-team-driver-standing-entry.model';
@@ -6,8 +6,10 @@ import { EventSession } from '../models/event-session.model';
 import { SeasonTeam } from '../models/season-team.model';
 import { AbstractResolver } from './abstract.resolver';
 import { IdArgs } from '../args/id.args';
-import { AllSeasonTeamDriverStandingEntriesArgs } from '../args/all-season-team-driver-standing-entries.args';
+import { AllSeasonTeamDriverStandingEntriesArgs } from '../args/season-team-driver-standing-entry/all-season-team-driver-standing-entries.args';
 import { ListMetadata } from '../models/list-metadata.model';
+import { CreateSeasonTeamDriverStandingEntryArgs } from '../args/season-team-driver-standing-entry/create-season-team-driver-standing-entry.args';
+import { UpdateSeasonTeamDriverStandingEntryArgs } from '../args/season-team-driver-standing-entry/update-season-team-driver-standing-entry.args';
 
 @Resolver(SeasonTeamDriverStandingEntry)
 export class SeasonTeamDriverStandingEntryResolver extends AbstractResolver {
@@ -41,6 +43,38 @@ export class SeasonTeamDriverStandingEntryResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => SeasonTeamDriverStandingEntry)
+  async createSeasonTeamDriverStandingEntry(@Args() args: CreateSeasonTeamDriverStandingEntryArgs) {
+    return this._prismaService.seasonTeamDriverStandingEntry.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => SeasonTeamDriverStandingEntry)
+  async updateSeasonTeamDriverStandingEntry(@Args() args: UpdateSeasonTeamDriverStandingEntryArgs) {
+    return this._prismaService.seasonTeamDriverStandingEntry.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        points: args.points,
+        dateAt: args.dateAt,
+        note: args.note,
+        seasonTeamDriverId: args.seasonTeamDriverId,
+        eventSessionId: args.eventSessionId,
+      },
+    });
+  }
+
+  @Mutation(() => SeasonTeamDriverStandingEntry)
+  async deleteSeasonTeamDriverStandingEntry(@Args() args: IdArgs) {
+    return this._prismaService.seasonTeamDriverStandingEntry.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 
   @ResolveField('seasonDriverTeam', () => SeasonTeam)

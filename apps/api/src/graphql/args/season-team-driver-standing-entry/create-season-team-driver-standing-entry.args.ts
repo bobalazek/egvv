@@ -1,10 +1,7 @@
-import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
+import { Field, ArgsType, Float } from '@nestjs/graphql';
 
-@ObjectType()
-export class SeasonTeamDriverStandingEntry {
-  @Field(() => ID)
-  id: string;
-
+@ArgsType()
+export class CreateSeasonTeamDriverStandingEntryArgs {
   @Field(() => Float)
   points: number;
 

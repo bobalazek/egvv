@@ -1,4 +1,4 @@
-import { Resolver, ResolveField, Parent, Query, Args } from '@nestjs/graphql';
+import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { SeasonTeamStandingEntry } from '../models/season-team-standing-entry.model';
@@ -6,8 +6,10 @@ import { EventSession } from '../models/event-session.model';
 import { SeasonTeam } from '../models/season-team.model';
 import { AbstractResolver } from './abstract.resolver';
 import { IdArgs } from '../args/id.args';
-import { AllSeasonTeamStandingEntriesArgs } from '../args/all-season-team-standing-entries.args';
+import { AllSeasonTeamStandingEntriesArgs } from '../args/season-team-standing-entry/all-season-team-standing-entries.args';
 import { ListMetadata } from '../models/list-metadata.model';
+import { CreateSeasonTeamStandingEntryArgs } from '../args/season-team-standing-entry/create-season-team-standing-entry.args';
+import { UpdateSeasonTeamStandingEntryArgs } from '../args/season-team-standing-entry/update-season-team-standing-entry.args';
 
 @Resolver(SeasonTeamStandingEntry)
 export class SeasonTeamStandingEntryResolver extends AbstractResolver {
@@ -39,6 +41,38 @@ export class SeasonTeamStandingEntryResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => SeasonTeamStandingEntry)
+  async createSeasonTeamStandingEntry(@Args() args: CreateSeasonTeamStandingEntryArgs) {
+    return this._prismaService.seasonTeamStandingEntry.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => SeasonTeamStandingEntry)
+  async updateSeasonTeamStandingEntry(@Args() args: UpdateSeasonTeamStandingEntryArgs) {
+    return this._prismaService.seasonTeamStandingEntry.update({
+      where: {
+        id: args.id,
+      },
+      data: {
+        points: args.points,
+        dateAt: args.dateAt,
+        note: args.note,
+        seasonTeamId: args.seasonTeamId,
+        eventSessionId: args.eventSessionId,
+      },
+    });
+  }
+
+  @Mutation(() => SeasonTeamStandingEntry)
+  async deleteSeasonTeamStandingEntry(@Args() args: IdArgs) {
+    return this._prismaService.seasonTeamStandingEntry.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 
   @ResolveField('seasonTeam', () => SeasonTeam)

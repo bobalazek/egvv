@@ -69,7 +69,7 @@ export const SeasonCreate = (props: ResourceComponentProps) => (
       <TextInput source="year" validate={required()} />
       <DateInput source="startAt" validate={required()} />
       <DateInput source="endAt" />
-      <ReferenceInput source="seriesId" reference="Series">
+      <ReferenceInput source="seriesId" reference="Series" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
@@ -85,7 +85,7 @@ export const SeasonEdit = (props: ResourceComponentProps) => (
       <TextInput source="year" validate={required()} />
       <DateInput source="startAt" validate={required()} />
       <DateInput source="endAt" />
-      <ReferenceInput source="seriesId" reference="Series">
+      <ReferenceInput source="seriesId" reference="Series" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>

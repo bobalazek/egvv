@@ -75,10 +75,10 @@ export const SeasonTeamCreate = (props: ResourceComponentProps) => (
       <TextInput source="powerUnit" validate={required()} />
       <TextInput source="chassis" validate={required()} />
       <BooleanInput source="isDefunct" validate={required()} />
-      <ReferenceInput source="seasonId" reference="Season">
+      <ReferenceInput source="seasonId" reference="Season" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="teamId" reference="Team">
+      <ReferenceInput source="teamId" reference="Team" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
@@ -94,10 +94,10 @@ export const SeasonTeamEdit = (props: ResourceComponentProps) => (
       <TextInput source="powerUnit" validate={required()} />
       <TextInput source="chassis" validate={required()} />
       <BooleanInput source="isDefunct" validate={required()} />
-      <ReferenceInput source="seasonId" reference="Season">
+      <ReferenceInput source="seasonId" reference="Season" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="teamId" reference="Team">
+      <ReferenceInput source="teamId" reference="Team" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>

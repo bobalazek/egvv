@@ -69,10 +69,10 @@ export const SeasonTeamDriverCreate = (props: ResourceComponentProps) => (
       <TextInput source="number" validate={required()} />
       <TextInput source="code" validate={required()} />
       <BooleanInput source="isTemporary" validate={required()} />
-      <ReferenceInput source="seasonTeamId" reference="SeasonTeam">
+      <ReferenceInput source="seasonTeamId" reference="SeasonTeam" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="driverId" reference="Driver">
+      <ReferenceInput source="driverId" reference="Driver" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
@@ -86,10 +86,10 @@ export const SeasonTeamDriverEdit = (props: ResourceComponentProps) => (
       <TextInput source="number" validate={required()} />
       <TextInput source="code" validate={required()} />
       <BooleanInput source="isTemporary" validate={required()} />
-      <ReferenceInput source="seasonTeamId" reference="SeasonTeam">
+      <ReferenceInput source="seasonTeamId" reference="SeasonTeam" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="driverId" reference="Driver">
+      <ReferenceInput source="driverId" reference="Driver" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>

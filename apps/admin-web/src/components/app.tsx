@@ -16,8 +16,18 @@ import {
   SeasonTeamDriverList,
   SeasonTeamDriverShow,
 } from './resources/season-team-driver';
-import { SeasonTeamStandingEntryList } from './resources/season-team-standing-entry';
-import { SeasonTeamDriverStandingEntryList } from './resources/season-team-driver-standing-entry';
+import {
+  SeasonTeamStandingEntryCreate,
+  SeasonTeamStandingEntryEdit,
+  SeasonTeamStandingEntryList,
+  SeasonTeamStandingEntryShow,
+} from './resources/season-team-standing-entry';
+import {
+  SeasonTeamDriverStandingEntryCreate,
+  SeasonTeamDriverStandingEntryEdit,
+  SeasonTeamDriverStandingEntryList,
+  SeasonTeamDriverStandingEntryShow,
+} from './resources/season-team-driver-standing-entry';
 import { EventCreate, EventEdit, EventList, EventShow } from './resources/event';
 import { EventSessionList } from './resources/event-session';
 import { EventSessionTeamDriverList } from './resources/event-session-team-driver';
@@ -114,11 +124,17 @@ export function App() {
       <Resource
         name="SeasonTeamStandingEntry"
         list={SeasonTeamStandingEntryList}
+        show={SeasonTeamStandingEntryShow}
+        create={SeasonTeamStandingEntryCreate}
+        edit={SeasonTeamStandingEntryEdit}
         options={{ label: 'Season Team Standing Entries' }}
       />
       <Resource
         name="SeasonTeamDriverStandingEntry"
         list={SeasonTeamDriverStandingEntryList}
+        show={SeasonTeamDriverStandingEntryShow}
+        create={SeasonTeamDriverStandingEntryCreate}
+        edit={SeasonTeamDriverStandingEntryEdit}
         options={{ label: 'Season Team Driver Standing Entries' }}
       />
       <Resource
