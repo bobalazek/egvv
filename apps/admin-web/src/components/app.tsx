@@ -30,11 +30,36 @@ import {
 } from './resources/season-team-driver-standing-entry';
 import { EventCreate, EventEdit, EventList, EventShow } from './resources/event';
 import { EventSessionCreate, EventSessionEdit, EventSessionList, EventSessionShow } from './resources/event-session';
-import { EventSessionTeamDriverList } from './resources/event-session-team-driver';
-import { EventSessionTeamDriverLapList } from './resources/event-session-team-driver-lap';
-import { EventSessionTeamDriverPitStopList } from './resources/event-session-team-driver-pit-stop';
-import { EventSessionTeamDriverStartingGridList } from './resources/event-session-team-driver-starting-grid';
-import { EventSessionTeamDriverClassificationList } from './resources/event-session-team-driver-classification';
+import {
+  EventSessionTeamDriverCreate,
+  EventSessionTeamDriverEdit,
+  EventSessionTeamDriverList,
+  EventSessionTeamDriverShow,
+} from './resources/event-session-team-driver';
+import {
+  EventSessionTeamDriverLapCreate,
+  EventSessionTeamDriverLapEdit,
+  EventSessionTeamDriverLapList,
+  EventSessionTeamDriverLapShow,
+} from './resources/event-session-team-driver-lap';
+import {
+  EventSessionTeamDriverPitStopCreate,
+  EventSessionTeamDriverPitStopEdit,
+  EventSessionTeamDriverPitStopList,
+  EventSessionTeamDriverPitStopShow,
+} from './resources/event-session-team-driver-pit-stop';
+import {
+  EventSessionTeamDriverStartingGridCreate,
+  EventSessionTeamDriverStartingGridEdit,
+  EventSessionTeamDriverStartingGridList,
+  EventSessionTeamDriverStartingGridShow,
+} from './resources/event-session-team-driver-starting-grid';
+import {
+  EventSessionTeamDriverClassificationCreate,
+  EventSessionTeamDriverClassificationEdit,
+  EventSessionTeamDriverClassificationList,
+  EventSessionTeamDriverClassificationShow,
+} from './resources/event-session-team-driver-classification';
 
 export function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider>();
@@ -156,26 +181,41 @@ export function App() {
       <Resource
         name="EventSessionTeamDriver"
         list={EventSessionTeamDriverList}
+        show={EventSessionTeamDriverShow}
+        create={EventSessionTeamDriverCreate}
+        edit={EventSessionTeamDriverEdit}
         options={{ label: 'Event Session Team Drivers' }}
       />
       <Resource
         name="EventSessionTeamDriverLap"
         list={EventSessionTeamDriverLapList}
+        show={EventSessionTeamDriverLapShow}
+        create={EventSessionTeamDriverLapCreate}
+        edit={EventSessionTeamDriverLapEdit}
         options={{ label: 'Event Session Team Driver Laps' }}
       />
       <Resource
         name="EventSessionTeamDriverPitStop"
         list={EventSessionTeamDriverPitStopList}
+        show={EventSessionTeamDriverPitStopShow}
+        create={EventSessionTeamDriverPitStopCreate}
+        edit={EventSessionTeamDriverPitStopEdit}
         options={{ label: 'Event Session Team Driver Pit Stops' }}
       />
       <Resource
         name="EventSessionTeamDriverStartingGrid"
         list={EventSessionTeamDriverStartingGridList}
+        show={EventSessionTeamDriverStartingGridShow}
+        create={EventSessionTeamDriverStartingGridCreate}
+        edit={EventSessionTeamDriverStartingGridEdit}
         options={{ label: 'Event Session Team Driver Starting Grids' }}
       />
       <Resource
         name="EventSessionTeamDriverClassification"
         list={EventSessionTeamDriverClassificationList}
+        show={EventSessionTeamDriverClassificationShow}
+        create={EventSessionTeamDriverClassificationCreate}
+        edit={EventSessionTeamDriverClassificationEdit}
         options={{ label: 'Event Session Team Driver Classifications' }}
       />
     </Admin>
