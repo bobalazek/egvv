@@ -35,7 +35,9 @@ export class SeasonTeamResolver extends AbstractResolver {
 
   @Query(() => [SeasonTeam])
   async allSeasonTeams(@Args() args: AllSeasonTeamsArgs) {
-    return this._prismaService.seasonTeam.findMany(this.getAllArgs(args));
+    return this._prismaService.seasonTeam.findMany(
+      this.getAllArgs(args, ['name', 'shortName', 'powerUnit', 'chassis'])
+    );
   }
 
   @Query(() => ListMetadata)

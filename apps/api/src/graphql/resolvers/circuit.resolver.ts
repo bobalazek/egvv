@@ -30,7 +30,7 @@ export class CircuitResolver extends AbstractResolver {
 
   @Query(() => [Circuit])
   async allCircuits(@Args() args: AllCircuitsArgs) {
-    return this._prismaService.circuit.findMany(this.getAllArgs(args));
+    return this._prismaService.circuit.findMany(this.getAllArgs(args, ['slug', 'name', 'location', 'countryCode']));
   }
 
   @Query(() => ListMetadata)

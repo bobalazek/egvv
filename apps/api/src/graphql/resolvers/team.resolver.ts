@@ -31,7 +31,7 @@ export class TeamResolver extends AbstractResolver {
 
   @Query(() => [Team])
   async allTeams(@Args() args: AllTeamsArgs) {
-    return this._prismaService.team.findMany(this.getAllArgs(args));
+    return this._prismaService.team.findMany(this.getAllArgs(args, ['slug', 'name', 'location', 'countryCode']));
   }
 
   @Query(() => ListMetadata)

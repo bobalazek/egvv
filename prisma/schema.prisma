@@ -69,7 +69,6 @@ model Vehicle {
   id                     String                  @id @default(uuid())
   slug                   String                  @unique
   name                   String
-  powerUnit              String
   modelUrl               String
   note                   String? // If the model has for example a specific livery
   seasonTeam             SeasonTeam?             @relation(name: "SeasonTeam_Vehicle")

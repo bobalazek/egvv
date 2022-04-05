@@ -2,6 +2,8 @@
 
 import { ArgsType, Field, Int } from '@nestjs/graphql';
 
+import { AllFilterInput } from '../inputs/all-filter.input';
+
 @ArgsType()
 export class AllArgs {
   @Field(() => Int, { nullable: true })
@@ -15,4 +17,7 @@ export class AllArgs {
 
   @Field({ nullable: true })
   sortOrder?: string;
+
+  @Field({ nullable: true })
+  filter?: AllFilterInput;
 }

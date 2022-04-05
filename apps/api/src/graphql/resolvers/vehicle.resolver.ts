@@ -30,7 +30,7 @@ export class VehicleResolver extends AbstractResolver {
 
   @Query(() => [Vehicle])
   async allVehicles(@Args() args: AllVehiclesArgs) {
-    return this._prismaService.vehicle.findMany(this.getAllArgs(args));
+    return this._prismaService.vehicle.findMany(this.getAllArgs(args, ['slug', 'name']));
   }
 
   @Query(() => ListMetadata)

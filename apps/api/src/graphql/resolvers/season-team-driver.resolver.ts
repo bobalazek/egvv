@@ -1,4 +1,5 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
+import { Prisma } from '@prisma/client';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllSeasonTeamDriversArgs } from '../args/season-team-drivers/all-season-team-drivers.args';
@@ -33,7 +34,7 @@ export class SeasonTeamDriverResolver extends AbstractResolver {
 
   @Query(() => [SeasonTeamDriver])
   async allSeasonTeamDrivers(@Args() args: AllSeasonTeamDriversArgs) {
-    return this._prismaService.seasonTeamDriver.findMany(this.getAllArgs(args));
+    return this._prismaService.seasonTeamDriver.findMany(this.getAllArgs(args, ['code']));
   }
 
   @Query(() => ListMetadata)
@@ -72,7 +73,16 @@ export class SeasonTeamDriverResolver extends AbstractResolver {
 
   @ResolveField('name', () => String)
   async name(@Parent() parent: SeasonTeamDriver) {
-    return `${parent.code} (${parent.number})`;
+    const seasonTeam = await this._prismaService.seasonTeam.findFirst({
+      where: {
+        id: parent.seasonTeamId,
+      },
+      include: {
+        season: true,
+      },
+    });
+
+    return `${parent.code} (${parent.number}) @ ${seasonTeam.shortName} for ${seasonTeam.season.name}`;
   }
 
   @ResolveField('seasonTeam', () => SeasonTeam)

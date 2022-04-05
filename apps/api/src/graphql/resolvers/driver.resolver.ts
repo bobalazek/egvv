@@ -31,7 +31,7 @@ export class DriverResolver extends AbstractResolver {
 
   @Query(() => [Driver])
   async allDrivers(@Args() args: AllDriversArgs) {
-    return this._prismaService.driver.findMany(this.getAllArgs(args));
+    return this._prismaService.driver.findMany(this.getAllArgs(args, ['slug', 'firstName', 'lastName', 'countryCode']));
   }
 
   @Query(() => ListMetadata)

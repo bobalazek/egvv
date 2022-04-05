@@ -32,7 +32,7 @@ export class SeasonResolver extends AbstractResolver {
 
   @Query(() => [Season])
   async allSeasons(@Args() args: AllSeasonsArgs) {
-    return this._prismaService.season.findMany(this.getAllArgs(args));
+    return this._prismaService.season.findMany(this.getAllArgs(args, ['slug', 'name']));
   }
 
   @Query(() => ListMetadata)

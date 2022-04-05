@@ -67,7 +67,6 @@ CREATE TABLE "Vehicle" (
     "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "powerUnit" TEXT NOT NULL,
     "modelUrl" TEXT NOT NULL,
     "note" TEXT,
 

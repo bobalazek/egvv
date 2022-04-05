@@ -31,7 +31,7 @@ export class SeriesResolver extends AbstractResolver {
 
   @Query(() => [Series])
   async allSeries(@Args() args: AllSeriesArgs) {
-    return this._prismaService.series.findMany(this.getAllArgs(args));
+    return this._prismaService.series.findMany(this.getAllArgs(args, ['slug', 'name']));
   }
 
   @Query(() => ListMetadata)
