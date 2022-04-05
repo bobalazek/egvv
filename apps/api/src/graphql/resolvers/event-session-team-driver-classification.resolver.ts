@@ -30,14 +30,14 @@ export class EventSessionTeamDriverClassificationResolver extends AbstractResolv
 
   @Query(() => [EventSessionTeamDriverClassification])
   async allEventSessionTeamDriverClassifications(@Args() args: AllEventSessionTeamDriverClassificationsArgs) {
-    return this._prismaService.eventSessionTeamDriverClassification.findMany(this.getAllArgs(args));
+    return this._prismaService.eventSessionTeamDriverClassification.findMany(this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionTeamDriverClassificationsMeta(
     @Args() args: AllEventSessionTeamDriverClassificationsArgs
   ): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionTeamDriverClassification.count();
+    const count = await this._prismaService.eventSessionTeamDriverClassification.count(this.getAllArgs(args, true));
     return {
       count,
     };

@@ -30,14 +30,14 @@ export class EventSessionTeamDriverPitStopResolver extends AbstractResolver {
 
   @Query(() => [EventSessionTeamDriverPitStop])
   async allEventSessionTeamDriverPitStops(@Args() args: AllEventSessionTeamDriverPitStopsArgs) {
-    return this._prismaService.eventSessionTeamDriverPitStop.findMany(this.getAllArgs(args));
+    return this._prismaService.eventSessionTeamDriverPitStop.findMany(this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionTeamDriverPitStopsMeta(
     @Args() args: AllEventSessionTeamDriverPitStopsArgs
   ): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionTeamDriverPitStop.count();
+    const count = await this._prismaService.eventSessionTeamDriverPitStop.count(this.getAllArgs(args, true));
     return {
       count,
     };

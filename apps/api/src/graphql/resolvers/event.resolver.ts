@@ -33,12 +33,12 @@ export class EventResolver extends AbstractResolver {
 
   @Query(() => [Event])
   async allEvents(@Args() args: AllEventsArgs) {
-    return this._prismaService.event.findMany(this.getAllArgs(args, ['slug', 'name']));
+    return this._prismaService.event.findMany(this.getAllArgs(args, false, ['slug', 'name']));
   }
 
   @Query(() => ListMetadata)
   async _allEventsMeta(@Args() args: AllEventsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.event.count();
+    const count = await this._prismaService.event.count(this.getAllArgs(args, true, ['slug', 'name']));
     return {
       count,
     };

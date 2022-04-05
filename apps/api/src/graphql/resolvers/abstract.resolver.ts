@@ -1,9 +1,16 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+
 import { AllArgs } from '../args/all.args';
 
 export abstract class AbstractResolver {
-  getAllArgs<T extends AllArgs>(args: T, queryFields: string[] = []) {
-    const skip = args.perPage ? args.page * args.perPage : undefined;
-    const take = args.perPage ? args.perPage : undefined;
+  getAllArgs<T extends AllArgs>(
+    args: T,
+    skipPagination: boolean = false,
+    queryFields: string[] = [],
+    otherFields: string[] = []
+  ) {
+    const skip = !skipPagination && args.perPage ? args.page * args.perPage : undefined;
+    const take = !skipPagination && args.perPage ? args.perPage : undefined;
     const orderBy =
       args.sortField && args.sortOrder
         ? {
@@ -26,6 +33,14 @@ export abstract class AbstractResolver {
           mode: 'insensitive',
         };
       }
+    }
+
+    for (const field of otherFields) {
+      if (!args.filter[field]) {
+        continue;
+      }
+
+      where[field] = args.filter[field];
     }
 
     return {

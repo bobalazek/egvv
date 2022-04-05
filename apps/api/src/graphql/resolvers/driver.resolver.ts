@@ -31,12 +31,16 @@ export class DriverResolver extends AbstractResolver {
 
   @Query(() => [Driver])
   async allDrivers(@Args() args: AllDriversArgs) {
-    return this._prismaService.driver.findMany(this.getAllArgs(args, ['slug', 'firstName', 'lastName', 'countryCode']));
+    return this._prismaService.driver.findMany(
+      this.getAllArgs(args, false, ['slug', 'firstName', 'lastName', 'countryCode'])
+    );
   }
 
   @Query(() => ListMetadata)
   async _allDriversMeta(@Args() args: AllDriversArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.driver.count();
+    const count = await this._prismaService.driver.count(
+      this.getAllArgs(args, true, ['slug', 'firstName', 'lastName', 'countryCode'])
+    );
     return {
       count,
     };

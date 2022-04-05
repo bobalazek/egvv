@@ -30,12 +30,12 @@ export class VehicleResolver extends AbstractResolver {
 
   @Query(() => [Vehicle])
   async allVehicles(@Args() args: AllVehiclesArgs) {
-    return this._prismaService.vehicle.findMany(this.getAllArgs(args, ['slug', 'name']));
+    return this._prismaService.vehicle.findMany(this.getAllArgs(args, false, ['slug', 'name']));
   }
 
   @Query(() => ListMetadata)
   async _allVehiclesMeta(@Args() args: AllVehiclesArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.vehicle.count();
+    const count = await this._prismaService.vehicle.count(this.getAllArgs(args, true, ['slug', 'name']));
     return {
       count,
     };

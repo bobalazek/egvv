@@ -13,6 +13,7 @@ import {
   EditButton,
   Create,
   DeleteButton,
+  ReferenceManyField,
 } from 'react-admin';
 
 export const SeriesList = (props: ResourceComponentProps) => (
@@ -42,6 +43,25 @@ export const SeriesShow = (props: ResourceComponentProps) => (
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="url" />
+      <ReferenceManyField
+        target="seriesId"
+        reference="Season"
+        label="Seasons"
+        sort={{
+          field: 'startAt',
+          order: 'desc',
+        }}
+        perPage={9999}
+      >
+        <Datagrid>
+          <TextField source="name" />
+          <TextField source="year" />
+          <TextField source="startAt" />
+          <TextField source="endAt" />
+          <ShowButton />
+          <EditButton />
+        </Datagrid>
+      </ReferenceManyField>
     </SimpleShowLayout>
   </Show>
 );

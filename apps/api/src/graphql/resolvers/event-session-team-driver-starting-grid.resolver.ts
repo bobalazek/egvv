@@ -30,14 +30,14 @@ export class EventSessionTeamDriverStartingGridResolver extends AbstractResolver
 
   @Query(() => [EventSessionTeamDriverStartingGrid])
   async allEventSessionTeamDriverStartingGrids(@Args() args: AllEventSessionTeamDriverStartingGridsArgs) {
-    return this._prismaService.eventSessionTeamDriverStartingGrid.findMany(this.getAllArgs(args));
+    return this._prismaService.eventSessionTeamDriverStartingGrid.findMany(this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionTeamDriverStartingGridsMeta(
     @Args() args: AllEventSessionTeamDriverStartingGridsArgs
   ): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionTeamDriverStartingGrid.count();
+    const count = await this._prismaService.eventSessionTeamDriverStartingGrid.count(this.getAllArgs(args, true));
     return {
       count,
     };

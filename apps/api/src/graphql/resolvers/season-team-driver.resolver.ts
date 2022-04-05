@@ -34,12 +34,12 @@ export class SeasonTeamDriverResolver extends AbstractResolver {
 
   @Query(() => [SeasonTeamDriver])
   async allSeasonTeamDrivers(@Args() args: AllSeasonTeamDriversArgs) {
-    return this._prismaService.seasonTeamDriver.findMany(this.getAllArgs(args, ['code']));
+    return this._prismaService.seasonTeamDriver.findMany(this.getAllArgs(args, false, ['code']));
   }
 
   @Query(() => ListMetadata)
   async _allSeasonTeamDriversMeta(@Args() args: AllSeasonTeamDriversArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.seasonTeamDriver.count();
+    const count = await this._prismaService.seasonTeamDriver.count(this.getAllArgs(args, true, ['code']));
     return {
       count,
     };

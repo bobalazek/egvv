@@ -32,12 +32,12 @@ export class SeasonTeamStandingEntryResolver extends AbstractResolver {
 
   @Query(() => [SeasonTeamStandingEntry])
   async allSeasonTeamStandingEntries(@Args() args: AllSeasonTeamStandingEntriesArgs) {
-    return this._prismaService.seasonTeamStandingEntry.findMany(this.getAllArgs(args));
+    return this._prismaService.seasonTeamStandingEntry.findMany(this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allSeasonTeamStandingEntriesMeta(@Args() args: AllSeasonTeamStandingEntriesArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.seasonTeamStandingEntry.count();
+    const count = await this._prismaService.seasonTeamStandingEntry.count(this.getAllArgs(args, true));
     return {
       count,
     };

@@ -17,6 +17,7 @@ import {
   ReferenceInput,
   AutocompleteInput,
   Edit,
+  ReferenceManyField,
 } from 'react-admin';
 
 export const EventList = (props: ResourceComponentProps) => (
@@ -68,6 +69,23 @@ export const EventShow = (props: ResourceComponentProps) => (
       <ReferenceField source="circuitId" reference="Circuit">
         <TextField source="name" />
       </ReferenceField>
+      <ReferenceManyField
+        target="eventId"
+        reference="EventSession"
+        label="Event Sessions"
+        sort={{
+          field: 'startAt',
+          order: 'asc',
+        }}
+      >
+        <Datagrid>
+          <TextField source="name" />
+          <TextField source="startAt" />
+          <TextField source="endAt" />
+          <ShowButton />
+          <EditButton />
+        </Datagrid>
+      </ReferenceManyField>
     </SimpleShowLayout>
   </Show>
 );

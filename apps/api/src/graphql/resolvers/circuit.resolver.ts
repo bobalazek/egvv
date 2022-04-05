@@ -30,12 +30,16 @@ export class CircuitResolver extends AbstractResolver {
 
   @Query(() => [Circuit])
   async allCircuits(@Args() args: AllCircuitsArgs) {
-    return this._prismaService.circuit.findMany(this.getAllArgs(args, ['slug', 'name', 'location', 'countryCode']));
+    return this._prismaService.circuit.findMany(
+      this.getAllArgs(args, false, ['slug', 'name', 'location', 'countryCode'])
+    );
   }
 
   @Query(() => ListMetadata)
   async _allCircuitsMeta(@Args() args: AllCircuitsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.circuit.count();
+    const count = await this._prismaService.circuit.count(
+      this.getAllArgs(args, true, ['slug', 'name', 'location', 'countryCode'])
+    );
     return {
       count,
     };
