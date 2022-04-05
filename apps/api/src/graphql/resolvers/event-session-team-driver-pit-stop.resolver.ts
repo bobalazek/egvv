@@ -1,7 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { AllEventSessionTeamDriverPitStopsArgs } from '../args/all-event-session-team-driver-pit-stops.args';
+import { AllEventSessionTeamDriverPitStopsArgs } from '../args/event-session-team-driver-pit-stop/all-event-session-team-driver-pit-stops.args';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionTeamDriverPitStop } from '../models/event-session-team-driver-pit-stop.model';

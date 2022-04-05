@@ -1,7 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { AllEventSessionTeamDriverLapsArgs } from '../args/all-event-session-team-driver-laps.args';
+import { AllEventSessionTeamDriverLapsArgs } from '../args/event-session-team-driver-lap/all-event-session-team-driver-laps.args';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionTeamDriverLap } from '../models/event-session-team-driver-lap.model';

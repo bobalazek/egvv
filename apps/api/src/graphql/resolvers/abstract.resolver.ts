@@ -1,4 +1,4 @@
-import { AllArgs } from '../args/all';
+import { AllArgs } from '../args/all.args';
 
 export abstract class AbstractResolver {
   getAllArgs(args: AllArgs) {
