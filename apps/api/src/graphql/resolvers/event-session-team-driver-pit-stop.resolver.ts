@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllEventSessionTeamDriverPitStopsArgs } from '../args/event-session-team-driver-pit-stop/all-event-session-team-driver-pit-stops.args';
@@ -6,6 +6,8 @@ import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionTeamDriverPitStop } from '../models/event-session-team-driver-pit-stop.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateEventSessionTeamDriverPitStopArgs } from '../args/event-session-team-driver-pit-stop/create-event-session-team-driver-pit-stop.args';
+import { UpdateEventSessionTeamDriverDriverPitStopArgs } from '../args/event-session-team-driver-pit-stop/update-event-session-team-driver-pit-stop.args';
 
 @Resolver(EventSessionTeamDriverPitStop)
 export class EventSessionTeamDriverPitStopResolver extends AbstractResolver {
@@ -39,5 +41,31 @@ export class EventSessionTeamDriverPitStopResolver extends AbstractResolver {
     return {
       count,
     };
+  }
+
+  @Mutation(() => EventSessionTeamDriverPitStop)
+  async createEventSessionTeamDriverPitStop(@Args() args: CreateEventSessionTeamDriverPitStopArgs) {
+    return this._prismaService.eventSessionTeamDriverPitStop.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => EventSessionTeamDriverPitStop)
+  async updateEventSessionTeamDriverPitStop(@Args() args: UpdateEventSessionTeamDriverDriverPitStopArgs) {
+    return this._prismaService.eventSessionTeamDriverPitStop.update({
+      where: {
+        id: args.id,
+      },
+      data: args,
+    });
+  }
+
+  @Mutation(() => EventSessionTeamDriverPitStop)
+  async deleteEventSessionTeamDriverPitStop(@Args() args: IdArgs) {
+    return this._prismaService.eventSessionTeamDriverPitStop.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 }

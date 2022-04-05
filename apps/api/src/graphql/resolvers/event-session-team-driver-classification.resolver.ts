@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllEventSessionTeamDriverClassificationsArgs } from '../args/event-session-team-driver-classification/all-event-session-team-driver-classificaitions.args';
@@ -6,6 +6,8 @@ import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionTeamDriverClassification } from '../models/event-session-team-driver-classification.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateEventSessionTeamDriverClassificationArgs } from '../args/event-session-team-driver-classification/create-event-session-team-driver-classification.args';
+import { UpdateEventSessionTeamDriverDriverClassificationArgs } from '../args/event-session-team-driver-classification/update-event-session-team-driver-classification.args';
 
 @Resolver(EventSessionTeamDriverClassification)
 export class EventSessionTeamDriverClassificationResolver extends AbstractResolver {
@@ -39,5 +41,31 @@ export class EventSessionTeamDriverClassificationResolver extends AbstractResolv
     return {
       count,
     };
+  }
+
+  @Mutation(() => EventSessionTeamDriverClassification)
+  async createEventSessionTeamDriverClassification(@Args() args: CreateEventSessionTeamDriverClassificationArgs) {
+    return this._prismaService.eventSessionTeamDriverClassification.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => EventSessionTeamDriverClassification)
+  async updateEventSessionTeamDriverClassification(@Args() args: UpdateEventSessionTeamDriverDriverClassificationArgs) {
+    return this._prismaService.eventSessionTeamDriverClassification.update({
+      where: {
+        id: args.id,
+      },
+      data: args,
+    });
+  }
+
+  @Mutation(() => EventSessionTeamDriverClassification)
+  async deleteEventSessionTeamDriverClassification(@Args() args: IdArgs) {
+    return this._prismaService.eventSessionTeamDriverClassification.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 }

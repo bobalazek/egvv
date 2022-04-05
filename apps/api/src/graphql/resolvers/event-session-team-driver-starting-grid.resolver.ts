@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllEventSessionTeamDriverStartingGridsArgs } from '../args/event-session-team-driver-starting-grid/all-event-session-team-driver-starting-grids.args';
@@ -6,6 +6,8 @@ import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionTeamDriverStartingGrid } from '../models/event-session-team-driver-starting-grid.model';
 import { AbstractResolver } from './abstract.resolver';
+import { CreateEventSessionTeamDriverStartingGridArgs } from '../args/event-session-team-driver-starting-grid/create-event-session-team-driver-starting-grid.args';
+import { UpdateEventSessionTeamDriverDriverStartingGridArgs } from '../args/event-session-team-driver-starting-grid/update-event-session-team-driver-starting-grid.args';
 
 @Resolver(EventSessionTeamDriverStartingGrid)
 export class EventSessionTeamDriverStartingGridResolver extends AbstractResolver {
@@ -39,5 +41,31 @@ export class EventSessionTeamDriverStartingGridResolver extends AbstractResolver
     return {
       count,
     };
+  }
+
+  @Mutation(() => EventSessionTeamDriverStartingGrid)
+  async createEventSessionTeamDriverStartingGrid(@Args() args: CreateEventSessionTeamDriverStartingGridArgs) {
+    return this._prismaService.eventSessionTeamDriverStartingGrid.create({
+      data: args,
+    });
+  }
+
+  @Mutation(() => EventSessionTeamDriverStartingGrid)
+  async updateEventSessionTeamDriverStartingGrid(@Args() args: UpdateEventSessionTeamDriverDriverStartingGridArgs) {
+    return this._prismaService.eventSessionTeamDriverStartingGrid.update({
+      where: {
+        id: args.id,
+      },
+      data: args,
+    });
+  }
+
+  @Mutation(() => EventSessionTeamDriverStartingGrid)
+  async deleteEventSessionTeamDriverStartingGrid(@Args() args: IdArgs) {
+    return this._prismaService.eventSessionTeamDriverStartingGrid.delete({
+      where: {
+        id: args.id,
+      },
+    });
   }
 }
