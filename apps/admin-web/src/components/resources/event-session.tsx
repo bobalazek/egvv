@@ -30,6 +30,7 @@ export const EventSessionList = (props: ResourceComponentProps) => (
   >
     <Datagrid>
       <TextField source="id" />
+      <TextField source="slug" />
       <TextField source="name" />
       <TextField source="type" />
       <DateField source="startAt" showTime={true} />
@@ -48,6 +49,7 @@ export const EventSessionShow = (props: ResourceComponentProps) => (
   <Show {...props}>
     <SimpleShowLayout>
       <TextField source="id" />
+      <TextField source="slug" />
       <TextField source="name" />
       <TextField source="type" />
       <DateField source="startAt" showTime={true} />
@@ -62,6 +64,7 @@ export const EventSessionShow = (props: ResourceComponentProps) => (
 export const EventSessionCreate = (props: ResourceComponentProps) => (
   <Create {...props}>
     <SimpleForm>
+      <TextInput source="slug" validate={required()} />
       <TextInput source="name" validate={required()} />
       <TextInput source="type" validate={required()} />
       <DateTimeInput source="startAt" validate={required()} />
@@ -77,6 +80,7 @@ export const EventSessionEdit = (props: ResourceComponentProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />
+      <TextInput source="slug" validate={required()} />
       <TextInput source="name" validate={required()} />
       <TextInput source="type" validate={required()} />
       <DateTimeInput source="startAt" validate={required()} />

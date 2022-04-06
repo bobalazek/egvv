@@ -6,6 +6,9 @@ export class UpdateEventSessionArgs {
   id: string;
 
   @Field()
+  slug: string;
+
+  @Field()
   name: string;
 
   @Field()

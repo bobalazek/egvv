@@ -144,6 +144,7 @@ CREATE TABLE "Event" (
 -- CreateTable
 CREATE TABLE "EventSession" (
     "id" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "tyreChoices" JSONB,
@@ -244,6 +245,9 @@ CREATE UNIQUE INDEX "SeasonTeamDriver_seasonTeamId_driverId_key" ON "SeasonTeamD
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Event_slug_key" ON "Event"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "EventSession_slug_key" ON "EventSession"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "EventSession_eventId_type_key" ON "EventSession"("eventId", "type");

@@ -6,6 +6,9 @@ export class EventSession {
   id: string;
 
   @Field()
+  slug: string;
+
+  @Field()
   name: string;
 
   @Field()

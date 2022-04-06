@@ -8,6 +8,7 @@ import drivers from './data/drivers';
 import events from './data/events';
 import seasonTeams from './data/season-teams';
 import seasonTeamDrivers from './data/season-team-drivers';
+import { convertToDashCase } from '../libs/shared/src';
 
 const prisma = new PrismaClient();
 
@@ -156,6 +157,7 @@ async function main() {
 
         const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
           name: eventSessionData.name,
+          slug: convertToDashCase(eventSessionData.name.replace(' - ', '-')),
           type: eventSessionData.type,
           startAt: new Date(eventSessionData.startAt),
           endAt: eventSessionData.endAt ? new Date(eventSessionData.endAt) : null,
