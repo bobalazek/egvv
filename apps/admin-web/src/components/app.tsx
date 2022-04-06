@@ -9,13 +9,8 @@ import circuit from './resources/circuit';
 import driver from './resources/driver';
 import team from './resources/team';
 import { VehicleCreate, VehicleEdit, VehicleList, VehicleShow } from './resources/vehicle';
-import { SeasonTeamCreate, SeasonTeamEdit, SeasonTeamList, SeasonTeamShow } from './resources/season-team';
-import {
-  SeasonTeamDriverCreate,
-  SeasonTeamDriverEdit,
-  SeasonTeamDriverList,
-  SeasonTeamDriverShow,
-} from './resources/season-team-driver';
+import seasonTeam from './resources/season-team';
+import seasonTeamDriver from './resources/season-team-driver';
 import {
   SeasonTeamStandingEntryCreate,
   SeasonTeamStandingEntryEdit,
@@ -28,8 +23,8 @@ import {
   SeasonTeamDriverStandingEntryList,
   SeasonTeamDriverStandingEntryShow,
 } from './resources/season-team-driver-standing-entry';
-import { EventCreate, EventEdit, EventList, EventShow } from './resources/event';
-import { EventSessionCreate, EventSessionEdit, EventSessionList, EventSessionShow } from './resources/event-session';
+import event from './resources/event';
+import eventSession from './resources/event-session';
 import {
   EventSessionTeamDriverCreate,
   EventSessionTeamDriverEdit,
@@ -95,22 +90,8 @@ export function App() {
         edit={VehicleEdit}
         options={{ label: 'Vehicles' }}
       />
-      <Resource
-        name="SeasonTeam"
-        list={SeasonTeamList}
-        show={SeasonTeamShow}
-        create={SeasonTeamCreate}
-        edit={SeasonTeamEdit}
-        options={{ label: 'Season Teams' }}
-      />
-      <Resource
-        name="SeasonTeamDriver"
-        list={SeasonTeamDriverList}
-        show={SeasonTeamDriverShow}
-        create={SeasonTeamDriverCreate}
-        edit={SeasonTeamDriverEdit}
-        options={{ label: 'Season Team Drivers' }}
-      />
+      <Resource {...seasonTeam} />
+      <Resource {...seasonTeamDriver} />
       <Resource
         name="SeasonTeamStandingEntry"
         list={SeasonTeamStandingEntryList}
@@ -127,22 +108,8 @@ export function App() {
         edit={SeasonTeamDriverStandingEntryEdit}
         options={{ label: 'Season Team Driver Standing Entries' }}
       />
-      <Resource
-        name="Event"
-        list={EventList}
-        show={EventShow}
-        create={EventCreate}
-        edit={EventEdit}
-        options={{ label: 'Events' }}
-      />
-      <Resource
-        name="EventSession"
-        list={EventSessionList}
-        show={EventSessionShow}
-        create={EventSessionCreate}
-        edit={EventSessionEdit}
-        options={{ label: 'Event Sessions' }}
-      />
+      <Resource {...event} />
+      <Resource {...eventSession} />
       <Resource
         name="EventSessionTeamDriver"
         list={EventSessionTeamDriverList}
