@@ -3,7 +3,6 @@ import {
   Datagrid,
   TextField,
   DateField,
-  ResourceComponentProps,
   Show,
   SimpleShowLayout,
   Create,
@@ -18,9 +17,13 @@ import {
   ShowButton,
   EditButton,
   DeleteButton,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const TeamList = (props: ResourceComponentProps) => (
+export const TeamList = (props: ListProps) => (
   <List
     sort={{
       field: 'name',
@@ -29,7 +32,6 @@ export const TeamList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="location" />
@@ -47,10 +49,9 @@ export const TeamList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const TeamShow = (props: ResourceComponentProps) => (
+export const TeamShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="location" />
@@ -65,7 +66,7 @@ export const TeamShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const TeamCreate = (props: ResourceComponentProps) => (
+export const TeamCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
@@ -82,7 +83,7 @@ export const TeamCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const TeamEdit = (props: ResourceComponentProps) => (
+export const TeamEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

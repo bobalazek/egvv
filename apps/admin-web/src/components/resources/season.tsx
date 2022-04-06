@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   DateField,
   ReferenceField,
   Show,
@@ -18,18 +17,21 @@ import {
   DeleteButton,
   ReferenceInput,
   AutocompleteInput,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const SeasonList = (props: ResourceComponentProps) => (
+export const SeasonList = (props: ListProps) => (
   <List
     sort={{
-      field: 'name',
-      order: 'asc',
+      field: 'startAt',
+      order: 'desc',
     }}
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="year" />
@@ -45,10 +47,9 @@ export const SeasonList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const SeasonShow = (props: ResourceComponentProps) => (
+export const SeasonShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="year" />
@@ -61,7 +62,7 @@ export const SeasonShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const SeasonCreate = (props: ResourceComponentProps) => (
+export const SeasonCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
@@ -76,7 +77,7 @@ export const SeasonCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const SeasonEdit = (props: ResourceComponentProps) => (
+export const SeasonEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

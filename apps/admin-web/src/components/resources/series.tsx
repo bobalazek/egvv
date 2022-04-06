@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   Show,
   SimpleShowLayout,
   ShowButton,
@@ -14,9 +13,14 @@ import {
   Create,
   DeleteButton,
   ReferenceManyField,
+  ShowProps,
+  ListProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
+import { SeasonList } from './season';
 
-export const SeriesList = (props: ResourceComponentProps) => (
+export const SeriesList = (props: ListProps) => (
   <List
     sort={{
       field: 'name',
@@ -25,7 +29,6 @@ export const SeriesList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="url" />
@@ -36,10 +39,9 @@ export const SeriesList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const SeriesShow = (props: ResourceComponentProps) => (
+export const SeriesShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="url" />
@@ -51,22 +53,15 @@ export const SeriesShow = (props: ResourceComponentProps) => (
           field: 'startAt',
           order: 'desc',
         }}
-        perPage={9999}
+        filter={{ seriesId: props.id }}
       >
-        <Datagrid>
-          <TextField source="name" />
-          <TextField source="year" />
-          <TextField source="startAt" />
-          <TextField source="endAt" />
-          <ShowButton />
-          <EditButton />
-        </Datagrid>
+        <SeasonList />
       </ReferenceManyField>
     </SimpleShowLayout>
   </Show>
 );
 
-export const SeriesCreate = (props: ResourceComponentProps) => (
+export const SeriesCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
@@ -76,7 +71,7 @@ export const SeriesCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const SeriesEdit = (props: ResourceComponentProps) => (
+export const SeriesEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

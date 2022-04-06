@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   DateField,
   ReferenceField,
   BooleanField,
@@ -16,14 +15,17 @@ import {
   TextInput,
   BooleanInput,
   required,
-  DateInput,
   DateTimeInput,
   ReferenceInput,
   AutocompleteInput,
   Edit,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const EventSessionTeamDriverLapList = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverLapList = (props: ListProps) => (
   <List
     sort={{
       field: 'lap',
@@ -32,7 +34,6 @@ export const EventSessionTeamDriverLapList = (props: ResourceComponentProps) => 
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="lap" />
       <BooleanField source="isDeleted" />
       <DateField source="time" />
@@ -47,10 +48,9 @@ export const EventSessionTeamDriverLapList = (props: ResourceComponentProps) => 
   </List>
 );
 
-export const EventSessionTeamDriverLapShow = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverLapShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="lap" />
       <BooleanField source="isDeleted" />
       <DateField source="time" />
@@ -62,7 +62,7 @@ export const EventSessionTeamDriverLapShow = (props: ResourceComponentProps) => 
   </Show>
 );
 
-export const EventSessionTeamDriverLapCreate = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverLapCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="lap" validate={required()} />
@@ -76,7 +76,7 @@ export const EventSessionTeamDriverLapCreate = (props: ResourceComponentProps) =
   </Create>
 );
 
-export const EventSessionTeamDriverLapEdit = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverLapEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

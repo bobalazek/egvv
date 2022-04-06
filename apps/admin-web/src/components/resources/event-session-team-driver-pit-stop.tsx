@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   ReferenceField,
   ShowButton,
   EditButton,
@@ -16,9 +15,13 @@ import {
   ReferenceInput,
   AutocompleteInput,
   Edit,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const EventSessionTeamDriverPitStopList = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverPitStopList = (props: ListProps) => (
   <List
     sort={{
       field: 'lap',
@@ -27,7 +30,6 @@ export const EventSessionTeamDriverPitStopList = (props: ResourceComponentProps)
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="lap" />
       <TextField source="timeMilliseconds" />
       <ReferenceField source="eventSessionTeamDriverId" reference="EventSessionTeamDriver">
@@ -40,10 +42,9 @@ export const EventSessionTeamDriverPitStopList = (props: ResourceComponentProps)
   </List>
 );
 
-export const EventSessionTeamDriverPitStopShow = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverPitStopShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="lap" />
       <TextField source="timeMilliseconds" />
       <ReferenceField source="eventSessionTeamDriverId" reference="EventSessionTeamDriver">
@@ -53,7 +54,7 @@ export const EventSessionTeamDriverPitStopShow = (props: ResourceComponentProps)
   </Show>
 );
 
-export const EventSessionTeamDriverPitStopCreate = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverPitStopCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="lap" validate={required()} />
@@ -65,7 +66,7 @@ export const EventSessionTeamDriverPitStopCreate = (props: ResourceComponentProp
   </Create>
 );
 
-export const EventSessionTeamDriverPitStopEdit = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverPitStopEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

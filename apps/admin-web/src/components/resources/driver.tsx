@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   ShowButton,
   EditButton,
   DeleteButton,
@@ -13,9 +12,13 @@ import {
   required,
   TextInput,
   Edit,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const DriverList = (props: ResourceComponentProps) => (
+export const DriverList = (props: ListProps) => (
   <List
     sort={{
       field: 'lastName',
@@ -24,7 +27,6 @@ export const DriverList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="firstName" />
       <TextField source="lastName" />
@@ -37,10 +39,9 @@ export const DriverList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const DriverShow = (props: ResourceComponentProps) => (
+export const DriverShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="firstName" />
       <TextField source="lastName" />
@@ -50,7 +51,7 @@ export const DriverShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const DriverCreate = (props: ResourceComponentProps) => (
+export const DriverCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
@@ -62,7 +63,7 @@ export const DriverCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const DriverEdit = (props: ResourceComponentProps) => (
+export const DriverEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

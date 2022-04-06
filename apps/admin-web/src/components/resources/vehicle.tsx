@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   ShowButton,
   EditButton,
   DeleteButton,
@@ -13,9 +12,13 @@ import {
   TextInput,
   required,
   Edit,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const VehicleList = (props: ResourceComponentProps) => (
+export const VehicleList = (props: ListProps) => (
   <List
     sort={{
       field: 'name',
@@ -24,7 +27,6 @@ export const VehicleList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="powerUnit" />
@@ -37,10 +39,9 @@ export const VehicleList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const VehicleShow = (props: ResourceComponentProps) => (
+export const VehicleShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="powerUnit" />
@@ -50,7 +51,7 @@ export const VehicleShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const VehicleCreate = (props: ResourceComponentProps) => (
+export const VehicleCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
@@ -62,7 +63,7 @@ export const VehicleCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const VehicleEdit = (props: ResourceComponentProps) => (
+export const VehicleEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

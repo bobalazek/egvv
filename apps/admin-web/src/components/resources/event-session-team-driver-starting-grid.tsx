@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   DateField,
   ReferenceField,
   ShowButton,
@@ -17,9 +16,13 @@ import {
   ReferenceInput,
   AutocompleteInput,
   required,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const EventSessionTeamDriverStartingGridList = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverStartingGridList = (props: ListProps) => (
   <List
     sort={{
       field: 'position',
@@ -28,7 +31,6 @@ export const EventSessionTeamDriverStartingGridList = (props: ResourceComponentP
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="position" />
       <DateField source="time" />
       <TextField source="note" />
@@ -42,10 +44,9 @@ export const EventSessionTeamDriverStartingGridList = (props: ResourceComponentP
   </List>
 );
 
-export const EventSessionTeamDriverStartingGridShow = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverStartingGridShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="position" />
       <DateField source="time" />
       <TextField source="note" />
@@ -56,7 +57,7 @@ export const EventSessionTeamDriverStartingGridShow = (props: ResourceComponentP
   </Show>
 );
 
-export const EventSessionTeamDriverStartingGridCreate = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverStartingGridCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="position" />
@@ -69,7 +70,7 @@ export const EventSessionTeamDriverStartingGridCreate = (props: ResourceComponen
   </Create>
 );
 
-export const EventSessionTeamDriverStartingGridEdit = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverStartingGridEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

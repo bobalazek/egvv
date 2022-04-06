@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   ReferenceField,
   DateField,
   ShowButton,
@@ -19,9 +18,13 @@ import {
   AutocompleteInput,
   Edit,
   NumberInput,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const SeasonTeamStandingEntryList = (props: ResourceComponentProps) => (
+export const SeasonTeamStandingEntryList = (props: ListProps) => (
   <List
     sort={{
       field: 'dateAt',
@@ -30,7 +33,6 @@ export const SeasonTeamStandingEntryList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="points" />
       <DateField source="dateAt" />
       <TextField source="note" />
@@ -44,10 +46,9 @@ export const SeasonTeamStandingEntryList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const SeasonTeamStandingEntryShow = (props: ResourceComponentProps) => (
+export const SeasonTeamStandingEntryShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="points" />
       <DateField source="dateAt" />
       <TextField source="note" />
@@ -61,7 +62,7 @@ export const SeasonTeamStandingEntryShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const SeasonTeamStandingEntryCreate = (props: ResourceComponentProps) => (
+export const SeasonTeamStandingEntryCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <NumberInput source="points" validate={required()} />
@@ -77,7 +78,7 @@ export const SeasonTeamStandingEntryCreate = (props: ResourceComponentProps) => 
   </Create>
 );
 
-export const SeasonTeamStandingEntryEdit = (props: ResourceComponentProps) => (
+export const SeasonTeamStandingEntryEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

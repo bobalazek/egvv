@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   DateField,
   ReferenceField,
   ShowButton,
@@ -18,9 +17,13 @@ import {
   AutocompleteInput,
   Edit,
   DateTimeInput,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const EventSessionList = (props: ResourceComponentProps) => (
+export const EventSessionList = (props: ListProps) => (
   <List
     sort={{
       field: 'name',
@@ -29,7 +32,6 @@ export const EventSessionList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="type" />
@@ -45,10 +47,9 @@ export const EventSessionList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const EventSessionShow = (props: ResourceComponentProps) => (
+export const EventSessionShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="type" />
@@ -61,7 +62,7 @@ export const EventSessionShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const EventSessionCreate = (props: ResourceComponentProps) => (
+export const EventSessionCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
@@ -76,7 +77,7 @@ export const EventSessionCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const EventSessionEdit = (props: ResourceComponentProps) => (
+export const EventSessionEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

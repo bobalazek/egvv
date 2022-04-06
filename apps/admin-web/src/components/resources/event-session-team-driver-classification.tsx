@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   DateField,
   ReferenceField,
   NumberField,
@@ -18,9 +17,13 @@ import {
   AutocompleteInput,
   Edit,
   required,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const EventSessionTeamDriverClassificationList = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverClassificationList = (props: ListProps) => (
   <List
     sort={{
       field: 'position',
@@ -29,7 +32,6 @@ export const EventSessionTeamDriverClassificationList = (props: ResourceComponen
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="status" />
       <TextField source="position" />
       <DateField source="time" />
@@ -45,10 +47,9 @@ export const EventSessionTeamDriverClassificationList = (props: ResourceComponen
   </List>
 );
 
-export const EventSessionTeamDriverClassificationShow = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverClassificationShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="status" />
       <TextField source="position" />
       <DateField source="time" />
@@ -61,7 +62,7 @@ export const EventSessionTeamDriverClassificationShow = (props: ResourceComponen
   </Show>
 );
 
-export const EventSessionTeamDriverClassificationCreate = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverClassificationCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="status" validate={required()} />
@@ -76,7 +77,7 @@ export const EventSessionTeamDriverClassificationCreate = (props: ResourceCompon
   </Create>
 );
 
-export const EventSessionTeamDriverClassificationEdit = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverClassificationEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

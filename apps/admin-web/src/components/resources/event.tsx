@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   DateField,
   ReferenceField,
   ShowButton,
@@ -18,9 +17,13 @@ import {
   AutocompleteInput,
   Edit,
   ReferenceManyField,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const EventList = (props: ResourceComponentProps) => (
+export const EventList = (props: ListProps) => (
   <List
     sort={{
       field: 'name',
@@ -29,7 +32,6 @@ export const EventList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="round" />
@@ -51,10 +53,9 @@ export const EventList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const EventShow = (props: ResourceComponentProps) => (
+export const EventShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="round" />
@@ -90,7 +91,7 @@ export const EventShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const EventCreate = (props: ResourceComponentProps) => (
+export const EventCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
@@ -111,7 +112,7 @@ export const EventCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const EventEdit = (props: ResourceComponentProps) => (
+export const EventEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

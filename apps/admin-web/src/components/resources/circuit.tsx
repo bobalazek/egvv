@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   Show,
   SimpleShowLayout,
   Create,
@@ -13,9 +12,13 @@ import {
   ShowButton,
   EditButton,
   DeleteButton,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const CircuitList = (props: ResourceComponentProps) => (
+export const CircuitList = (props: ListProps) => (
   <List
     sort={{
       field: 'name',
@@ -24,7 +27,6 @@ export const CircuitList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="location" />
@@ -39,10 +41,9 @@ export const CircuitList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const CircuitShow = (props: ResourceComponentProps) => (
+export const CircuitShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="location" />
@@ -54,7 +55,7 @@ export const CircuitShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const CircuitCreate = (props: ResourceComponentProps) => (
+export const CircuitCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
@@ -68,7 +69,7 @@ export const CircuitCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const CircuitEdit = (props: ResourceComponentProps) => (
+export const CircuitEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

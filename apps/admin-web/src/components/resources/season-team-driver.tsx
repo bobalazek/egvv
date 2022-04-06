@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   BooleanField,
   ReferenceField,
   ShowButton,
@@ -18,9 +17,13 @@ import {
   ReferenceInput,
   AutocompleteInput,
   BooleanInput,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const SeasonTeamDriverList = (props: ResourceComponentProps) => (
+export const SeasonTeamDriverList = (props: ListProps) => (
   <List
     sort={{
       field: 'code',
@@ -29,7 +32,6 @@ export const SeasonTeamDriverList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="number" />
       <TextField source="code" />
       <BooleanField source="isTemporary" />
@@ -46,10 +48,9 @@ export const SeasonTeamDriverList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const SeasonTeamDriverShow = (props: ResourceComponentProps) => (
+export const SeasonTeamDriverShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="number" />
       <TextField source="code" />
       <BooleanField source="isTemporary" />
@@ -63,7 +64,7 @@ export const SeasonTeamDriverShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const SeasonTeamDriverCreate = (props: ResourceComponentProps) => (
+export const SeasonTeamDriverCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="number" validate={required()} />
@@ -79,7 +80,7 @@ export const SeasonTeamDriverCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const SeasonTeamDriverEdit = (props: ResourceComponentProps) => (
+export const SeasonTeamDriverEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

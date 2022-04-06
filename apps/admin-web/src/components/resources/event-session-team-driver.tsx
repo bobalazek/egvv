@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ResourceComponentProps,
   ReferenceField,
   Show,
   ShowButton,
@@ -16,9 +15,13 @@ import {
   ReferenceInput,
   AutocompleteInput,
   Edit,
+  ListProps,
+  ShowProps,
+  CreateProps,
+  EditProps,
 } from 'react-admin';
 
-export const EventSessionTeamDriverList = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverList = (props: ListProps) => (
   <List
     sort={{
       field: 'code',
@@ -27,7 +30,6 @@ export const EventSessionTeamDriverList = (props: ResourceComponentProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="id" />
       <TextField source="number" />
       <TextField source="code" />
       <ReferenceField source="eventSessionId" reference="EventSession">
@@ -43,10 +45,9 @@ export const EventSessionTeamDriverList = (props: ResourceComponentProps) => (
   </List>
 );
 
-export const EventSessionTeamDriverShow = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="id" />
       <TextField source="number" />
       <TextField source="code" />
       <ReferenceField source="eventSessionId" reference="EventSession">
@@ -59,7 +60,7 @@ export const EventSessionTeamDriverShow = (props: ResourceComponentProps) => (
   </Show>
 );
 
-export const EventSessionTeamDriverCreate = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="number" validate={required()} />
@@ -74,7 +75,7 @@ export const EventSessionTeamDriverCreate = (props: ResourceComponentProps) => (
   </Create>
 );
 
-export const EventSessionTeamDriverEdit = (props: ResourceComponentProps) => (
+export const EventSessionTeamDriverEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />
