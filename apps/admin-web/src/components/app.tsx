@@ -3,9 +3,9 @@ import { Admin, DataProvider, Resource } from 'react-admin';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 
 import { HTTP_SERVER_GRAPHQL_PATH, HTTP_SERVER_PORT } from '@egvv/shared';
-import { SeriesCreate, SeriesEdit, SeriesList, SeriesShow } from './resources/series';
-import { SeasonCreate, SeasonEdit, SeasonList, SeasonShow } from './resources/season';
-import { CircuitCreate, CircuitEdit, CircuitList, CircuitShow } from './resources/circuit';
+import series from './resources/series';
+import season from './resources/season';
+import circuit from './resources/circuit';
 import { DriverCreate, DriverEdit, DriverList, DriverShow } from './resources/driver';
 import { TeamCreate, TeamEdit, TeamList, TeamShow } from './resources/team';
 import { VehicleCreate, VehicleEdit, VehicleList, VehicleShow } from './resources/vehicle';
@@ -82,30 +82,9 @@ export function App() {
 
   return (
     <Admin dataProvider={dataProvider}>
-      <Resource
-        name="Series"
-        list={SeriesList}
-        show={SeriesShow}
-        create={SeriesCreate}
-        edit={SeriesEdit}
-        options={{ label: 'Series' }}
-      />
-      <Resource
-        name="Season"
-        list={SeasonList}
-        show={SeasonShow}
-        create={SeasonCreate}
-        edit={SeasonEdit}
-        options={{ label: 'Seasons' }}
-      />
-      <Resource
-        name="Circuit"
-        list={CircuitList}
-        show={CircuitShow}
-        create={CircuitCreate}
-        edit={CircuitEdit}
-        options={{ label: 'Circuits' }}
-      />
+      <Resource {...series} />
+      <Resource {...season} />
+      <Resource {...circuit} />
       <Resource
         name="Driver"
         list={DriverList}
