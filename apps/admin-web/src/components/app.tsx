@@ -6,8 +6,8 @@ import { HTTP_SERVER_GRAPHQL_PATH, HTTP_SERVER_PORT } from '@egvv/shared';
 import series from './resources/series';
 import season from './resources/season';
 import circuit from './resources/circuit';
-import { DriverCreate, DriverEdit, DriverList, DriverShow } from './resources/driver';
-import { TeamCreate, TeamEdit, TeamList, TeamShow } from './resources/team';
+import driver from './resources/driver';
+import team from './resources/team';
 import { VehicleCreate, VehicleEdit, VehicleList, VehicleShow } from './resources/vehicle';
 import { SeasonTeamCreate, SeasonTeamEdit, SeasonTeamList, SeasonTeamShow } from './resources/season-team';
 import {
@@ -85,22 +85,8 @@ export function App() {
       <Resource {...series} />
       <Resource {...season} />
       <Resource {...circuit} />
-      <Resource
-        name="Driver"
-        list={DriverList}
-        show={DriverShow}
-        create={DriverCreate}
-        edit={DriverEdit}
-        options={{ label: 'Drivers' }}
-      />
-      <Resource
-        name="Team"
-        list={TeamList}
-        show={TeamShow}
-        create={TeamCreate}
-        edit={TeamEdit}
-        options={{ label: 'Teams' }}
-      />
+      <Resource {...driver} />
+      <Resource {...team} />
       <Resource
         name="Vehicle"
         list={VehicleList}
