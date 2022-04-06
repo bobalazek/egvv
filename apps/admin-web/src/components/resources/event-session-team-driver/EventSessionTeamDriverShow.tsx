@@ -4,7 +4,6 @@ export const EventSessionTeamDriverShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
       <TextField source="number" />
-      <TextField source="code" />
       <ReferenceField source="eventSessionId" reference="EventSession">
         <TextField source="name" />
       </ReferenceField>

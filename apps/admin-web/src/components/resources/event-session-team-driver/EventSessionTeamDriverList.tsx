@@ -12,14 +12,13 @@ import {
 export const EventSessionTeamDriverList = (props: ListProps) => (
   <List
     sort={{
-      field: 'code',
+      field: 'number',
       order: 'asc',
     }}
     {...props}
   >
     <Datagrid>
       <TextField source="number" />
-      <TextField source="code" />
       <ReferenceField source="eventSessionId" reference="EventSession">
         <TextField source="name" />
       </ReferenceField>

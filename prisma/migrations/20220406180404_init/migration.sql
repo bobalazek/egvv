@@ -158,8 +158,7 @@ CREATE TABLE "EventSession" (
 -- CreateTable
 CREATE TABLE "EventSessionTeamDriver" (
     "id" TEXT NOT NULL,
-    "number" INTEGER NOT NULL,
-    "code" TEXT NOT NULL,
+    "number" INTEGER,
     "eventSessionId" TEXT NOT NULL,
     "seasonTeamDriverId" TEXT NOT NULL,
     "vehicleId" TEXT,

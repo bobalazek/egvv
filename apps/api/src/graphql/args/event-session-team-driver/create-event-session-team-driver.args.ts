@@ -2,11 +2,8 @@ import { Field, ArgsType, Int } from '@nestjs/graphql';
 
 @ArgsType()
 export class CreateEventSessionTeamDriverArgs {
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   number: number;
-
-  @Field()
-  code: string;
 
   @Field()
   eventSessionId: string;

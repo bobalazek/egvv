@@ -5,7 +5,6 @@ export const EventSessionTeamDriverEdit = (props: EditProps) => (
     <SimpleForm>
       <TextInput source="id" disabled />
       <TextInput source="number" validate={required()} />
-      <TextInput source="code" validate={required()} />
       <ReferenceInput source="eventSessionId" reference="EventSession" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>

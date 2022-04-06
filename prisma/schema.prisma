@@ -167,8 +167,7 @@ model EventSession {
 
 model EventSessionTeamDriver {
   id                                    String                                 @id @default(uuid())
-  number                                Int
-  code                                  String
+  number                                Int? // Sometimes a driver changes their number for a session, so we can ovewrite it here
   eventSessionId                        String
   eventSession                          EventSession                           @relation(name: "EventSessionTeamDriver_EventSession", fields: [eventSessionId], references: [id])
   seasonTeamDriverId                    String

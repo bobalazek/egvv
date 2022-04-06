@@ -5,11 +5,8 @@ export class EventSessionTeamDriver {
   @Field(() => ID)
   id: string;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   number: number;
-
-  @Field()
-  code: string;
 
   @Field()
   eventSessionId: string;
