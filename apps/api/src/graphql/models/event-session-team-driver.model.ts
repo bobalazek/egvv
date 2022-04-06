@@ -13,7 +13,4 @@ export class EventSessionTeamDriver {
 
   @Field()
   seasonTeamDriverId: string;
-
-  @Field({ nullable: true })
-  vehicleId?: string;
 }

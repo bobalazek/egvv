@@ -12,7 +12,6 @@ import { SeasonResolver } from '../graphql/resolvers/season.resolver';
 import { DriverResolver } from '../graphql/resolvers/driver.resolver';
 import { CircuitResolver } from '../graphql/resolvers/circuit.resolver';
 import { TeamResolver } from '../graphql/resolvers/team.resolver';
-import { VehicleResolver } from '../graphql/resolvers/vehicle.resolver';
 import { SeasonTeamResolver } from '../graphql/resolvers/season-team.resolver';
 import { SeasonTeamDriverResolver } from '../graphql/resolvers/season-team-driver.resolver';
 import { EventResolver } from '../graphql/resolvers/event.resolver';
@@ -49,7 +48,6 @@ import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
     SeriesResolver,
     CircuitResolver,
     TeamResolver,
-    VehicleResolver,
     DriverResolver,
     SeasonResolver,
     SeasonTeamResolver,

@@ -13,7 +13,4 @@ export class UpdateEventSessionTeamDriverDriverArgs {
 
   @Field()
   seasonTeamDriverId: string;
-
-  @Field({ nullable: true })
-  vehicleId?: string;
 }

@@ -63,17 +63,6 @@ CREATE TABLE "Team" (
 );
 
 -- CreateTable
-CREATE TABLE "Vehicle" (
-    "id" TEXT NOT NULL,
-    "slug" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "modelUrl" TEXT NOT NULL,
-    "note" TEXT,
-
-    CONSTRAINT "Vehicle_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "SeasonTeam" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -83,7 +72,6 @@ CREATE TABLE "SeasonTeam" (
     "isDefunct" BOOLEAN NOT NULL DEFAULT false,
     "seasonId" TEXT NOT NULL,
     "teamId" TEXT NOT NULL,
-    "vehicleId" TEXT,
 
     CONSTRAINT "SeasonTeam_pkey" PRIMARY KEY ("id")
 );
@@ -161,7 +149,6 @@ CREATE TABLE "EventSessionTeamDriver" (
     "number" INTEGER,
     "eventSessionId" TEXT NOT NULL,
     "seasonTeamDriverId" TEXT NOT NULL,
-    "vehicleId" TEXT,
 
     CONSTRAINT "EventSessionTeamDriver_pkey" PRIMARY KEY ("id")
 );
@@ -231,12 +218,6 @@ CREATE UNIQUE INDEX "Team_slug_key" ON "Team"("slug");
 CREATE UNIQUE INDEX "Team_predecessorTeamId_key" ON "Team"("predecessorTeamId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Vehicle_slug_key" ON "Vehicle"("slug");
-
--- CreateIndex
-CREATE UNIQUE INDEX "SeasonTeam_vehicleId_key" ON "SeasonTeam"("vehicleId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "SeasonTeam_seasonId_teamId_key" ON "SeasonTeam"("seasonId", "teamId");
 
 -- CreateIndex
@@ -251,9 +232,6 @@ CREATE UNIQUE INDEX "EventSession_slug_key" ON "EventSession"("slug");
 -- CreateIndex
 CREATE UNIQUE INDEX "EventSession_eventId_type_key" ON "EventSession"("eventId", "type");
 
--- CreateIndex
-CREATE UNIQUE INDEX "EventSessionTeamDriver_vehicleId_key" ON "EventSessionTeamDriver"("vehicleId");
-
 -- AddForeignKey
 ALTER TABLE "Season" ADD CONSTRAINT "Season_seriesId_fkey" FOREIGN KEY ("seriesId") REFERENCES "Series"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -265,9 +243,6 @@ ALTER TABLE "SeasonTeam" ADD CONSTRAINT "SeasonTeam_seasonId_fkey" FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE "SeasonTeam" ADD CONSTRAINT "SeasonTeam_teamId_fkey" FOREIGN KEY ("teamId") REFERENCES "Team"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "SeasonTeam" ADD CONSTRAINT "SeasonTeam_vehicleId_fkey" FOREIGN KEY ("vehicleId") REFERENCES "Vehicle"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "SeasonTeamDriver" ADD CONSTRAINT "SeasonTeamDriver_driverId_fkey" FOREIGN KEY ("driverId") REFERENCES "Driver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -295,9 +270,6 @@ ALTER TABLE "Event" ADD CONSTRAINT "Event_circuitId_fkey" FOREIGN KEY ("circuitI
 
 -- AddForeignKey
 ALTER TABLE "EventSession" ADD CONSTRAINT "EventSession_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "EventSessionTeamDriver" ADD CONSTRAINT "EventSessionTeamDriver_vehicleId_fkey" FOREIGN KEY ("vehicleId") REFERENCES "Vehicle"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "EventSessionTeamDriver" ADD CONSTRAINT "EventSessionTeamDriver_seasonTeamDriverId_fkey" FOREIGN KEY ("seasonTeamDriverId") REFERENCES "SeasonTeamDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

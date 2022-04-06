@@ -25,7 +25,4 @@ export class UpdateSeasonTeamArgs {
 
   @Field()
   teamId: string;
-
-  @Field({ nullable: true })
-  vehicleId?: string;
 }

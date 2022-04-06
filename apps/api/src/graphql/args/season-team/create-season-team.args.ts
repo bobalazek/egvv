@@ -22,7 +22,4 @@ export class CreateSeasonTeamArgs {
 
   @Field()
   teamId: string;
-
-  @Field({ nullable: true })
-  vehicleId?: string;
 }

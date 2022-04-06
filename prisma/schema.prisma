@@ -65,16 +65,6 @@ model Team {
   seasonTeams       SeasonTeam[] @relation(name: "SeasonTeam_Team")
 }
 
-model Vehicle {
-  id                     String                  @id @default(uuid())
-  slug                   String                  @unique
-  name                   String
-  modelUrl               String
-  note                   String? // If the model has for example a specific livery
-  seasonTeam             SeasonTeam?             @relation(name: "SeasonTeam_Vehicle")
-  eventSessionTeamDriver EventSessionTeamDriver? @relation(name: "EventSessionTeamDriver_Vehicle")
-}
-
 model SeasonTeam {
   id                        String                    @id @default(uuid())
   name                      String // Full name of the team this season, like "Mercedes-AMG Petronas F1 Team", "Scuderia Ferrari", ...
@@ -86,8 +76,6 @@ model SeasonTeam {
   season                    Season                    @relation(name: "SeasonTeam_Season", fields: [seasonId], references: [id])
   teamId                    String
   team                      Team                      @relation(name: "SeasonTeam_Team", fields: [teamId], references: [id])
-  vehicleId                 String?                   @unique
-  vehicle                   Vehicle?                  @relation(name: "SeasonTeam_Vehicle", fields: [vehicleId], references: [id])
   seasonTeamDrivers         SeasonTeamDriver[]        @relation(name: "SeasonTeamDriver_SeasonTeam")
   seasonTeamStandingEntries SeasonTeamStandingEntry[] @relation(name: "SeasonTeamStandingEntry_SeasonTeam")
 
@@ -172,8 +160,6 @@ model EventSessionTeamDriver {
   eventSession                          EventSession                           @relation(name: "EventSessionTeamDriver_EventSession", fields: [eventSessionId], references: [id])
   seasonTeamDriverId                    String
   seasonTeamDriver                      SeasonTeamDriver                       @relation(name: "EventSessionTeamDriver_SeasonTeamDriver", fields: [seasonTeamDriverId], references: [id])
-  vehicleId                             String?                                @unique
-  vehicle                               Vehicle?                               @relation(name: "EventSessionTeamDriver_Vehicle", fields: [vehicleId], references: [id])
   eventSessionTeamDriverLaps            EventSessionTeamDriverLap[]            @relation(name: "EventSessionTeamDriverLap_EventSessionTeamDriver")
   eventSessionTeamDriverPitStops        EventSessionTeamDriverPitStop[]        @relation(name: "EventSessionTeamDriverPitStop_EventSessionTeamDriver")
   eventSessionTeamDriverStartingGrids   EventSessionTeamDriverStartingGrid[]   @relation(name: "EventSessionTeamDriverStartingGrid_EventSessionTeamDriver")

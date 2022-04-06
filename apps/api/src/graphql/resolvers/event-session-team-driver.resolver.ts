@@ -9,7 +9,6 @@ import { EventSessionTeamDriver } from '../models/event-session-team-driver.mode
 import { EventSession } from '../models/event-session.model';
 import { ListMetadata } from '../models/list-metadata.model';
 import { SeasonTeamDriver } from '../models/season-team-driver.model';
-import { Vehicle } from '../models/vehicle.model';
 import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(EventSessionTeamDriver)
@@ -84,19 +83,6 @@ export class EventSessionTeamDriverResolver extends AbstractResolver {
     return this._prismaService.seasonTeamDriver.findFirst({
       where: {
         id: parent.seasonTeamDriverId,
-      },
-    });
-  }
-
-  @ResolveField('vehicle', () => Vehicle, { nullable: true })
-  async vehicle(@Parent() parent: EventSessionTeamDriver) {
-    if (!parent.vehicleId) {
-      return null;
-    }
-
-    return this._prismaService.vehicle.findFirst({
-      where: {
-        id: parent.vehicleId,
       },
     });
   }

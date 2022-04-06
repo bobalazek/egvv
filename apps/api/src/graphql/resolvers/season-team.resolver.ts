@@ -9,7 +9,6 @@ import { SeasonTeamStandingEntry } from '../models/season-team-standing-entry.mo
 import { SeasonTeam } from '../models/season-team.model';
 import { Season } from '../models/season.model';
 import { Team } from '../models/team.model';
-import { Vehicle } from '../models/vehicle.model';
 import { AbstractResolver } from './abstract.resolver';
 import { CreateSeasonTeamArgs } from '../args/season-team/create-season-team.args';
 import { UpdateSeasonTeamArgs } from '../args/season-team/update-season-team.args';
@@ -100,19 +99,6 @@ export class SeasonTeamResolver extends AbstractResolver {
     return this._prismaService.team.findFirst({
       where: {
         id: parent.teamId,
-      },
-    });
-  }
-
-  @ResolveField('vehicle', () => Vehicle, { nullable: true })
-  async vehicle(@Parent() parent: SeasonTeam) {
-    if (!parent.vehicleId) {
-      return null;
-    }
-
-    return this._prismaService.vehicle.findFirst({
-      where: {
-        id: parent.vehicleId,
       },
     });
   }

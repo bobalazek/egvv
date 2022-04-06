@@ -8,7 +8,6 @@ import season from './resources/season';
 import circuit from './resources/circuit';
 import driver from './resources/driver';
 import team from './resources/team';
-import vehicle from './resources/vehicle';
 import seasonTeam from './resources/season-team';
 import seasonTeamDriver from './resources/season-team-driver';
 import seasonTeamStandingEntry from './resources/season-team-standing-entry';
@@ -47,7 +46,6 @@ export function App() {
       <Resource {...circuit} />
       <Resource {...driver} />
       <Resource {...team} />
-      <Resource {...vehicle} />
       <Resource {...seasonTeam} />
       <Resource {...seasonTeamDriver} />
       <Resource {...seasonTeamStandingEntry} />
