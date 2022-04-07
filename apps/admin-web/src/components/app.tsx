@@ -19,6 +19,7 @@ import eventSessionTeamDriverLap from './resources/event-session-team-driver-lap
 import eventSessionTeamDriverPitStop from './resources/event-session-team-driver-pit-stop';
 import eventSessionTeamDriverStartingGrid from './resources/event-session-team-driver-starting-grid';
 import eventSessionTeamDriverClassification from './resources/event-session-team-driver-classification';
+import user from './resources/user';
 
 export function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider>();
@@ -57,6 +58,7 @@ export function App() {
       <Resource {...eventSessionTeamDriverPitStop} />
       <Resource {...eventSessionTeamDriverStartingGrid} />
       <Resource {...eventSessionTeamDriverClassification} />
+      <Resource {...user} />
     </Admin>
   );
 }

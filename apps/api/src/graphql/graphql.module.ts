@@ -4,8 +4,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerModule } from '@nestjs/throttler';
 
+import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
 import { PrismaService } from '../app/services/prisma.service';
-import { GqlThrottlerGuard } from './services/gql-throttler.guard';
+import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 import { ComplexityPlugin } from '../graphql/plugins/complexity.plugin';
 import { SeriesResolver } from '../graphql/resolvers/series.resolver';
 import { SeasonResolver } from '../graphql/resolvers/season.resolver';
@@ -23,7 +24,7 @@ import { EventSessionTeamDriverStartingGridResolver } from './resolvers/event-se
 import { EventSessionTeamDriverClassificationResolver } from './resolvers/event-session-team-driver-classification.resolver';
 import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-team-standing-entry.resolver';
 import { SeasonTeamDriverStandingEntryResolver } from '../graphql/resolvers/season-team-driver-standing-entry.resolver';
-import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
+import { UserResolver } from './resolvers/user.resolver';
 
 @Module({
   imports: [
@@ -61,6 +62,7 @@ import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
     EventSessionTeamDriverPitStopResolver,
     EventSessionTeamDriverStartingGridResolver,
     EventSessionTeamDriverClassificationResolver,
+    UserResolver,
   ],
 })
 export class GraphQLModule {}

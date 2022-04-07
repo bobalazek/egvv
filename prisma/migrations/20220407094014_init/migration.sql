@@ -207,7 +207,7 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "roles" JSONB NOT NULL DEFAULT '[]',
     "isLocked" BOOLEAN NOT NULL DEFAULT false,
-    "createdAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")

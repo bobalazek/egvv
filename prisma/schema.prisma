@@ -211,6 +211,6 @@ model User {
   email     String
   roles     Json     @default("[]")
   isLocked  Boolean  @default(false)
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

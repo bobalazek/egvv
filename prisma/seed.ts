@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 
+import users from './data/users';
 import circuits from './data/circuits';
 import series from './data/series';
 import seasons from './data/seasons';
@@ -13,6 +14,19 @@ import { convertToDashCase } from '../libs/shared/src';
 const prisma = new PrismaClient();
 
 async function main() {
+  console.log('========== Users ==========');
+  for (const data of users) {
+    console.log(`Upserting "${data.username}" ...`);
+
+    await prisma.user.upsert({
+      where: {
+        username: data.username,
+      },
+      update: data,
+      create: data,
+    });
+  }
+
   console.log('========== Circuits ==========');
   for (const data of circuits) {
     console.log(`Upserting "${data.slug}" ...`);
