@@ -1,7 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 
 import { AbstractResolver } from './abstract.resolver';
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { LoginArgs } from '../args/login.args';
 import { LoginResponse } from '../models/login-response.model';
 

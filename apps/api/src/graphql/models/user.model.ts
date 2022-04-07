@@ -6,13 +6,16 @@ export class User {
   id: string;
 
   @Field()
-  email: string;
+  username: string;
 
   @Field()
-  username: string;
+  email: string;
 
   @Field(() => [String], { nullable: true })
   roles?: string[];
+
+  @Field()
+  isLocked: boolean;
 
   @Field()
   createdAt: Date;

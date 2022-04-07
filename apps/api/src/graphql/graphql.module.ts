@@ -3,9 +3,10 @@ import { GraphQLModule as NestGraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 
-import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
-import { AuthModule } from '../auth/auth.module';
+import { HTTP_SERVER_GRAPHQL_PATH, JWT_SECRET } from '@egvv/shared';
 import { PrismaService } from '../app/services/prisma.service';
 import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 import { ComplexityPlugin } from '../graphql/plugins/complexity.plugin';
@@ -27,6 +28,8 @@ import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-tea
 import { SeasonTeamDriverStandingEntryResolver } from '../graphql/resolvers/season-team-driver-standing-entry.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { AuthResolver } from './resolvers/auth.resolver';
+import { AuthService } from './services/auth.service';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -36,11 +39,15 @@ import { AuthResolver } from './resolvers/auth.resolver';
       path: HTTP_SERVER_GRAPHQL_PATH,
       context: ({ req, res }) => ({ req, res }),
     }),
+    PassportModule,
+    JwtModule.register({
+      secret: JWT_SECRET,
+      signOptions: { expiresIn: '60s' },
+    }),
     ThrottlerModule.forRoot({
       ttl: 60,
       limit: 30,
     }),
-    AuthModule,
   ],
   providers: [
     {
@@ -49,6 +56,8 @@ import { AuthResolver } from './resolvers/auth.resolver';
     },
     ComplexityPlugin,
     PrismaService,
+    AuthService,
+    JwtStrategy,
     SeriesResolver,
     CircuitResolver,
     TeamResolver,
