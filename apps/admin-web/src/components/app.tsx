@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Admin, DataProvider, Resource } from 'react-admin';
+import { Admin, DataProvider, Resource, useGetIdentity, usePermissions } from 'react-admin';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 
 import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared';
@@ -24,12 +24,16 @@ import user from './resources/user';
 
 export function App() {
   const [dataProvider, setDataProvider] = useState<DataProvider>();
+  // TODO: check local storage for token and set it in the headers
 
   useEffect(() => {
     (async () => {
       const newDataProvider = await buildGraphQLProvider({
         clientOptions: {
           uri: HTTP_SERVER_GRAPHQL_URL,
+          headers: {
+            // TODO
+          },
         },
       });
 

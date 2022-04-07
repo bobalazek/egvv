@@ -61,7 +61,7 @@ const authProvider = {
 
     const user = JSON.parse(userRaw);
 
-    return user.roles;
+    return Promise.resolve(user.roles);
   },
   getIdentity: async () => {
     const userRaw = localStorage.getItem('user');
@@ -71,7 +71,7 @@ const authProvider = {
 
     const user = JSON.parse(userRaw);
 
-    return { id: user.sub, fullName: user.username };
+    return Promise.resolve({ id: user.sub, fullName: user.username });
   },
 };
 
