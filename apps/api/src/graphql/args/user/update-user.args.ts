@@ -11,9 +11,9 @@ export class UpdateUserArgs {
   @Field()
   username: string;
 
-  @Field()
-  password: string;
+  @Field({ nullable: true })
+  password?: string;
 
-  @Field(() => [String])
-  roles: string[];
+  @Field(() => [String], { nullable: true })
+  roles?: string[];
 }

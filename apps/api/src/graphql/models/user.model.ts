@@ -11,8 +11,8 @@ export class User {
   @Field()
   username: string;
 
-  @Field(() => [String])
-  roles: string[];
+  @Field(() => [String], { nullable: true })
+  roles?: string[];
 
   @Field()
   createdAt: Date;

@@ -208,7 +208,7 @@ model User {
   id        String   @id @default(uuid())
   username  String   @unique
   password  String
-  email     String
+  email     String   @unique
   roles     Json     @default("[]")
   isLocked  Boolean  @default(false)
   createdAt DateTime @default(now())

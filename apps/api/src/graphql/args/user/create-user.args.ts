@@ -11,6 +11,6 @@ export class CreateUserArgs {
   @Field()
   password: string;
 
-  @Field(() => [String])
-  roles: string[];
+  @Field(() => [String], { nullable: true })
+  roles?: string[];
 }

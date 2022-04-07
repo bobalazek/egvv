@@ -8,6 +8,7 @@ export const UserEdit = (props: EditProps) => (
       <TextInput source="id" disabled />
       <TextInput source="username" validate={required()} />
       <TextInput source="email" validate={required()} />
+      <TextInput source="password" helperText="Only set, if you want to change the password" />
       <AutocompleteArrayInput
         source="roles"
         choices={USER_ROLES.map((role) => {

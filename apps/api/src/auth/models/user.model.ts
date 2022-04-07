@@ -11,8 +11,8 @@ export class User {
   @Field()
   email: string;
 
-  @Field(() => [String])
-  roles: string[];
+  @Field(() => [String], { nullable: true })
+  roles?: string[];
 
   @Field()
   isLocked: boolean;

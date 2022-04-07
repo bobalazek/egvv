@@ -7,6 +7,7 @@ export const UserCreate = (props: CreateProps) => (
     <SimpleForm>
       <TextInput source="username" validate={required()} />
       <TextInput source="email" validate={required()} />
+      <TextInput source="password" validate={required()} />
       <AutocompleteArrayInput
         source="roles"
         choices={USER_ROLES.map((role) => {

@@ -3,7 +3,7 @@ import { List, Datagrid, TextField, ShowButton, EditButton, DeleteButton, ListPr
 export const UserList = (props: ListProps) => (
   <List
     sort={{
-      field: 'username',
+      field: 'createdAt',
       order: 'asc',
     }}
     {...props}
