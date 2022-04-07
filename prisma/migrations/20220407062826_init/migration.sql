@@ -199,6 +199,20 @@ CREATE TABLE "EventSessionTeamDriverClassification" (
     CONSTRAINT "EventSessionTeamDriverClassification_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "roles" JSONB NOT NULL DEFAULT '[]',
+    "isLocked" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Series_slug_key" ON "Series"("slug");
 
@@ -231,6 +245,9 @@ CREATE UNIQUE INDEX "EventSession_slug_key" ON "EventSession"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "EventSession_eventId_type_key" ON "EventSession"("eventId", "type");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- AddForeignKey
 ALTER TABLE "Season" ADD CONSTRAINT "Season_seriesId_fkey" FOREIGN KEY ("seriesId") REFERENCES "Series"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
