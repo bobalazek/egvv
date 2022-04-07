@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Admin, DataProvider, Resource } from 'react-admin';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 
-import { HTTP_SERVER_GRAPHQL_PATH, HTTP_SERVER_PORT } from '@egvv/shared';
+import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared';
 import series from './resources/series';
 import season from './resources/season';
 import circuit from './resources/circuit';
@@ -28,7 +28,7 @@ export function App() {
     (async () => {
       const newDataProvider = await buildGraphQLProvider({
         clientOptions: {
-          uri: 'http://localhost:' + HTTP_SERVER_PORT + HTTP_SERVER_GRAPHQL_PATH,
+          uri: HTTP_SERVER_GRAPHQL_URL,
         },
       });
 
