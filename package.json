@@ -8,6 +8,7 @@
   },
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.5.10",
     "@nestjs/apollo": "^10.0.7",
     "@nestjs/common": "^8.4.1",
     "@nestjs/core": "^8.4.1",
@@ -25,6 +26,7 @@
     "core-js": "^3.6.5",
     "graphql": "^16.3.0",
     "graphql-query-complexity": "^0.11.0",
+    "jwt-decode": "^3.1.2",
     "next": "12.1.0",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",

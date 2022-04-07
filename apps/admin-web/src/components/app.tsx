@@ -3,6 +3,7 @@ import { Admin, DataProvider, Resource } from 'react-admin';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 
 import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared';
+import authProvider from '../providers/auth.provider';
 import series from './resources/series';
 import season from './resources/season';
 import circuit from './resources/circuit';
@@ -41,7 +42,7 @@ export function App() {
   }
 
   return (
-    <Admin dataProvider={dataProvider}>
+    <Admin dataProvider={dataProvider} authProvider={authProvider}>
       <Resource {...series} />
       <Resource {...season} />
       <Resource {...circuit} />

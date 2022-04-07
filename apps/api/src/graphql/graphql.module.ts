@@ -5,6 +5,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 import { HTTP_SERVER_GRAPHQL_PATH } from '@egvv/shared';
+import { AuthModule } from '../auth/auth.module';
 import { PrismaService } from '../app/services/prisma.service';
 import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 import { ComplexityPlugin } from '../graphql/plugins/complexity.plugin';
@@ -25,6 +26,7 @@ import { EventSessionTeamDriverClassificationResolver } from './resolvers/event-
 import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-team-standing-entry.resolver';
 import { SeasonTeamDriverStandingEntryResolver } from '../graphql/resolvers/season-team-driver-standing-entry.resolver';
 import { UserResolver } from './resolvers/user.resolver';
+import { AuthResolver } from './resolvers/auth.resolver';
 
 @Module({
   imports: [
@@ -38,6 +40,7 @@ import { UserResolver } from './resolvers/user.resolver';
       ttl: 60,
       limit: 30,
     }),
+    AuthModule,
   ],
   providers: [
     {
@@ -63,6 +66,7 @@ import { UserResolver } from './resolvers/user.resolver';
     EventSessionTeamDriverStartingGridResolver,
     EventSessionTeamDriverClassificationResolver,
     UserResolver,
+    AuthResolver,
   ],
 })
 export class GraphQLModule {}
