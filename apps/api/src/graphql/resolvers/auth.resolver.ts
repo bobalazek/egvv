@@ -7,8 +7,8 @@ import { LoginArgs } from '../args/auth/login.args';
 import { LoginResponse } from '../models/auth/login-response.model';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
-import { User } from '../models/user.model';
 import { CurrentUser } from '../decorators/current-user.decorator';
+import { JwtUserInterface } from '../auth/interfaces/jwt-user.interface';
 
 @Resolver()
 export class AuthResolver extends AbstractResolver {
@@ -34,7 +34,11 @@ export class AuthResolver extends AbstractResolver {
 
   @Query(() => LoginResponse)
   @UseGuards(GqlAuthGuard)
-  async profile(@CurrentUser() user: User) {
-    return user;
+  async profile(@CurrentUser() user: JwtUserInterface) {
+    return this._prismaService.user.findFirst({
+      where: {
+        id: user.sub,
+      },
+    });
   }
 }

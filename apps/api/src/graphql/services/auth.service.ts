@@ -3,6 +3,7 @@ import { User } from '../models/user.model';
 import { JwtService } from '@nestjs/jwt';
 
 import { PrismaService } from '../../app/services/prisma.service';
+import { JwtUserDynamicFieldsInterface } from '../auth/interfaces/jwt-user.interface';
 
 @Injectable()
 export class AuthService {
@@ -29,7 +30,7 @@ export class AuthService {
   }
 
   async login(user: User) {
-    const payload = {
+    const payload: JwtUserDynamicFieldsInterface = {
       sub: user.id,
       username: user.username,
       roles: user.roles,

@@ -10,6 +10,8 @@ import { AbstractResolver } from './abstract.resolver';
 import { CreateUserArgs } from '../args/user/create-user.args';
 import { UpdateUserArgs } from '../args/user/update-user.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import { JwtUserInterface } from '../auth/interfaces/jwt-user.interface';
 
 @Resolver(User)
 export class UserResolver extends AbstractResolver {
@@ -67,7 +69,11 @@ export class UserResolver extends AbstractResolver {
 
   @Mutation(() => User)
   @UseGuards(GqlAuthGuard)
-  async deleteUser(@Args() args: IdArgs) {
+  async deleteUser(@Args() args: IdArgs, @CurrentUser() user: JwtUserInterface) {
+    if (user.sub === args.id) {
+      throw new Error(`You can not delete yourself.`);
+    }
+
     return this._prismaService.user.delete({
       where: {
         id: args.id,
