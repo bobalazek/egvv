@@ -3,11 +3,11 @@ import { TextField, ReferenceField, Show, SimpleShowLayout, ShowProps } from 're
 export const EventSessionDriverPitStopShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
-      <TextField source="lap" />
-      <TextField source="timeMilliseconds" />
       <ReferenceField source="eventSessionDriverId" reference="EventSessionDriver">
         <TextField source="name" />
       </ReferenceField>
+      <TextField source="lap" />
+      <TextField source="timeMilliseconds" />
     </SimpleShowLayout>
   </Show>
 );

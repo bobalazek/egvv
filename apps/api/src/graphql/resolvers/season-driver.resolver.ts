@@ -81,7 +81,7 @@ export class SeasonDriverResolver extends AbstractResolver {
       },
     });
 
-    return `${parent.code} (${parent.number}) @ ${seasonTeam.shortName} for ${seasonTeam.season.name}`;
+    return `${parent.code} (${parent.number}) @ ${seasonTeam.shortName} (${seasonTeam.season.name})`;
   }
 
   @ResolveField('seasonTeam', () => SeasonTeam)

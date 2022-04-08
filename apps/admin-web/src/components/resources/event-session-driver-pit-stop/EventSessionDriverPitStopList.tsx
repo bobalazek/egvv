@@ -18,11 +18,11 @@ export const EventSessionDriverPitStopList = (props: ListProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="lap" />
-      <TextField source="timeMilliseconds" />
       <ReferenceField source="eventSessionDriverId" reference="EventSessionDriver">
         <TextField source="name" />
       </ReferenceField>
+      <TextField source="lap" />
+      <TextField source="timeMilliseconds" />
       <ShowButton />
       <EditButton />
       <DeleteButton />

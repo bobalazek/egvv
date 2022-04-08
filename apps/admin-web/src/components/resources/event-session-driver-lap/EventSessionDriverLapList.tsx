@@ -20,13 +20,13 @@ export const EventSessionDriverLapList = (props: ListProps) => (
     {...props}
   >
     <Datagrid>
+      <ReferenceField source="eventSessionDriverId" reference="EventSessionDriver">
+        <TextField source="name" />
+      </ReferenceField>
       <TextField source="lap" />
       <BooleanField source="isDeleted" />
       <DateField source="time" />
       <TextField source="position" />
-      <ReferenceField source="eventSessionDriverId" reference="EventSessionDriver">
-        <TextField source="name" />
-      </ReferenceField>
       <ShowButton />
       <EditButton />
       <DeleteButton />

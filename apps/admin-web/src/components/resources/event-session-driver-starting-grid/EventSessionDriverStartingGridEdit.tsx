@@ -4,12 +4,12 @@ export const EventSessionDriverStartingGridEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />
-      <TextInput source="position" />
-      <TextInput source="time" />
-      <TextInput source="note" />
       <ReferenceInput source="eventSessionDriverId" reference="EventSessionDriver" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
+      <TextInput source="position" />
+      <TextInput source="time" />
+      <TextInput source="note" />
     </SimpleForm>
   </Edit>
 );

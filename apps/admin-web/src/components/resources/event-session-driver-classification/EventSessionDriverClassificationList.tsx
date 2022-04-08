@@ -20,14 +20,14 @@ export const EventSessionDriverClassificationList = (props: ListProps) => (
     {...props}
   >
     <Datagrid>
+      <ReferenceField source="eventSessionDriverId" reference="EventSessionDriver">
+        <TextField source="name" />
+      </ReferenceField>
       <TextField source="status" />
       <TextField source="position" />
       <DateField source="time" />
       <NumberField source="points" />
       <TextField source="note" />
-      <ReferenceField source="eventSessionDriverId" reference="EventSessionDriver">
-        <TextField source="name" />
-      </ReferenceField>
       <ShowButton />
       <EditButton />
       <DeleteButton />

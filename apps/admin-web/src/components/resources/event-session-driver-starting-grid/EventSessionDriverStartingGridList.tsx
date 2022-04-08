@@ -19,12 +19,12 @@ export const EventSessionDriverStartingGridList = (props: ListProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="position" />
-      <DateField source="time" />
-      <TextField source="note" />
       <ReferenceField source="eventSessionDriverId" reference="EventSessionDriver">
         <TextField source="name" />
       </ReferenceField>
+      <TextField source="position" />
+      <DateField source="time" />
+      <TextField source="note" />
       <ShowButton />
       <EditButton />
       <DeleteButton />
