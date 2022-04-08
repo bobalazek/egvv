@@ -5,7 +5,7 @@ import { SeasonTeamDriverStandingEntryEdit } from './SeasonTeamDriverStandingEnt
 
 export default {
   name: 'SeasonTeamDriverStandingEntry',
-  options: { label: 'SeasonTeam Driver Standing Entries' },
+  options: { label: 'Season Team Driver Standing Entries' },
   list: SeasonTeamDriverStandingEntryList,
   show: SeasonTeamDriverStandingEntryShow,
   create: SeasonTeamDriverStandingEntryCreate,
