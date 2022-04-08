@@ -29,24 +29,24 @@ const authProvider = {
     const decodedToken = decodeJwt(token);
 
     localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(decodedToken));
+    localStorage.setItem('tokenData', JSON.stringify(decodedToken));
 
     return Promise.resolve();
   },
   logout: async () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('tokenData');
 
     return Promise.resolve();
   },
   checkAuth: async () => {
     return localStorage.getItem('token') ? Promise.resolve() : Promise.reject();
   },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   checkError: async (error: any) => {
-    const status = error.status;
-    if (status === 401 || status === 403) {
+    if (error.status === 401 || error.status === 403 || error.message === 'Unauthorized') {
       localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      localStorage.removeItem('tokenData');
 
       return Promise.reject();
     }
@@ -54,24 +54,24 @@ const authProvider = {
     return Promise.resolve();
   },
   getPermissions: async () => {
-    const userRaw = localStorage.getItem('user');
-    if (!userRaw) {
+    const tokenData = localStorage.getItem('tokenData');
+    if (!tokenData) {
       return Promise.reject();
     }
 
-    const user = JSON.parse(userRaw);
+    const tokenDataParsed = JSON.parse(tokenData);
 
-    return Promise.resolve(user.roles);
+    return tokenDataParsed.roles;
   },
   getIdentity: async () => {
-    const userRaw = localStorage.getItem('user');
-    if (!userRaw) {
-      return { id: '' };
+    const tokenData = localStorage.getItem('tokenData');
+    if (!tokenData) {
+      return { id: '', fullName: '' };
     }
 
-    const user = JSON.parse(userRaw);
+    const tokenDataParsed = JSON.parse(tokenData);
 
-    return Promise.resolve({ id: user.sub, fullName: user.username });
+    return { id: tokenDataParsed.sub, fullName: tokenDataParsed.username };
   },
 };
 

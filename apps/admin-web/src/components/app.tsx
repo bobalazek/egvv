@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Admin, DataProvider, Resource, useGetIdentity, usePermissions } from 'react-admin';
-import buildGraphQLProvider from 'ra-data-graphql-simple';
+import { Admin, DataProvider, Resource } from 'react-admin';
 
-import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared';
 import authProvider from '../providers/auth.provider';
+import dataProvider from '../providers/data.provider';
 import series from './resources/series';
 import season from './resources/season';
 import circuit from './resources/circuit';
@@ -23,30 +22,20 @@ import eventSessionTeamDriverClassification from './resources/event-session-team
 import user from './resources/user';
 
 export function App() {
-  const [dataProvider, setDataProvider] = useState<DataProvider>();
-  // TODO: check local storage for token and set it in the headers
+  const [customDataProvider, setCustomDataProvider] = useState<DataProvider>();
 
   useEffect(() => {
-    (async () => {
-      const newDataProvider = await buildGraphQLProvider({
-        clientOptions: {
-          uri: HTTP_SERVER_GRAPHQL_URL,
-          headers: {
-            // TODO
-          },
-        },
-      });
-
-      setDataProvider(newDataProvider);
-    })();
+    dataProvider.then((newDataProvider: DataProvider) => {
+      setCustomDataProvider(newDataProvider);
+    });
   }, []);
 
-  if (!dataProvider) {
+  if (!customDataProvider) {
     return <>Loading ...</>;
   }
 
   return (
-    <Admin dataProvider={dataProvider} authProvider={authProvider}>
+    <Admin dataProvider={customDataProvider} authProvider={authProvider}>
       <Resource {...series} />
       <Resource {...season} />
       <Resource {...circuit} />
