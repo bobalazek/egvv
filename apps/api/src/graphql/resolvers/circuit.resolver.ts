@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
@@ -8,6 +9,7 @@ import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
 import { CreateCircuitArgs } from '../args/circuit/create-circuit.args';
 import { UpdateCircuitArgs } from '../args/circuit/update-circuit.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(Circuit)
 export class CircuitResolver extends AbstractResolver {
@@ -46,6 +48,7 @@ export class CircuitResolver extends AbstractResolver {
   }
 
   @Mutation(() => Circuit)
+  @UseGuards(GqlAuthGuard)
   async createCircuit(@Args() args: CreateCircuitArgs) {
     return this._prismaService.circuit.create({
       data: args,
@@ -53,6 +56,7 @@ export class CircuitResolver extends AbstractResolver {
   }
 
   @Mutation(() => Circuit)
+  @UseGuards(GqlAuthGuard)
   async updateCircuit(@Args() args: UpdateCircuitArgs) {
     return this._prismaService.circuit.update({
       where: {
@@ -63,6 +67,7 @@ export class CircuitResolver extends AbstractResolver {
   }
 
   @Mutation(() => Circuit)
+  @UseGuards(GqlAuthGuard)
   async deleteCircuit(@Args() args: IdArgs) {
     return this._prismaService.circuit.delete({
       where: {

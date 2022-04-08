@@ -1,4 +1,6 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
+import { UpdateSeasonTeamArgs } from '../args/season-team/update-season-team.args';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllSeasonTeamsArgs } from '../args/season-team/all-season-teams.args';
@@ -11,7 +13,7 @@ import { Season } from '../models/season.model';
 import { Team } from '../models/team.model';
 import { AbstractResolver } from './abstract.resolver';
 import { CreateSeasonTeamArgs } from '../args/season-team/create-season-team.args';
-import { UpdateSeasonTeamArgs } from '../args/season-team/update-season-team.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(SeasonTeam)
 export class SeasonTeamResolver extends AbstractResolver {
@@ -51,6 +53,7 @@ export class SeasonTeamResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonTeam)
+  @UseGuards(GqlAuthGuard)
   async createSeasonTeam(@Args() args: CreateSeasonTeamArgs) {
     return this._prismaService.seasonTeam.create({
       data: args,
@@ -58,6 +61,7 @@ export class SeasonTeamResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonTeam)
+  @UseGuards(GqlAuthGuard)
   async updateSeasonTeam(@Args() args: UpdateSeasonTeamArgs) {
     return this._prismaService.seasonTeam.update({
       where: {
@@ -68,6 +72,7 @@ export class SeasonTeamResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonTeam)
+  @UseGuards(GqlAuthGuard)
   async deleteSeasonTeam(@Args() args: IdArgs) {
     return this._prismaService.seasonTeam.delete({
       where: {

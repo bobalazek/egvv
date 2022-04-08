@@ -1,4 +1,5 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllSeasonDriversArgs } from '../args/season-drivers/all-season-drivers.args';
@@ -11,6 +12,7 @@ import { SeasonTeam } from '../models/season-team.model';
 import { AbstractResolver } from './abstract.resolver';
 import { CreateSeasonDriverArgs } from '../args/season-drivers/create-season-driver.args';
 import { UpdateSeasonDriverArgs } from '../args/season-drivers/update-season-driver.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(SeasonDriver)
 export class SeasonDriverResolver extends AbstractResolver {
@@ -45,6 +47,7 @@ export class SeasonDriverResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonDriver)
+  @UseGuards(GqlAuthGuard)
   async createEvent(@Args() args: CreateSeasonDriverArgs) {
     return this._prismaService.seasonDriver.create({
       data: args,
@@ -52,6 +55,7 @@ export class SeasonDriverResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonDriver)
+  @UseGuards(GqlAuthGuard)
   async updateSeasonDriver(@Args() args: UpdateSeasonDriverArgs) {
     return this._prismaService.seasonDriver.update({
       where: {
@@ -62,6 +66,7 @@ export class SeasonDriverResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonDriver)
+  @UseGuards(GqlAuthGuard)
   async deleteSeasonDriver(@Args() args: IdArgs) {
     return this._prismaService.seasonDriver.delete({
       where: {

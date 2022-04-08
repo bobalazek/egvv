@@ -1,4 +1,5 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { SeasonTeamStandingEntry } from '../models/season-team-standing-entry.model';
@@ -10,6 +11,7 @@ import { AllSeasonTeamStandingEntriesArgs } from '../args/season-team-standing-e
 import { ListMetadata } from '../models/list-metadata.model';
 import { CreateSeasonTeamStandingEntryArgs } from '../args/season-team-standing-entry/create-season-team-standing-entry.args';
 import { UpdateSeasonTeamStandingEntryArgs } from '../args/season-team-standing-entry/update-season-team-standing-entry.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(SeasonTeamStandingEntry)
 export class SeasonTeamStandingEntryResolver extends AbstractResolver {
@@ -44,6 +46,7 @@ export class SeasonTeamStandingEntryResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonTeamStandingEntry)
+  @UseGuards(GqlAuthGuard)
   async createSeasonTeamStandingEntry(@Args() args: CreateSeasonTeamStandingEntryArgs) {
     return this._prismaService.seasonTeamStandingEntry.create({
       data: args,
@@ -51,6 +54,7 @@ export class SeasonTeamStandingEntryResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonTeamStandingEntry)
+  @UseGuards(GqlAuthGuard)
   async updateSeasonTeamStandingEntry(@Args() args: UpdateSeasonTeamStandingEntryArgs) {
     return this._prismaService.seasonTeamStandingEntry.update({
       where: {
@@ -61,6 +65,7 @@ export class SeasonTeamStandingEntryResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonTeamStandingEntry)
+  @UseGuards(GqlAuthGuard)
   async deleteSeasonTeamStandingEntry(@Args() args: IdArgs) {
     return this._prismaService.seasonTeamStandingEntry.delete({
       where: {

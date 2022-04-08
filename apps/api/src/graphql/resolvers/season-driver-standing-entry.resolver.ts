@@ -1,4 +1,5 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { SeasonDriverStandingEntry } from '../models/season-driver-standing-entry.model';
@@ -10,6 +11,7 @@ import { AllSeasonDriverStandingEntriesArgs } from '../args/season-driver-standi
 import { ListMetadata } from '../models/list-metadata.model';
 import { CreateSeasonDriverStandingEntryArgs } from '../args/season-driver-standing-entry/create-season-driver-standing-entry.args';
 import { UpdateSeasonDriverStandingEntryArgs } from '../args/season-driver-standing-entry/update-season-driver-standing-entry.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(SeasonDriverStandingEntry)
 export class SeasonDriverStandingEntryResolver extends AbstractResolver {
@@ -44,6 +46,7 @@ export class SeasonDriverStandingEntryResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonDriverStandingEntry)
+  @UseGuards(GqlAuthGuard)
   async createSeasonDriverStandingEntry(@Args() args: CreateSeasonDriverStandingEntryArgs) {
     return this._prismaService.seasonDriverStandingEntry.create({
       data: args,
@@ -51,6 +54,7 @@ export class SeasonDriverStandingEntryResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonDriverStandingEntry)
+  @UseGuards(GqlAuthGuard)
   async updateSeasonDriverStandingEntry(@Args() args: UpdateSeasonDriverStandingEntryArgs) {
     return this._prismaService.seasonDriverStandingEntry.update({
       where: {
@@ -61,6 +65,7 @@ export class SeasonDriverStandingEntryResolver extends AbstractResolver {
   }
 
   @Mutation(() => SeasonDriverStandingEntry)
+  @UseGuards(GqlAuthGuard)
   async deleteSeasonDriverStandingEntry(@Args() args: IdArgs) {
     return this._prismaService.seasonDriverStandingEntry.delete({
       where: {

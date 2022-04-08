@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, ResolveField, Parent, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
@@ -10,6 +11,7 @@ import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
 import { CreateSeasonArgs } from '../args/season/create-season.args';
 import { UpdateSeasonArgs } from '../args/season/update-season.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(Season)
 export class SeasonResolver extends AbstractResolver {
@@ -44,6 +46,7 @@ export class SeasonResolver extends AbstractResolver {
   }
 
   @Mutation(() => Season)
+  @UseGuards(GqlAuthGuard)
   async createSeason(@Args() args: CreateSeasonArgs) {
     return this._prismaService.season.create({
       data: args,
@@ -51,6 +54,7 @@ export class SeasonResolver extends AbstractResolver {
   }
 
   @Mutation(() => Season)
+  @UseGuards(GqlAuthGuard)
   async updateSeason(@Args() args: UpdateSeasonArgs) {
     return this._prismaService.season.update({
       where: {
@@ -61,6 +65,7 @@ export class SeasonResolver extends AbstractResolver {
   }
 
   @Mutation(() => Season)
+  @UseGuards(GqlAuthGuard)
   async deleteSeason(@Args() args: IdArgs) {
     return this._prismaService.season.delete({
       where: {

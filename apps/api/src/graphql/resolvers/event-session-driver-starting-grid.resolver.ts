@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllEventSessionDriverStartingGridsArgs } from '../args/event-session-driver-starting-grid/all-event-session-driver-starting-grids.args';
@@ -8,6 +9,7 @@ import { EventSessionDriverStartingGrid } from '../models/event-session-driver-s
 import { AbstractResolver } from './abstract.resolver';
 import { CreateEventSessionDriverStartingGridArgs } from '../args/event-session-driver-starting-grid/create-event-session-driver-starting-grid.args';
 import { UpdateEventSessionDriverDriverStartingGridArgs } from '../args/event-session-driver-starting-grid/update-event-session-driver-starting-grid.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(EventSessionDriverStartingGrid)
 export class EventSessionDriverStartingGridResolver extends AbstractResolver {
@@ -44,6 +46,7 @@ export class EventSessionDriverStartingGridResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverStartingGrid)
+  @UseGuards(GqlAuthGuard)
   async createEventSessionDriverStartingGrid(@Args() args: CreateEventSessionDriverStartingGridArgs) {
     return this._prismaService.eventSessionDriverStartingGrid.create({
       data: args,
@@ -51,6 +54,7 @@ export class EventSessionDriverStartingGridResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverStartingGrid)
+  @UseGuards(GqlAuthGuard)
   async updateEventSessionDriverStartingGrid(@Args() args: UpdateEventSessionDriverDriverStartingGridArgs) {
     return this._prismaService.eventSessionDriverStartingGrid.update({
       where: {
@@ -61,6 +65,7 @@ export class EventSessionDriverStartingGridResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverStartingGrid)
+  @UseGuards(GqlAuthGuard)
   async deleteEventSessionDriverStartingGrid(@Args() args: IdArgs) {
     return this._prismaService.eventSessionDriverStartingGrid.delete({
       where: {

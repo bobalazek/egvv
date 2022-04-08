@@ -1,4 +1,4 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { AbstractResolver } from './abstract.resolver';
 import { PrismaService } from '../../app/services/prisma.service';
@@ -22,7 +22,7 @@ export class AuthResolver extends AbstractResolver {
     this._authService = authService;
   }
 
-  @Query(() => LoginResponse)
+  @Mutation(() => LoginResponse)
   async login(@Args() args: LoginArgs) {
     const user = await this._authService.validateUser(args.username, args.password);
     if (!user) {

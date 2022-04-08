@@ -10,9 +10,9 @@ const authProvider = {
       cache: new InMemoryCache(),
     });
 
-    const response = await client.query({
-      query: gql`
-        query doLogin($username: String!, $password: String!) {
+    const response = await client.mutate({
+      mutation: gql`
+        mutation doLogin($username: String!, $password: String!) {
           login(username: $username, password: $password) {
             token
           }
@@ -21,8 +21,8 @@ const authProvider = {
       variables: data,
     });
 
-    if (response.errors?.length || response.error) {
-      throw new Error(response.errors?.join(', ') || response.error?.message);
+    if (response.errors?.length) {
+      throw new Error(response.errors?.join(', '));
     }
 
     const { token } = response.data.login;

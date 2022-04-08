@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllEventSessionDriverPitStopsArgs } from '../args/event-session-driver-pit-stop/all-event-session-driver-pit-stops.args';
@@ -8,6 +9,7 @@ import { EventSessionDriverPitStop } from '../models/event-session-driver-pit-st
 import { AbstractResolver } from './abstract.resolver';
 import { CreateEventSessionDriverPitStopArgs } from '../args/event-session-driver-pit-stop/create-event-session-driver-pit-stop.args';
 import { UpdateEventSessionDriverDriverPitStopArgs } from '../args/event-session-driver-pit-stop/update-event-session-driver-pit-stop.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(EventSessionDriverPitStop)
 export class EventSessionDriverPitStopResolver extends AbstractResolver {
@@ -42,6 +44,7 @@ export class EventSessionDriverPitStopResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverPitStop)
+  @UseGuards(GqlAuthGuard)
   async createEventSessionDriverPitStop(@Args() args: CreateEventSessionDriverPitStopArgs) {
     return this._prismaService.eventSessionDriverPitStop.create({
       data: args,
@@ -49,6 +52,7 @@ export class EventSessionDriverPitStopResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverPitStop)
+  @UseGuards(GqlAuthGuard)
   async updateEventSessionDriverPitStop(@Args() args: UpdateEventSessionDriverDriverPitStopArgs) {
     return this._prismaService.eventSessionDriverPitStop.update({
       where: {
@@ -59,6 +63,7 @@ export class EventSessionDriverPitStopResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverPitStop)
+  @UseGuards(GqlAuthGuard)
   async deleteEventSessionDriverPitStop(@Args() args: IdArgs) {
     return this._prismaService.eventSessionDriverPitStop.delete({
       where: {

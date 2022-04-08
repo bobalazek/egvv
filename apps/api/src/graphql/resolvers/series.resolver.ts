@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, ResolveField, Parent, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { Season } from '../models/season.model';
@@ -9,6 +10,7 @@ import { IdArgs } from '../args/id.args';
 import { AllSeriesArgs } from '../args/series/all-series.args';
 import { CreateSeriesArgs } from '../args/series/create-series.args';
 import { UpdateSeriesArgs } from '../args/series/update-series.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(Series)
 export class SeriesResolver extends AbstractResolver {
@@ -43,6 +45,7 @@ export class SeriesResolver extends AbstractResolver {
   }
 
   @Mutation(() => Series)
+  @UseGuards(GqlAuthGuard)
   async createSeries(@Args() args: CreateSeriesArgs) {
     return this._prismaService.series.create({
       data: args,
@@ -50,6 +53,7 @@ export class SeriesResolver extends AbstractResolver {
   }
 
   @Mutation(() => Series)
+  @UseGuards(GqlAuthGuard)
   async updateSeries(@Args() args: UpdateSeriesArgs) {
     return this._prismaService.series.update({
       where: {
@@ -60,6 +64,7 @@ export class SeriesResolver extends AbstractResolver {
   }
 
   @Mutation(() => Series)
+  @UseGuards(GqlAuthGuard)
   async deleteSeries(@Args() args: IdArgs) {
     return this._prismaService.series.delete({
       where: {

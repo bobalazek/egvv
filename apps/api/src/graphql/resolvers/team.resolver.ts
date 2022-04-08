@@ -1,4 +1,5 @@
 import { Resolver, Query, Parent, ResolveField, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
@@ -9,6 +10,7 @@ import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
 import { CreateTeamArgs } from '../args/team/create-team.args';
 import { UpdateTeamArgs } from '../args/team/update-team.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(Team)
 export class TeamResolver extends AbstractResolver {
@@ -45,6 +47,7 @@ export class TeamResolver extends AbstractResolver {
   }
 
   @Mutation(() => Team)
+  @UseGuards(GqlAuthGuard)
   async createTeam(@Args() args: CreateTeamArgs) {
     return this._prismaService.team.create({
       data: args,
@@ -52,6 +55,7 @@ export class TeamResolver extends AbstractResolver {
   }
 
   @Mutation(() => Team)
+  @UseGuards(GqlAuthGuard)
   async updateTeam(@Args() args: UpdateTeamArgs) {
     return this._prismaService.team.update({
       where: {
@@ -62,6 +66,7 @@ export class TeamResolver extends AbstractResolver {
   }
 
   @Mutation(() => Team)
+  @UseGuards(GqlAuthGuard)
   async deleteTeam(@Args() args: IdArgs) {
     return this._prismaService.team.delete({
       where: {

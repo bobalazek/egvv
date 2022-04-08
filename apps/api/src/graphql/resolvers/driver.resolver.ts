@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, Parent, ResolveField, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
@@ -9,6 +10,7 @@ import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
 import { CreateDriverArgs } from '../args/driver/create-driver.args';
 import { UpdateDriverArgs } from '../args/driver/update-driver.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(Driver)
 export class DriverResolver extends AbstractResolver {
@@ -47,6 +49,7 @@ export class DriverResolver extends AbstractResolver {
   }
 
   @Mutation(() => Driver)
+  @UseGuards(GqlAuthGuard)
   async createDriver(@Args() args: CreateDriverArgs) {
     return this._prismaService.driver.create({
       data: args,
@@ -54,6 +57,7 @@ export class DriverResolver extends AbstractResolver {
   }
 
   @Mutation(() => Driver)
+  @UseGuards(GqlAuthGuard)
   async updateDriver(@Args() args: UpdateDriverArgs) {
     return this._prismaService.driver.update({
       where: {
@@ -64,6 +68,7 @@ export class DriverResolver extends AbstractResolver {
   }
 
   @Mutation(() => Driver)
+  @UseGuards(GqlAuthGuard)
   async deleteDriver(@Args() args: IdArgs) {
     return this._prismaService.driver.delete({
       where: {

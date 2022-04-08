@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllEventSessionDriverClassificationsArgs } from '../args/event-session-driver-classification/all-event-session-driver-classificaitions.args';
@@ -8,6 +9,7 @@ import { EventSessionDriverClassification } from '../models/event-session-driver
 import { AbstractResolver } from './abstract.resolver';
 import { CreateEventSessionDriverClassificationArgs } from '../args/event-session-driver-classification/create-event-session-driver-classification.args';
 import { UpdateEventSessionDriverDriverClassificationArgs } from '../args/event-session-driver-classification/update-event-session-driver-classification.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(EventSessionDriverClassification)
 export class EventSessionDriverClassificationResolver extends AbstractResolver {
@@ -44,6 +46,7 @@ export class EventSessionDriverClassificationResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverClassification)
+  @UseGuards(GqlAuthGuard)
   async createEventSessionDriverClassification(@Args() args: CreateEventSessionDriverClassificationArgs) {
     return this._prismaService.eventSessionDriverClassification.create({
       data: args,
@@ -51,6 +54,7 @@ export class EventSessionDriverClassificationResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverClassification)
+  @UseGuards(GqlAuthGuard)
   async updateEventSessionDriverClassification(@Args() args: UpdateEventSessionDriverDriverClassificationArgs) {
     return this._prismaService.eventSessionDriverClassification.update({
       where: {
@@ -61,6 +65,7 @@ export class EventSessionDriverClassificationResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverClassification)
+  @UseGuards(GqlAuthGuard)
   async deleteEventSessionDriverClassification(@Args() args: IdArgs) {
     return this._prismaService.eventSessionDriverClassification.delete({
       where: {

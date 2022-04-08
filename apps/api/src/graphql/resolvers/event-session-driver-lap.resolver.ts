@@ -1,4 +1,5 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { UseGuards } from '@nestjs/common';
 
 import { PrismaService } from '../../app/services/prisma.service';
 import { AllEventSessionDriverLapsArgs } from '../args/event-session-driver-lap/all-event-session-driver-laps.args';
@@ -8,6 +9,7 @@ import { EventSessionDriverLap } from '../models/event-session-driver-lap.model'
 import { AbstractResolver } from './abstract.resolver';
 import { CreateEventSessionDriverLapArgs } from '../args/event-session-driver-lap/create-event-session-driver-lap.args';
 import { UpdateEventSessionDriverDriverLapArgs } from '../args/event-session-driver-lap/update-event-session-driver-lap.args';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(EventSessionDriverLap)
 export class EventSessionDriverLapResolver extends AbstractResolver {
@@ -42,6 +44,7 @@ export class EventSessionDriverLapResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverLap)
+  @UseGuards(GqlAuthGuard)
   async createEventSessionDriverLap(@Args() args: CreateEventSessionDriverLapArgs) {
     return this._prismaService.eventSessionDriverLap.create({
       data: args,
@@ -49,6 +52,7 @@ export class EventSessionDriverLapResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverLap)
+  @UseGuards(GqlAuthGuard)
   async updateEventSessionDriverLap(@Args() args: UpdateEventSessionDriverDriverLapArgs) {
     return this._prismaService.eventSessionDriverLap.update({
       where: {
@@ -59,6 +63,7 @@ export class EventSessionDriverLapResolver extends AbstractResolver {
   }
 
   @Mutation(() => EventSessionDriverLap)
+  @UseGuards(GqlAuthGuard)
   async deleteEventSessionDriverLap(@Args() args: IdArgs) {
     return this._prismaService.eventSessionDriverLap.delete({
       where: {
