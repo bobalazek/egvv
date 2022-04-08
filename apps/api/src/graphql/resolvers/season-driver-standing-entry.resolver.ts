@@ -6,10 +6,10 @@ import { EventSession } from '../models/event-session.model';
 import { SeasonTeam } from '../models/season-team.model';
 import { AbstractResolver } from './abstract.resolver';
 import { IdArgs } from '../args/id.args';
-import { AllSeasonDriverStandingEntriesArgs } from '../args/season-team-driver-standing-entry/all-season-team-driver-standing-entries.args';
+import { AllSeasonDriverStandingEntriesArgs } from '../args/season-driver-standing-entry/all-season-driver-standing-entries.args';
 import { ListMetadata } from '../models/list-metadata.model';
-import { CreateSeasonDriverStandingEntryArgs } from '../args/season-team-driver-standing-entry/create-season-team-driver-standing-entry.args';
-import { UpdateSeasonDriverStandingEntryArgs } from '../args/season-team-driver-standing-entry/update-season-team-driver-standing-entry.args';
+import { CreateSeasonDriverStandingEntryArgs } from '../args/season-driver-standing-entry/create-season-driver-standing-entry.args';
+import { UpdateSeasonDriverStandingEntryArgs } from '../args/season-driver-standing-entry/update-season-driver-standing-entry.args';
 
 @Resolver(SeasonDriverStandingEntry)
 export class SeasonDriverStandingEntryResolver extends AbstractResolver {

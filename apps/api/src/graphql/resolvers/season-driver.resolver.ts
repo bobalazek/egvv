@@ -1,7 +1,7 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 
 import { PrismaService } from '../../app/services/prisma.service';
-import { AllSeasonDriversArgs } from '../args/season-team-drivers/all-season-team-drivers.args';
+import { AllSeasonDriversArgs } from '../args/season-drivers/all-season-drivers.args';
 import { IdArgs } from '../args/id.args';
 import { Driver } from '../models/driver.model';
 import { ListMetadata } from '../models/list-metadata.model';
@@ -9,8 +9,8 @@ import { SeasonDriverStandingEntry } from '../models/season-driver-standing-entr
 import { SeasonDriver } from '../models/season-driver.model';
 import { SeasonTeam } from '../models/season-team.model';
 import { AbstractResolver } from './abstract.resolver';
-import { CreateSeasonDriverArgs } from '../args/season-team-drivers/create-season-team-driver.args';
-import { UpdateSeasonDriverArgs } from '../args/season-team-drivers/update-season-team-driver.args';
+import { CreateSeasonDriverArgs } from '../args/season-drivers/create-season-driver.args';
+import { UpdateSeasonDriverArgs } from '../args/season-drivers/update-season-driver.args';
 
 @Resolver(SeasonDriver)
 export class SeasonDriverResolver extends AbstractResolver {
