@@ -12,7 +12,7 @@ export const SeriesShowAddSeasonButton = (data: any) => (
 export const SeriesShow = (props: ShowProps) => (
   <Show title={<SeriesShowTitle />} {...props}>
     <TabbedShowLayout>
-      <Tab label="Summary">
+      <Tab label="General">
         <TextField source="slug" />
         <TextField source="name" />
         <TextField source="url" />

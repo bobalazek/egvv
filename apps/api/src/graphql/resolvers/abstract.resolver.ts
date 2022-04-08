@@ -2,6 +2,8 @@
 
 import { AllArgs } from '../args/all.args';
 
+type KeyValue = { [key: string]: any };
+
 export abstract class AbstractResolver {
   getAllArgs<T extends AllArgs>(
     args: T,
@@ -19,7 +21,7 @@ export abstract class AbstractResolver {
         : undefined;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const where: { [key: string]: any } = {};
+    const where: KeyValue = {};
     if (args.filter?.ids) {
       where['id'] = { in: args.filter.ids };
     } else if (args.filter?.id) {
@@ -27,12 +29,18 @@ export abstract class AbstractResolver {
     }
     if (queryFields.length && args.filter?.q) {
       const query = args.filter?.q;
+      const orWhere: KeyValue[] = [];
+
       for (const field of queryFields) {
-        where[field] = {
-          contains: query,
-          mode: 'insensitive',
-        };
+        orWhere.push({
+          [field]: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        });
       }
+
+      where['OR'] = orWhere;
     }
 
     for (const field of otherFields) {

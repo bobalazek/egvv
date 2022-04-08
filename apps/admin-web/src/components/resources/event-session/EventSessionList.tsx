@@ -19,14 +19,14 @@ export const EventSessionList = (props: ListProps) => (
     {...props}
   >
     <Datagrid>
+      <ReferenceField source="eventId" reference="Event">
+        <TextField source="name" />
+      </ReferenceField>
       <TextField source="slug" />
       <TextField source="name" />
       <TextField source="type" />
       <DateField source="startAt" showTime={true} />
       <DateField source="endAt" showTime={true} />
-      <ReferenceField source="eventId" reference="Event">
-        <TextField source="name" />
-      </ReferenceField>
       <ShowButton />
       <EditButton />
       <DeleteButton />

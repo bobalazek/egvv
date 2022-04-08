@@ -81,6 +81,20 @@ export class SeasonTeamResolver extends AbstractResolver {
     });
   }
 
+  @ResolveField('nameWithSeason', () => String)
+  async nameWithSeason(@Parent() parent: SeasonTeam) {
+    const seasonTeam = await this._prismaService.seasonTeam.findFirst({
+      where: {
+        id: parent.id,
+      },
+      include: {
+        season: true,
+      },
+    });
+
+    return `${seasonTeam.name} (${seasonTeam.season.name})`;
+  }
+
   @ResolveField('seasonDrivers', () => [SeasonDriver])
   async seasonDrivers(@Parent() parent: SeasonTeam) {
     return this._prismaService.seasonDriver.findMany({

@@ -13,15 +13,15 @@ import {
 export const SeasonTeamStandingEntryCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
-      <NumberInput source="points" validate={required()} />
-      <DateInput source="dateAt" validate={required()} />
-      <TextInput source="note" />
       <ReferenceInput source="seasonTeamId" reference="SeasonTeam" validate={required()}>
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="nameWithSeason" />
       </ReferenceInput>
       <ReferenceInput source="eventSessionId" reference="EventSession" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
+      <NumberInput source="points" validate={required()} />
+      <DateInput source="dateAt" validate={required()} />
+      <TextInput source="note" />
     </SimpleForm>
   </Create>
 );
