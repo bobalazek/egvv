@@ -22,7 +22,7 @@ export const EventSessionTeamDriverList = (props: ListProps) => (
       <ReferenceField source="eventSessionId" reference="EventSession">
         <TextField source="name" />
       </ReferenceField>
-      <ReferenceField source="seasonTeamDriverId" reference="SeasonTeamDriver">
+      <ReferenceField source="seasonDriverId" reference="SeasonDriver">
         <TextField source="name" />
       </ReferenceField>
       <ShowButton />

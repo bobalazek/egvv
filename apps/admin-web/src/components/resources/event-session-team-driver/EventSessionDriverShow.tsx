@@ -7,7 +7,7 @@ export const EventSessionTeamDriverShow = (props: ShowProps) => (
       <ReferenceField source="eventSessionId" reference="EventSession">
         <TextField source="name" />
       </ReferenceField>
-      <ReferenceField source="seasonTeamDriverId" reference="SeasonTeamDriver">
+      <ReferenceField source="seasonDriverId" reference="SeasonDriver">
         <TextField source="name" />
       </ReferenceField>
     </SimpleShowLayout>

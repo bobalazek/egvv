@@ -41,13 +41,13 @@ model Circuit {
 }
 
 model Driver {
-  id                String             @id @default(uuid())
-  slug              String             @unique
-  firstName         String
-  lastName          String
-  countryCode       String
-  url               String
-  seasonTeamDrivers SeasonTeamDriver[] @relation(name: "SeasonTeamDriver_Driver")
+  id            String         @id @default(uuid())
+  slug          String         @unique
+  firstName     String
+  lastName      String
+  countryCode   String
+  url           String
+  seasonDrivers SeasonDriver[] @relation(name: "SeasonDriver_Driver")
 }
 
 model Team {
@@ -76,23 +76,23 @@ model SeasonTeam {
   season                    Season                    @relation(name: "SeasonTeam_Season", fields: [seasonId], references: [id])
   teamId                    String
   team                      Team                      @relation(name: "SeasonTeam_Team", fields: [teamId], references: [id])
-  seasonTeamDrivers         SeasonTeamDriver[]        @relation(name: "SeasonTeamDriver_SeasonTeam")
+  seasonDrivers             SeasonDriver[]            @relation(name: "SeasonDriver_SeasonTeam")
   seasonTeamStandingEntries SeasonTeamStandingEntry[] @relation(name: "SeasonTeamStandingEntry_SeasonTeam")
 
   @@unique([seasonId, teamId])
 }
 
-model SeasonTeamDriver {
-  id                              String                          @id @default(uuid())
-  number                          Int
-  code                            String
-  isTemporary                     Boolean                         @default(false)
-  seasonTeamId                    String
-  seasonTeam                      SeasonTeam                      @relation(name: "SeasonTeamDriver_SeasonTeam", fields: [seasonTeamId], references: [id])
-  driverId                        String
-  driver                          Driver                          @relation(name: "SeasonTeamDriver_Driver", fields: [driverId], references: [id])
-  seasonTeamDriverStandingEntries SeasonTeamDriverStandingEntry[] @relation(name: "SeasonTeamDriverStandingEntry_SeasonTeamDriver")
-  eventSessionTeamDrivers         EventSessionTeamDriver[]        @relation(name: "EventSessionTeamDriver_SeasonTeamDriver")
+model SeasonDriver {
+  id                          String                      @id @default(uuid())
+  number                      Int
+  code                        String
+  isTemporary                 Boolean                     @default(false)
+  seasonTeamId                String
+  seasonTeam                  SeasonTeam                  @relation(name: "SeasonDriver_SeasonTeam", fields: [seasonTeamId], references: [id])
+  driverId                    String
+  driver                      Driver                      @relation(name: "SeasonDriver_Driver", fields: [driverId], references: [id])
+  seasonDriverStandingEntries SeasonDriverStandingEntry[] @relation(name: "SeasonDriverStandingEntry_SeasonDriver")
+  eventSessionTeamDrivers     EventSessionTeamDriver[]    @relation(name: "EventSessionTeamDriver_SeasonDriver")
 
   @@unique([seasonTeamId, driverId])
 }
@@ -108,15 +108,15 @@ model SeasonTeamStandingEntry {
   eventSession   EventSession? @relation(name: "SeasonTeamStandingEntry_EventSession", fields: [eventSessionId], references: [id])
 }
 
-model SeasonTeamDriverStandingEntry {
-  id                 String           @id @default(uuid())
-  points             Float
-  dateAt             DateTime
-  note               String?
-  seasonTeamDriverId String
-  seasonTeamDriver   SeasonTeamDriver @relation(name: "SeasonTeamDriverStandingEntry_SeasonTeamDriver", fields: [seasonTeamDriverId], references: [id])
-  eventSessionId     String?
-  eventSession       EventSession?    @relation(name: "SeasonTeamDriverStandingEntry_EventSession", fields: [eventSessionId], references: [id])
+model SeasonDriverStandingEntry {
+  id             String        @id @default(uuid())
+  points         Float
+  dateAt         DateTime
+  note           String?
+  seasonDriverId String
+  seasonDriver   SeasonDriver  @relation(name: "SeasonDriverStandingEntry_SeasonDriver", fields: [seasonDriverId], references: [id])
+  eventSessionId String?
+  eventSession   EventSession? @relation(name: "SeasonDriverStandingEntry_EventSession", fields: [eventSessionId], references: [id])
 }
 
 model Event {
@@ -137,18 +137,18 @@ model Event {
 }
 
 model EventSession {
-  id                              String                          @id @default(uuid())
-  slug                            String                          @unique
-  name                            String
-  type                            String // practice-1, practice-2, qualifying-1, qualifying-2, sprint, race, feature-race, ...
-  tyreChoices                     Json?
-  startAt                         DateTime
-  endAt                           DateTime?
-  eventId                         String
-  event                           Event                           @relation(name: "EventSession_Event", fields: [eventId], references: [id])
-  eventSessionTeamDrivers         EventSessionTeamDriver[]        @relation(name: "EventSessionTeamDriver_EventSession")
-  seasonTeamStandingEntries       SeasonTeamStandingEntry[]       @relation(name: "SeasonTeamStandingEntry_EventSession")
-  seasonTeamDriverStandingEntries SeasonTeamDriverStandingEntry[] @relation(name: "SeasonTeamDriverStandingEntry_EventSession")
+  id                          String                      @id @default(uuid())
+  slug                        String                      @unique
+  name                        String
+  type                        String // practice-1, practice-2, qualifying-1, qualifying-2, sprint, race, feature-race, ...
+  tyreChoices                 Json?
+  startAt                     DateTime
+  endAt                       DateTime?
+  eventId                     String
+  event                       Event                       @relation(name: "EventSession_Event", fields: [eventId], references: [id])
+  eventSessionTeamDrivers     EventSessionTeamDriver[]    @relation(name: "EventSessionTeamDriver_EventSession")
+  seasonTeamStandingEntries   SeasonTeamStandingEntry[]   @relation(name: "SeasonTeamStandingEntry_EventSession")
+  seasonDriverStandingEntries SeasonDriverStandingEntry[] @relation(name: "SeasonDriverStandingEntry_EventSession")
 
   @@unique([eventId, type])
 }
@@ -158,8 +158,8 @@ model EventSessionTeamDriver {
   number                                Int? // Sometimes a driver changes their number for a session, so we can ovewrite it here
   eventSessionId                        String
   eventSession                          EventSession                           @relation(name: "EventSessionTeamDriver_EventSession", fields: [eventSessionId], references: [id])
-  seasonTeamDriverId                    String
-  seasonTeamDriver                      SeasonTeamDriver                       @relation(name: "EventSessionTeamDriver_SeasonTeamDriver", fields: [seasonTeamDriverId], references: [id])
+  seasonDriverId                        String
+  seasonDriver                          SeasonDriver                           @relation(name: "EventSessionTeamDriver_SeasonDriver", fields: [seasonDriverId], references: [id])
   eventSessionTeamDriverLaps            EventSessionTeamDriverLap[]            @relation(name: "EventSessionTeamDriverLap_EventSessionTeamDriver")
   eventSessionTeamDriverPitStops        EventSessionTeamDriverPitStop[]        @relation(name: "EventSessionTeamDriverPitStop_EventSessionTeamDriver")
   eventSessionTeamDriverStartingGrids   EventSessionTeamDriverStartingGrid[]   @relation(name: "EventSessionTeamDriverStartingGrid_EventSessionTeamDriver")

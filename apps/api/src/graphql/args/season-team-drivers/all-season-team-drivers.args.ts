@@ -3,4 +3,4 @@ import { ArgsType } from '@nestjs/graphql';
 import { AllArgs } from '../all.args';
 
 @ArgsType()
-export class AllSeasonTeamDriversArgs extends AllArgs {}
+export class AllSeasonDriversArgs extends AllArgs {}

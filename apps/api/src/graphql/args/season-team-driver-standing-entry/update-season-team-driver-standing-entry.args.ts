@@ -1,7 +1,7 @@
 import { ArgsType, Field, Float, ID } from '@nestjs/graphql';
 
 @ArgsType()
-export class UpdateSeasonTeamDriverStandingEntryArgs {
+export class UpdateSeasonDriverStandingEntryArgs {
   @Field(() => ID)
   id: string;
 
@@ -15,7 +15,7 @@ export class UpdateSeasonTeamDriverStandingEntryArgs {
   note?: string;
 
   @Field()
-  seasonTeamDriverId: string;
+  seasonDriverId: string;
 
   @Field()
   eventSessionId: string;

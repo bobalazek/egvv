@@ -9,7 +9,7 @@ import {
   EditProps,
 } from 'react-admin';
 
-export const SeasonTeamDriverEdit = (props: EditProps) => (
+export const SeasonDriverEdit = (props: EditProps) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput source="id" disabled />

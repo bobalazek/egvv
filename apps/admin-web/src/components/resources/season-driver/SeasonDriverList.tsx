@@ -2,30 +2,30 @@ import {
   List,
   Datagrid,
   TextField,
+  BooleanField,
   ReferenceField,
-  DateField,
   ShowButton,
   EditButton,
   DeleteButton,
   ListProps,
 } from 'react-admin';
 
-export const SeasonTeamDriverStandingEntryList = (props: ListProps) => (
+export const SeasonDriverList = (props: ListProps) => (
   <List
     sort={{
-      field: 'points',
+      field: 'code',
       order: 'asc',
     }}
     {...props}
   >
     <Datagrid>
-      <TextField source="points" />
-      <DateField source="dateAt" />
-      <TextField source="note" />
-      <ReferenceField source="seasonTeamDriverId" reference="SeasonTeamDriver">
+      <TextField source="number" />
+      <TextField source="code" />
+      <BooleanField source="isTemporary" />
+      <ReferenceField source="seasonTeamId" reference="SeasonTeam">
         <TextField source="name" />
       </ReferenceField>
-      <ReferenceField source="eventSessionId" reference="EventSession">
+      <ReferenceField source="driverId" reference="Driver">
         <TextField source="name" />
       </ReferenceField>
       <ShowButton />

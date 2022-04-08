@@ -8,7 +8,7 @@ import teams from './data/teams';
 import drivers from './data/drivers';
 import events from './data/events';
 import seasonTeams from './data/season-teams';
-import seasonTeamDrivers from './data/season-team-drivers';
+import seasonDrivers from './data/season-drivers';
 import { convertToDashCase } from '../libs/shared/src';
 
 const prisma = new PrismaClient();
@@ -239,8 +239,8 @@ async function main() {
     });
   }
 
-  console.log('========== Season team drivers ==========');
-  for (const data of seasonTeamDrivers) {
+  console.log('========== Season drivers ==========');
+  for (const data of seasonDrivers) {
     console.log(`Upserting "${data.code}" ...`);
 
     const season = await prisma.season.findFirst({
@@ -296,7 +296,7 @@ async function main() {
       isTemporary: (<any>data).isTemporary ?? false,
     };
 
-    await prisma.seasonTeamDriver.upsert({
+    await prisma.seasonDriver.upsert({
       where: {
         seasonTeamId_driverId: {
           seasonTeamId: finalData.seasonTeamId,

@@ -1,7 +1,7 @@
-import { EventSessionTeamDriverList } from './EventSessionTeamDriverList';
-import { EventSessionTeamDriverShow } from './EventSessionTeamDriverShow';
-import { EventSessionTeamDriverCreate } from './EventSessionTeamDriverCreate';
-import { EventSessionTeamDriverEdit } from './EventSessionTeamDriverEdit';
+import { EventSessionTeamDriverList } from './EventSessionDriverList';
+import { EventSessionTeamDriverShow } from './EventSessionDriverShow';
+import { EventSessionTeamDriverCreate } from './EventSessionDriverCreate';
+import { EventSessionTeamDriverEdit } from './EventSessionDriverEdit';
 
 export default {
   name: 'EventSessionTeamDriver',

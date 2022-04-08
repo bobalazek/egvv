@@ -1,7 +1,7 @@
 import { ObjectType, Field, ID, Int } from '@nestjs/graphql';
 
 @ObjectType()
-export class SeasonTeamDriver {
+export class SeasonDriver {
   @Field(() => ID)
   id: string;
 

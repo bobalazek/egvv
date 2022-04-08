@@ -1,6 +1,6 @@
 import { TextField, BooleanField, ReferenceField, Show, SimpleShowLayout, ShowProps } from 'react-admin';
 
-export const SeasonTeamDriverShow = (props: ShowProps) => (
+export const SeasonDriverShow = (props: ShowProps) => (
   <Show {...props}>
     <SimpleShowLayout>
       <TextField source="number" />

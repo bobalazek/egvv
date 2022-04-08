@@ -9,5 +9,5 @@ export class CreateEventSessionTeamDriverArgs {
   eventSessionId: string;
 
   @Field()
-  seasonTeamDriverId: string;
+  seasonDriverId: string;
 }

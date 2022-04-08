@@ -12,5 +12,5 @@ export class UpdateEventSessionTeamDriverDriverArgs {
   eventSessionId: string;
 
   @Field()
-  seasonTeamDriverId: string;
+  seasonDriverId: string;
 }

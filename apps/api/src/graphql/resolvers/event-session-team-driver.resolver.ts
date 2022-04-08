@@ -8,7 +8,7 @@ import { IdArgs } from '../args/id.args';
 import { EventSessionTeamDriver } from '../models/event-session-team-driver.model';
 import { EventSession } from '../models/event-session.model';
 import { ListMetadata } from '../models/list-metadata.model';
-import { SeasonTeamDriver } from '../models/season-team-driver.model';
+import { SeasonDriver } from '../models/season-driver.model';
 import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(EventSessionTeamDriver)
@@ -78,11 +78,11 @@ export class EventSessionTeamDriverResolver extends AbstractResolver {
     });
   }
 
-  @ResolveField('seasonTeamDriver', () => SeasonTeamDriver)
-  async seasonTeamDriver(@Parent() parent: EventSessionTeamDriver) {
-    return this._prismaService.seasonTeamDriver.findFirst({
+  @ResolveField('seasonDriver', () => SeasonDriver)
+  async seasonDriver(@Parent() parent: EventSessionTeamDriver) {
+    return this._prismaService.seasonDriver.findFirst({
       where: {
-        id: parent.seasonTeamDriverId,
+        id: parent.seasonDriverId,
       },
     });
   }

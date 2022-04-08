@@ -1,7 +1,7 @@
 import { Field, ArgsType, Int, Float } from '@nestjs/graphql';
 
 @ArgsType()
-export class CreateSeasonTeamDriverArgs {
+export class CreateSeasonDriverArgs {
   @Field(() => Int)
   number: number;
 

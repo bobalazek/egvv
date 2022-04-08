@@ -1,28 +1,27 @@
 import {
+  Create,
   SimpleForm,
   required,
   TextInput,
   ReferenceInput,
   AutocompleteInput,
-  Edit,
   DateInput,
   NumberInput,
-  EditProps,
+  CreateProps,
 } from 'react-admin';
 
-export const SeasonTeamDriverStandingEntryEdit = (props: EditProps) => (
-  <Edit {...props}>
+export const SeasonDriverStandingEntryCreate = (props: CreateProps) => (
+  <Create {...props}>
     <SimpleForm>
-      <TextInput source="id" disabled />
       <NumberInput source="points" validate={required()} />
       <DateInput source="dateAt" validate={required()} />
       <TextInput source="note" />
-      <ReferenceInput source="seasonTeamDriverId" reference="SeasonTeamDriver" validate={required()}>
+      <ReferenceInput source="seasonDriverId" reference="SeasonDriver" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <ReferenceInput source="eventSessionId" reference="EventSession" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
     </SimpleForm>
-  </Edit>
+  </Create>
 );

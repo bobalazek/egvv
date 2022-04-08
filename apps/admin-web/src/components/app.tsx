@@ -9,9 +9,9 @@ import circuit from './resources/circuit';
 import driver from './resources/driver';
 import team from './resources/team';
 import seasonTeam from './resources/season-team';
-import seasonTeamDriver from './resources/season-team-driver';
+import seasonDriver from './resources/season-driver';
 import seasonTeamStandingEntry from './resources/season-team-standing-entry';
-import seasonTeamDriverStandingEntry from './resources/season-team-driver-standing-entry';
+import seasonDriverStandingEntry from './resources/season-driver-standing-entry';
 import event from './resources/event';
 import eventSession from './resources/event-session';
 import eventSessionTeamDriver from './resources/event-session-team-driver';
@@ -42,9 +42,9 @@ export function App() {
       <Resource {...driver} />
       <Resource {...team} />
       <Resource {...seasonTeam} />
-      <Resource {...seasonTeamDriver} />
+      <Resource {...seasonDriver} />
       <Resource {...seasonTeamStandingEntry} />
-      <Resource {...seasonTeamDriverStandingEntry} />
+      <Resource {...seasonDriverStandingEntry} />
       <Resource {...event} />
       <Resource {...eventSession} />
       <Resource {...eventSessionTeamDriver} />

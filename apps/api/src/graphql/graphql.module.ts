@@ -16,7 +16,7 @@ import { DriverResolver } from '../graphql/resolvers/driver.resolver';
 import { CircuitResolver } from '../graphql/resolvers/circuit.resolver';
 import { TeamResolver } from '../graphql/resolvers/team.resolver';
 import { SeasonTeamResolver } from '../graphql/resolvers/season-team.resolver';
-import { SeasonTeamDriverResolver } from '../graphql/resolvers/season-team-driver.resolver';
+import { SeasonDriverResolver } from './resolvers/season-driver.resolver';
 import { EventResolver } from '../graphql/resolvers/event.resolver';
 import { EventSessionResolver } from '../graphql/resolvers/event-session.resolver';
 import { EventSessionTeamDriverResolver } from './resolvers/event-session-team-driver.resolver';
@@ -25,7 +25,7 @@ import { EventSessionTeamDriverPitStopResolver } from './resolvers/event-session
 import { EventSessionTeamDriverStartingGridResolver } from './resolvers/event-session-team-driver-starting-grid.resolver';
 import { EventSessionTeamDriverClassificationResolver } from './resolvers/event-session-team-driver-classification.resolver';
 import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-team-standing-entry.resolver';
-import { SeasonTeamDriverStandingEntryResolver } from '../graphql/resolvers/season-team-driver-standing-entry.resolver';
+import { SeasonDriverStandingEntryResolver } from './resolvers/season-driver-standing-entry.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { AuthResolver } from './resolvers/auth.resolver';
 import { AuthService } from './services/auth.service';
@@ -64,9 +64,9 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     DriverResolver,
     SeasonResolver,
     SeasonTeamResolver,
-    SeasonTeamDriverResolver,
+    SeasonDriverResolver,
     SeasonTeamStandingEntryResolver,
-    SeasonTeamDriverStandingEntryResolver,
+    SeasonDriverStandingEntryResolver,
     EventResolver,
     EventSessionResolver,
     EventSessionTeamDriverResolver,

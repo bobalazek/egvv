@@ -9,7 +9,7 @@ import {
   CreateProps,
 } from 'react-admin';
 
-export const SeasonTeamDriverCreate = (props: CreateProps) => (
+export const SeasonDriverCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <TextInput source="number" validate={required()} />

@@ -4,7 +4,7 @@ import { PrismaService } from '../../app/services/prisma.service';
 import { AllSeasonTeamsArgs } from '../args/season-team/all-season-teams.args';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
-import { SeasonTeamDriver } from '../models/season-team-driver.model';
+import { SeasonDriver } from '../models/season-driver.model';
 import { SeasonTeamStandingEntry } from '../models/season-team-standing-entry.model';
 import { SeasonTeam } from '../models/season-team.model';
 import { Season } from '../models/season.model';
@@ -76,9 +76,9 @@ export class SeasonTeamResolver extends AbstractResolver {
     });
   }
 
-  @ResolveField('seasonTeamDrivers', () => [SeasonTeamDriver])
-  async seasonTeamDrivers(@Parent() parent: SeasonTeam) {
-    return this._prismaService.seasonTeamDriver.findMany({
+  @ResolveField('seasonDrivers', () => [SeasonDriver])
+  async seasonDrivers(@Parent() parent: SeasonTeam) {
+    return this._prismaService.seasonDriver.findMany({
       where: {
         seasonTeamId: parent.id,
       },

@@ -1,7 +1,7 @@
 import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
 
 @ArgsType()
-export class UpdateSeasonTeamDriverArgs {
+export class UpdateSeasonDriverArgs {
   @Field(() => ID)
   id: string;
 
