@@ -92,7 +92,7 @@ model SeasonDriver {
   driverId                    String
   driver                      Driver                      @relation(name: "SeasonDriver_Driver", fields: [driverId], references: [id])
   seasonDriverStandingEntries SeasonDriverStandingEntry[] @relation(name: "SeasonDriverStandingEntry_SeasonDriver")
-  eventSessionTeamDrivers     EventSessionTeamDriver[]    @relation(name: "EventSessionTeamDriver_SeasonDriver")
+  eventSessionDrivers     eventSessionDriver[]    @relation(name: "eventSessionDriver_SeasonDriver")
 
   @@unique([seasonTeamId, driverId])
 }
@@ -146,62 +146,62 @@ model EventSession {
   endAt                       DateTime?
   eventId                     String
   event                       Event                       @relation(name: "EventSession_Event", fields: [eventId], references: [id])
-  eventSessionTeamDrivers     EventSessionTeamDriver[]    @relation(name: "EventSessionTeamDriver_EventSession")
+  eventSessionDrivers     eventSessionDriver[]    @relation(name: "eventSessionDriver_EventSession")
   seasonTeamStandingEntries   SeasonTeamStandingEntry[]   @relation(name: "SeasonTeamStandingEntry_EventSession")
   seasonDriverStandingEntries SeasonDriverStandingEntry[] @relation(name: "SeasonDriverStandingEntry_EventSession")
 
   @@unique([eventId, type])
 }
 
-model EventSessionTeamDriver {
+model eventSessionDriver {
   id                                    String                                 @id @default(uuid())
   number                                Int? // Sometimes a driver changes their number for a session, so we can ovewrite it here
   eventSessionId                        String
-  eventSession                          EventSession                           @relation(name: "EventSessionTeamDriver_EventSession", fields: [eventSessionId], references: [id])
+  eventSession                          EventSession                           @relation(name: "eventSessionDriver_EventSession", fields: [eventSessionId], references: [id])
   seasonDriverId                        String
-  seasonDriver                          SeasonDriver                           @relation(name: "EventSessionTeamDriver_SeasonDriver", fields: [seasonDriverId], references: [id])
-  eventSessionTeamDriverLaps            EventSessionTeamDriverLap[]            @relation(name: "EventSessionTeamDriverLap_EventSessionTeamDriver")
-  eventSessionTeamDriverPitStops        EventSessionTeamDriverPitStop[]        @relation(name: "EventSessionTeamDriverPitStop_EventSessionTeamDriver")
-  eventSessionTeamDriverStartingGrids   EventSessionTeamDriverStartingGrid[]   @relation(name: "EventSessionTeamDriverStartingGrid_EventSessionTeamDriver")
-  eventSessionTeamDriverClassifications EventSessionTeamDriverClassification[] @relation(name: "EventSessionTeamDriverClassification_EventSessionTeamDriver")
+  seasonDriver                          SeasonDriver                           @relation(name: "eventSessionDriver_SeasonDriver", fields: [seasonDriverId], references: [id])
+  eventSessionDriverLaps            eventSessionDriverLap[]            @relation(name: "eventSessionDriverLap_eventSessionDriver")
+  eventSessionDriverPitStops        eventSessionDriverPitStop[]        @relation(name: "eventSessionDriverPitStop_eventSessionDriver")
+  eventSessionDriverStartingGrids   eventSessionDriverStartingGrid[]   @relation(name: "eventSessionDriverStartingGrid_eventSessionDriver")
+  eventSessionDriverClassifications eventSessionDriverClassification[] @relation(name: "eventSessionDriverClassification_eventSessionDriver")
 }
 
-model EventSessionTeamDriverLap {
+model eventSessionDriverLap {
   id                       String                 @id @default(uuid())
   lap                      Int
   isDeleted                Boolean                @default(false)
   time                     DateTime?
   position                 Int?
-  eventSessionTeamDriverId String
-  eventSessionTeamDriver   EventSessionTeamDriver @relation(name: "EventSessionTeamDriverLap_EventSessionTeamDriver", fields: [eventSessionTeamDriverId], references: [id])
+  eventSessionDriverId String
+  eventSessionDriver   eventSessionDriver @relation(name: "eventSessionDriverLap_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
 
-model EventSessionTeamDriverPitStop {
+model eventSessionDriverPitStop {
   id                       String                 @id @default(uuid())
   lap                      Int
   timeMilliseconds         Int? // How long was the pitstop?
-  eventSessionTeamDriverId String
-  eventSessionTeamDriver   EventSessionTeamDriver @relation(name: "EventSessionTeamDriverPitStop_EventSessionTeamDriver", fields: [eventSessionTeamDriverId], references: [id])
+  eventSessionDriverId String
+  eventSessionDriver   eventSessionDriver @relation(name: "eventSessionDriverPitStop_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
 
-model EventSessionTeamDriverStartingGrid {
+model eventSessionDriverStartingGrid {
   id                       String                 @id @default(uuid())
   position                 Int?
   time                     DateTime? // What was the time to reach the position in the qualification?
   note                     String? // if the racer for example starts in the pit or has a penalty
-  eventSessionTeamDriverId String
-  eventSessionTeamDriver   EventSessionTeamDriver @relation(name: "EventSessionTeamDriverStartingGrid_EventSessionTeamDriver", fields: [eventSessionTeamDriverId], references: [id])
+  eventSessionDriverId String
+  eventSessionDriver   eventSessionDriver @relation(name: "eventSessionDriverStartingGrid_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
 
-model EventSessionTeamDriverClassification {
+model eventSessionDriverClassification {
   id                       String                 @id @default(uuid())
   status                   String // finished, dnf, dns, ...
   position                 Int?
   time                     DateTime?
   points                   Float? // Yes, as we've seen last season, there can be half points
   note                     String?
-  eventSessionTeamDriverId String
-  eventSessionTeamDriver   EventSessionTeamDriver @relation(name: "EventSessionTeamDriverClassification_EventSessionTeamDriver", fields: [eventSessionTeamDriverId], references: [id])
+  eventSessionDriverId String
+  eventSessionDriver   eventSessionDriver @relation(name: "eventSessionDriverClassification_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
 
 model User {

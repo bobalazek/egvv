@@ -5,7 +5,7 @@ import { AllEventSessionsArgs } from '../args/event-session/all-event-sessions.a
 import { CreateEventSessionArgs } from '../args/event-session/create-event-session.args';
 import { UpdateEventSessionArgs } from '../args/event-session/update-event-session.args';
 import { IdArgs } from '../args/id.args';
-import { EventSessionTeamDriver } from '../models/event-session-team-driver.model';
+import { EventSessionDriver } from '../models/event-session-driver.model';
 import { EventSession } from '../models/event-session.model';
 import { Event } from '../models/event.model';
 import { ListMetadata } from '../models/list-metadata.model';
@@ -78,9 +78,9 @@ export class EventSessionResolver extends AbstractResolver {
     });
   }
 
-  @ResolveField('eventSessionTeamDrivers', () => [EventSessionTeamDriver])
-  async eventSessionTeamDrivers(@Parent() parent: EventSession) {
-    return this._prismaService.eventSessionTeamDriver.findMany({
+  @ResolveField('eventSessionDrivers', () => [EventSessionDriver])
+  async eventSessionDrivers(@Parent() parent: EventSession) {
+    return this._prismaService.eventSessionDriver.findMany({
       where: {
         eventSessionId: parent.id,
       },

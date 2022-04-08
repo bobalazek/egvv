@@ -19,11 +19,11 @@ import { SeasonTeamResolver } from '../graphql/resolvers/season-team.resolver';
 import { SeasonDriverResolver } from './resolvers/season-driver.resolver';
 import { EventResolver } from '../graphql/resolvers/event.resolver';
 import { EventSessionResolver } from '../graphql/resolvers/event-session.resolver';
-import { EventSessionTeamDriverResolver } from './resolvers/event-session-team-driver.resolver';
-import { EventSessionTeamDriverLapResolver } from './resolvers/event-session-team-driver-lap.resolver';
-import { EventSessionTeamDriverPitStopResolver } from './resolvers/event-session-team-driver-pit-stop.resolver';
-import { EventSessionTeamDriverStartingGridResolver } from './resolvers/event-session-team-driver-starting-grid.resolver';
-import { EventSessionTeamDriverClassificationResolver } from './resolvers/event-session-team-driver-classification.resolver';
+import { EventSessionDriverResolver } from './resolvers/event-session-driver.resolver';
+import { EventSessionDriverLapResolver } from './resolvers/event-session-driver-lap.resolver';
+import { EventSessionDriverPitStopResolver } from './resolvers/event-session-driver-pit-stop.resolver';
+import { EventSessionDriverStartingGridResolver } from './resolvers/event-session-driver-starting-grid.resolver';
+import { EventSessionDriverClassificationResolver } from './resolvers/event-session-driver-classification.resolver';
 import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-team-standing-entry.resolver';
 import { SeasonDriverStandingEntryResolver } from './resolvers/season-driver-standing-entry.resolver';
 import { UserResolver } from './resolvers/user.resolver';
@@ -69,11 +69,11 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     SeasonDriverStandingEntryResolver,
     EventResolver,
     EventSessionResolver,
-    EventSessionTeamDriverResolver,
-    EventSessionTeamDriverLapResolver,
-    EventSessionTeamDriverPitStopResolver,
-    EventSessionTeamDriverStartingGridResolver,
-    EventSessionTeamDriverClassificationResolver,
+    EventSessionDriverResolver,
+    EventSessionDriverLapResolver,
+    EventSessionDriverPitStopResolver,
+    EventSessionDriverStartingGridResolver,
+    EventSessionDriverClassificationResolver,
     UserResolver,
     AuthResolver,
   ],

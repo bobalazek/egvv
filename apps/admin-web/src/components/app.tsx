@@ -14,11 +14,11 @@ import seasonTeamStandingEntry from './resources/season-team-standing-entry';
 import seasonDriverStandingEntry from './resources/season-driver-standing-entry';
 import event from './resources/event';
 import eventSession from './resources/event-session';
-import eventSessionTeamDriver from './resources/event-session-team-driver';
-import eventSessionTeamDriverLap from './resources/event-session-team-driver-lap';
-import eventSessionTeamDriverPitStop from './resources/event-session-team-driver-pit-stop';
-import eventSessionTeamDriverStartingGrid from './resources/event-session-team-driver-starting-grid';
-import eventSessionTeamDriverClassification from './resources/event-session-team-driver-classification';
+import eventSessionDriver from './resources/event-session-driver';
+import eventSessionDriverLap from './resources/event-session-driver-lap';
+import eventSessionDriverPitStop from './resources/event-session-driver-pit-stop';
+import eventSessionDriverStartingGrid from './resources/event-session-driver-starting-grid';
+import eventSessionDriverClassification from './resources/event-session-driver-classification';
 import user from './resources/user';
 
 export function App() {
@@ -47,11 +47,11 @@ export function App() {
       <Resource {...seasonDriverStandingEntry} />
       <Resource {...event} />
       <Resource {...eventSession} />
-      <Resource {...eventSessionTeamDriver} />
-      <Resource {...eventSessionTeamDriverLap} />
-      <Resource {...eventSessionTeamDriverPitStop} />
-      <Resource {...eventSessionTeamDriverStartingGrid} />
-      <Resource {...eventSessionTeamDriverClassification} />
+      <Resource {...eventSessionDriver} />
+      <Resource {...eventSessionDriverLap} />
+      <Resource {...eventSessionDriverPitStop} />
+      <Resource {...eventSessionDriverStartingGrid} />
+      <Resource {...eventSessionDriverClassification} />
       <Resource {...user} />
     </Admin>
   );

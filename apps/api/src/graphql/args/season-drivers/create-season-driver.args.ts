@@ -1,4 +1,4 @@
-import { Field, ArgsType, Int, Float } from '@nestjs/graphql';
+import { Field, ArgsType, Int } from '@nestjs/graphql';
 
 @ArgsType()
 export class CreateSeasonDriverArgs {
