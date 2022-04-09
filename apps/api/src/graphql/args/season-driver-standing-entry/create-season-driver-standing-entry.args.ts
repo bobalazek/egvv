@@ -14,6 +14,6 @@ export class CreateSeasonDriverStandingEntryArgs {
   @Field()
   seasonDriverId: string;
 
-  @Field()
-  eventSessionId: string;
+  @Field({ nullable: true })
+  eventSessionId?: string;
 }

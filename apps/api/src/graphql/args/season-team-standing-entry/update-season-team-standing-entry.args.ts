@@ -17,6 +17,6 @@ export class UpdateSeasonTeamStandingEntryArgs {
   @Field()
   seasonTeamId: string;
 
-  @Field()
-  eventSessionId: string;
+  @Field({ nullable: true })
+  eventSessionId?: string;
 }

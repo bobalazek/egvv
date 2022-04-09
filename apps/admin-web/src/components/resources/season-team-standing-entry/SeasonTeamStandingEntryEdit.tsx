@@ -9,6 +9,7 @@ import {
   NumberInput,
   EditProps,
 } from 'react-admin';
+import { SeasonTeamStandingEntrySessionTeamInput } from './SeasonTeamStandingEntrySessionTeamInput';
 
 export const SeasonTeamStandingEntryEdit = (props: EditProps) => (
   <Edit {...props}>
@@ -17,11 +18,9 @@ export const SeasonTeamStandingEntryEdit = (props: EditProps) => (
       <ReferenceInput source="seasonTeamId" reference="SeasonTeam" validate={required()}>
         <AutocompleteInput optionText="nameWithSeason" />
       </ReferenceInput>
-      <ReferenceInput source="eventSessionId" reference="EventSession" validate={required()}>
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+      <SeasonTeamStandingEntrySessionTeamInput source="eventSessionId" reference="EventSession" />
       <NumberInput source="points" validate={required()} />
-      <DateInput source="dateAt" validate={required()} />
+      <DateInput source="dateAt" validate={required()} helperText="When were the points awarded?" />
       <TextInput source="note" multiline />
     </SimpleForm>
   </Edit>
