@@ -40,12 +40,34 @@ export abstract class AbstractResolver {
       const orWhere: KeyValue[] = [];
 
       for (const field of queryFilterFields) {
-        orWhere.push({
-          [field]: {
-            contains: query,
-            mode: 'insensitive',
-          },
-        });
+        if (field.includes('.')) {
+          const fieldSplit = field.split('.');
+          if (fieldSplit.length !== 2) {
+            new Error(`You are only allowed to to have 2 fields.`);
+          }
+
+          const fieldParent = fieldSplit[0];
+          const fieldChild = fieldSplit[1];
+          if (!fieldParent || !fieldChild) {
+            new Error(`The parent or child field is empty.`);
+          }
+
+          orWhere.push({
+            [fieldParent]: {
+              [fieldChild]: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+          });
+        } else {
+          orWhere.push({
+            [field]: {
+              contains: query,
+              mode: 'insensitive',
+            },
+          });
+        }
       }
 
       where['OR'] = orWhere;
