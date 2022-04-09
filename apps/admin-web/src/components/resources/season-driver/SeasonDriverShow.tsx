@@ -7,7 +7,7 @@ export const SeasonDriverShow = (props: ShowProps) => (
       <TextField source="code" />
       <BooleanField source="isTemporary" />
       <ReferenceField source="seasonTeamId" reference="SeasonTeam">
-        <TextField source="name" />
+        <TextField source="nameWithSeason" />
       </ReferenceField>
       <ReferenceField source="driverId" reference="Driver">
         <TextField source="name" />

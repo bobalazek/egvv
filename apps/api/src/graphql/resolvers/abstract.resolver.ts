@@ -2,14 +2,22 @@
 
 import { AllArgs } from '../args/all.args';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type KeyValue = { [key: string]: any };
 
 export abstract class AbstractResolver {
+  /**
+   * @param args
+   * @param skipPagination
+   * @param queryFilterFields When passing the args.filter.q parameter, which fields should it search?
+   * @param allowedExactFilterFields Which exact filters from args.filters should we choose and filter by the exact match?
+   * @returns array
+   */
   getAllArgs<T extends AllArgs>(
     args: T,
     skipPagination: boolean = false,
-    queryFields: string[] = [],
-    otherFields: string[] = []
+    queryFilterFields: string[] = [],
+    allowedExactFilterFields: string[] = []
   ) {
     const skip = !skipPagination && args.perPage ? args.page * args.perPage : undefined;
     const take = !skipPagination && args.perPage ? args.perPage : undefined;
@@ -20,18 +28,18 @@ export abstract class AbstractResolver {
           }
         : undefined;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const where: KeyValue = {};
     if (args.filter?.ids) {
       where['id'] = { in: args.filter.ids };
     } else if (args.filter?.id) {
       where['id'] = args.filter.id;
     }
-    if (queryFields.length && args.filter?.q) {
+
+    if (queryFilterFields.length && args.filter?.q) {
       const query = args.filter?.q;
       const orWhere: KeyValue[] = [];
 
-      for (const field of queryFields) {
+      for (const field of queryFilterFields) {
         orWhere.push({
           [field]: {
             contains: query,
@@ -43,7 +51,7 @@ export abstract class AbstractResolver {
       where['OR'] = orWhere;
     }
 
-    for (const field of otherFields) {
+    for (const field of allowedExactFilterFields) {
       if (!args.filter[field]) {
         continue;
       }

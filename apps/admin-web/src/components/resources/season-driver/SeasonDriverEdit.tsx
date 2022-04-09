@@ -17,7 +17,7 @@ export const SeasonDriverEdit = (props: EditProps) => (
       <TextInput source="code" validate={required()} />
       <BooleanInput source="isTemporary" validate={required()} />
       <ReferenceInput source="seasonTeamId" reference="SeasonTeam" validate={required()}>
-        <AutocompleteInput optionText="name" />
+        <AutocompleteInput optionText="nameWithSeason" />
       </ReferenceInput>
       <ReferenceInput source="driverId" reference="Driver" validate={required()}>
         <AutocompleteInput optionText="name" />
