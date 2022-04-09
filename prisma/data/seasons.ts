@@ -86,7 +86,7 @@ for (let year = 2014; year <= 2022; year++) {
 // Extreme E
 for (let year = 2021; year <= 2022; year++) {
   data.push({
-    slug: 'exreme-e-' + year,
+    slug: 'extreme-e-' + year,
     name: year + ' Extreme E World Championship',
     year,
     startAt: year + '-01-01',

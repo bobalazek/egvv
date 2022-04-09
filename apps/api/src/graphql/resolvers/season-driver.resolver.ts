@@ -26,12 +26,31 @@ export class SeasonDriverResolver extends AbstractResolver {
 
   @Query(() => [SeasonDriver])
   async allSeasonDrivers(@Args() args: AllSeasonDriversArgs) {
-    return this._prismaService.seasonDriver.findMany(await this.getAllArgs(args, false, ['code']));
+    return this._prismaService.seasonDriver.findMany(
+      await this.getAllArgs(
+        args,
+        false,
+        ['code'],
+        [
+          // TODO: not working yet!
+          {
+            filterField: 'seasonId',
+            baseModel: 'season',
+            model: 'season',
+            modelField: 'id',
+            modelFieldParent: 'seasonTeam',
+          },
+        ]
+      )
+    );
   }
 
   @Query(() => ListMetadata)
   async _allSeasonDriversMeta(@Args() args: AllSeasonDriversArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.seasonDriver.count(await this.getAllArgs(args, true, ['code']));
+    const count = await this._prismaService.seasonDriver.count(
+      await this.getAllArgs(args, true, ['code'], ['seasonId'])
+    );
+
     return {
       count,
     };

@@ -48,7 +48,24 @@ export class EventSessionResolver extends AbstractResolver {
 
   @Query(() => ListMetadata)
   async _allEventSessionsMeta(@Args() args: AllEventSessionsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSession.count(await this.getAllArgs(args, true, [], ['eventId']));
+    const count = await this._prismaService.eventSession.count(
+      await this.getAllArgs(
+        args,
+        true,
+        [],
+        [
+          'eventId',
+          { filterField: 'seasonTeamId', baseModel: 'seasonTeam', model: 'event', modelField: 'seasonId' },
+          {
+            filterField: 'seasonDriverId',
+            baseModel: 'seasonDriver',
+            model: 'event',
+            modelField: 'seasonId',
+            modelFieldParent: 'seasonTeam',
+          },
+        ]
+      )
+    );
     return {
       count,
     };
