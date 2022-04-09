@@ -21,7 +21,7 @@ export const SeasonDriverStandingEntryCreate = (props: CreateProps) => (
       </ReferenceInput>
       <NumberInput source="points" validate={required()} />
       <DateInput source="dateAt" validate={required()} />
-      <TextInput source="note" />
+      <TextInput source="note" multiline />
     </SimpleForm>
   </Create>
 );

@@ -5,4 +5,7 @@ import { AllFilterInput } from './all-filter.input';
 export class AllEventSessionsFilterInput extends AllFilterInput {
   @Field({ nullable: true })
   eventId?: string;
+
+  @Field({ nullable: true })
+  seasonTeamId?: string;
 }

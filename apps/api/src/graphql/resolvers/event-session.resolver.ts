@@ -34,7 +34,25 @@ export class EventSessionResolver extends AbstractResolver {
 
   @Query(() => [EventSession])
   async allEventSessions(@Args() args: AllEventSessionsArgs) {
-    return this._prismaService.eventSession.findMany(this.getAllArgs(args, false, [], ['eventId']));
+    const prismaArgs = this.getAllArgs(args, false, [], ['eventId']);
+    if (args.filter?.seasonTeamId) {
+      if (!prismaArgs.where) {
+        prismaArgs.where = {};
+      }
+
+      const seasonTeam = await this._prismaService.seasonTeam.findFirst({
+        where: {
+          id: args.filter.seasonTeamId,
+        },
+      });
+      if (seasonTeam) {
+        prismaArgs.where.event = {
+          seasonId: seasonTeam.seasonId,
+        };
+      }
+    }
+
+    return this._prismaService.eventSession.findMany(prismaArgs);
   }
 
   @Query(() => ListMetadata)

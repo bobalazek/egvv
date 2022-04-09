@@ -9,7 +9,7 @@ export const EventSessionDriverStartingGridEdit = (props: EditProps) => (
       </ReferenceInput>
       <TextInput source="position" />
       <TextInput source="time" />
-      <TextInput source="note" />
+      <TextInput source="note" multiline />
     </SimpleForm>
   </Edit>
 );

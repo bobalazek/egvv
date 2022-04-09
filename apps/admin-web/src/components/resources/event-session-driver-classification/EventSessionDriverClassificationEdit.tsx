@@ -11,7 +11,7 @@ export const EventSessionDriverClassificationEdit = (props: EditProps) => (
       <TextInput source="position" />
       <TextInput source="time" />
       <TextInput source="points" />
-      <TextInput source="note" />
+      <TextInput source="note" multiline />
     </SimpleForm>
   </Edit>
 );

@@ -10,7 +10,7 @@ export const EventSessionDriverClassificationCreate = (props: CreateProps) => (
       <TextInput source="position" />
       <TextInput source="time" />
       <TextInput source="points" />
-      <TextInput source="note" />
+      <TextInput source="note" multiline />
     </SimpleForm>
   </Create>
 );

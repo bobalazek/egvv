@@ -144,17 +144,17 @@ CREATE TABLE "EventSession" (
 );
 
 -- CreateTable
-CREATE TABLE "eventSessionDriver" (
+CREATE TABLE "EventSessionDriver" (
     "id" TEXT NOT NULL,
     "number" INTEGER,
     "eventSessionId" TEXT NOT NULL,
     "seasonDriverId" TEXT NOT NULL,
 
-    CONSTRAINT "eventSessionDriver_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "EventSessionDriver_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "eventSessionDriverLap" (
+CREATE TABLE "EventSessionDriverLap" (
     "id" TEXT NOT NULL,
     "lap" INTEGER NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
@@ -162,32 +162,32 @@ CREATE TABLE "eventSessionDriverLap" (
     "position" INTEGER,
     "eventSessionDriverId" TEXT NOT NULL,
 
-    CONSTRAINT "eventSessionDriverLap_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "EventSessionDriverLap_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "eventSessionDriverPitStop" (
+CREATE TABLE "EventSessionDriverPitStop" (
     "id" TEXT NOT NULL,
     "lap" INTEGER NOT NULL,
     "timeMilliseconds" INTEGER,
     "eventSessionDriverId" TEXT NOT NULL,
 
-    CONSTRAINT "eventSessionDriverPitStop_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "EventSessionDriverPitStop_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "eventSessionDriverStartingGrid" (
+CREATE TABLE "EventSessionDriverStartingGrid" (
     "id" TEXT NOT NULL,
     "position" INTEGER,
     "time" TIMESTAMP(3),
     "note" TEXT,
     "eventSessionDriverId" TEXT NOT NULL,
 
-    CONSTRAINT "eventSessionDriverStartingGrid_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "EventSessionDriverStartingGrid_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "eventSessionDriverClassification" (
+CREATE TABLE "EventSessionDriverClassification" (
     "id" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "position" INTEGER,
@@ -196,7 +196,7 @@ CREATE TABLE "eventSessionDriverClassification" (
     "note" TEXT,
     "eventSessionDriverId" TEXT NOT NULL,
 
-    CONSTRAINT "eventSessionDriverClassification_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "EventSessionDriverClassification_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -292,19 +292,19 @@ ALTER TABLE "Event" ADD CONSTRAINT "Event_circuitId_fkey" FOREIGN KEY ("circuitI
 ALTER TABLE "EventSession" ADD CONSTRAINT "EventSession_eventId_fkey" FOREIGN KEY ("eventId") REFERENCES "Event"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "eventSessionDriver" ADD CONSTRAINT "eventSessionDriver_seasonDriverId_fkey" FOREIGN KEY ("seasonDriverId") REFERENCES "SeasonDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "EventSessionDriver" ADD CONSTRAINT "EventSessionDriver_seasonDriverId_fkey" FOREIGN KEY ("seasonDriverId") REFERENCES "SeasonDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "eventSessionDriver" ADD CONSTRAINT "eventSessionDriver_eventSessionId_fkey" FOREIGN KEY ("eventSessionId") REFERENCES "EventSession"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "EventSessionDriver" ADD CONSTRAINT "EventSessionDriver_eventSessionId_fkey" FOREIGN KEY ("eventSessionId") REFERENCES "EventSession"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "eventSessionDriverLap" ADD CONSTRAINT "eventSessionDriverLap_eventSessionDriverId_fkey" FOREIGN KEY ("eventSessionDriverId") REFERENCES "eventSessionDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "EventSessionDriverLap" ADD CONSTRAINT "EventSessionDriverLap_eventSessionDriverId_fkey" FOREIGN KEY ("eventSessionDriverId") REFERENCES "EventSessionDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "eventSessionDriverPitStop" ADD CONSTRAINT "eventSessionDriverPitStop_eventSessionDriverId_fkey" FOREIGN KEY ("eventSessionDriverId") REFERENCES "eventSessionDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "EventSessionDriverPitStop" ADD CONSTRAINT "EventSessionDriverPitStop_eventSessionDriverId_fkey" FOREIGN KEY ("eventSessionDriverId") REFERENCES "EventSessionDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "eventSessionDriverStartingGrid" ADD CONSTRAINT "eventSessionDriverStartingGrid_eventSessionDriverId_fkey" FOREIGN KEY ("eventSessionDriverId") REFERENCES "eventSessionDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "EventSessionDriverStartingGrid" ADD CONSTRAINT "EventSessionDriverStartingGrid_eventSessionDriverId_fkey" FOREIGN KEY ("eventSessionDriverId") REFERENCES "EventSessionDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "eventSessionDriverClassification" ADD CONSTRAINT "eventSessionDriverClassification_eventSessionDriverId_fkey" FOREIGN KEY ("eventSessionDriverId") REFERENCES "eventSessionDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "EventSessionDriverClassification" ADD CONSTRAINT "EventSessionDriverClassification_eventSessionDriverId_fkey" FOREIGN KEY ("eventSessionDriverId") REFERENCES "EventSessionDriver"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

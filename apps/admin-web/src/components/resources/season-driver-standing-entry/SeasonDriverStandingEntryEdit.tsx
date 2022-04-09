@@ -22,7 +22,7 @@ export const SeasonDriverStandingEntryEdit = (props: EditProps) => (
       </ReferenceInput>
       <NumberInput source="points" validate={required()} />
       <DateInput source="dateAt" validate={required()} />
-      <TextInput source="note" />
+      <TextInput source="note" multiline />
     </SimpleForm>
   </Edit>
 );

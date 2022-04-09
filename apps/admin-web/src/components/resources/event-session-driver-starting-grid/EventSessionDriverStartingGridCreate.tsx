@@ -8,7 +8,7 @@ export const EventSessionDriverStartingGridCreate = (props: CreateProps) => (
       </ReferenceInput>
       <TextInput source="position" />
       <TextInput source="time" />
-      <TextInput source="note" />
+      <TextInput source="note" multiline />
     </SimpleForm>
   </Create>
 );
