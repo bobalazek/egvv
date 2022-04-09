@@ -1,26 +1,17 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
-import { AllEventSessionDriverPitStopsArgs } from '../args/event-session-driver-pit-stop/all-event-session-driver-pit-stops.args';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionDriverPitStop } from '../models/event-session-driver-pit-stop.model';
 import { AbstractResolver } from './abstract.resolver';
+import { AllEventSessionDriverPitStopsArgs } from '../args/event-session-driver-pit-stop/all-event-session-driver-pit-stops.args';
 import { CreateEventSessionDriverPitStopArgs } from '../args/event-session-driver-pit-stop/create-event-session-driver-pit-stop.args';
 import { UpdateEventSessionDriverDriverPitStopArgs } from '../args/event-session-driver-pit-stop/update-event-session-driver-pit-stop.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(EventSessionDriverPitStop)
 export class EventSessionDriverPitStopResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => EventSessionDriverPitStop)
   async EventSessionDriverPitStop(@Args() args: IdArgs) {
     return this._prismaService.eventSessionDriverPitStop.findFirst({
@@ -32,12 +23,12 @@ export class EventSessionDriverPitStopResolver extends AbstractResolver {
 
   @Query(() => [EventSessionDriverPitStop])
   async allEventSessionDriverPitStops(@Args() args: AllEventSessionDriverPitStopsArgs) {
-    return this._prismaService.eventSessionDriverPitStop.findMany(this.getAllArgs(args, false));
+    return this._prismaService.eventSessionDriverPitStop.findMany(await this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionDriverPitStopsMeta(@Args() args: AllEventSessionDriverPitStopsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionDriverPitStop.count(this.getAllArgs(args, true));
+    const count = await this._prismaService.eventSessionDriverPitStop.count(await this.getAllArgs(args, true));
     return {
       count,
     };

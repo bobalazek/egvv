@@ -1,27 +1,18 @@
 import { Resolver, Query, Args, Parent, ResolveField, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
 import { IdArgs } from '../args/id.args';
-import { AllDriversArgs } from '../args/driver/all-drivers.args';
 import { Driver } from '../models/driver.model';
 import { SeasonDriver } from '../models/season-driver.model';
 import { ListMetadata } from '../models/list-metadata.model';
 import { AbstractResolver } from './abstract.resolver';
+import { AllDriversArgs } from '../args/driver/all-drivers.args';
 import { CreateDriverArgs } from '../args/driver/create-driver.args';
 import { UpdateDriverArgs } from '../args/driver/update-driver.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(Driver)
 export class DriverResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => Driver)
   async Driver(@Args() args: IdArgs) {
     return this._prismaService.driver.findFirst({
@@ -34,14 +25,14 @@ export class DriverResolver extends AbstractResolver {
   @Query(() => [Driver])
   async allDrivers(@Args() args: AllDriversArgs) {
     return this._prismaService.driver.findMany(
-      this.getAllArgs(args, false, ['slug', 'firstName', 'lastName', 'countryCode'])
+      await this.getAllArgs(args, false, ['slug', 'firstName', 'lastName', 'countryCode'])
     );
   }
 
   @Query(() => ListMetadata)
   async _allDriversMeta(@Args() args: AllDriversArgs): Promise<ListMetadata> {
     const count = await this._prismaService.driver.count(
-      this.getAllArgs(args, true, ['slug', 'firstName', 'lastName', 'countryCode'])
+      await this.getAllArgs(args, true, ['slug', 'firstName', 'lastName', 'countryCode'])
     );
     return {
       count,

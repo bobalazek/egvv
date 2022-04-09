@@ -1,27 +1,18 @@
 import { Resolver, Query, Parent, ResolveField, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
+import { AbstractResolver } from './abstract.resolver';
 import { IdArgs } from '../args/id.args';
 import { AllTeamsArgs } from '../args/team/all-teams.args';
 import { SeasonTeam } from '../models/season-team.model';
 import { Team } from '../models/team.model';
 import { ListMetadata } from '../models/list-metadata.model';
-import { AbstractResolver } from './abstract.resolver';
 import { CreateTeamArgs } from '../args/team/create-team.args';
 import { UpdateTeamArgs } from '../args/team/update-team.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(Team)
 export class TeamResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => Team)
   async Team(@Args() args: IdArgs) {
     return this._prismaService.team.findFirst({
@@ -33,13 +24,15 @@ export class TeamResolver extends AbstractResolver {
 
   @Query(() => [Team])
   async allTeams(@Args() args: AllTeamsArgs) {
-    return this._prismaService.team.findMany(this.getAllArgs(args, false, ['slug', 'name', 'location', 'countryCode']));
+    return this._prismaService.team.findMany(
+      await this.getAllArgs(args, false, ['slug', 'name', 'location', 'countryCode'])
+    );
   }
 
   @Query(() => ListMetadata)
   async _allTeamsMeta(@Args() args: AllTeamsArgs): Promise<ListMetadata> {
     const count = await this._prismaService.team.count(
-      this.getAllArgs(args, true, ['slug', 'name', 'location', 'countryCode'])
+      await this.getAllArgs(args, true, ['slug', 'name', 'location', 'countryCode'])
     );
     return {
       count,

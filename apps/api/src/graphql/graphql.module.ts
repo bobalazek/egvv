@@ -30,6 +30,7 @@ import { UserResolver } from './resolvers/user.resolver';
 import { AuthResolver } from './resolvers/auth.resolver';
 import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
+import { AbstractResolver } from './resolvers/abstract.resolver';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     PrismaService,
     AuthService,
     JwtStrategy,
+    AbstractResolver,
     SeriesResolver,
     CircuitResolver,
     TeamResolver,

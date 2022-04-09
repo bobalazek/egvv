@@ -1,26 +1,17 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
-import { AllEventSessionDriverLapsArgs } from '../args/event-session-driver-lap/all-event-session-driver-laps.args';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionDriverLap } from '../models/event-session-driver-lap.model';
 import { AbstractResolver } from './abstract.resolver';
+import { AllEventSessionDriverLapsArgs } from '../args/event-session-driver-lap/all-event-session-driver-laps.args';
 import { CreateEventSessionDriverLapArgs } from '../args/event-session-driver-lap/create-event-session-driver-lap.args';
 import { UpdateEventSessionDriverDriverLapArgs } from '../args/event-session-driver-lap/update-event-session-driver-lap.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(EventSessionDriverLap)
 export class EventSessionDriverLapResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => EventSessionDriverLap)
   async EventSessionDriverLap(@Args() args: IdArgs) {
     return this._prismaService.eventSessionDriverLap.findFirst({
@@ -32,12 +23,12 @@ export class EventSessionDriverLapResolver extends AbstractResolver {
 
   @Query(() => [EventSessionDriverLap])
   async allEventSessionDriverLaps(@Args() args: AllEventSessionDriverLapsArgs) {
-    return this._prismaService.eventSessionDriverLap.findMany(this.getAllArgs(args, false));
+    return this._prismaService.eventSessionDriverLap.findMany(await this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionDriverLapsMeta(@Args() args: AllEventSessionDriverLapsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionDriverLap.count(this.getAllArgs(args, true));
+    const count = await this._prismaService.eventSessionDriverLap.count(await this.getAllArgs(args, true));
     return {
       count,
     };

@@ -15,14 +15,6 @@ import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(EventSession)
 export class EventSessionResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => EventSession)
   async EventSession(@Args() args: IdArgs) {
     return this._prismaService.eventSession.findFirst({
@@ -34,51 +26,32 @@ export class EventSessionResolver extends AbstractResolver {
 
   @Query(() => [EventSession])
   async allEventSessions(@Args() args: AllEventSessionsArgs) {
-    const prismaArgs = this.getAllArgs(args, false, ['name'], ['eventId']);
-
-    const eventSeasonIds: string[] = [];
-    if (args.filter?.seasonTeamId) {
-      const seasonTeam = await this._prismaService.seasonTeam.findFirst({
-        where: {
-          id: args.filter.seasonTeamId,
+    const prismaArgs = await this.getAllArgs(
+      args,
+      false,
+      ['slug', 'name'],
+      [
+        'eventId',
+        { filterField: 'seasonTeamId', parentModel: 'event', model: 'seasonTeam', modelField: 'seasonId' },
+        {
+          filterField: 'seasonDriverId',
+          parentModel: 'event',
+          model: 'seasonDriver',
+          modelField: 'seasonId',
+          modelFieldParent: 'seasonTeam',
+          modelInclude: {
+            seasonTeam: true,
+          },
         },
-      });
-      if (seasonTeam) {
-        eventSeasonIds.push(seasonTeam.seasonId);
-      }
-    }
-    if (args.filter?.seasonDriverId) {
-      const seasonDriver = await this._prismaService.seasonDriver.findFirst({
-        where: {
-          id: args.filter.seasonDriverId,
-        },
-        include: {
-          seasonTeam: true,
-        },
-      });
-      if (seasonDriver) {
-        eventSeasonIds.push(seasonDriver.seasonTeam.seasonId);
-      }
-    }
-
-    if (eventSeasonIds.length) {
-      if (!prismaArgs.where) {
-        prismaArgs.where = {};
-      }
-
-      prismaArgs.where.event = {
-        seasonId: {
-          in: eventSeasonIds,
-        },
-      };
-    }
+      ]
+    );
 
     return this._prismaService.eventSession.findMany(prismaArgs);
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionsMeta(@Args() args: AllEventSessionsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSession.count(this.getAllArgs(args, true, [], ['eventId']));
+    const count = await this._prismaService.eventSession.count(await this.getAllArgs(args, true, [], ['eventId']));
     return {
       count,
     };

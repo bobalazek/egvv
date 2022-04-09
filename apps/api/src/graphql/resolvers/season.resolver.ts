@@ -1,28 +1,19 @@
 import { Resolver, Query, Args, ResolveField, Parent, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
+import { AbstractResolver } from './abstract.resolver';
 import { IdArgs } from '../args/id.args';
 import { AllSeasonsArgs } from '../args/season/all-seasons.args';
 import { SeasonTeam } from '../models/season-team.model';
 import { Season } from '../models/season.model';
 import { Series } from '../models/series.model';
 import { ListMetadata } from '../models/list-metadata.model';
-import { AbstractResolver } from './abstract.resolver';
 import { CreateSeasonArgs } from '../args/season/create-season.args';
 import { UpdateSeasonArgs } from '../args/season/update-season.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(Season)
 export class SeasonResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => Season)
   async Season(@Args() args: IdArgs) {
     return this._prismaService.season.findFirst({
@@ -34,12 +25,14 @@ export class SeasonResolver extends AbstractResolver {
 
   @Query(() => [Season])
   async allSeasons(@Args() args: AllSeasonsArgs) {
-    return this._prismaService.season.findMany(this.getAllArgs(args, false, ['slug', 'name'], ['seriesId']));
+    return this._prismaService.season.findMany(await this.getAllArgs(args, false, ['slug', 'name'], ['seriesId']));
   }
 
   @Query(() => ListMetadata)
   async _allSeasonsMeta(@Args() args: AllSeasonsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.season.count(this.getAllArgs(args, true, ['slug', 'name'], ['seriesId']));
+    const count = await this._prismaService.season.count(
+      await this.getAllArgs(args, true, ['slug', 'name'], ['seriesId'])
+    );
     return {
       count,
     };

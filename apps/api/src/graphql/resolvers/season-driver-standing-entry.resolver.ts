@@ -1,13 +1,12 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
+import { AbstractResolver } from './abstract.resolver';
+import { IdArgs } from '../args/id.args';
 import { SeasonDriverStandingEntry } from '../models/season-driver-standing-entry.model';
 import { EventSession } from '../models/event-session.model';
 import { SeasonTeam } from '../models/season-team.model';
 import { ListMetadata } from '../models/list-metadata.model';
-import { AbstractResolver } from './abstract.resolver';
-import { IdArgs } from '../args/id.args';
 import { AllSeasonDriverStandingEntriesArgs } from '../args/season-driver-standing-entry/all-season-driver-standing-entries.args';
 import { CreateSeasonDriverStandingEntryArgs } from '../args/season-driver-standing-entry/create-season-driver-standing-entry.args';
 import { UpdateSeasonDriverStandingEntryArgs } from '../args/season-driver-standing-entry/update-season-driver-standing-entry.args';
@@ -15,14 +14,6 @@ import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(SeasonDriverStandingEntry)
 export class SeasonDriverStandingEntryResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => SeasonDriverStandingEntry)
   async SeasonDriverStandingEntry(@Args() args: IdArgs) {
     return this._prismaService.seasonDriverStandingEntry.findFirst({
@@ -34,12 +25,12 @@ export class SeasonDriverStandingEntryResolver extends AbstractResolver {
 
   @Query(() => [SeasonDriverStandingEntry])
   async allSeasonDriverStandingEntries(@Args() args: AllSeasonDriverStandingEntriesArgs) {
-    return this._prismaService.seasonDriverStandingEntry.findMany(this.getAllArgs(args, false));
+    return this._prismaService.seasonDriverStandingEntry.findMany(await this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allSeasonDriverStandingEntriesMeta(@Args() args: AllSeasonDriverStandingEntriesArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.seasonDriverStandingEntry.count(this.getAllArgs(args, true));
+    const count = await this._prismaService.seasonDriverStandingEntry.count(await this.getAllArgs(args, true));
     return {
       count,
     };

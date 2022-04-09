@@ -1,11 +1,10 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
+import { IdArgs } from '../args/id.args';
 import { AllEventSessionDriversArgs } from '../args/event-session-driver/all-event-session-drivers.args';
 import { CreateEventSessionDriverArgs } from '../args/event-session-driver/create-event-session-driver.args';
 import { UpdateEventSessionDriverDriverArgs } from '../args/event-session-driver/update-event-session-driver.args';
-import { IdArgs } from '../args/id.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 import { EventSessionDriver } from '../models/event-session-driver.model';
 import { EventSession } from '../models/event-session.model';
@@ -15,14 +14,6 @@ import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(EventSessionDriver)
 export class EventSessionDriverResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => EventSessionDriver)
   async EventSessionDriver(@Args() args: IdArgs) {
     return this._prismaService.eventSessionDriver.findFirst({
@@ -34,12 +25,12 @@ export class EventSessionDriverResolver extends AbstractResolver {
 
   @Query(() => [EventSessionDriver])
   async allEventSessionDrivers(@Args() args: AllEventSessionDriversArgs) {
-    return this._prismaService.eventSessionDriver.findMany(this.getAllArgs(args, false));
+    return this._prismaService.eventSessionDriver.findMany(await this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionDriversMeta(@Args() args: AllEventSessionDriversArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionDriver.count(this.getAllArgs(args, true));
+    const count = await this._prismaService.eventSessionDriver.count(await this.getAllArgs(args, true));
     return {
       count,
     };

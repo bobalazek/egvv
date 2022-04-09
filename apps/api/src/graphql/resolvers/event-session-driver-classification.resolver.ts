@@ -1,26 +1,17 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
-import { AllEventSessionDriverClassificationsArgs } from '../args/event-session-driver-classification/all-event-session-driver-classificaitions.args';
+import { AbstractResolver } from './abstract.resolver';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionDriverClassification } from '../models/event-session-driver-classification.model';
-import { AbstractResolver } from './abstract.resolver';
+import { AllEventSessionDriverClassificationsArgs } from '../args/event-session-driver-classification/all-event-session-driver-classificaitions.args';
 import { CreateEventSessionDriverClassificationArgs } from '../args/event-session-driver-classification/create-event-session-driver-classification.args';
 import { UpdateEventSessionDriverDriverClassificationArgs } from '../args/event-session-driver-classification/update-event-session-driver-classification.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(EventSessionDriverClassification)
 export class EventSessionDriverClassificationResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => EventSessionDriverClassification)
   async EventSessionDriverClassification(@Args() args: IdArgs) {
     return this._prismaService.eventSessionDriverClassification.findFirst({
@@ -32,14 +23,14 @@ export class EventSessionDriverClassificationResolver extends AbstractResolver {
 
   @Query(() => [EventSessionDriverClassification])
   async allEventSessionDriverClassifications(@Args() args: AllEventSessionDriverClassificationsArgs) {
-    return this._prismaService.eventSessionDriverClassification.findMany(this.getAllArgs(args, false));
+    return this._prismaService.eventSessionDriverClassification.findMany(await this.getAllArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionDriverClassificationsMeta(
     @Args() args: AllEventSessionDriverClassificationsArgs
   ): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionDriverClassification.count(this.getAllArgs(args, true));
+    const count = await this._prismaService.eventSessionDriverClassification.count(await this.getAllArgs(args, true));
     return {
       count,
     };

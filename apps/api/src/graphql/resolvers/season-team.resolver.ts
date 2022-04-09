@@ -2,8 +2,7 @@ import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/g
 import { UpdateSeasonTeamArgs } from '../args/season-team/update-season-team.args';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
-import { AllSeasonTeamsArgs } from '../args/season-team/all-season-teams.args';
+import { AbstractResolver } from './abstract.resolver';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { SeasonDriver } from '../models/season-driver.model';
@@ -11,20 +10,12 @@ import { SeasonTeamStandingEntry } from '../models/season-team-standing-entry.mo
 import { SeasonTeam } from '../models/season-team.model';
 import { Season } from '../models/season.model';
 import { Team } from '../models/team.model';
-import { AbstractResolver } from './abstract.resolver';
+import { AllSeasonTeamsArgs } from '../args/season-team/all-season-teams.args';
 import { CreateSeasonTeamArgs } from '../args/season-team/create-season-team.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
 @Resolver(SeasonTeam)
 export class SeasonTeamResolver extends AbstractResolver {
-  private _prismaService: PrismaService;
-
-  constructor(prismaService: PrismaService) {
-    super();
-
-    this._prismaService = prismaService;
-  }
-
   @Query(() => SeasonTeam)
   async SeasonTeam(@Args() args: IdArgs) {
     return this._prismaService.seasonTeam.findFirst({
@@ -37,14 +28,14 @@ export class SeasonTeamResolver extends AbstractResolver {
   @Query(() => [SeasonTeam])
   async allSeasonTeams(@Args() args: AllSeasonTeamsArgs) {
     return this._prismaService.seasonTeam.findMany(
-      this.getAllArgs(args, false, ['name', 'shortName', 'powerUnit', 'chassis', 'season.name'])
+      await this.getAllArgs(args, false, ['name', 'shortName', 'powerUnit', 'chassis', 'season.name'])
     );
   }
 
   @Query(() => ListMetadata)
   async _allSeasonTeamsMeta(@Args() args: AllSeasonTeamsArgs): Promise<ListMetadata> {
     const count = await this._prismaService.seasonTeam.count(
-      this.getAllArgs(args, true, ['name', 'shortName', 'powerUnit', 'chassis', 'season.name'])
+      await this.getAllArgs(args, true, ['name', 'shortName', 'powerUnit', 'chassis', 'season.name'])
     );
 
     return {
