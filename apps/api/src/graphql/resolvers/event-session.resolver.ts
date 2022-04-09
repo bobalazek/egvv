@@ -32,16 +32,13 @@ export class EventSessionResolver extends AbstractResolver {
       ['slug', 'name'],
       [
         'eventId',
-        { filterField: 'seasonTeamId', parentModel: 'event', model: 'seasonTeam', modelField: 'seasonId' },
+        { filterField: 'seasonTeamId', baseModel: 'seasonTeam', model: 'event', modelField: 'seasonId' },
         {
           filterField: 'seasonDriverId',
-          parentModel: 'event',
-          model: 'seasonDriver',
+          baseModel: 'seasonDriver',
+          model: 'event',
           modelField: 'seasonId',
           modelFieldParent: 'seasonTeam',
-          modelInclude: {
-            seasonTeam: true,
-          },
         },
       ]
     );

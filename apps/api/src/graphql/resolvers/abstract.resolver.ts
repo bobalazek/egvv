@@ -9,13 +9,18 @@ type KeyValueMap = { [key: string]: any };
 
 type ExactFilterField =
   | string
+  // This is rather difficult to explain. Check the code down below or check the example in event-sesion.resolver.ts
+  // Basically:
+  // * filterField - value of which field should be taken (in args[{filterField}]), to get the entity?
+  // * model - what parent modal are we searching in?
+  // * modelField - which field of that model are we searching?
+  // * modelFieldParent - if we are going 2 levels deep, which is the parent model we want to access the modelField from?
   | {
       filterField: string;
-      parentModel: string;
+      baseModel: string;
       model: string;
       modelField: string;
       modelFieldParent?: string;
-      modelInclude?: { [key: string]: boolean };
     };
 
 @Injectable()
@@ -95,27 +100,31 @@ export class AbstractResolver {
 
     for (const field of allowedExactFilterFields) {
       if (typeof field !== 'string') {
-        const entity = await this._prismaService[field.model].findFirst({
+        const entity = await this._prismaService[field.baseModel].findFirst({
           where: {
             id: args.filter[field.filterField],
           },
-          include: field.modelInclude,
+          include: field.modelFieldParent
+            ? {
+                [field.modelFieldParent]: true,
+              }
+            : undefined,
         });
         if (!entity) {
           continue;
         }
 
-        if (!where[field.parentModel]) {
-          where[field.parentModel] = {};
+        if (!where[field.model]) {
+          where[field.model] = {};
         }
-        if (!where[field.parentModel]?.[field.modelField]) {
-          where[field.parentModel][field.modelField] = {};
+        if (!where[field.model]?.[field.modelField]) {
+          where[field.model][field.modelField] = {};
         }
-        if (!where[field.parentModel]?.[field.modelField]?.in) {
-          where[field.parentModel][field.modelField].in = [];
+        if (!where[field.model]?.[field.modelField]?.in) {
+          where[field.model][field.modelField].in = [];
         }
 
-        where[field.parentModel][field.modelField].in.push(
+        where[field.model][field.modelField].in.push(
           field.modelFieldParent ? entity[field.modelFieldParent][field.modelField] : entity[field.modelField]
         );
 
