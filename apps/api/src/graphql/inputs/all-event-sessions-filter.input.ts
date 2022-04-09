@@ -8,4 +8,7 @@ export class AllEventSessionsFilterInput extends AllFilterInput {
 
   @Field({ nullable: true })
   seasonTeamId?: string;
+
+  @Field({ nullable: true })
+  seasonDriverId?: string;
 }

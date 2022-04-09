@@ -34,22 +34,43 @@ export class EventSessionResolver extends AbstractResolver {
 
   @Query(() => [EventSession])
   async allEventSessions(@Args() args: AllEventSessionsArgs) {
-    const prismaArgs = this.getAllArgs(args, false, [], ['eventId']);
-    if (args.filter?.seasonTeamId) {
-      if (!prismaArgs.where) {
-        prismaArgs.where = {};
-      }
+    const prismaArgs = this.getAllArgs(args, false, ['name'], ['eventId']);
 
+    const eventSeasonIds: string[] = [];
+    if (args.filter?.seasonTeamId) {
       const seasonTeam = await this._prismaService.seasonTeam.findFirst({
         where: {
           id: args.filter.seasonTeamId,
         },
       });
       if (seasonTeam) {
-        prismaArgs.where.event = {
-          seasonId: seasonTeam.seasonId,
-        };
+        eventSeasonIds.push(seasonTeam.seasonId);
       }
+    }
+    if (args.filter?.seasonDriverId) {
+      const seasonDriver = await this._prismaService.seasonDriver.findFirst({
+        where: {
+          id: args.filter.seasonDriverId,
+        },
+        include: {
+          seasonTeam: true,
+        },
+      });
+      if (seasonDriver) {
+        eventSeasonIds.push(seasonDriver.seasonTeam.seasonId);
+      }
+    }
+
+    if (eventSeasonIds.length) {
+      if (!prismaArgs.where) {
+        prismaArgs.where = {};
+      }
+
+      prismaArgs.where.event = {
+        seasonId: {
+          in: eventSeasonIds,
+        },
+      };
     }
 
     return this._prismaService.eventSession.findMany(prismaArgs);
