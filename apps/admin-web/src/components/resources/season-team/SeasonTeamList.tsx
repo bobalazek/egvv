@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  BooleanField,
   ReferenceField,
   ShowButton,
   EditButton,
@@ -23,7 +22,6 @@ export const SeasonTeamList = (props: ListProps) => (
       <TextField source="shortName" />
       <TextField source="powerUnit" />
       <TextField source="chassis" />
-      <BooleanField source="isDefunct" />
       <ReferenceField source="seasonId" reference="Season">
         <TextField source="name" />
       </ReferenceField>

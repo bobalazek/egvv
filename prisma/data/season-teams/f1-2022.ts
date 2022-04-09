@@ -31,7 +31,7 @@ export default [
     name: 'Aston Martin Cognizant F1 Team',
     shortName: 'Aston Martin Aramco Mercedes',
     powerUnit: 'Mercedes',
-    chassis: 'AMR21',
+    chassis: 'AMR22',
     teamSlug: 'aston-martin',
   },
   {

@@ -18,9 +18,6 @@ export class SeasonTeam {
   chassis: string;
 
   @Field()
-  isDefunct: boolean;
-
-  @Field()
   seasonId: string;
 
   @Field()

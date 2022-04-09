@@ -1,13 +1,4 @@
-import {
-  SimpleForm,
-  TextInput,
-  required,
-  BooleanInput,
-  ReferenceInput,
-  Edit,
-  AutocompleteInput,
-  EditProps,
-} from 'react-admin';
+import { SimpleForm, TextInput, required, ReferenceInput, Edit, AutocompleteInput, EditProps } from 'react-admin';
 
 export const SeasonTeamEdit = (props: EditProps) => (
   <Edit {...props}>
@@ -17,7 +8,6 @@ export const SeasonTeamEdit = (props: EditProps) => (
       <TextInput source="shortName" validate={required()} />
       <TextInput source="powerUnit" validate={required()} />
       <TextInput source="chassis" validate={required()} />
-      <BooleanInput source="isDefunct" validate={required()} />
       <ReferenceInput source="seasonId" reference="Season" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>

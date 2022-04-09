@@ -18,9 +18,6 @@ export class UpdateSeasonTeamArgs {
   chassis: string;
 
   @Field()
-  isDefunct: boolean;
-
-  @Field()
   seasonId: string;
 
   @Field()

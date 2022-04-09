@@ -72,7 +72,6 @@ model SeasonTeam {
   shortName                 String // "Mercedes", "Ferrari", "McLaren Mercedes", "Williams Mercedes", ...
   powerUnit                 String
   chassis                   String
-  isDefunct                 Boolean                   @default(false)
   seasonId                  String
   season                    Season                    @relation(name: "SeasonTeam_Season", fields: [seasonId], references: [id])
   teamId                    String

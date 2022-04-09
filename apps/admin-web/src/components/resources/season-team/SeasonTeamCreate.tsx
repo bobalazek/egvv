@@ -1,13 +1,4 @@
-import {
-  Create,
-  SimpleForm,
-  TextInput,
-  required,
-  BooleanInput,
-  ReferenceInput,
-  AutocompleteInput,
-  CreateProps,
-} from 'react-admin';
+import { Create, SimpleForm, TextInput, required, ReferenceInput, AutocompleteInput, CreateProps } from 'react-admin';
 
 export const SeasonTeamCreate = (props: CreateProps) => (
   <Create {...props}>
@@ -16,7 +7,6 @@ export const SeasonTeamCreate = (props: CreateProps) => (
       <TextInput source="shortName" validate={required()} />
       <TextInput source="powerUnit" validate={required()} />
       <TextInput source="chassis" validate={required()} />
-      <BooleanInput source="isDefunct" validate={required()} />
       <ReferenceInput source="seasonId" reference="Season" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
