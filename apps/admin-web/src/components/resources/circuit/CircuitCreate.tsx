@@ -9,6 +9,7 @@ export const CircuitCreate = (props: CreateProps) => (
       <TextInput source="locationLatitude" />
       <TextInput source="locationLongitude" />
       <TextInput source="countryCode" validate={required()} />
+      <TextInput source="timezone" validate={required()} />
       <TextInput source="url" validate={required()} />
     </SimpleForm>
   </Create>

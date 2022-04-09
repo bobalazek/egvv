@@ -10,6 +10,7 @@ export const CircuitEdit = (props: EditProps) => (
       <TextInput source="locationLatitude" />
       <TextInput source="locationLongitude" />
       <TextInput source="countryCode" validate={required()} />
+      <TextInput source="timezone" validate={required()} />
       <TextInput source="url" validate={required()} />
     </SimpleForm>
   </Edit>

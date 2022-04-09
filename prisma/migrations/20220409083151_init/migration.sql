@@ -30,6 +30,7 @@ CREATE TABLE "Circuit" (
     "locationLatitude" DOUBLE PRECISION,
     "locationLongitude" DOUBLE PRECISION,
     "countryCode" TEXT NOT NULL,
+    "timezone" TEXT NOT NULL,
     "url" TEXT NOT NULL,
 
     CONSTRAINT "Circuit_pkey" PRIMARY KEY ("id")

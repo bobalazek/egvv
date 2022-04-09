@@ -36,6 +36,7 @@ model Circuit {
   locationLatitude  Float?
   locationLongitude Float?
   countryCode       String
+  timezone          String
   url               String
   events            Event[] @relation(name: "Event_Circuit")
 }

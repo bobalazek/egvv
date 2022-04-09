@@ -21,5 +21,8 @@ export class CreateCircuitArgs {
   countryCode: string;
 
   @Field()
+  timezone: string;
+
+  @Field()
   url: string;
 }

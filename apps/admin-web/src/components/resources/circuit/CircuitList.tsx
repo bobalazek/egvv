@@ -15,6 +15,7 @@ export const CircuitList = (props: ListProps) => (
       <TextField source="locationLatitude" />
       <TextField source="locationLongitude" />
       <TextField source="countryCode" />
+      <TextField source="timezone" />
       <TextField source="url" />
       <ShowButton />
       <EditButton />

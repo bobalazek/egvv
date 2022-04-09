@@ -4,6 +4,7 @@ export default [
     slug: 'bahrain',
     location: 'Sakhir',
     countryCode: 'BH',
+    timezone: 'Asia/Qatar',
     url: 'https://en.wikipedia.org/wiki/Bahrain_International_Circuit',
   },
   {
@@ -11,6 +12,7 @@ export default [
     slug: 'imola',
     location: 'Imola, Emilia-Romagna',
     countryCode: 'IT',
+    timezone: 'Europe/Rome',
     url: 'https://en.wikipedia.org/wiki/Imola_Circuit',
   },
   {
@@ -18,6 +20,7 @@ export default [
     slug: 'portimao',
     location: 'Portimão, Algarve',
     countryCode: 'PT',
+    timezone: 'Europe/Lisbon',
     url: 'https://en.wikipedia.org/wiki/Algarve_International_Circuit',
   },
   {
@@ -25,6 +28,7 @@ export default [
     slug: 'barcelona-catalunya',
     location: 'Montmeló, Catalonia',
     countryCode: 'ES',
+    timezone: 'Europe/Madrid',
     url: 'https://en.wikipedia.org/wiki/Circuit_de_Barcelona-Catalunya',
   },
   {
@@ -32,6 +36,7 @@ export default [
     slug: 'monaco',
     location: 'Monte Carlo',
     countryCode: 'MC',
+    timezone: 'Europe/Monaco',
     url: 'https://en.wikipedia.org/wiki/Circuit_de_Monaco',
   },
   {
@@ -39,6 +44,7 @@ export default [
     slug: 'baku',
     location: 'Azadliq Square, Baku',
     countryCode: 'AZ',
+    timezone: 'Asia/Baku',
     url: 'https://en.wikipedia.org/wiki/Baku_City_Circuit',
   },
   {
@@ -46,6 +52,7 @@ export default [
     slug: 'gilles-villeneuve',
     location: 'Parc Jean-Drapeau, Montreal, Quebec',
     countryCode: 'CA',
+    timezone: 'America/Toronto',
     url: 'https://en.wikipedia.org/wiki/Circuit_Gilles_Villeneuve',
   },
   {
@@ -53,6 +60,7 @@ export default [
     slug: 'paul-ricard',
     location: 'Le Castellet',
     countryCode: 'FR',
+    timezone: 'Europe/Paris',
     url: 'https://en.wikipedia.org/wiki/Circuit_Paul_Ricard',
   },
   {
@@ -60,6 +68,7 @@ export default [
     slug: 'red-bull-ring',
     location: 'Spielberg, Styria',
     countryCode: 'AT',
+    timezone: 'Europe/Vienna',
     url: 'https://en.wikipedia.org/wiki/Red_Bull_Ring',
   },
   {
@@ -67,6 +76,7 @@ export default [
     slug: 'silverstone',
     location: 'Silverstone, Northamptonshire',
     countryCode: 'GB',
+    timezone: 'Europe/London',
     url: 'https://en.wikipedia.org/wiki/Silverstone_Circuit',
   },
   {
@@ -74,6 +84,7 @@ export default [
     slug: 'hungaroring',
     location: 'Mogyoród',
     countryCode: 'HU',
+    timezone: 'Europe/Budapest',
     url: 'https://en.wikipedia.org/wiki/Hungaroring',
   },
   {
@@ -81,6 +92,7 @@ export default [
     slug: 'spa',
     location: 'Stavelot',
     countryCode: 'BE',
+    timezone: 'Europe/Brussels',
     url: 'https://en.wikipedia.org/wiki/Circuit_de_Spa-Francorchamps',
   },
   {
@@ -88,6 +100,7 @@ export default [
     slug: 'zandvoort',
     location: 'Zandvoort, North Holland',
     countryCode: 'NL',
+    timezone: 'Europe/Amsterdam',
     url: 'https://en.wikipedia.org/wiki/Circuit_Zandvoort',
   },
   {
@@ -95,6 +108,7 @@ export default [
     slug: 'monza',
     location: 'Monza',
     countryCode: 'IT',
+    timezone: 'Europe/Rome',
     url: 'https://en.wikipedia.org/wiki/Autodromo_Nazionale_di_Monza',
   },
   {
@@ -102,6 +116,7 @@ export default [
     slug: 'mugello',
     location: 'Mugello',
     countryCode: 'IT',
+    timezone: 'Europe/Rome',
     url: 'https://en.wikipedia.org/wiki/Mugello_Circuit',
   },
   {
@@ -109,6 +124,7 @@ export default [
     slug: 'sochi',
     location: 'Sochi, Krasnodar Krai',
     countryCode: 'RU',
+    timezone: 'Europe/Moscow',
     url: 'https://en.wikipedia.org/wiki/Sochi_Autodrom',
   },
   {
@@ -116,6 +132,7 @@ export default [
     slug: 'marina-bay-street',
     location: 'Downtown Core and Kallang',
     countryCode: 'SG',
+    timezone: 'Asia/Singapore',
     url: 'https://en.wikipedia.org/wiki/Marina_Bay_Street_Circuit',
   },
   {
@@ -123,6 +140,7 @@ export default [
     slug: 'suzuka',
     location: 'Suzuka, Mie Prefecture',
     countryCode: 'JP',
+    timezone: 'Japan/Tokyo',
     url: 'https://en.wikipedia.org/wiki/Suzuka_International_Racing_Course',
   },
   {
@@ -130,6 +148,7 @@ export default [
     slug: 'cota',
     location: 'Austin, Texas',
     countryCode: 'US',
+    timezone: 'America/Chicago',
     url: 'https://en.wikipedia.org/wiki/Circuit_of_the_Americas',
   },
   {
@@ -137,6 +156,7 @@ export default [
     slug: 'hermanos-rodriguez',
     location: 'Mexico City',
     countryCode: 'ME',
+    timezone: 'America/Mexico_City',
     url: 'https://en.wikipedia.org/wiki/Aut%C3%B3dromo_Hermanos_Rodr%C3%ADguez',
   },
   {
@@ -144,6 +164,7 @@ export default [
     slug: 'interlagos',
     location: 'São Paulo',
     countryCode: 'BR',
+    timezone: 'America/Sao_Paulo',
     url: 'https://en.wikipedia.org/wiki/Interlagos_Circuit',
   },
   {
@@ -151,6 +172,7 @@ export default [
     slug: 'albert-park',
     location: 'Albert Park, Melbourne, Victoria',
     countryCode: 'AU',
+    timezone: 'Australia/Melbourne',
     url: 'https://en.wikipedia.org/wiki/Albert_Park_Circuit',
   },
   {
@@ -158,6 +180,7 @@ export default [
     slug: 'yas-marina',
     location: 'Yas Island, Abu Dhabi',
     countryCode: 'AE',
+    timezone: 'Asia/Dubai',
     url: 'https://en.wikipedia.org/wiki/Yas_Marina_Circuit',
   },
   {
@@ -165,6 +188,7 @@ export default [
     slug: 'nurburgring',
     location: 'Nürburg',
     countryCode: 'DE',
+    timezone: 'Europe/Berlin',
     url: 'https://en.wikipedia.org/wiki/N%C3%BCrburgring',
   },
   {
@@ -172,6 +196,7 @@ export default [
     slug: 'istanbul',
     location: 'Tuzla, Istanbul',
     countryCode: 'TR',
+    timezone: 'Europe/Istanbul',
     url: 'https://en.wikipedia.org/wiki/Istanbul_Park',
   },
   {
@@ -179,6 +204,7 @@ export default [
     slug: 'mugello',
     location: 'Scarperia e San Piero, Tuscany',
     countryCode: 'IT',
+    timezone: 'Europe/Rome',
     url: 'https://en.wikipedia.org/wiki/Mugello_Circuit',
   },
   {
@@ -186,6 +212,7 @@ export default [
     slug: 'shanghai',
     location: 'Shanghai',
     countryCode: 'CN',
+    timezone: 'Asia/Shanghai',
     url: 'https://en.wikipedia.org/wiki/Shanghai_International_Circuit',
   },
   {
@@ -193,6 +220,7 @@ export default [
     slug: 'hockenheimring',
     location: 'Hockenheim',
     countryCode: 'DE',
+    timezone: 'Europe/Berlin',
     url: 'https://en.wikipedia.org/wiki/Hockenheimring',
   },
   {
@@ -200,6 +228,7 @@ export default [
     slug: 'marina-bay',
     location: 'Marina Bay',
     countryCode: 'SG',
+    timezone: 'Asia/Singapore',
     url: 'https://en.wikipedia.org/wiki/Marina_Bay_Street_Circuit',
   },
   {
@@ -207,6 +236,7 @@ export default [
     slug: 'losail',
     location: 'Lusail',
     countryCode: 'QA',
+    timezone: 'Asia/Qatar',
     url: 'https://en.wikipedia.org/wiki/Losail_International_Circuit',
   },
   {
@@ -214,6 +244,7 @@ export default [
     slug: 'jeddah',
     location: 'Jeddah',
     countryCode: 'SA',
+    timezone: 'Asia/Riyadh',
     url: 'https://en.wikipedia.org/wiki/Jeddah_Corniche_Circuit',
   },
 ];

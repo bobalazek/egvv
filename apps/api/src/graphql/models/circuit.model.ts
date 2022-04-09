@@ -24,5 +24,8 @@ export class Circuit {
   countryCode: string;
 
   @Field()
+  timezone: string;
+
+  @Field()
   url: string;
 }
