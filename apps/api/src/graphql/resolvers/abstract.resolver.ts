@@ -10,6 +10,8 @@ type KeyValueMap = { [key: string]: any };
 type ExactFilterField = {
   filterField: string;
   model?: string;
+  sourceModel?: string; // if the filter links to another entity, which one is it? Ex. event-session.resolver.ts
+  sourceField?: string;
 };
 
 @Injectable()
@@ -91,21 +93,36 @@ export class AbstractResolver {
       const andWhere: KeyValueMap[] = [];
 
       for (const field of allowedExactFilterFields) {
-        const filterFieldValue = args.filter[field.filterField];
+        let filterFieldValue = args.filter[field.filterField];
         if (!filterFieldValue) {
           continue;
+        }
+
+        let whereField = field.filterField;
+        if (field.sourceField && field.sourceModel) {
+          const model = await this._prismaService[field.sourceModel].findFirst({
+            where: {
+              id: filterFieldValue,
+            },
+          });
+          if (!model) {
+            continue;
+          }
+
+          whereField = field.sourceField;
+          filterFieldValue = model[whereField];
         }
 
         let exactFilterFieldWhere = {};
         if (field.model) {
           exactFilterFieldWhere = {
             [field.model]: {
-              [field.filterField]: filterFieldValue,
+              [whereField]: filterFieldValue,
             },
           };
         } else {
           exactFilterFieldWhere = {
-            [field.filterField]: filterFieldValue,
+            [whereField]: filterFieldValue,
           };
         }
 

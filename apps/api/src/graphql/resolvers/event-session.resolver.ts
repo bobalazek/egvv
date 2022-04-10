@@ -26,18 +26,24 @@ export class EventSessionResolver extends AbstractResolver {
 
   @Query(() => [EventSession])
   async allEventSessions(@Args() args: AllEventSessionsArgs) {
-    const prismaArgs = await this.getAllArgs(
-      args,
-      false,
-      ['slug', 'name'],
-      [
-        {
-          filterField: 'eventId',
-        },
-      ]
+    return this._prismaService.eventSession.findMany(
+      await this.getAllArgs(
+        args,
+        false,
+        ['slug', 'name'],
+        [
+          {
+            filterField: 'eventId',
+          },
+          {
+            filterField: 'seasonTeamId',
+            model: 'event',
+            sourceField: 'seasonId',
+            sourceModel: 'seasonTeam',
+          },
+        ]
+      )
     );
-
-    return this._prismaService.eventSession.findMany(prismaArgs);
   }
 
   @Query(() => ListMetadata)
@@ -51,16 +57,12 @@ export class EventSessionResolver extends AbstractResolver {
           {
             filterField: 'eventId',
           },
-          /*
-          { filterField: 'seasonTeamId', baseModel: 'seasonTeam', model: 'event', modelField: 'seasonId' },
           {
-            filterField: 'seasonDriverId',
-            baseModel: 'seasonDriver',
+            filterField: 'seasonTeamId',
             model: 'event',
-            modelField: 'seasonId',
-            modelFieldParent: 'seasonTeam',
+            sourceField: 'seasonId',
+            sourceModel: 'seasonTeam',
           },
-          */
         ]
       )
     );
