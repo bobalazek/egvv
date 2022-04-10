@@ -36,6 +36,9 @@ export class SeasonDriverResolver extends AbstractResolver {
             filterField: 'seasonId',
             model: 'seasonTeam',
           },
+          {
+            filterField: 'seasonTeamId',
+          },
         ]
       )
     );

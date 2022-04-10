@@ -5,4 +5,7 @@ import { AllFilterInput } from './all-filter.input';
 export class AllSeasonDriversFilterInput extends AllFilterInput {
   @Field({ nullable: true })
   seasonId?: string;
+
+  @Field({ nullable: true })
+  seasonTeamId?: string;
 }

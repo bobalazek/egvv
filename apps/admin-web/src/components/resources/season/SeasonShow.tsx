@@ -10,10 +10,27 @@ import {
   Datagrid,
   ShowButton,
   EditButton,
+  CreateButton,
+  BooleanField,
 } from 'react-admin';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SeasonShowTitle = (data: any) => <span>Seasons - {data.record.name}</span>;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const SeriesShowAddTeamButton = (data: any) => (
+  <CreateButton
+    to={`/SeasonTeam/create?seasonId=${data.record.id}`}
+    size="large"
+    variant="outlined"
+    label="Add a season team"
+  />
+);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const SeriesShowAddDriverButton = (data: any) => (
+  <CreateButton to={`/SeasonDriver/create?seasonTeamId=${data.record.id}`} label="Add a driver" />
+);
 
 export const SeasonShow = (props: ShowProps) => (
   <Show title={<SeasonShowTitle />} {...props}>
@@ -37,14 +54,18 @@ export const SeasonShow = (props: ShowProps) => (
             field: 'name',
             order: 'asc',
           }}
+          perPage={200}
         >
-          <Datagrid>
+          <Datagrid empty={<>No teams found</>}>
             <TextField source="name" />
             <TextField source="shortName" />
             <ShowButton />
             <EditButton />
+            <SeriesShowAddDriverButton />
           </Datagrid>
         </ReferenceManyField>
+        <SeriesShowAddTeamButton />
+        <br />
       </Tab>
       <Tab label="Drivers" path="drivers">
         <ReferenceManyField
@@ -52,14 +73,21 @@ export const SeasonShow = (props: ShowProps) => (
           reference="SeasonDriver"
           label=""
           sort={{
-            field: 'number',
+            field: 'seasonTeamId',
             order: 'asc',
           }}
+          perPage={200}
         >
-          <Datagrid>
+          <Datagrid empty={<>No drivers found</>}>
+            <ReferenceField source="seasonTeamId" reference="SeasonTeam">
+              <TextField source="name" />
+            </ReferenceField>
+            <ReferenceField source="driverId" reference="Driver">
+              <TextField source="name" />
+            </ReferenceField>
             <TextField source="code" />
             <TextField source="number" />
-            <TextField source="isTemporary" />
+            <BooleanField source="isTemporary" />
             <ShowButton />
             <EditButton />
           </Datagrid>

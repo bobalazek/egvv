@@ -8,7 +8,7 @@ The number one AutoMoto project.
 - Prisma as the ORM
 - PostgreSQL as the database
 - React admin for the admin area
-- NestJS + GraphQL for the API
+- NestJS & GraphQL for the API
 - NextJS for the web app
 - Puppeteer for scrapping data
 

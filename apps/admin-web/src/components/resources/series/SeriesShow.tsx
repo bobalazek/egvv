@@ -33,6 +33,7 @@ export const SeriesShow = (props: ShowProps) => (
             options={{
               deleteRedirect: `/series/${props.id}/show/seasons`,
             }}
+            empty={<>No seasons found</>}
           />
         </ReferenceManyField>
         <SeriesShowAddSeasonButton />
