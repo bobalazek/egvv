@@ -7,6 +7,7 @@ import {
   EditButton,
   DeleteButton,
   ListProps,
+  TextInput,
 } from 'react-admin';
 
 export const SeasonTeamList = (props: ListProps) => (
@@ -15,6 +16,7 @@ export const SeasonTeamList = (props: ListProps) => (
       field: 'name',
       order: 'asc',
     }}
+    filters={[<TextInput label="Search" source="q" alwaysOn />]}
     {...props}
   >
     <Datagrid>

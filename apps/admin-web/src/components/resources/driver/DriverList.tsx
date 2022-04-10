@@ -1,4 +1,4 @@
-import { List, Datagrid, TextField, ShowButton, EditButton, DeleteButton, ListProps } from 'react-admin';
+import { List, Datagrid, TextField, ShowButton, EditButton, DeleteButton, ListProps, TextInput } from 'react-admin';
 
 export const DriverList = (props: ListProps) => (
   <List
@@ -6,6 +6,7 @@ export const DriverList = (props: ListProps) => (
       field: 'lastName',
       order: 'asc',
     }}
+    filters={[<TextInput label="Search" source="q" alwaysOn />]}
     {...props}
   >
     <Datagrid>

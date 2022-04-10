@@ -7,6 +7,7 @@ import {
   EditButton,
   DeleteButton,
   ListProps,
+  TextInput,
 } from 'react-admin';
 
 export const EventSessionDriverPitStopList = (props: ListProps) => (
@@ -15,6 +16,7 @@ export const EventSessionDriverPitStopList = (props: ListProps) => (
       field: 'lap',
       order: 'asc',
     }}
+    filters={[<TextInput label="Search" source="q" alwaysOn />]}
     {...props}
   >
     <Datagrid>

@@ -8,6 +8,7 @@ import {
   EditButton,
   DeleteButton,
   ListProps,
+  TextInput,
 } from 'react-admin';
 
 export const EventSessionDriverStartingGridList = (props: ListProps) => (
@@ -16,6 +17,7 @@ export const EventSessionDriverStartingGridList = (props: ListProps) => (
       field: 'position',
       order: 'asc',
     }}
+    filters={[<TextInput label="Search" source="q" alwaysOn />]}
     {...props}
   >
     <Datagrid>

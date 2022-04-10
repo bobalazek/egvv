@@ -1,4 +1,4 @@
-import { List, Datagrid, TextField, ShowButton, EditButton, DeleteButton, ListProps } from 'react-admin';
+import { List, Datagrid, TextField, ShowButton, EditButton, DeleteButton, ListProps, TextInput } from 'react-admin';
 
 export const UserList = (props: ListProps) => (
   <List
@@ -6,6 +6,7 @@ export const UserList = (props: ListProps) => (
       field: 'createdAt',
       order: 'asc',
     }}
+    filters={[<TextInput label="Search" source="q" alwaysOn />]}
     {...props}
   >
     <Datagrid>

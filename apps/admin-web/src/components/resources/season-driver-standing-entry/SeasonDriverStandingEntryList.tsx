@@ -8,6 +8,7 @@ import {
   EditButton,
   DeleteButton,
   ListProps,
+  TextInput,
 } from 'react-admin';
 
 export const SeasonDriverStandingEntryList = (props: ListProps) => (
@@ -16,6 +17,7 @@ export const SeasonDriverStandingEntryList = (props: ListProps) => (
       field: 'points',
       order: 'asc',
     }}
+    filters={[<TextInput label="Search" source="q" alwaysOn />]}
     {...props}
   >
     <Datagrid>

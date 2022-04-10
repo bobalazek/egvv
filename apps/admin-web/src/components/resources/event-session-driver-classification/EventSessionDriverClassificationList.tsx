@@ -9,6 +9,7 @@ import {
   EditButton,
   DeleteButton,
   ListProps,
+  TextInput,
 } from 'react-admin';
 
 export const EventSessionDriverClassificationList = (props: ListProps) => (
@@ -17,6 +18,7 @@ export const EventSessionDriverClassificationList = (props: ListProps) => (
       field: 'position',
       order: 'asc',
     }}
+    filters={[<TextInput label="Search" source="q" alwaysOn />]}
     {...props}
   >
     <Datagrid>
