@@ -41,6 +41,13 @@ export class EventSessionResolver extends AbstractResolver {
             sourceField: 'seasonId',
             sourceModel: 'seasonTeam',
           },
+          {
+            filterField: 'seasonDriverId',
+            model: 'event',
+            sourceField: 'seasonId',
+            sourceModel: 'seasonDriver',
+            sourceModelParent: 'seasonTeam',
+          },
         ]
       )
     );
@@ -62,6 +69,13 @@ export class EventSessionResolver extends AbstractResolver {
             model: 'event',
             sourceField: 'seasonId',
             sourceModel: 'seasonTeam',
+          },
+          {
+            filterField: 'seasonDriverId',
+            model: 'event',
+            sourceField: 'seasonId',
+            sourceModel: 'seasonDriver',
+            sourceModelParent: 'seasonTeam',
           },
         ]
       )

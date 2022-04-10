@@ -10,8 +10,9 @@ type KeyValueMap = { [key: string]: any };
 type ExactFilterField = {
   filterField: string;
   model?: string;
-  sourceModel?: string; // if the filter links to another entity, which one is it? Ex. event-session.resolver.ts
   sourceField?: string;
+  sourceModel?: string; // if the filter links to another entity, which one is it? Ex. event-session.resolver.ts
+  sourceModelParent?: string;
 };
 
 @Injectable()
@@ -104,13 +105,18 @@ export class AbstractResolver {
             where: {
               id: filterFieldValue,
             },
+            include: field.sourceModelParent
+              ? {
+                  [field.sourceModelParent]: true,
+                }
+              : undefined,
           });
           if (!model) {
             continue;
           }
 
           whereField = field.sourceField;
-          filterFieldValue = model[whereField];
+          filterFieldValue = field.sourceModelParent ? model[field.sourceModelParent][whereField] : model[whereField];
         }
 
         let exactFilterFieldWhere = {};
@@ -129,14 +135,16 @@ export class AbstractResolver {
         andWhere.push(exactFilterFieldWhere);
       }
 
-      where['AND'] = andWhere;
+      if (andWhere.length) {
+        where['AND'] = andWhere;
+      }
     }
 
     return {
       skip,
       take,
       orderBy,
-      where: Object.keys(where) ? where : undefined,
+      where: Object.keys(where).length ? where : undefined,
     };
   }
 }

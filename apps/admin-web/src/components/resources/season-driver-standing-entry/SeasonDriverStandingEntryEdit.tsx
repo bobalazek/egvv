@@ -9,6 +9,7 @@ import {
   NumberInput,
   EditProps,
 } from 'react-admin';
+import { SeasonDriverStandingEntrySessionDriverInput } from './SeasonDriverStandingEntrySessionDriverInput';
 
 export const SeasonDriverStandingEntryEdit = (props: EditProps) => (
   <Edit {...props}>
@@ -17,9 +18,7 @@ export const SeasonDriverStandingEntryEdit = (props: EditProps) => (
       <ReferenceInput source="seasonDriverId" reference="SeasonDriver" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
-      <ReferenceInput source="eventSessionId" reference="EventSession">
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
+      <SeasonDriverStandingEntrySessionDriverInput source="eventSessionId" reference="EventSession" />
       <NumberInput source="points" validate={required()} />
       <DateInput source="dateAt" validate={required()} helperText="When were the points awarded?" />
       <TextInput source="note" multiline />
