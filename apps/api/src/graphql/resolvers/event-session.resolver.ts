@@ -31,14 +31,8 @@ export class EventSessionResolver extends AbstractResolver {
       false,
       ['slug', 'name'],
       [
-        'eventId',
-        { filterField: 'seasonTeamId', baseModel: 'seasonTeam', model: 'event', modelField: 'seasonId' },
         {
-          filterField: 'seasonDriverId',
-          baseModel: 'seasonDriver',
-          model: 'event',
-          modelField: 'seasonId',
-          modelFieldParent: 'seasonTeam',
+          filterField: 'eventId',
         },
       ]
     );
@@ -54,7 +48,10 @@ export class EventSessionResolver extends AbstractResolver {
         true,
         [],
         [
-          'eventId',
+          {
+            filterField: 'eventId',
+          },
+          /*
           { filterField: 'seasonTeamId', baseModel: 'seasonTeam', model: 'event', modelField: 'seasonId' },
           {
             filterField: 'seasonDriverId',
@@ -63,6 +60,7 @@ export class EventSessionResolver extends AbstractResolver {
             modelField: 'seasonId',
             modelFieldParent: 'seasonTeam',
           },
+          */
         ]
       )
     );

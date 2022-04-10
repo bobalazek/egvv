@@ -32,13 +32,9 @@ export class SeasonDriverResolver extends AbstractResolver {
         false,
         ['code'],
         [
-          // TODO: not working yet!
           {
             filterField: 'seasonId',
-            baseModel: 'season',
-            model: 'season',
-            modelField: 'id',
-            modelFieldParent: 'seasonTeam',
+            model: 'seasonTeam',
           },
         ]
       )
@@ -48,7 +44,17 @@ export class SeasonDriverResolver extends AbstractResolver {
   @Query(() => ListMetadata)
   async _allSeasonDriversMeta(@Args() args: AllSeasonDriversArgs): Promise<ListMetadata> {
     const count = await this._prismaService.seasonDriver.count(
-      await this.getAllArgs(args, true, ['code'], ['seasonId'])
+      await this.getAllArgs(
+        args,
+        true,
+        ['code'],
+        [
+          {
+            filterField: 'seasonId',
+            model: 'seasonTeam',
+          },
+        ]
+      )
     );
 
     return {

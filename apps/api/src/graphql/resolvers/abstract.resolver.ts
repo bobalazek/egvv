@@ -7,21 +7,10 @@ import { AllArgs } from '../args/all.args';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type KeyValueMap = { [key: string]: any };
 
-type ExactFilterField =
-  | string
-  // This is rather difficult to explain. Check the code down below or check the example in event-sesion.resolver.ts
-  // Basically:
-  // * filterField - value of which field should be taken (in args[{filterField}]), to get the entity?
-  // * model - what parent modal are we searching in?
-  // * modelField - which field of that model are we searching?
-  // * modelFieldParent - if we are going 2 levels deep, which is the parent model we want to access the modelField from?
-  | {
-      filterField: string;
-      baseModel: string;
-      model: string;
-      modelField: string;
-      modelFieldParent?: string;
-    };
+type ExactFilterField = {
+  filterField: string;
+  model?: string;
+};
 
 @Injectable()
 export class AbstractResolver {
@@ -98,44 +87,32 @@ export class AbstractResolver {
       where['OR'] = orWhere;
     }
 
-    for (const field of allowedExactFilterFields) {
-      if (typeof field !== 'string') {
-        const entity = await this._prismaService[field.baseModel].findFirst({
-          where: {
-            id: args.filter[field.filterField],
-          },
-          include: field.modelFieldParent
-            ? {
-                [field.modelFieldParent]: true,
-              }
-            : undefined,
-        });
-        if (!entity) {
+    if (allowedExactFilterFields?.length) {
+      const andWhere: KeyValueMap[] = [];
+
+      for (const field of allowedExactFilterFields) {
+        const filterFieldValue = args.filter[field.filterField];
+        if (!filterFieldValue) {
           continue;
         }
 
-        if (!where[field.model]) {
-          where[field.model] = {};
-        }
-        if (!where[field.model]?.[field.modelField]) {
-          where[field.model][field.modelField] = {};
-        }
-        if (!where[field.model]?.[field.modelField]?.in) {
-          where[field.model][field.modelField].in = [];
+        let exactFilterFieldWhere = {};
+        if (field.model) {
+          exactFilterFieldWhere = {
+            [field.model]: {
+              [field.filterField]: filterFieldValue,
+            },
+          };
+        } else {
+          exactFilterFieldWhere = {
+            [field.filterField]: filterFieldValue,
+          };
         }
 
-        where[field.model][field.modelField].in.push(
-          field.modelFieldParent ? entity[field.modelFieldParent][field.modelField] : entity[field.modelField]
-        );
-
-        continue;
+        andWhere.push(exactFilterFieldWhere);
       }
 
-      if (!args.filter[field]) {
-        continue;
-      }
-
-      where[field] = args.filter[field];
+      where['AND'] = andWhere;
     }
 
     return {
