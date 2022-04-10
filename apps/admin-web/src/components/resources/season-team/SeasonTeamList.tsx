@@ -18,16 +18,17 @@ export const SeasonTeamList = (props: ListProps) => (
     {...props}
   >
     <Datagrid>
-      <TextField source="name" />
-      <TextField source="shortName" />
-      <TextField source="powerUnit" />
-      <TextField source="chassis" />
       <ReferenceField source="seasonId" reference="Season">
         <TextField source="name" />
       </ReferenceField>
       <ReferenceField source="teamId" reference="Team">
         <TextField source="name" />
       </ReferenceField>
+      <TextField source="name" />
+      <TextField source="shortName" />
+      <TextField source="powerUnit" />
+      <TextField source="chassis" />
+
       <ShowButton />
       <EditButton />
       <DeleteButton />

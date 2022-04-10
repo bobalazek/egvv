@@ -48,6 +48,7 @@ model Driver {
   lastName      String
   countryCode   String
   url           String
+  nickname      String?
   seasonDrivers SeasonDriver[] @relation(name: "SeasonDriver_Driver")
 }
 

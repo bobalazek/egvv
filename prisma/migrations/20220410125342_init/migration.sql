@@ -44,6 +44,7 @@ CREATE TABLE "Driver" (
     "lastName" TEXT NOT NULL,
     "countryCode" TEXT NOT NULL,
     "url" TEXT NOT NULL,
+    "nickname" TEXT,
 
     CONSTRAINT "Driver_pkey" PRIMARY KEY ("id")
 );

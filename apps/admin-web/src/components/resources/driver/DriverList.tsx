@@ -14,6 +14,7 @@ export const DriverList = (props: ListProps) => (
       <TextField source="lastName" />
       <TextField source="countryCode" />
       <TextField source="url" />
+      <TextField source="nickname" />
       <ShowButton />
       <EditButton />
       <DeleteButton />

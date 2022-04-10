@@ -19,4 +19,7 @@ export class UpdateDriverArgs {
 
   @Field()
   url: string;
+
+  @Field({ nullable: true })
+  nickname?: string;
 }

@@ -8,6 +8,7 @@ export const DriverShow = (props: ShowProps) => (
       <TextField source="lastName" />
       <TextField source="countryCode" />
       <TextField source="url" />
+      <TextField source="nickname" />
     </SimpleShowLayout>
   </Show>
 );

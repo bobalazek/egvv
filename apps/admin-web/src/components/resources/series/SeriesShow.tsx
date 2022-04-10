@@ -1,5 +1,15 @@
-import { TextField, Show, ReferenceManyField, ShowProps, CreateButton, TabbedShowLayout, Tab } from 'react-admin';
-import { SeasonList } from '../season/SeasonList';
+import {
+  TextField,
+  Show,
+  ReferenceManyField,
+  ShowProps,
+  CreateButton,
+  TabbedShowLayout,
+  Tab,
+  Datagrid,
+  ShowButton,
+  EditButton,
+} from 'react-admin';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const SeriesShowTitle = (data: any) => <span>Series - {data.record.name}</span>;
@@ -28,13 +38,14 @@ export const SeriesShow = (props: ShowProps) => (
           }}
           filter={{ seriesId: props.id }}
         >
-          <SeasonList
-            title={' '}
-            options={{
-              deleteRedirect: `/series/${props.id}/show/seasons`,
-            }}
-            empty={<>No seasons found</>}
-          />
+          <Datagrid>
+            <TextField source="name" />
+            <TextField source="year" />
+            <TextField source="startAt" />
+            <TextField source="endAt" />
+            <ShowButton />
+            <EditButton />
+          </Datagrid>
         </ReferenceManyField>
         <SeriesShowAddSeasonButton />
         <br />

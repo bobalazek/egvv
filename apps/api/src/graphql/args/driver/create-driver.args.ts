@@ -16,4 +16,7 @@ export class CreateDriverArgs {
 
   @Field()
   url: string;
+
+  @Field({ nullable: true })
+  nickname?: string;
 }

@@ -5,6 +5,7 @@ export default [
     slug: 'lewis-hamilton',
     countryCode: 'GB',
     url: 'https://en.wikipedia.org/wiki/Lewis_Hamilton',
+    nickname: '#blessed',
   },
   {
     firstName: 'Valtteri',
@@ -12,6 +13,7 @@ export default [
     slug: 'valtteri-bottas',
     countryCode: 'FI',
     url: 'https://en.wikipedia.org/wiki/Valtteri_Bottas',
+    nickname: '#traditions',
   },
   {
     firstName: 'Max',
@@ -19,6 +21,7 @@ export default [
     slug: 'max-verstappen',
     countryCode: 'NL',
     url: 'https://en.wikipedia.org/wiki/Max_Verstappen',
+    nickname: 'The Calm One',
   },
   {
     firstName: 'Sergio',
@@ -26,6 +29,7 @@ export default [
     slug: 'sergio-perez',
     countryCode: 'MX',
     url: 'https://en.wikipedia.org/wiki/Sergio_P%C3%A9rez',
+    nickname: "Mexico's Minister of Defence",
   },
   {
     firstName: 'Lando',
@@ -33,6 +37,7 @@ export default [
     slug: 'lando-norris',
     countryCode: 'GB',
     url: 'http://en.wikipedia.org/wiki/Lando_Norris',
+    nickname: 'Lacking Talent',
   },
   {
     firstName: 'Daniel',
@@ -47,6 +52,7 @@ export default [
     slug: 'lance-stroll',
     countryCode: 'CA',
     url: 'http://en.wikipedia.org/wiki/Lance_Stroll',
+    nickname: 'Master of Spartial Awareness',
   },
   {
     firstName: 'Sebastian',
@@ -54,6 +60,7 @@ export default [
     slug: 'sebastian-vettel',
     countryCode: 'DE',
     url: 'https://en.wikipedia.org/wiki/Sebastian_Vettel',
+    nickname: 'Inspector Seb',
   },
   {
     firstName: 'Esteban',
@@ -68,6 +75,7 @@ export default [
     slug: 'fernando-alonso',
     countryCode: 'ES',
     url: 'https://en.wikipedia.org/wiki/Fernando_Alonso',
+    nickname: 'El Plan',
   },
   {
     firstName: 'Charles',
@@ -75,6 +83,7 @@ export default [
     slug: 'charles-leclerc',
     countryCode: 'MC',
     url: 'https://en.wikipedia.org/wiki/Charles_Leclerc',
+    nickname: "I'm So Stupid",
   },
   {
     firstName: 'Carlos',
@@ -82,6 +91,7 @@ export default [
     slug: 'carlos-sainz',
     countryCode: 'ES',
     url: 'https://en.wikipedia.org/wiki/Carlos_Sainz_Jr.',
+    nickname: 'Smooth Operator',
   },
   {
     firstName: 'Pierre',
@@ -103,6 +113,7 @@ export default [
     slug: 'kimi-raikkonen',
     countryCode: 'FI',
     url: 'https://en.wikipedia.org/wiki/Kimi_R%C3%A4ikk%C3%B6nen',
+    nickname: 'Woah',
   },
   {
     firstName: 'Antonio',
@@ -124,6 +135,7 @@ export default [
     slug: 'nikita-mazepin',
     countryCode: 'RU',
     url: 'https://en.wikipedia.org/wiki/Nikita_Mazepin',
+    nickname: 'You Spin Me Right Round',
   },
   {
     firstName: 'George',
@@ -152,6 +164,7 @@ export default [
     slug: 'romain-grosjean',
     countryCode: 'FR',
     url: 'https://en.wikipedia.org/wiki/Romain_Grosjeann',
+    nickname: 'The Phoenix',
   },
   {
     firstName: 'Kevin',
@@ -159,6 +172,7 @@ export default [
     slug: 'kevin-magnussen',
     countryCode: 'DK',
     url: 'https://en.wikipedia.org/wiki/Kevin_Magnussen',
+    nickname: 'Door Smasher',
   },
   {
     firstName: 'Daniil',
@@ -194,13 +208,6 @@ export default [
     slug: 'guanyu-zhou',
     countryCode: 'CN',
     url: 'https://en.wikipedia.org/wiki/Guanyu_Zhou',
-  },
-  {
-    firstName: 'Robert',
-    lastName: 'Kubica',
-    slug: 'robert-kubica',
-    countryCode: 'PL',
-    url: 'https://en.wikipedia.org/wiki/Robert_Kubica',
   },
   {
     firstName: 'Robert',

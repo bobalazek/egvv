@@ -35,7 +35,7 @@ export function App() {
   }
 
   return (
-    <Admin dataProvider={customDataProvider} authProvider={authProvider}>
+    <Admin theme={theme} dataProvider={customDataProvider} authProvider={authProvider}>
       <Resource {...series} />
       <Resource {...season} />
       <Resource {...circuit} />

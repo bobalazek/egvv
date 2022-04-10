@@ -9,6 +9,7 @@ export const DriverEdit = (props: EditProps) => (
       <TextInput source="lastName" validate={required()} />
       <TextInput source="countryCode" validate={required()} />
       <TextInput source="url" validate={required()} />
+      <TextInput source="nickname" />
     </SimpleForm>
   </Edit>
 );

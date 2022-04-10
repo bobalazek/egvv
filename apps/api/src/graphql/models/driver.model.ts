@@ -19,4 +19,7 @@ export class Driver {
 
   @Field()
   url: string;
+
+  @Field({ nullable: true })
+  nickname?: string;
 }
