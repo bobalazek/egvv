@@ -1,18 +1,18 @@
 {
-  "root": "libs/shared",
-  "sourceRoot": "libs/shared/src",
+  "root": "libs/shared/constants",
+  "sourceRoot": "libs/shared/constants/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/constants/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared"],
+      "outputs": ["coverage/libs/shared/constants"],
       "options": {
         "jestConfig": "libs/shared/jest.config.js",
         "passWithNoTests": true
