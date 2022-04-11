@@ -6,7 +6,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
-import { HTTP_SERVER_GRAPHQL_PATH, JWT_SECRET } from '@egvv/shared';
+import { HTTP_SERVER_GRAPHQL_PATH, JWT_SECRET } from '@egvv/shared-constants';
 import { PrismaService } from '../app/services/prisma.service';
 import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 import { ComplexityPlugin } from '../graphql/plugins/complexity.plugin';

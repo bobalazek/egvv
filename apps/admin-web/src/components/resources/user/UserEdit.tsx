@@ -1,6 +1,6 @@
 import { SimpleForm, TextInput, required, Edit, EditProps, AutocompleteArrayInput } from 'react-admin';
 
-import { USER_ROLES } from '@egvv/shared';
+import { USER_ROLES } from '@egvv/shared-constants';
 
 export const UserEdit = (props: EditProps) => (
   <Edit {...props}>

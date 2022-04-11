@@ -7,6 +7,7 @@
     "cli": "apps/cli",
     "web": "apps/web",
     "web-e2e": "apps/web-e2e",
-    "shared": "libs/shared"
+    "shared-constants": "libs/shared/constants",
+    "shared-helpers": "libs/shared/helpers"
   }
 }

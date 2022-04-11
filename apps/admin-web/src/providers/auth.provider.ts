@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import decodeJwt from 'jwt-decode';
 
-import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared';
+import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared-constants';
 
 const authProvider = {
   login: async (data: { username: string; password: string }) => {

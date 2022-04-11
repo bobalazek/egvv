@@ -1,7 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
-import { HTTP_SERVER_PORT } from '@egvv/shared';
+import { HTTP_SERVER_PORT } from '@egvv/shared-constants';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {

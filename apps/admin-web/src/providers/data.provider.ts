@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloLink, InMemoryCache, from, HttpLink } from '@apollo/client';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
 
-import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared';
+import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared-constants';
 
 const authLink = new ApolloLink((operation, forward) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

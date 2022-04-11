@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import { PrismaClient } from '@prisma/client';
 
-import { convertToDashCase } from '@egvv/shared';
+import { convertToDashCase } from '@egvv/shared-helpers';
 import { EventSessionInterface, EventsListInterface, EventWithSessionsInterface } from './Interfaces';
 import { saveEvent } from './Helpers';
 

@@ -2,7 +2,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 
-import { JWT_SECRET } from '@egvv/shared';
+import { JWT_SECRET } from '@egvv/shared-constants';
 import { JwtUserInterface } from '../interfaces/jwt-user.interface';
 
 @Injectable()
