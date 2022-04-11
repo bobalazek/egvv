@@ -1,7 +1,7 @@
 [
-  { "name": "Soft Compound", "modelDirectory": "soft" },
-  { "name": "Medium Compound", "modelDirectory": "medium" },
-  { "name": "Hard Compound", "modelDirectory": "hard" },
-  { "name": "Intermediate Compound", "modelDirectory": "intermediate" },
-  { "name": "Wet Compound", "modelDirectory": "wet" }
+  { "name": "Pirelli Soft", "key": "pirelli-soft" },
+  { "name": "Pirelli Medium", "key": "pirelli-medium" },
+  { "name": "Pirelli Hard", "key": "pirelli-hard" },
+  { "name": "Pirelli Intermediate", "key": "pirelli-intermediate" },
+  { "name": "Pirelli Wet", "key": "pirelli-wet" }
 ]
