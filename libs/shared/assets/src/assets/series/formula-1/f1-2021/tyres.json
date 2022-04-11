@@ -1,0 +1,7 @@
+[
+  { "name": "Soft Compound", "modelDirectory": "soft" },
+  { "name": "Medium Compound", "modelDirectory": "medium" },
+  { "name": "Hard Compound", "modelDirectory": "hard" },
+  { "name": "Intermediate Compound", "modelDirectory": "intermediate" },
+  { "name": "Wet Compound", "modelDirectory": "wet" }
+]

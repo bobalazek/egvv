@@ -8,6 +8,7 @@
     "web": "apps/web",
     "web-e2e": "apps/web-e2e",
     "shared-constants": "libs/shared/constants",
-    "shared-helpers": "libs/shared/helpers"
+    "shared-helpers": "libs/shared/helpers",
+    "shared-assets": "libs/shared/assets"
   }
 }
