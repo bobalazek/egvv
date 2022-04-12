@@ -9,6 +9,8 @@ export const EventSessionDriverClassificationCreate = (props: CreateProps) => (
       <TextInput source="status" validate={required()} />
       <TextInput source="position" />
       <TextInput source="time" />
+      <TextInput source="laps" />
+      <TextInput source="lapsBehind" />
       <TextInput source="points" />
       <TextInput source="note" multiline />
     </SimpleForm>

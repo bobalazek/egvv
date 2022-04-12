@@ -193,6 +193,8 @@ CREATE TABLE "EventSessionDriverClassification" (
     "status" TEXT NOT NULL,
     "position" INTEGER,
     "time" TIMESTAMP(3),
+    "laps" INTEGER,
+    "lapsBehind" INTEGER,
     "points" DOUBLE PRECISION,
     "note" TEXT,
     "eventSessionDriverId" TEXT NOT NULL,

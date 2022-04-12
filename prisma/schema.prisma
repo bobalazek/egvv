@@ -199,6 +199,8 @@ model EventSessionDriverClassification {
   status               String // finished, dnf, dns, ...
   position             Int?
   time                 DateTime?
+  laps                 Int? // How many laps were completed?
+  lapsBehind           Int?
   points               Float? // Yes, as we've seen last season, there can be half points
   note                 String?
   eventSessionDriverId String

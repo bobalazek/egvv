@@ -14,6 +14,12 @@ export class UpdateEventSessionDriverDriverClassificationArgs {
   @Field({ nullable: true })
   time?: Date;
 
+  @Field({ nullable: true })
+  laps?: number;
+
+  @Field({ nullable: true })
+  lapsBehind?: number;
+
   @Field(() => Float, { nullable: true })
   points?: number;
 

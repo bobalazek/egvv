@@ -9,6 +9,8 @@ export const EventSessionDriverClassificationShow = (props: ShowProps) => (
       <TextField source="status" />
       <TextField source="position" />
       <DateField source="time" />
+      <TextField source="laps" />
+      <TextField source="lapsBehind" />
       <NumberField source="points" />
       <TextField source="note" />
     </SimpleShowLayout>
