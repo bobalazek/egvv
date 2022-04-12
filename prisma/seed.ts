@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
+import slugify from 'slugify';
 
-import { convertToDashCase } from '../libs/shared/helpers/src';
 import users from './data/users';
 import circuits from './data/circuits';
 import series from './data/series';
@@ -171,7 +171,9 @@ async function main() {
 
         const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
           name: eventSessionData.name,
-          slug: convertToDashCase(eventSessionData.name.replace(' - ', '-')),
+          slug: slugify(eventSessionData.name.replace(' - ', '-'), {
+            lower: true,
+          }),
           type: eventSessionData.type,
           startAt: new Date(eventSessionData.startAt),
           endAt: eventSessionData.endAt ? new Date(eventSessionData.endAt) : null,

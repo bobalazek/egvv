@@ -43,6 +43,7 @@
     "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "0.13.7",
     "rxjs": "^7.0.0",
+    "slugify": "^1.6.5",
     "three": "^0.139.2",
     "three-stdlib": "^2.9.1",
     "tslib": "^2.0.0"

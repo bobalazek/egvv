@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
+import slugify from 'slugify';
 import { PrismaClient } from '@prisma/client';
 
-import { convertToDashCase } from '@egvv/shared-helpers';
 import { EventSessionInterface, EventsListInterface, EventWithSessionsInterface } from './Interfaces';
 import { saveEvent } from './Helpers';
 
@@ -171,7 +171,9 @@ export async function getEventSessions(page: puppeteer.Page, year: number, event
       name = 'Qualifying';
     }
 
-    const type = convertToDashCase(name);
+    const type = slugify(name, {
+      lower: true,
+    });
 
     sessions.push({
       name,
@@ -224,7 +226,9 @@ export async function getEventsList(page: puppeteer.Page, year: number) {
 
     events.push({
       slug,
-      type: convertToDashCase(type),
+      type: slugify(type, {
+        lower: true,
+      }),
     });
   }
 
@@ -294,13 +298,17 @@ export async function getEventData(
     circuitLayout = 'Outer Track';
   }
 
-  const eventSlug = convertToDashCase(name);
+  const eventSlug = slugify(name, {
+    lower: true,
+  });
 
   const sessions: EventSessionInterface[] = [];
   for (const eventSession of parsedScript.subEvent) {
     const eventSessionNameSplit = eventSession.name.split(' - ');
     const eventSessionName = name + ' - ' + eventSessionNameSplit[0];
-    const type = convertToDashCase(eventSessionNameSplit[0]);
+    const type = slugify(eventSessionNameSplit[0], {
+      lower: true,
+    });
 
     if (type === 'qualifying') {
       for (let i = 1; i <= 3; i++) {
