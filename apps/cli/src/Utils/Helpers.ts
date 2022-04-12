@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 
+import { convertToDashCase } from '@egvv/shared-helpers';
 import { EventWithSessionsInterface } from './Interfaces';
 
 export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSessionsInterface, seasonSlug: string) {
@@ -47,9 +48,9 @@ export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSes
     laps: eventRawData.laps,
     lapDistance: eventRawData.lapDistance,
     round: eventRawData.round,
+    raceAt,
     url: eventRawData.url,
     circuitLayout: eventRawData.circuitLayout,
-    raceAt,
     seasonId: season.id,
     circuitId: circuit.id,
   };
@@ -68,6 +69,7 @@ export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSes
     console.log(`Upserting ${eventSessionData.type} ...`);
 
     const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
+      slug: convertToDashCase(eventSessionData.name.replace(' - ', '-')),
       name: eventSessionData.name,
       type: eventSessionData.type,
       startAt: eventSessionData.startAt,
@@ -86,4 +88,6 @@ export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSes
       create: eventSessionFinalData,
     });
   }
+
+  return event;
 }

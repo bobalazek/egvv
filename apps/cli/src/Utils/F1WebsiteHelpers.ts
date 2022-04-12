@@ -37,6 +37,50 @@ export async function processEventsForYear(
     console.log('----------');
   }
 
+  /*
+  // Uncomment this, if you want to get the JSON version to save it in a file
+  console.log(
+    JSON.stringify(
+      (
+        await prisma.event.findMany({
+          where: {
+            season: {
+              slug: seasonSlug,
+            },
+          },
+          include: {
+            circuit: true,
+            eventSessions: true,
+          },
+          orderBy: {
+            round: 'asc',
+          },
+        })
+      ).map((event) => {
+        return {
+          name: event.name,
+          slug: event.slug,
+          laps: event.laps,
+          lapDistance: event.lapDistance,
+          round: event.round,
+          raceAt: event.raceAt.toISOString(),
+          url: event.url,
+          circuitLayout: event.circuitLayout,
+          circuitSlug: event.circuit.slug,
+          sessions: event.eventSessions.map((eventSession) => {
+            return {
+              name: eventSession.name,
+              type: eventSession.type,
+              startAt: eventSession.startAt.toISOString(),
+              endAt: eventSession.endAt.toISOString(),
+            };
+          }),
+        };
+      })
+    )
+  );
+  */
+
   return void 0;
 }
 
@@ -256,7 +300,8 @@ export async function getEventData(
   for (const eventSession of parsedScript.subEvent) {
     const eventSessionNameSplit = eventSession.name.split(' - ');
     const eventSessionName = name + ' - ' + eventSessionNameSplit[0];
-    const type = convertToDashCase(eventSessionName);
+    const type = convertToDashCase(eventSessionNameSplit[0]);
+
     if (type === 'qualifying') {
       for (let i = 1; i <= 3; i++) {
         sessions.push({
@@ -271,10 +316,10 @@ export async function getEventData(
     }
 
     sessions.push({
-      name,
+      name: eventSessionName,
       type,
-      startAt: eventSession.startAt,
-      endAt: eventSession.endAt,
+      startAt: new Date(eventSession.startDate),
+      endAt: new Date(eventSession.startDate),
     });
   }
 

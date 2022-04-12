@@ -247,4 +247,12 @@ export default [
     timezone: 'Asia/Riyadh',
     url: 'https://en.wikipedia.org/wiki/Jeddah_Corniche_Circuit',
   },
+  {
+    name: 'Miami International Autodrome',
+    slug: 'miami',
+    location: 'Miami',
+    countryCode: 'US',
+    timezone: 'America/New_York',
+    url: 'https://en.wikipedia.org/wiki/Miami_International_Autodrome',
+  },
 ];

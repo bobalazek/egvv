@@ -8,6 +8,7 @@ export const addScrapeF1DataCommand = (program: Command) => {
   const command = program
     .command('scrape-f1-data')
     .requiredOption('-y, --year <year>', 'For what year?')
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .action(async (options: any) => {
       const browser = await puppeteer.launch();
       const prisma = new PrismaClient();

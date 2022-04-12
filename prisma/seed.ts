@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 
+import { convertToDashCase } from '../libs/shared/helpers/src';
 import users from './data/users';
 import circuits from './data/circuits';
 import series from './data/series';
@@ -9,7 +10,6 @@ import drivers from './data/drivers';
 import events from './data/events';
 import seasonTeams from './data/season-teams';
 import seasonDrivers from './data/season-drivers';
-import { convertToDashCase } from '../libs/shared/src';
 
 const prisma = new PrismaClient();
 
