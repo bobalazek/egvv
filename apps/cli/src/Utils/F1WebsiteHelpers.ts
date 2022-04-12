@@ -2,7 +2,12 @@ import puppeteer from 'puppeteer';
 import slugify from 'slugify';
 import { PrismaClient } from '@prisma/client';
 
-import { EventSessionInterface, EventsListInterface, EventWithSessionsInterface } from './Interfaces';
+import {
+  EventRaceInterface,
+  EventSessionInterface,
+  EventsListInterface,
+  EventWithSessionsInterface,
+} from './Interfaces';
 import { saveEvent } from './Helpers';
 
 export async function processEventsForYear(
@@ -14,12 +19,6 @@ export async function processEventsForYear(
   console.log(`========== Getting events for ${year} ==========`);
 
   const page = await browser.newPage();
-
-  const url = `https://www.formula1.com/en/racing/${year}.html`;
-
-  console.log(`Goto URL: ${url} ...`);
-
-  page.goto(url);
 
   const eventsList = await getEventsList(page, year);
   for (const event of eventsList) {
@@ -209,6 +208,12 @@ export async function getEventTableData(page: puppeteer.Page) {
 }
 
 export async function getEventsList(page: puppeteer.Page, year: number) {
+  const url = `https://www.formula1.com/en/racing/${year}.html`;
+
+  console.log(`Goto URL: ${url} ...`);
+
+  page.goto(url);
+
   await page.waitForSelector('.event-list');
 
   const events: EventsListInterface[] = [];
@@ -342,4 +347,16 @@ export async function getEventData(
     url,
     sessions,
   };
+}
+
+export async function getEventRaces(page: puppeteer.Page, year: number): Promise<EventRaceInterface[]> {
+  const url = `https://www.formula1.com/en/results.html/${year}/races.html`;
+
+  console.log(`Goto URL: ${url} ...`);
+
+  page.goto(url);
+
+  // TODO
+
+  return [];
 }

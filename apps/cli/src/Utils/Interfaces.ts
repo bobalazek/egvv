@@ -24,3 +24,9 @@ export interface EventSessionInterface {
   startAt: Date;
   endAt: Date;
 }
+
+export interface EventRaceInterface {
+  name: string;
+  url: string;
+  date: string;
+}
