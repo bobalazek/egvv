@@ -19,7 +19,10 @@ export const processEventsForYear = async (year: number, seasonSlug: string, eve
   const page = await browser.newPage();
 
   const eventsRaces = await getEventsRaces(page, year);
-  console.log(eventsRaces);
+  for (const eventRace of eventsRaces) {
+    const eventsRaceResults = await getEventsRaceResults(page, eventRace.url);
+    console.log(eventsRaceResults);
+  }
 
   const eventsList = await getEventsList(page, year);
   for (const event of eventsList) {
@@ -373,11 +376,11 @@ export const getEventsRaceResults = async (page: puppeteer.Page, url: string): P
   const $tableRows = await $table.$$('tbody tr');
   for (const $tableRow of $tableRows) {
     let driverNumber: number = 0;
-    let driverName: string = '';
+    let driverCode: string = '';
     let teamName: string = '';
     let status: string = 'FINISHED';
     let position: number | null = null;
-    let time: Date | null = null;
+    let timeInMilliseconds: number | null = null;
     let laps: number | null = null;
     let lapsBehind: number | null = null;
     let points: number | null = null;
@@ -392,23 +395,28 @@ export const getEventsRaceResults = async (page: puppeteer.Page, url: string): P
       } else if (i === 2) {
         driverNumber = parseInt(value);
       } else if (i === 3) {
-        driverName = value;
+        const $code = await $single.$('.hide-for-desktop');
+
+        driverCode = await page.evaluate((el) => el.textContent, $code);
       } else if (i === 4) {
         teamName = value;
       } else if (i === 5) {
         laps = parseInt(value);
       } else if (i === 6) {
-        if (!timeFirstPosition) {
-          timeFirstPosition = convertTimeToMilliseconds(value);
-        }
-
         if (value === 'DNF' || value === 'DNS') {
           status = value;
         } else {
           if (value.includes('lap')) {
             lapsBehind = parseInt(value.replace(' laps', '').replace(' lap', '').replace('+', ''));
           } else {
-            time = new Date(); // TODO
+            if (!timeFirstPosition) {
+              timeFirstPosition = convertTimeToMilliseconds(value);
+              timeInMilliseconds = timeFirstPosition;
+            } else if (value.includes('+') && value.includes('s')) {
+              const timeSplit = value.replace('+', '').replace('s', '').split('.');
+
+              timeInMilliseconds = timeFirstPosition + parseInt(timeSplit[1]) + parseInt(timeSplit[0]) * 1000;
+            }
           }
         }
       } else if (i === 7) {
@@ -418,11 +426,11 @@ export const getEventsRaceResults = async (page: puppeteer.Page, url: string): P
 
     results.push({
       driverNumber,
-      driverName,
+      driverCode,
       teamName,
       status,
       position,
-      time,
+      timeInMilliseconds,
       laps,
       lapsBehind,
       points,

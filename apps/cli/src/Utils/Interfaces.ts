@@ -34,7 +34,7 @@ export interface EventRaceInterface {
 
 export interface EventRaceResultInterface {
   driverNumber: number;
-  driverName: string;
+  driverCode: string;
   teamName: string;
   status: string;
   position?: number;
