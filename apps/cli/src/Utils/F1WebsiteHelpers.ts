@@ -9,7 +9,7 @@ import {
 } from './Interfaces';
 import { saveEvent } from './Helpers';
 
-export async function processEventsForYear(year: number, seasonSlug: string) {
+export const processEventsForYear = async (year: number, seasonSlug: string) => {
   console.log(`========== Getting events for ${year} ==========`);
 
   const browser = await puppeteer.launch();
@@ -30,10 +30,10 @@ export async function processEventsForYear(year: number, seasonSlug: string) {
   await browser.close();
 
   return void 0;
-}
+};
 
 // Keep in case we want some other data for other series
-export async function getEventSessions(page: puppeteer.Page, year: number, event: string) {
+export const getEventSessions = async (page: puppeteer.Page, year: number, event: string) => {
   const url = `https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`;
 
   console.log(`Goto URL: ${url} ...`);
@@ -132,9 +132,9 @@ export async function getEventSessions(page: puppeteer.Page, year: number, event
   }
 
   return sessions;
-}
+};
 
-export async function getEventTableData(page: puppeteer.Page) {
+export const getEventTableData = async (page: puppeteer.Page) => {
   await page.waitForSelector('.article-content');
 
   const table: string[][] = [];
@@ -154,10 +154,10 @@ export async function getEventTableData(page: puppeteer.Page) {
   }
 
   return table;
-}
+};
 
 // eslint-disable-next-line @typescript-eslint/no-inferrable-types
-export async function getEventsList(page: puppeteer.Page, year: number, racesOnly: boolean = true) {
+export const getEventsList = async (page: puppeteer.Page, year: number, racesOnly: boolean = true) => {
   const url = `https://www.formula1.com/en/racing/${year}.html`;
 
   console.log(`Goto URL: ${url} ...`);
@@ -194,14 +194,14 @@ export async function getEventsList(page: puppeteer.Page, year: number, racesOnl
   }
 
   return events;
-}
+};
 
-export async function getEventData(
+export const getEventData = async (
   page: puppeteer.Page,
   year: number,
   urlSlug: string,
   round: number
-): Promise<EventWithSessionsInterface> {
+): Promise<EventWithSessionsInterface> => {
   // Summary page
   const url = `https://www.formula1.com/en/racing/${year}/${urlSlug}.html`;
 
@@ -303,7 +303,7 @@ export async function getEventData(
     url,
     sessions,
   };
-}
+};
 
 export const getEventRaces = async (page: puppeteer.Page, year: number): Promise<EventRaceInterface[]> => {
   const url = `https://www.formula1.com/en/results.html/${year}/races.html`;
