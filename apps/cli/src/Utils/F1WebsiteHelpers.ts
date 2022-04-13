@@ -10,7 +10,7 @@ import {
   EventsListInterface,
   EventWithSessionsInterface,
 } from './Interfaces';
-import { convertTimeToMilliseconds, saveEvent } from './Helpers';
+import { convertTimeToMilliseconds, saveEvent, saveEventRaceResults } from './Helpers';
 
 export const processEventsForYear = async (year: number, seasonSlug: string, eventSlug?: string) => {
   console.log(`========== Getting events for ${year} ==========`);
@@ -18,12 +18,7 @@ export const processEventsForYear = async (year: number, seasonSlug: string, eve
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  const eventsRaces = await getEventsRaces(page, year);
-  for (const eventRace of eventsRaces) {
-    const eventsRaceResults = await getEventsRaceResults(page, eventRace.url);
-    console.log(eventsRaceResults);
-  }
-
+  console.log('========== Processing events ==========');
   const eventsList = await getEventsList(page, year);
   for (const event of eventsList) {
     if (eventSlug && eventSlug !== event.slug) {
@@ -36,6 +31,23 @@ export const processEventsForYear = async (year: number, seasonSlug: string, eve
     const eventData = await getEventData(page, year, event.slug, round);
 
     await saveEvent(eventData, seasonSlug);
+
+    console.log('----------');
+  }
+
+  console.log('========== Processing event races ==========');
+  const eventsRaces = await getEventsRaces(page, year);
+  for (const eventRace of eventsRaces) {
+    const eventRaceSlug = slugify(eventRace.name, {
+      lower: true,
+    });
+    if (eventSlug && eventSlug !== eventRaceSlug) {
+      continue;
+    }
+
+    const eventRaceResults = await getEventsRaceResults(page, eventRace.url);
+
+    await saveEventRaceResults(eventRace, eventRaceResults, year);
 
     console.log('----------');
   }
@@ -184,8 +196,8 @@ export const getEventsList = async (page: puppeteer.Page, year: number, racesOnl
   for (const $event of $events) {
     const href = await page.evaluate((el) => el.getAttribute('href'), $event);
     const slug = href.replace(`/en/racing/${year}/`, '').replace('.html', '');
-    const $type = await $event.$('.card-title');
 
+    const $type = await $event.$('.card-title');
     let type = await page.evaluate((el) => el.textContent, $type);
     if (type.includes('-')) {
       type = type.split('-')[0].trim();

@@ -1,7 +1,7 @@
 import slugify from 'slugify';
 import { Prisma, PrismaClient } from '@prisma/client';
 
-import { EventWithSessionsInterface } from './Interfaces';
+import { EventRaceInterface, EventRaceResultInterface, EventWithSessionsInterface } from './Interfaces';
 
 let prismaClient: PrismaClient = null;
 export const getPrismaClient = () => {
@@ -103,6 +103,73 @@ export const saveEvent = async (eventRawData: EventWithSessionsInterface, season
   }
 
   return event;
+};
+
+export const saveEventRaceResults = async (
+  eventRace: EventRaceInterface,
+  eventRaceResults: EventRaceResultInterface[],
+  year: number
+) => {
+  console.log(`Saving ${eventRace.name} event race results ...`);
+
+  const prisma = getPrismaClient();
+
+  const eventRaceSession = await prisma.eventSession.findFirst({
+    where: {
+      type: 'race',
+      name: {
+        contains: eventRace.name,
+        mode: 'insensitive',
+      },
+      event: {
+        laps: eventRace.laps,
+        season: {
+          year,
+        },
+      },
+    },
+  });
+  if (!eventRaceSession) {
+    throw new Error(`Event race session for ${eventRace.name} not found.`);
+  }
+
+  for (const eventRaceResult of eventRaceResults) {
+    const eventSessionDriver = await prisma.eventSessionDriver.findFirst({
+      where: {
+        eventSessionId: eventRaceSession.id,
+        seasonDriver: {
+          code: eventRaceResult.driverCode,
+          number: eventRaceResult.driverNumber,
+        },
+      },
+    });
+    if (!eventSessionDriver) {
+      throw new Error(`Event session driver ${eventRaceResult.driverCode} for ${eventRace.name} not found.`);
+    }
+
+    console.log(`Removing existing race result for ${eventRaceResult.driverCode} ...`);
+    await prisma.eventSessionDriverClassification.deleteMany({
+      where: {
+        eventSessionDriverId: eventSessionDriver.id,
+      },
+    });
+
+    console.log(`Creating race result for ${eventRaceResult.driverCode} ...`);
+
+    const finalData = {
+      status: eventRaceResult.status,
+      position: eventRaceResult.position,
+      timeMilliseconds: eventRaceResult.timeMilliseconds,
+      laps: eventRaceResult.laps,
+      lapsBehind: eventRaceResult.lapsBehind,
+      points: eventRaceResult.points,
+      eventSessionDriverId: eventSessionDriver.id,
+    };
+
+    await prisma.eventSessionDriverClassification.create({
+      data: finalData,
+    });
+  }
 };
 
 export const exportData = async (seasonSlug: string) => {
