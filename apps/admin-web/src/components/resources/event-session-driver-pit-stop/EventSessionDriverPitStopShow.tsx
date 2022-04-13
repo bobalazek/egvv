@@ -1,4 +1,4 @@
-import { TextField, ReferenceField, Show, SimpleShowLayout, ShowProps } from 'react-admin';
+import { TextField, ReferenceField, Show, SimpleShowLayout, ShowProps, NumberField } from 'react-admin';
 
 export const EventSessionDriverPitStopShow = (props: ShowProps) => (
   <Show {...props}>
@@ -7,7 +7,8 @@ export const EventSessionDriverPitStopShow = (props: ShowProps) => (
         <TextField source="name" />
       </ReferenceField>
       <TextField source="lap" />
-      <TextField source="timeMilliseconds" />
+      <NumberField source="stopTimeMilliseconds" />
+      <NumberField source="timeMilliseconds" />
     </SimpleShowLayout>
   </Show>
 );

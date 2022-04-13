@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  DateField,
   ReferenceField,
   BooleanField,
   ShowButton,
@@ -10,6 +9,7 @@ import {
   DeleteButton,
   ListProps,
   TextInput,
+  NumberField,
 } from 'react-admin';
 
 export const EventSessionDriverLapList = (props: ListProps) => (
@@ -27,7 +27,7 @@ export const EventSessionDriverLapList = (props: ListProps) => (
       </ReferenceField>
       <TextField source="lap" />
       <BooleanField source="isDeleted" />
-      <DateField source="time" />
+      <NumberField source="timeMilliseconds" />
       <TextField source="position" />
       <ShowButton />
       <EditButton />

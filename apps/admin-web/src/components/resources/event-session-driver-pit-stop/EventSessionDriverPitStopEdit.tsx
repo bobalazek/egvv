@@ -1,4 +1,13 @@
-import { SimpleForm, required, TextInput, ReferenceInput, AutocompleteInput, Edit, EditProps } from 'react-admin';
+import {
+  SimpleForm,
+  required,
+  TextInput,
+  ReferenceInput,
+  AutocompleteInput,
+  Edit,
+  EditProps,
+  NumberInput,
+} from 'react-admin';
 
 export const EventSessionDriverPitStopEdit = (props: EditProps) => (
   <Edit {...props}>
@@ -8,7 +17,8 @@ export const EventSessionDriverPitStopEdit = (props: EditProps) => (
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <TextInput source="lap" validate={required()} />
-      <TextInput source="timeMilliseconds" />
+      <NumberInput source="stopTimeMilliseconds" />
+      <NumberInput source="timeMilliseconds" />
     </SimpleForm>
   </Edit>
 );

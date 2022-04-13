@@ -3,11 +3,11 @@ import {
   TextInput,
   BooleanInput,
   required,
-  DateTimeInput,
   ReferenceInput,
   AutocompleteInput,
   Edit,
   EditProps,
+  NumberInput,
 } from 'react-admin';
 
 export const EventSessionDriverLapEdit = (props: EditProps) => (
@@ -19,7 +19,7 @@ export const EventSessionDriverLapEdit = (props: EditProps) => (
       </ReferenceInput>
       <TextInput source="lap" validate={required()} />
       <BooleanInput source="isDeleted" validate={required()} />
-      <DateTimeInput source="time" />
+      <NumberInput source="timeMilliseconds" />
       <TextInput source="position" />
     </SimpleForm>
   </Edit>

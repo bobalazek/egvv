@@ -1,4 +1,13 @@
-import { SimpleForm, TextInput, ReferenceInput, AutocompleteInput, Edit, required, EditProps } from 'react-admin';
+import {
+  SimpleForm,
+  TextInput,
+  ReferenceInput,
+  AutocompleteInput,
+  Edit,
+  required,
+  EditProps,
+  NumberInput,
+} from 'react-admin';
 
 export const EventSessionDriverClassificationEdit = (props: EditProps) => (
   <Edit {...props}>
@@ -9,7 +18,7 @@ export const EventSessionDriverClassificationEdit = (props: EditProps) => (
       </ReferenceInput>
       <TextInput source="status" validate={required()} />
       <TextInput source="position" />
-      <TextInput source="time" />
+      <NumberInput source="timeMilliseconds" />
       <TextInput source="laps" />
       <TextInput source="lapsBehind" />
       <TextInput source="points" />

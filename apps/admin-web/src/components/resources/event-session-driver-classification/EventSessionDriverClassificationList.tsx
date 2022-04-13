@@ -27,7 +27,7 @@ export const EventSessionDriverClassificationList = (props: ListProps) => (
       </ReferenceField>
       <TextField source="status" />
       <TextField source="position" />
-      <DateField source="time" />
+      <NumberField source="timeMilliseconds" />
       <TextField source="laps" />
       <TextField source="lapsBehind" />
       <NumberField source="points" />

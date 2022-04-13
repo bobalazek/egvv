@@ -1,4 +1,13 @@
-import { SimpleForm, Edit, TextInput, ReferenceInput, AutocompleteInput, required, EditProps } from 'react-admin';
+import {
+  SimpleForm,
+  Edit,
+  TextInput,
+  ReferenceInput,
+  AutocompleteInput,
+  required,
+  EditProps,
+  NumberInput,
+} from 'react-admin';
 
 export const EventSessionDriverStartingGridEdit = (props: EditProps) => (
   <Edit {...props}>
@@ -8,7 +17,7 @@ export const EventSessionDriverStartingGridEdit = (props: EditProps) => (
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
       <TextInput source="position" />
-      <TextInput source="time" />
+      <NumberInput source="timeMilliseconds" />
       <TextInput source="note" multiline />
     </SimpleForm>
   </Edit>

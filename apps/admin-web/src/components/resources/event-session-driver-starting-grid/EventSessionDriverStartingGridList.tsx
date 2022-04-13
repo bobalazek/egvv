@@ -9,6 +9,7 @@ import {
   DeleteButton,
   ListProps,
   TextInput,
+  NumberField,
 } from 'react-admin';
 
 export const EventSessionDriverStartingGridList = (props: ListProps) => (
@@ -25,7 +26,7 @@ export const EventSessionDriverStartingGridList = (props: ListProps) => (
         <TextField source="name" />
       </ReferenceField>
       <TextField source="position" />
-      <DateField source="time" />
+      <NumberField source="timeMilliseconds" />
       <TextField source="note" />
       <ShowButton />
       <EditButton />

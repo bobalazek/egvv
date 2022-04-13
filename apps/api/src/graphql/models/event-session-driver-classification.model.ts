@@ -11,8 +11,8 @@ export class EventSessionDriverClassification {
   @Field(() => Int, { nullable: true })
   position?: number;
 
-  @Field({ nullable: true })
-  time?: Date;
+  @Field(() => Int, { nullable: true })
+  timeInMilliseconds?: number;
 
   @Field({ nullable: true })
   laps?: number;

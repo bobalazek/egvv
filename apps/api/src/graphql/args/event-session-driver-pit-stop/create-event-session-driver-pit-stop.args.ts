@@ -5,7 +5,10 @@ export class CreateEventSessionDriverPitStopArgs {
   @Field(() => Int)
   lap: number;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
+  stopTimeMilliseconds?: number;
+
+  @Field(() => Int, { nullable: true })
   timeMilliseconds?: number;
 
   @Field()

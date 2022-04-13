@@ -8,6 +8,7 @@ import {
   DeleteButton,
   ListProps,
   TextInput,
+  NumberField,
 } from 'react-admin';
 
 export const EventSessionDriverPitStopList = (props: ListProps) => (
@@ -24,7 +25,8 @@ export const EventSessionDriverPitStopList = (props: ListProps) => (
         <TextField source="name" />
       </ReferenceField>
       <TextField source="lap" />
-      <TextField source="timeMilliseconds" />
+      <NumberField source="stopTimeMilliseconds" />
+      <NumberField source="timeMilliseconds" />
       <ShowButton />
       <EditButton />
       <DeleteButton />

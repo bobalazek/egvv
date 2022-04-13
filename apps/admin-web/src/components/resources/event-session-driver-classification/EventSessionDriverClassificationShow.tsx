@@ -1,4 +1,4 @@
-import { TextField, DateField, ReferenceField, NumberField, Show, SimpleShowLayout, ShowProps } from 'react-admin';
+import { TextField, ReferenceField, NumberField, Show, SimpleShowLayout, ShowProps } from 'react-admin';
 
 export const EventSessionDriverClassificationShow = (props: ShowProps) => (
   <Show {...props}>
@@ -8,7 +8,7 @@ export const EventSessionDriverClassificationShow = (props: ShowProps) => (
       </ReferenceField>
       <TextField source="status" />
       <TextField source="position" />
-      <DateField source="time" />
+      <NumberField source="timeMilliseconds" />
       <TextField source="laps" />
       <TextField source="lapsBehind" />
       <NumberField source="points" />

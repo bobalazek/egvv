@@ -4,10 +4,10 @@ import {
   TextInput,
   BooleanInput,
   required,
-  DateTimeInput,
   ReferenceInput,
   AutocompleteInput,
   CreateProps,
+  NumberInput,
 } from 'react-admin';
 
 export const EventSessionDriverLapCreate = (props: CreateProps) => (
@@ -18,7 +18,7 @@ export const EventSessionDriverLapCreate = (props: CreateProps) => (
       </ReferenceInput>
       <TextInput source="lap" validate={required()} />
       <BooleanInput source="isDeleted" validate={required()} />
-      <DateTimeInput source="time" />
+      <NumberInput source="timeMilliseconds" />
       <TextInput source="position" />
     </SimpleForm>
   </Create>

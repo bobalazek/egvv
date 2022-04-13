@@ -1,4 +1,4 @@
-import { TextField, DateField, ReferenceField, BooleanField, Show, SimpleShowLayout, ShowProps } from 'react-admin';
+import { TextField, ReferenceField, BooleanField, Show, SimpleShowLayout, ShowProps, NumberField } from 'react-admin';
 
 export const EventSessionDriverLapShow = (props: ShowProps) => (
   <Show {...props}>
@@ -8,7 +8,7 @@ export const EventSessionDriverLapShow = (props: ShowProps) => (
       </ReferenceField>
       <TextField source="lap" />
       <BooleanField source="isDeleted" />
-      <DateField source="time" />
+      <NumberField source="timeMilliseconds" />
       <TextField source="position" />
     </SimpleShowLayout>
   </Show>

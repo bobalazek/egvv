@@ -1,4 +1,4 @@
-import { TextField, DateField, ReferenceField, Show, SimpleShowLayout, ShowProps } from 'react-admin';
+import { TextField, ReferenceField, Show, SimpleShowLayout, ShowProps, NumberField } from 'react-admin';
 
 export const EventSessionDriverStartingGridShow = (props: ShowProps) => (
   <Show {...props}>
@@ -7,7 +7,7 @@ export const EventSessionDriverStartingGridShow = (props: ShowProps) => (
         <TextField source="name" />
       </ReferenceField>
       <TextField source="position" />
-      <DateField source="time" />
+      <NumberField source="timeMilliseconds" />
       <TextField source="note" />
     </SimpleShowLayout>
   </Show>
