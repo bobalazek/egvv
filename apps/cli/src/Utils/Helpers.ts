@@ -3,8 +3,19 @@ import { Prisma, PrismaClient } from '@prisma/client';
 
 import { EventWithSessionsInterface } from './Interfaces';
 
-export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSessionsInterface, seasonSlug: string) {
+let prismaClient: PrismaClient = null;
+export const getPrismaClient = () => {
+  if (!prismaClient) {
+    prismaClient = new PrismaClient();
+  }
+
+  return prismaClient;
+};
+
+export const saveEvent = async (eventRawData: EventWithSessionsInterface, seasonSlug: string) => {
   console.log(`Saving ${eventRawData.slug} event ...`);
+
+  const prisma = getPrismaClient();
 
   let raceAt: Date;
   for (const eventSessionData of eventRawData.sessions) {
@@ -92,4 +103,46 @@ export async function saveEvent(prisma: PrismaClient, eventRawData: EventWithSes
   }
 
   return event;
-}
+};
+
+export const exportData = async (seasonSlug: string) => {
+  const prisma = getPrismaClient();
+  const eventsData = (
+    await prisma.event.findMany({
+      where: {
+        season: {
+          slug: seasonSlug,
+        },
+      },
+      include: {
+        circuit: true,
+        eventSessions: true,
+      },
+      orderBy: {
+        round: 'asc',
+      },
+    })
+  ).map((event) => {
+    return {
+      name: event.name,
+      slug: event.slug,
+      laps: event.laps,
+      lapDistance: event.lapDistance,
+      round: event.round,
+      raceAt: event.raceAt.toISOString(),
+      url: event.url,
+      circuitLayout: event.circuitLayout,
+      circuitSlug: event.circuit.slug,
+      sessions: event.eventSessions.map((eventSession) => {
+        return {
+          name: eventSession.name,
+          type: eventSession.type,
+          startAt: eventSession.startAt.toISOString(),
+          endAt: eventSession.endAt.toISOString(),
+        };
+      }),
+    };
+  });
+
+  console.log(JSON.stringify(eventsData));
+};

@@ -1,6 +1,4 @@
-import puppeteer from 'puppeteer';
 import { Command } from 'commander';
-import { PrismaClient } from '@prisma/client';
 
 import { processEventsForYear } from '../Utils/F1WebsiteHelpers';
 
@@ -10,14 +8,9 @@ export const addScrapeF1DataCommand = (program: Command) => {
     .requiredOption('-y, --year <year>', 'For what year?')
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .action(async (options: any) => {
-      const browser = await puppeteer.launch();
-      const prisma = new PrismaClient();
-
       const year = parseInt(options.year);
 
-      await processEventsForYear(browser, prisma, year, `f1-${year}`);
-
-      await browser.close();
+      await processEventsForYear(year, `f1-${year}`);
     });
   program.addCommand(command);
 };

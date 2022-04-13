@@ -1,6 +1,5 @@
 import puppeteer from 'puppeteer';
 import slugify from 'slugify';
-import { PrismaClient } from '@prisma/client';
 
 import {
   EventRaceInterface,
@@ -10,80 +9,30 @@ import {
 } from './Interfaces';
 import { saveEvent } from './Helpers';
 
-export async function processEventsForYear(
-  browser: puppeteer.Browser,
-  prisma: PrismaClient,
-  year: number,
-  seasonSlug: string
-) {
+export async function processEventsForYear(year: number, seasonSlug: string) {
   console.log(`========== Getting events for ${year} ==========`);
 
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   const eventsList = await getEventsList(page, year);
   for (const event of eventsList) {
-    if (!event.type.startsWith('round')) {
-      continue;
-    }
-
     console.log(`Getting event data for ${event.slug} ${year} ...`);
 
     const round = parseInt(event.type.replace('round-', ''));
     const eventData = await getEventData(page, year, event.slug, round);
 
-    await saveEvent(prisma, eventData, seasonSlug);
+    await saveEvent(eventData, seasonSlug);
 
     console.log('----------');
   }
 
-  /*
-  // Uncomment this, if you want to get the JSON version to save it in a file
-  console.log(
-    JSON.stringify(
-      (
-        await prisma.event.findMany({
-          where: {
-            season: {
-              slug: seasonSlug,
-            },
-          },
-          include: {
-            circuit: true,
-            eventSessions: true,
-          },
-          orderBy: {
-            round: 'asc',
-          },
-        })
-      ).map((event) => {
-        return {
-          name: event.name,
-          slug: event.slug,
-          laps: event.laps,
-          lapDistance: event.lapDistance,
-          round: event.round,
-          raceAt: event.raceAt.toISOString(),
-          url: event.url,
-          circuitLayout: event.circuitLayout,
-          circuitSlug: event.circuit.slug,
-          sessions: event.eventSessions.map((eventSession) => {
-            return {
-              name: eventSession.name,
-              type: eventSession.type,
-              startAt: eventSession.startAt.toISOString(),
-              endAt: eventSession.endAt.toISOString(),
-            };
-          }),
-        };
-      })
-    )
-  );
-  */
+  await browser.close();
 
   return void 0;
 }
 
-// TODO: Keep in case we want some other data for other series
+// Keep in case we want some other data for other series
 export async function getEventSessions(page: puppeteer.Page, year: number, event: string) {
   const url = `https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`;
 
@@ -207,7 +156,8 @@ export async function getEventTableData(page: puppeteer.Page) {
   return table;
 }
 
-export async function getEventsList(page: puppeteer.Page, year: number) {
+// eslint-disable-next-line @typescript-eslint/no-inferrable-types
+export async function getEventsList(page: puppeteer.Page, year: number, racesOnly: boolean = true) {
   const url = `https://www.formula1.com/en/racing/${year}.html`;
 
   console.log(`Goto URL: ${url} ...`);
@@ -229,11 +179,17 @@ export async function getEventsList(page: puppeteer.Page, year: number) {
       type = type.split('-')[0].trim();
     }
 
+    type = slugify(type, {
+      lower: true,
+    });
+
+    if (racesOnly && !type.startsWith('round')) {
+      continue;
+    }
+
     events.push({
       slug,
-      type: slugify(type, {
-        lower: true,
-      }),
+      type,
     });
   }
 
@@ -243,11 +199,11 @@ export async function getEventsList(page: puppeteer.Page, year: number) {
 export async function getEventData(
   page: puppeteer.Page,
   year: number,
-  slug: string,
+  urlSlug: string,
   round: number
 ): Promise<EventWithSessionsInterface> {
   // Summary page
-  const url = `https://www.formula1.com/en/racing/${year}/${slug}.html`;
+  const url = `https://www.formula1.com/en/racing/${year}/${urlSlug}.html`;
 
   console.log(`Goto URL: ${url} ...`);
 
@@ -269,7 +225,7 @@ export async function getEventData(
   let circuitLayout: string | null = null;
 
   // Circuit page
-  const circuitUrl = `https://www.formula1.com/en/racing/${year}/${slug}/Circuit.html`;
+  const circuitUrl = `https://www.formula1.com/en/racing/${year}/${urlSlug}/Circuit.html`;
 
   console.log(`Goto URL: ${circuitUrl} ...`);
 
@@ -303,7 +259,7 @@ export async function getEventData(
     circuitLayout = 'Outer Track';
   }
 
-  const eventSlug = slugify(name, {
+  const slug = slugify(name, {
     lower: true,
   });
 
@@ -338,7 +294,7 @@ export async function getEventData(
 
   return {
     name,
-    slug: eventSlug,
+    slug,
     round,
     laps,
     lapDistance,
@@ -349,7 +305,7 @@ export async function getEventData(
   };
 }
 
-export async function getEventRaces(page: puppeteer.Page, year: number): Promise<EventRaceInterface[]> {
+export const getEventRaces = async (page: puppeteer.Page, year: number): Promise<EventRaceInterface[]> => {
   const url = `https://www.formula1.com/en/results.html/${year}/races.html`;
 
   console.log(`Goto URL: ${url} ...`);
@@ -359,4 +315,4 @@ export async function getEventRaces(page: puppeteer.Page, year: number): Promise
   // TODO
 
   return [];
-}
+};
