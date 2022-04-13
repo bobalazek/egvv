@@ -146,3 +146,19 @@ export const exportData = async (seasonSlug: string) => {
 
   console.log(JSON.stringify(eventsData));
 };
+
+export const convertTimeToMilliseconds = (time: string): number => {
+  if (!time) {
+    return 0;
+  }
+
+  const timeDotSplit = time.split('.');
+  const timeCommaSplit = time.split(':');
+
+  return (
+    parseInt(timeDotSplit[1]) +
+    parseInt(timeCommaSplit[2]) * 1000 +
+    parseInt(timeCommaSplit[1]) * 60 * 1000 +
+    parseInt(timeCommaSplit[0]) * 60 * 60 * 1000
+  );
+};

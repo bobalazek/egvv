@@ -31,3 +31,15 @@ export interface EventRaceInterface {
   date: Date;
   laps: number;
 }
+
+export interface EventRaceResultInterface {
+  driverNumber: number;
+  driverName: string;
+  teamName: string;
+  status: string;
+  position?: number;
+  time?: Date;
+  laps?: number;
+  lapsBehind?: number;
+  points?: number;
+}

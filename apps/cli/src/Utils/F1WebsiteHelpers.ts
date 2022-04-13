@@ -5,11 +5,12 @@ import slugify from 'slugify';
 
 import {
   EventRaceInterface,
+  EventRaceResultInterface,
   EventSessionInterface,
   EventsListInterface,
   EventWithSessionsInterface,
 } from './Interfaces';
-import { saveEvent } from './Helpers';
+import { convertTimeToMilliseconds, saveEvent } from './Helpers';
 
 export const processEventsForYear = async (year: number, seasonSlug: string, eventSlug?: string) => {
   console.log(`========== Getting events for ${year} ==========`);
@@ -330,6 +331,7 @@ export const getEventsRaces = async (page: puppeteer.Page, year: number): Promis
     let url: string = '';
     let date: Date = new Date();
     let laps: number = 0;
+
     const $tableRowData = await $tableRow.$$('td');
     for (let i = 0; i < $tableRowData.length; i++) {
       const $single = $tableRowData[i];
@@ -356,4 +358,76 @@ export const getEventsRaces = async (page: puppeteer.Page, year: number): Promis
   }
 
   return eventRaces;
+};
+
+export const getEventsRaceResults = async (page: puppeteer.Page, url: string): Promise<EventRaceResultInterface[]> => {
+  console.log(`Goto URL: ${url} ...`);
+
+  page.goto(url);
+
+  await page.waitForSelector('.resultsarchive-table');
+
+  let timeFirstPosition: number = 0;
+  const results: EventRaceResultInterface[] = [];
+  const $table = await page.$('.resultsarchive-table');
+  const $tableRows = await $table.$$('tbody tr');
+  for (const $tableRow of $tableRows) {
+    let driverNumber: number = 0;
+    let driverName: string = '';
+    let teamName: string = '';
+    let status: string = 'FINISHED';
+    let position: number | null = null;
+    let time: Date | null = null;
+    let laps: number | null = null;
+    let lapsBehind: number | null = null;
+    let points: number | null = null;
+
+    const $tableRowData = await $tableRow.$$('td');
+    for (let i = 0; i < $tableRowData.length; i++) {
+      const $single = $tableRowData[i];
+      const value = (await page.evaluate((el) => el.textContent, $single)).trim();
+
+      if (i === 1) {
+        position = value === 'NC' ? null : parseInt(value);
+      } else if (i === 2) {
+        driverNumber = parseInt(value);
+      } else if (i === 3) {
+        driverName = value;
+      } else if (i === 4) {
+        teamName = value;
+      } else if (i === 5) {
+        laps = parseInt(value);
+      } else if (i === 6) {
+        if (!timeFirstPosition) {
+          timeFirstPosition = convertTimeToMilliseconds(value);
+        }
+
+        if (value === 'DNF' || value === 'DNS') {
+          status = value;
+        } else {
+          if (value.includes('lap')) {
+            lapsBehind = parseInt(value.replace(' laps', '').replace(' lap', '').replace('+', ''));
+          } else {
+            time = new Date(); // TODO
+          }
+        }
+      } else if (i === 7) {
+        points = parseFloat(value);
+      }
+    }
+
+    results.push({
+      driverNumber,
+      driverName,
+      teamName,
+      status,
+      position,
+      time,
+      laps,
+      lapsBehind,
+      points,
+    });
+  }
+
+  return results;
 };
