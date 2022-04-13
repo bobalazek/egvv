@@ -171,7 +171,7 @@ model EventSessionDriverLap {
   id                   String             @id @default(uuid())
   lap                  Int
   isDeleted            Boolean            @default(false)
-  timeMilliseconds   BigInt?
+  timeMilliseconds     BigInt?
   position             Int?
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverLap_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
@@ -180,8 +180,8 @@ model EventSessionDriverLap {
 model EventSessionDriverPitStop {
   id                   String             @id @default(uuid())
   lap                  Int
-  stopTimeMilliseconds Int? // How long was the time for only the pitstop?
-  timeMilliseconds     Int? // How long was the total time for the pitstop?
+  stopTimeMilliseconds BigInt? // How long was the time for only the pitstop?
+  timeMilliseconds     BigInt? // How long was the total time for the pitstop?
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverPitStop_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }

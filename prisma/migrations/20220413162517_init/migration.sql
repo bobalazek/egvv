@@ -170,8 +170,8 @@ CREATE TABLE "EventSessionDriverLap" (
 CREATE TABLE "EventSessionDriverPitStop" (
     "id" TEXT NOT NULL,
     "lap" INTEGER NOT NULL,
-    "stopTimeMilliseconds" INTEGER,
-    "timeMilliseconds" INTEGER,
+    "stopTimeMilliseconds" BIGINT,
+    "timeMilliseconds" BIGINT,
     "eventSessionDriverId" TEXT NOT NULL,
 
     CONSTRAINT "EventSessionDriverPitStop_pkey" PRIMARY KEY ("id")
