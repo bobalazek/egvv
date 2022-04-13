@@ -28,5 +28,6 @@ export interface EventSessionInterface {
 export interface EventRaceInterface {
   name: string;
   url: string;
-  date: string;
+  date: Date;
+  laps: number;
 }

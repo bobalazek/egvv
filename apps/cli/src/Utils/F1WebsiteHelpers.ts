@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+
 import puppeteer from 'puppeteer';
 import slugify from 'slugify';
 
@@ -9,14 +11,21 @@ import {
 } from './Interfaces';
 import { saveEvent } from './Helpers';
 
-export const processEventsForYear = async (year: number, seasonSlug: string) => {
+export const processEventsForYear = async (year: number, seasonSlug: string, eventSlug?: string) => {
   console.log(`========== Getting events for ${year} ==========`);
 
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
+  const eventsRaces = await getEventsRaces(page, year);
+  console.log(eventsRaces);
+
   const eventsList = await getEventsList(page, year);
   for (const event of eventsList) {
+    if (eventSlug && eventSlug !== event.slug) {
+      continue;
+    }
+
     console.log(`Getting event data for ${event.slug} ${year} ...`);
 
     const round = parseInt(event.type.replace('round-', ''));
@@ -33,16 +42,9 @@ export const processEventsForYear = async (year: number, seasonSlug: string) => 
 };
 
 // Keep in case we want some other data for other series
-export const getEventSessions = async (page: puppeteer.Page, year: number, event: string) => {
-  const url = `https://www.formula1.com/en/racing/${year}/${event}/Timetable.html`;
-
-  console.log(`Goto URL: ${url} ...`);
-
-  page.goto(url);
-
+export const getEventSessions = async (page: puppeteer.Page, year: number, eventSlug: string) => {
+  const table = await getEventTableData(page, year, eventSlug);
   const sessions: EventSessionInterface[] = [];
-
-  const table = await getEventTableData(page);
 
   let currentDate = '';
   for (let i = 0; i < table.length; i++) {
@@ -134,7 +136,13 @@ export const getEventSessions = async (page: puppeteer.Page, year: number, event
   return sessions;
 };
 
-export const getEventTableData = async (page: puppeteer.Page) => {
+export const getEventTableData = async (page: puppeteer.Page, year: number, eventSlug: string) => {
+  const url = `https://www.formula1.com/en/racing/${year}/${eventSlug}/Timetable.html`;
+
+  console.log(`Goto URL: ${url} ...`);
+
+  page.goto(url);
+
   await page.waitForSelector('.article-content');
 
   const table: string[][] = [];
@@ -147,6 +155,7 @@ export const getEventTableData = async (page: puppeteer.Page) => {
 
     for (const $single of $tableRowData) {
       const value = await page.evaluate((el) => el.textContent, $single);
+
       row.push(value.trim());
     }
 
@@ -156,7 +165,6 @@ export const getEventTableData = async (page: puppeteer.Page) => {
   return table;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-inferrable-types
 export const getEventsList = async (page: puppeteer.Page, year: number, racesOnly: boolean = true) => {
   const url = `https://www.formula1.com/en/racing/${year}.html`;
 
@@ -305,14 +313,47 @@ export const getEventData = async (
   };
 };
 
-export const getEventRaces = async (page: puppeteer.Page, year: number): Promise<EventRaceInterface[]> => {
+export const getEventsRaces = async (page: puppeteer.Page, year: number): Promise<EventRaceInterface[]> => {
   const url = `https://www.formula1.com/en/results.html/${year}/races.html`;
 
   console.log(`Goto URL: ${url} ...`);
 
   page.goto(url);
 
-  // TODO
+  await page.waitForSelector('.resultsarchive-table');
 
-  return [];
+  const eventRaces: EventRaceInterface[] = [];
+  const $table = await page.$('.resultsarchive-table');
+  const $tableRows = await $table.$$('tbody tr');
+  for (const $tableRow of $tableRows) {
+    let name: string = '';
+    let url: string = '';
+    let date: Date = new Date();
+    let laps: number = 0;
+    const $tableRowData = await $tableRow.$$('td');
+    for (let i = 0; i < $tableRowData.length; i++) {
+      const $single = $tableRowData[i];
+
+      if (i === 1) {
+        name = (await page.evaluate((el) => el.textContent, $single)).trim();
+
+        const $a = await $single.$('a');
+        url = await page.evaluate((el) => el.href, $a);
+      } else if (i === 2) {
+        const dateString = await page.evaluate((el) => el.textContent, $single);
+        date = new Date(dateString); // TODO: annoying timezone stuff ...
+      } else if (i === 5) {
+        laps = parseInt(await page.evaluate((el) => el.textContent, $single));
+      }
+    }
+
+    eventRaces.push({
+      name,
+      url,
+      date,
+      laps,
+    });
+  }
+
+  return eventRaces;
 };
