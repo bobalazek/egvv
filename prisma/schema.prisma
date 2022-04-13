@@ -171,7 +171,7 @@ model EventSessionDriverLap {
   id                   String             @id @default(uuid())
   lap                  Int
   isDeleted            Boolean            @default(false)
-  timeInMilliseconds   BigInt?
+  timeMilliseconds   BigInt?
   position             Int?
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverLap_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
@@ -189,7 +189,7 @@ model EventSessionDriverPitStop {
 model EventSessionDriverStartingGrid {
   id                   String             @id @default(uuid())
   position             Int?
-  timeInMilliseconds   BigInt? // What was the time to reach the position in the qualification?
+  timeMilliseconds     BigInt? // What was the time to reach the position in the qualification?
   note                 String? // if the racer for example starts in the pit or has a penalty
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverStartingGrid_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
@@ -199,7 +199,7 @@ model EventSessionDriverClassification {
   id                   String             @id @default(uuid())
   status               String // finished, dnf, dns, ...
   position             Int?
-  timeInMilliseconds   DateTime?
+  timeMilliseconds     BigInt?
   laps                 Int? // How many laps were completed?
   lapsBehind           Int?
   points               Float? // Yes, as we've seen last season, there can be half points

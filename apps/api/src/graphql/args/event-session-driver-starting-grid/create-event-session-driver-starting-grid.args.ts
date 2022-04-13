@@ -9,7 +9,7 @@ export class CreateEventSessionDriverStartingGridArgs {
   position?: number;
 
   @Field(() => Int, { nullable: true })
-  timeInMilliseconds?: number;
+  timeMilliseconds?: number;
 
   @Field({ nullable: true })
   note?: string;

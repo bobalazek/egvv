@@ -9,7 +9,7 @@ export class CreateEventSessionDriverClassificationArgs {
   position?: number;
 
   @Field(() => Int, { nullable: true })
-  timeInMilliseconds?: number;
+  timeMilliseconds?: number;
 
   @Field({ nullable: true })
   laps?: number;

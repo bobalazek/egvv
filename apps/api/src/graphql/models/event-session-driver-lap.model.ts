@@ -9,7 +9,7 @@ export class EventSessionDriverLap {
   lap: number;
 
   @Field(() => Int, { nullable: true })
-  timeInMilliseconds?: number;
+  timeMilliseconds?: number;
 
   @Field({ nullable: true })
   position?: number;

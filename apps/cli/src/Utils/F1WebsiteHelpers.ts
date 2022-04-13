@@ -380,7 +380,7 @@ export const getEventsRaceResults = async (page: puppeteer.Page, url: string): P
     let teamName: string = '';
     let status: string = 'FINISHED';
     let position: number | null = null;
-    let timeInMilliseconds: number | null = null;
+    let timeMilliseconds: number | null = null;
     let laps: number | null = null;
     let lapsBehind: number | null = null;
     let points: number | null = null;
@@ -411,11 +411,11 @@ export const getEventsRaceResults = async (page: puppeteer.Page, url: string): P
           } else {
             if (!timeFirstPosition) {
               timeFirstPosition = convertTimeToMilliseconds(value);
-              timeInMilliseconds = timeFirstPosition;
+              timeMilliseconds = timeFirstPosition;
             } else if (value.includes('+') && value.includes('s')) {
               const timeSplit = value.replace('+', '').replace('s', '').split('.');
 
-              timeInMilliseconds = timeFirstPosition + parseInt(timeSplit[1]) + parseInt(timeSplit[0]) * 1000;
+              timeMilliseconds = timeFirstPosition + parseInt(timeSplit[1]) + parseInt(timeSplit[0]) * 1000;
             }
           }
         }
@@ -430,7 +430,7 @@ export const getEventsRaceResults = async (page: puppeteer.Page, url: string): P
       teamName,
       status,
       position,
-      timeInMilliseconds,
+      timeMilliseconds,
       laps,
       lapsBehind,
       points,

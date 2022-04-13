@@ -6,7 +6,7 @@ export class CreateEventSessionDriverLapArgs {
   lap: number;
 
   @Field(() => Int, { nullable: true })
-  timeInMilliseconds?: number;
+  timeMilliseconds?: number;
 
   @Field({ nullable: true })
   position?: number;

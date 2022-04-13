@@ -38,7 +38,7 @@ export interface EventRaceResultInterface {
   teamName: string;
   status: string;
   position?: number;
-  timeInMilliseconds?: number;
+  timeMilliseconds?: number;
   laps?: number;
   lapsBehind?: number;
   points?: number;
