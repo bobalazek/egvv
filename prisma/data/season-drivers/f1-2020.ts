@@ -61,7 +61,7 @@ export default [
     driverSlug: 'kimi-raikkonen',
   },
   {
-    number: 66,
+    number: 99,
     code: 'GIO',
     teamSlug: 'alfa-romeo',
     driverSlug: 'antonio-giovinazzi',

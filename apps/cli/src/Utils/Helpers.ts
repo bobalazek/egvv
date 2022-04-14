@@ -153,7 +153,7 @@ export const saveEventRaceResults = async (
         },
       });
       if (!seasonDriver) {
-        throw new Error(`Season driver ${eventRaceResult.driverCode} not found.`);
+        throw new Error(`Season driver ${eventRaceResult.driverCode} (${eventRaceResult.driverNumber}) not found.`);
       }
 
       eventSessionDriver = await prisma.eventSessionDriver.create({

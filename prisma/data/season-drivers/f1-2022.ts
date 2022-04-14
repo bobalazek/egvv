@@ -18,7 +18,7 @@ export default [
     driverSlug: 'max-verstappen',
   },
   {
-    number: 23,
+    number: 11,
     code: 'PER',
     teamSlug: 'red-bull',
     driverSlug: 'sergio-perez',
