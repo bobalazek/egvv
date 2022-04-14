@@ -12,13 +12,13 @@ export const getPrismaClient = () => {
   return prismaClient;
 };
 
-export const saveEvent = async (eventRawData: EventWithSessionsInterface, seasonSlug: string) => {
-  console.log(`Saving ${eventRawData.slug} event ...`);
+export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlug: string) => {
+  console.log(`Saving ${eventData.slug} event ...`);
 
   const prisma = getPrismaClient();
 
   let raceAt: Date;
-  for (const eventSessionData of eventRawData.sessions) {
+  for (const eventSessionData of eventData.sessions) {
     if (eventSessionData.type === 'race') {
       raceAt = eventSessionData.startAt;
       break;
@@ -26,7 +26,7 @@ export const saveEvent = async (eventRawData: EventWithSessionsInterface, season
   }
 
   if (!raceAt) {
-    console.error(`Could not find raceAt for "${eventRawData.name}"`);
+    console.error(`Could not find raceAt for "${eventData.name}"`);
 
     process.exit(1);
   }
@@ -44,24 +44,24 @@ export const saveEvent = async (eventRawData: EventWithSessionsInterface, season
 
   const circuit = await prisma.circuit.findFirst({
     where: {
-      name: eventRawData.circuitName,
+      name: eventData.circuitName,
     },
   });
   if (!circuit) {
-    console.error(`Circuit "${eventRawData.circuitName}" not found`);
+    console.error(`Circuit "${eventData.circuitName}" not found`);
 
     process.exit(1);
   }
 
   const finalData: Prisma.EventUncheckedCreateInput = {
-    name: eventRawData.name,
-    slug: eventRawData.slug,
-    laps: eventRawData.laps,
-    lapDistance: eventRawData.lapDistance,
-    round: eventRawData.round,
+    name: eventData.name,
+    slug: eventData.slug,
+    laps: eventData.laps,
+    lapDistance: eventData.lapDistance,
+    round: eventData.round,
     raceAt,
-    url: eventRawData.url,
-    circuitLayout: eventRawData.circuitLayout,
+    url: eventData.url,
+    circuitLayout: eventData.circuitLayout,
     seasonId: season.id,
     circuitId: circuit.id,
   };
@@ -76,7 +76,7 @@ export const saveEvent = async (eventRawData: EventWithSessionsInterface, season
 
   console.log(`===== Event sessions for ${event.slug} =====`);
 
-  for (const eventSessionData of eventRawData.sessions) {
+  for (const eventSessionData of eventData.sessions) {
     console.log(`Upserting ${eventSessionData.type} ...`);
 
     const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
@@ -230,20 +230,4 @@ export const exportData = async (seasonSlug: string) => {
   });
 
   console.log(JSON.stringify(eventsData));
-};
-
-export const convertTimeToMilliseconds = (time: string): number => {
-  if (!time) {
-    return 0;
-  }
-
-  const timeDotSplit = time.split('.');
-  const timeCommaSplit = time.split(':');
-
-  return (
-    parseInt(timeDotSplit[1]) +
-    parseInt(timeCommaSplit[2]) * 1000 +
-    parseInt(timeCommaSplit[1]) * 60 * 1000 +
-    parseInt(timeCommaSplit[0]) * 60 * 60 * 1000
-  );
 };

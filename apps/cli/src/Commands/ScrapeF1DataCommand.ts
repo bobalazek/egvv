@@ -11,7 +11,7 @@ export const addScrapeF1DataCommand = (program: Command) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .action(async (options: any) => {
       const year = parseInt(options.year);
-      const event = slugify(options.event, {
+      const event = slugify(options.event ?? '', {
         lower: true,
       });
 

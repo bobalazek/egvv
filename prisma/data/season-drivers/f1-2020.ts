@@ -105,7 +105,7 @@ export default [
   },
   {
     number: 26,
-    code: 'KYV',
+    code: 'KVY',
     teamSlug: 'alphatauri',
     driverSlug: 'daniil-kvyat',
   },

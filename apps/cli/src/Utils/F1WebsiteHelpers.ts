@@ -3,6 +3,7 @@
 import puppeteer from 'puppeteer';
 import slugify from 'slugify';
 
+import { convertTimeToMilliseconds } from '@egvv/shared-helpers';
 import {
   EventRaceInterface,
   EventRaceResultInterface,
@@ -10,7 +11,7 @@ import {
   EventsListInterface,
   EventWithSessionsInterface,
 } from './Interfaces';
-import { convertTimeToMilliseconds, saveEvent, saveEventRaceResults } from './Helpers';
+import { saveEvent, saveEventRaceResults } from './Helpers';
 
 export const processEventsForYear = async (year: number, seasonSlug: string, eventSlug?: string) => {
   console.log(`========== Getting events for ${year} ==========`);
@@ -407,12 +408,14 @@ export const getEventsRaceResults = async (page: puppeteer.Page, url: string): P
       const value = (await page.evaluate((el) => el.textContent, $single)).trim();
 
       if (i === 1) {
-        position = value === 'NC' ? null : parseInt(value);
+        position = value === 'NC' || value === 'DQ' ? null : parseInt(value);
+        if (value === 'DQ') {
+          status = 'DSQ';
+        }
       } else if (i === 2) {
         driverNumber = parseInt(value);
       } else if (i === 3) {
         const $code = await $single.$('.hide-for-desktop');
-
         driverCode = await page.evaluate((el) => el.textContent, $code);
       } else if (i === 4) {
         teamName = value;

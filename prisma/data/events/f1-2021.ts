@@ -997,7 +997,7 @@ export default [
   },
   {
     name: '2021 São Paulo Grand Prix',
-    slug: '2021-são-paulo-grand-prix',
+    slug: '2021-sao-paulo-grand-prix',
     laps: 71,
     lapDistance: 4309,
     round: 19,
@@ -1041,12 +1041,6 @@ export default [
         type: 'sprint',
         startAt: '2021-11-13T15:30:00.000Z',
         endAt: '2021-11-13T15:30:00.000Z',
-      },
-      {
-        name: '2021 São Paulo Grand Prix - Sprint',
-        type: 'sprint',
-        startAt: '2021-11-13T16:00:00.000Z',
-        endAt: '2021-11-13T16:00:00.000Z',
       },
       {
         name: '2021 São Paulo Grand Prix - Race',
