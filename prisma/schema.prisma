@@ -162,10 +162,10 @@ model EventSessionDriver {
   eventSession                      EventSession                       @relation(name: "EventSessionDriver_EventSession", fields: [eventSessionId], references: [id])
   seasonDriverId                    String
   seasonDriver                      SeasonDriver                       @relation(name: "EventSessionDriver_SeasonDriver", fields: [seasonDriverId], references: [id])
-  eventSessionDriverLaps            EventSessionDriverLap[]            @relation(name: "EventSessionDriverLap_eventSessionDriver")
-  eventSessionDriverPitStops        EventSessionDriverPitStop[]        @relation(name: "EventSessionDriverPitStop_eventSessionDriver")
-  eventSessionDriverStartingGrids   EventSessionDriverStartingGrid[]   @relation(name: "EventSessionDriverStartingGrid_eventSessionDriver")
-  eventSessionDriverClassifications EventSessionDriverClassification[] @relation(name: "EventSessionDriverClassification_eventSessionDriver")
+  eventSessionDriverLaps            EventSessionDriverLap[]            @relation(name: "EventSessionDriverLap_EventSessionDriver")
+  eventSessionDriverPitStops        EventSessionDriverPitStop[]        @relation(name: "EventSessionDriverPitStop_EventSessionDriver")
+  eventSessionDriverStartingGrids   EventSessionDriverStartingGrid[]   @relation(name: "EventSessionDriverStartingGrid_EventSessionDriver")
+  eventSessionDriverClassifications EventSessionDriverClassification[] @relation(name: "EventSessionDriverClassification_EventSessionDriver")
 }
 
 model EventSessionDriverLap {
@@ -175,7 +175,7 @@ model EventSessionDriverLap {
   timeMilliseconds     Int?
   position             Int?
   eventSessionDriverId String
-  eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverLap_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
+  eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverLap_EventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
 
 model EventSessionDriverPitStop {
@@ -184,7 +184,7 @@ model EventSessionDriverPitStop {
   stopTimeMilliseconds Int? // How long was the time for only the pitstop?
   timeMilliseconds     Int? // How long was the total time for the pitstop?
   eventSessionDriverId String
-  eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverPitStop_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
+  eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverPitStop_EventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
 
 model EventSessionDriverStartingGrid {
@@ -193,7 +193,7 @@ model EventSessionDriverStartingGrid {
   timeMilliseconds     Int? // What was the time to reach the position in the qualification?
   note                 String? // if the racer for example starts in the pit or has a penalty
   eventSessionDriverId String
-  eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverStartingGrid_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
+  eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverStartingGrid_EventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
 
 model EventSessionDriverClassification {
@@ -206,7 +206,7 @@ model EventSessionDriverClassification {
   points               Float? // Yes, as we've seen last season, there can be half points
   note                 String?
   eventSessionDriverId String
-  eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverClassification_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
+  eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverClassification_EventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
 
 model User {
