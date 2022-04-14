@@ -30,6 +30,7 @@ export interface EventRaceInterface {
   url: string;
   date: Date;
   laps: number;
+  round: number;
 }
 
 export interface EventRaceResultInterface {

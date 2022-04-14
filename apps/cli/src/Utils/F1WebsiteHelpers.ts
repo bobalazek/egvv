@@ -47,7 +47,7 @@ export const processEventsForYear = async (year: number, seasonSlug: string, eve
 
     const eventRaceResults = await getEventsRaceResults(page, eventRace.url);
 
-    await saveEventRaceResults(eventRace, eventRaceResults, year);
+    await saveEventRaceResults(eventRace, eventRaceResults, seasonSlug, year);
 
     console.log('----------');
   }
@@ -338,6 +338,7 @@ export const getEventsRaces = async (page: puppeteer.Page, year: number): Promis
 
   await page.waitForSelector('.resultsarchive-table');
 
+  let round = 1;
   const eventRaces: EventRaceInterface[] = [];
   const $table = await page.$('.resultsarchive-table');
   const $tableRows = await $table.$$('tbody tr');
@@ -365,11 +366,14 @@ export const getEventsRaces = async (page: puppeteer.Page, year: number): Promis
     }
 
     eventRaces.push({
+      round,
       name,
       url,
       date,
       laps,
     });
+
+    round++;
   }
 
   return eventRaces;

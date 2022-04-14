@@ -108,6 +108,7 @@ export const saveEvent = async (eventRawData: EventWithSessionsInterface, season
 export const saveEventRaceResults = async (
   eventRace: EventRaceInterface,
   eventRaceResults: EventRaceResultInterface[],
+  seasonSlug: string,
   year: number
 ) => {
   console.log(`Saving ${eventRace.name} event race results ...`);
@@ -117,12 +118,8 @@ export const saveEventRaceResults = async (
   const eventRaceSession = await prisma.eventSession.findFirst({
     where: {
       type: 'race',
-      name: {
-        contains: eventRace.name,
-        mode: 'insensitive',
-      },
       event: {
-        laps: eventRace.laps,
+        round: eventRace.round,
         season: {
           year,
         },
@@ -134,7 +131,7 @@ export const saveEventRaceResults = async (
   }
 
   for (const eventRaceResult of eventRaceResults) {
-    const eventSessionDriver = await prisma.eventSessionDriver.findFirst({
+    let eventSessionDriver = await prisma.eventSessionDriver.findFirst({
       where: {
         eventSessionId: eventRaceSession.id,
         seasonDriver: {
@@ -144,7 +141,28 @@ export const saveEventRaceResults = async (
       },
     });
     if (!eventSessionDriver) {
-      throw new Error(`Event session driver ${eventRaceResult.driverCode} for ${eventRace.name} not found.`);
+      const seasonDriver = await prisma.seasonDriver.findFirst({
+        where: {
+          code: eventRaceResult.driverCode,
+          number: eventRaceResult.driverNumber,
+          seasonTeam: {
+            season: {
+              slug: seasonSlug,
+            },
+          },
+        },
+      });
+      if (!seasonDriver) {
+        throw new Error(`Season driver ${eventRaceResult.driverCode} not found.`);
+      }
+
+      eventSessionDriver = await prisma.eventSessionDriver.create({
+        data: {
+          eventSessionId: eventRaceSession.id,
+          seasonDriverId: seasonDriver.id,
+          number: eventRaceResult.driverNumber,
+        },
+      });
     }
 
     console.log(`Removing existing race result for ${eventRaceResult.driverCode} ...`);

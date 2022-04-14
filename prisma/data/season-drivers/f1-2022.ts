@@ -42,7 +42,7 @@ export default [
     driverSlug: 'lando-norris',
   },
   {
-    number: 55,
+    number: 3,
     code: 'RIC',
     teamSlug: 'mclaren',
     driverSlug: 'daniel-ricciardo',
