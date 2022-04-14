@@ -5,6 +5,7 @@ export const EventCreate = (props: CreateProps) => (
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
       <TextInput source="name" validate={required()} />
+      <TextInput source="fullName" validate={required()} />
       <TextInput source="round" validate={required()} />
       <TextInput source="laps" validate={required()} />
       <TextInput source="lapDistance" validate={required()} />

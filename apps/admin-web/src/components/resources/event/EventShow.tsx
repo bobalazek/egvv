@@ -32,6 +32,7 @@ export const EventShow = (props: ShowProps) => (
       <Tab label="General">
         <TextField source="slug" />
         <TextField source="name" />
+        <TextField source="fullName" />
         <TextField source="round" />
         <TextField source="laps" />
         <TextField source="lapDistance" />

@@ -23,6 +23,7 @@ export const EventList = (props: ListProps) => (
     <Datagrid>
       <TextField source="slug" />
       <TextField source="name" />
+      <TextField source="fullName" />
       <TextField source="round" />
       <TextField source="laps" />
       <TextField source="lapDistance" />

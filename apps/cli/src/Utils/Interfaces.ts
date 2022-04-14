@@ -1,5 +1,6 @@
 export interface EventInterface {
   name: string;
+  fullName: string;
   slug: string;
   round: number;
   laps: number;

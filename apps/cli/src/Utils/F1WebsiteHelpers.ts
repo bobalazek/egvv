@@ -11,7 +11,7 @@ import {
   EventsListInterface,
   EventWithSessionsInterface,
 } from './Interfaces';
-import { saveEvent, saveEventRaceResults } from './Helpers';
+import { exportEventData, saveEvent, saveEventRaceResults } from './Helpers';
 
 export const processEventsForYear = async (year: number, seasonSlug: string, eventSlug?: string) => {
   console.log(`========== Getting events for ${year} ==========`);
@@ -35,6 +35,9 @@ export const processEventsForYear = async (year: number, seasonSlug: string, eve
 
     console.log('----------');
   }
+
+  console.log('========== Export events ==========');
+  await exportEventData(seasonSlug);
 
   console.log('========== Processing event races ==========');
   const eventsRaces = await getEventsRaces(page, year);
@@ -241,6 +244,7 @@ export const getEventData = async (
   const parsedScript = JSON.parse(script);
 
   const name = year + ' ' + parsedScript.subEvent[0].name.split(' - ')[1];
+  const fullName = parsedScript.name;
 
   await page.waitForSelector('.f1-race-hub--timetable-links-wrapper');
 
@@ -313,12 +317,13 @@ export const getEventData = async (
       name: eventSessionName,
       type,
       startAt: new Date(eventSession.startDate),
-      endAt: new Date(eventSession.startDate),
+      endAt: new Date(eventSession.endDate),
     });
   }
 
   return {
     name,
+    fullName,
     slug,
     round,
     laps,

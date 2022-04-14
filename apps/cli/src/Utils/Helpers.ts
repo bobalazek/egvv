@@ -55,6 +55,7 @@ export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlu
 
   const finalData: Prisma.EventUncheckedCreateInput = {
     name: eventData.name,
+    fullName: eventData.fullName,
     slug: eventData.slug,
     laps: eventData.laps,
     lapDistance: eventData.lapDistance,
@@ -136,7 +137,7 @@ export const saveEventRaceResults = async (
         eventSessionId: eventRaceSession.id,
         seasonDriver: {
           code: eventRaceResult.driverCode,
-          number: eventRaceResult.driverNumber,
+          // number: eventRaceResult.driverNumber, // There are situations where multiple drivers could have the same number, per season?
         },
       },
     });
@@ -190,7 +191,7 @@ export const saveEventRaceResults = async (
   }
 };
 
-export const exportData = async (seasonSlug: string) => {
+export const exportEventData = async (seasonSlug: string) => {
   const prisma = getPrismaClient();
   const eventsData = (
     await prisma.event.findMany({
@@ -201,7 +202,16 @@ export const exportData = async (seasonSlug: string) => {
       },
       include: {
         circuit: true,
-        eventSessions: true,
+        eventSessions: {
+          orderBy: [
+            {
+              startAt: 'asc',
+            },
+            {
+              name: 'asc',
+            },
+          ],
+        },
       },
       orderBy: {
         round: 'asc',
@@ -210,6 +220,7 @@ export const exportData = async (seasonSlug: string) => {
   ).map((event) => {
     return {
       name: event.name,
+      fullName: event.fullName,
       slug: event.slug,
       laps: event.laps,
       lapDistance: event.lapDistance,

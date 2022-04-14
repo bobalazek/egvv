@@ -118,6 +118,7 @@ CREATE TABLE "Event" (
     "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "fullName" TEXT NOT NULL,
     "round" INTEGER NOT NULL,
     "laps" INTEGER NOT NULL,
     "lapDistance" DOUBLE PRECISION NOT NULL,

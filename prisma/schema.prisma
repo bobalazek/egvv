@@ -124,6 +124,7 @@ model Event {
   id            String         @id @default(uuid())
   slug          String         @unique
   name          String
+  fullName      String
   round         Int // Which round in the season?
   laps          Int
   lapDistance   Float // in km

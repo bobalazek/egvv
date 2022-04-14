@@ -116,84 +116,6 @@ async function main() {
     });
   }
 
-  console.log('========== Events ==========');
-  for (const data of events) {
-    console.log(`Upserting "${data.slug}" ...`);
-
-    const season = await prisma.season.findFirst({
-      where: {
-        slug: data.seasonSlug,
-      },
-    });
-    if (!season) {
-      console.error(`Season "${data.seasonSlug}" not found`);
-
-      process.exit(1);
-    }
-
-    const circuit = await prisma.circuit.findFirst({
-      where: {
-        slug: data.circuitSlug,
-      },
-    });
-    if (!circuit) {
-      console.error(`Circuit "${data.circuitSlug}" not found`);
-
-      process.exit(1);
-    }
-
-    const finalData: Prisma.EventUncheckedCreateInput = {
-      name: data.name,
-      slug: data.slug,
-      laps: data.laps,
-      lapDistance: data.lapDistance,
-      round: data.round,
-      raceAt: new Date(data.raceAt),
-      url: data.url ?? null,
-      circuitLayout: data.circuitLayout ?? null,
-      seasonId: season.id,
-      circuitId: circuit.id,
-    };
-
-    const event = await prisma.event.upsert({
-      where: {
-        slug: finalData.slug,
-      },
-      update: finalData,
-      create: finalData,
-    });
-
-    if (data.sessions) {
-      console.log(`===== Event sessions for "${event.slug}" =====`);
-
-      for (const eventSessionData of data.sessions) {
-        console.log(`Upserting ${eventSessionData.type} ...`);
-
-        const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
-          name: eventSessionData.name,
-          slug: slugify(eventSessionData.name.replace(' - ', '-'), {
-            lower: true,
-          }),
-          type: eventSessionData.type,
-          startAt: new Date(eventSessionData.startAt),
-          endAt: eventSessionData.endAt ? new Date(eventSessionData.endAt) : null,
-          eventId: event.id,
-        };
-
-        await prisma.eventSession.upsert({
-          where: {
-            eventId_type: {
-              eventId: eventSessionFinalData.eventId,
-              type: eventSessionFinalData.type,
-            },
-          },
-          update: eventSessionFinalData,
-          create: eventSessionFinalData,
-        });
-      }
-    }
-  }
-
   console.log('========== Season teams ==========');
   for (const data of seasonTeams) {
     console.log(`Upserting "${data.name}" ...`);
@@ -308,6 +230,85 @@ async function main() {
       update: finalData,
       create: finalData,
     });
+  }
+
+  console.log('========== Events ==========');
+  for (const data of events) {
+    console.log(`Upserting "${data.slug}" ...`);
+
+    const season = await prisma.season.findFirst({
+      where: {
+        slug: data.seasonSlug,
+      },
+    });
+    if (!season) {
+      console.error(`Season "${data.seasonSlug}" not found`);
+
+      process.exit(1);
+    }
+
+    const circuit = await prisma.circuit.findFirst({
+      where: {
+        slug: data.circuitSlug,
+      },
+    });
+    if (!circuit) {
+      console.error(`Circuit "${data.circuitSlug}" not found`);
+
+      process.exit(1);
+    }
+
+    const finalData: Prisma.EventUncheckedCreateInput = {
+      name: data.name,
+      fullName: data.fullName,
+      slug: data.slug,
+      laps: data.laps,
+      lapDistance: data.lapDistance,
+      round: data.round,
+      raceAt: new Date(data.raceAt),
+      url: data.url ?? null,
+      circuitLayout: data.circuitLayout ?? null,
+      seasonId: season.id,
+      circuitId: circuit.id,
+    };
+
+    const event = await prisma.event.upsert({
+      where: {
+        slug: finalData.slug,
+      },
+      update: finalData,
+      create: finalData,
+    });
+
+    if (data.sessions) {
+      console.log(`===== Event sessions for "${event.slug}" =====`);
+
+      for (const eventSessionData of data.sessions) {
+        console.log(`Upserting ${eventSessionData.type} ...`);
+
+        const eventSessionFinalData: Prisma.EventSessionUncheckedCreateInput = {
+          name: eventSessionData.name,
+          slug: slugify(eventSessionData.name.replace(' - ', '-'), {
+            lower: true,
+          }),
+          type: eventSessionData.type,
+          startAt: new Date(eventSessionData.startAt),
+          endAt: eventSessionData.endAt ? new Date(eventSessionData.endAt) : null,
+          eventId: event.id,
+        };
+
+        await prisma.eventSession.upsert({
+          where: {
+            eventId_type: {
+              eventId: eventSessionFinalData.eventId,
+              type: eventSessionFinalData.type,
+            },
+          },
+          update: eventSessionFinalData,
+          create: eventSessionFinalData,
+        });
+      }
+    }
   }
 }
 

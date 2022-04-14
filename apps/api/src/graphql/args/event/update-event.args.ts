@@ -11,6 +11,9 @@ export class UpdateEventArgs {
   @Field()
   name: string;
 
+  @Field()
+  fullName: string;
+
   @Field(() => Int)
   round: number;
 
