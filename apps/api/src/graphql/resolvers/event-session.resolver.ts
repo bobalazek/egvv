@@ -1,7 +1,6 @@
 import { Resolver, ResolveField, Parent, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
 import { AllEventSessionsArgs } from '../args/event-session/all-event-sessions.args';
 import { CreateEventSessionArgs } from '../args/event-session/create-event-session.args';
 import { UpdateEventSessionArgs } from '../args/event-session/update-event-session.args';
@@ -11,6 +10,7 @@ import { EventSessionDriver } from '../models/event-session-driver.model';
 import { EventSession } from '../models/event-session.model';
 import { Event } from '../models/event.model';
 import { ListMetadata } from '../models/list-metadata.model';
+import { EventSessionDriverClassification } from '../models/event-session-driver-classification.model';
 import { AbstractResolver } from './abstract.resolver';
 
 @Resolver(EventSession)
@@ -128,6 +128,28 @@ export class EventSessionResolver extends AbstractResolver {
     return this._prismaService.eventSessionDriver.findMany({
       where: {
         eventSessionId: parent.id,
+      },
+    });
+  }
+
+  @ResolveField('eventSessionDriverClassifications', () => [EventSessionDriverClassification])
+  async eventSessionDriverClassifications(@Parent() parent: EventSession) {
+    const eventSessionDrivers = await this._prismaService.eventSessionDriver.findMany({
+      where: {
+        eventSessionId: parent.id,
+      },
+    });
+    if (eventSessionDrivers.length === 0) {
+      return [];
+    }
+
+    return this._prismaService.eventSessionDriverClassification.findMany({
+      where: {
+        eventSessionDriverId: {
+          in: eventSessionDrivers.map((eventSessionDriver) => {
+            return eventSessionDriver.id;
+          }),
+        },
       },
     });
   }

@@ -14,10 +14,10 @@ export class EventSessionDriverClassification {
   @Field(() => Int, { nullable: true })
   timeMilliseconds?: number;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   laps?: number;
 
-  @Field({ nullable: true })
+  @Field(() => Int, { nullable: true })
   lapsBehind?: number;
 
   @Field(() => Float, { nullable: true })

@@ -65,6 +65,22 @@ export class EventSessionDriverResolver extends AbstractResolver {
     });
   }
 
+  @ResolveField('name', () => String)
+  async name(@Parent() parent: EventSessionDriver) {
+    const seasonDriver = await this._prismaService.seasonDriver.findFirst({
+      where: {
+        id: parent.seasonDriverId,
+      },
+    });
+    const eventSession = await this._prismaService.eventSession.findFirst({
+      where: {
+        id: parent.eventSessionId,
+      },
+    });
+
+    return `${seasonDriver.code} (${seasonDriver.number}) @ ${eventSession.name}`;
+  }
+
   @ResolveField('eventSession', () => EventSession)
   async eventSession(@Parent() parent: EventSessionDriver) {
     return this._prismaService.eventSession.findFirst({

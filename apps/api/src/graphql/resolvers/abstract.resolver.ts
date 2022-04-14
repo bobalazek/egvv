@@ -52,7 +52,7 @@ export class AbstractResolver {
       where['id'] = args.filter.id;
     }
 
-    if (queryFilterFields.length && args.filter?.q) {
+    if (args.filter?.q && queryFilterFields.length) {
       const query = args.filter?.q;
       const orWhere: KeyValueMap[] = [];
 
@@ -90,7 +90,7 @@ export class AbstractResolver {
       where['OR'] = orWhere;
     }
 
-    if (allowedExactFilterFields?.length) {
+    if (args.filter && allowedExactFilterFields?.length) {
       const andWhere: KeyValueMap[] = [];
 
       for (const field of allowedExactFilterFields) {

@@ -172,7 +172,7 @@ model EventSessionDriverLap {
   id                   String             @id @default(uuid())
   lap                  Int
   isDeleted            Boolean            @default(false)
-  timeMilliseconds     BigInt?
+  timeMilliseconds     Int?
   position             Int?
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverLap_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
@@ -181,8 +181,8 @@ model EventSessionDriverLap {
 model EventSessionDriverPitStop {
   id                   String             @id @default(uuid())
   lap                  Int
-  stopTimeMilliseconds BigInt? // How long was the time for only the pitstop?
-  timeMilliseconds     BigInt? // How long was the total time for the pitstop?
+  stopTimeMilliseconds Int? // How long was the time for only the pitstop?
+  timeMilliseconds     Int? // How long was the total time for the pitstop?
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverPitStop_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
@@ -190,7 +190,7 @@ model EventSessionDriverPitStop {
 model EventSessionDriverStartingGrid {
   id                   String             @id @default(uuid())
   position             Int?
-  timeMilliseconds     BigInt? // What was the time to reach the position in the qualification?
+  timeMilliseconds     Int? // What was the time to reach the position in the qualification?
   note                 String? // if the racer for example starts in the pit or has a penalty
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverStartingGrid_eventSessionDriver", fields: [eventSessionDriverId], references: [id])
@@ -200,7 +200,7 @@ model EventSessionDriverClassification {
   id                   String             @id @default(uuid())
   status               String // finished, dnf, dns, ...
   position             Int?
-  timeMilliseconds     BigInt?
+  timeMilliseconds     Int?
   laps                 Int? // How many laps were completed?
   lapsBehind           Int?
   points               Float? // Yes, as we've seen last season, there can be half points

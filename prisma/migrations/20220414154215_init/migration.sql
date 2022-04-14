@@ -160,7 +160,7 @@ CREATE TABLE "EventSessionDriverLap" (
     "id" TEXT NOT NULL,
     "lap" INTEGER NOT NULL,
     "isDeleted" BOOLEAN NOT NULL DEFAULT false,
-    "timeMilliseconds" BIGINT,
+    "timeMilliseconds" INTEGER,
     "position" INTEGER,
     "eventSessionDriverId" TEXT NOT NULL,
 
@@ -171,8 +171,8 @@ CREATE TABLE "EventSessionDriverLap" (
 CREATE TABLE "EventSessionDriverPitStop" (
     "id" TEXT NOT NULL,
     "lap" INTEGER NOT NULL,
-    "stopTimeMilliseconds" BIGINT,
-    "timeMilliseconds" BIGINT,
+    "stopTimeMilliseconds" INTEGER,
+    "timeMilliseconds" INTEGER,
     "eventSessionDriverId" TEXT NOT NULL,
 
     CONSTRAINT "EventSessionDriverPitStop_pkey" PRIMARY KEY ("id")
@@ -182,7 +182,7 @@ CREATE TABLE "EventSessionDriverPitStop" (
 CREATE TABLE "EventSessionDriverStartingGrid" (
     "id" TEXT NOT NULL,
     "position" INTEGER,
-    "timeMilliseconds" BIGINT,
+    "timeMilliseconds" INTEGER,
     "note" TEXT,
     "eventSessionDriverId" TEXT NOT NULL,
 
@@ -194,7 +194,7 @@ CREATE TABLE "EventSessionDriverClassification" (
     "id" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "position" INTEGER,
-    "timeMilliseconds" BIGINT,
+    "timeMilliseconds" INTEGER,
     "laps" INTEGER,
     "lapsBehind" INTEGER,
     "points" DOUBLE PRECISION,

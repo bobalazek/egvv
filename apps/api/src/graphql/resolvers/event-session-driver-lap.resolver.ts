@@ -1,4 +1,4 @@
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { IdArgs } from '../args/id.args';
@@ -9,6 +9,7 @@ import { AllEventSessionDriverLapsArgs } from '../args/event-session-driver-lap/
 import { CreateEventSessionDriverLapArgs } from '../args/event-session-driver-lap/create-event-session-driver-lap.args';
 import { UpdateEventSessionDriverDriverLapArgs } from '../args/event-session-driver-lap/update-event-session-driver-lap.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
+import { EventSessionDriver } from '../models/event-session-driver.model';
 
 @Resolver(EventSessionDriverLap)
 export class EventSessionDriverLapResolver extends AbstractResolver {
@@ -59,6 +60,15 @@ export class EventSessionDriverLapResolver extends AbstractResolver {
     return this._prismaService.eventSessionDriverLap.delete({
       where: {
         id: args.id,
+      },
+    });
+  }
+
+  @ResolveField('eventSessionDriver', () => EventSessionDriver)
+  async eventSessionDriver(@Parent() parent: EventSessionDriverLap) {
+    return this._prismaService.eventSessionDriver.findFirst({
+      where: {
+        id: parent.eventSessionDriverId,
       },
     });
   }

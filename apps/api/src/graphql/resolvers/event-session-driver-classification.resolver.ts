@@ -1,14 +1,15 @@
-import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation, ResolveField, Parent } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
 import { AbstractResolver } from './abstract.resolver';
+import { GqlAuthGuard } from '../guards/gql-auth.guard';
 import { IdArgs } from '../args/id.args';
 import { ListMetadata } from '../models/list-metadata.model';
 import { EventSessionDriverClassification } from '../models/event-session-driver-classification.model';
 import { AllEventSessionDriverClassificationsArgs } from '../args/event-session-driver-classification/all-event-session-driver-classificaitions.args';
 import { CreateEventSessionDriverClassificationArgs } from '../args/event-session-driver-classification/create-event-session-driver-classification.args';
 import { UpdateEventSessionDriverDriverClassificationArgs } from '../args/event-session-driver-classification/update-event-session-driver-classification.args';
-import { GqlAuthGuard } from '../guards/gql-auth.guard';
+import { EventSessionDriver } from '../models/event-session-driver.model';
 
 @Resolver(EventSessionDriverClassification)
 export class EventSessionDriverClassificationResolver extends AbstractResolver {
@@ -61,6 +62,15 @@ export class EventSessionDriverClassificationResolver extends AbstractResolver {
     return this._prismaService.eventSessionDriverClassification.delete({
       where: {
         id: args.id,
+      },
+    });
+  }
+
+  @ResolveField('eventSessionDriver', () => EventSessionDriver)
+  async eventSessionDriver(@Parent() parent: EventSessionDriverClassification) {
+    return this._prismaService.eventSessionDriver.findFirst({
+      where: {
+        id: parent.eventSessionDriverId,
       },
     });
   }
