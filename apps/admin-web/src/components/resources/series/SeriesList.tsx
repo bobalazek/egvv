@@ -12,6 +12,7 @@ export const SeriesList = (props: ListProps) => (
     <Datagrid>
       <TextField source="slug" />
       <TextField source="name" />
+      <TextField source="description" />
       <TextField source="url" />
       <ShowButton />
       <EditButton />

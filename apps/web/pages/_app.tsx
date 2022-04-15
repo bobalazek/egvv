@@ -19,7 +19,12 @@ function App({ Component, pageProps }: AppProps) {
           colorScheme: 'light',
         }}
       >
-        <HeaderResponsive links={[{ link: '/', label: 'Home' }]} />
+        <HeaderResponsive
+          links={[
+            { href: '/', label: 'Home' },
+            { href: '/series', label: 'Series' },
+          ]}
+        />
         <Component {...pageProps} />
       </MantineProvider>
     </>

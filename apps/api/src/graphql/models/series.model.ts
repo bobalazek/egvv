@@ -12,5 +12,8 @@ export class Series {
   name: string;
 
   @Field()
+  description: string;
+
+  @Field()
   url: string;
 }

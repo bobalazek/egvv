@@ -12,5 +12,8 @@ export class UpdateSeriesArgs {
   name: string;
 
   @Field()
+  description: string;
+
+  @Field()
   url: string;
 }

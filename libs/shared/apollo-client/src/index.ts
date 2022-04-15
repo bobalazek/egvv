@@ -3,7 +3,7 @@ import { ApolloClient, ApolloLink, InMemoryCache, from, HttpLink } from '@apollo
 import { HTTP_SERVER_GRAPHQL_URL } from '../../constants/src';
 
 const authLink = new ApolloLink((operation, forward) => {
-  const token = localStorage.getItem('token');
+  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
   if (token) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     operation.setContext(({ headers }: { headers: any }) => ({

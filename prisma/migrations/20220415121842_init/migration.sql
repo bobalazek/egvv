@@ -3,6 +3,7 @@ CREATE TABLE "Series" (
     "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
     "url" TEXT NOT NULL,
 
     CONSTRAINT "Series_pkey" PRIMARY KEY ("id")

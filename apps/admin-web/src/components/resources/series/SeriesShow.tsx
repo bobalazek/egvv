@@ -25,6 +25,7 @@ export const SeriesShow = (props: ShowProps) => (
       <Tab label="General">
         <TextField source="slug" />
         <TextField source="name" />
+        <TextField source="description" />
         <TextField source="url" />
       </Tab>
       <Tab label="Seasons" path="seasons">

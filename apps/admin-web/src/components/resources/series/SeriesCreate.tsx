@@ -5,6 +5,7 @@ export const SeriesCreate = (props: CreateProps) => (
     <SimpleForm>
       <TextInput source="slug" validate={required()} />
       <TextInput source="name" validate={required()} />
+      <TextInput source="description" validate={required()} />
       <TextInput source="url" validate={required()} />
     </SimpleForm>
   </Create>

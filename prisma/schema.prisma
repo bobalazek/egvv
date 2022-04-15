@@ -8,11 +8,12 @@ datasource db {
 }
 
 model Series {
-  id      String   @id @default(uuid())
-  slug    String   @unique // formula-1, formula-2, formula-3, formula-e
-  name    String
-  url     String
-  seasons Season[] @relation(name: "Season_Series")
+  id          String   @id @default(uuid())
+  slug        String   @unique // formula-1, formula-2, formula-3, formula-e
+  name        String
+  description String
+  url         String
+  seasons     Season[] @relation(name: "Season_Series")
 }
 
 model Season {

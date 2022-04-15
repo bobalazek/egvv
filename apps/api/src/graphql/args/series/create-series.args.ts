@@ -9,5 +9,8 @@ export class CreateSeriesArgs {
   name: string;
 
   @Field()
+  description: string;
+
+  @Field()
   url: string;
 }

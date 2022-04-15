@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { createStyles, Header, Container, Group, Burger, Paper, Transition } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
 
@@ -73,27 +73,26 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface HeaderResponsiveProps {
-  links: { link: string; label: string }[];
+  links: { href: string; label: string }[];
 }
 
 export function HeaderResponsive({ links }: HeaderResponsiveProps) {
+  const router = useRouter();
   const [opened, toggleOpened] = useBooleanToggle(false);
-  const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={cx(classes.link, { [classes.linkActive]: active === link.link })}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-        toggleOpened(false);
-      }}
-    >
-      {link.label}
-    </a>
+    <Link key={link.href} href={link.href} passHref>
+      <a
+        key={link.label}
+        className={cx(classes.link, { [classes.linkActive]: router.asPath === link.href })}
+        onClick={() => {
+          toggleOpened(false);
+        }}
+      >
+        {link.label}
+      </a>
+    </Link>
   ));
 
   return (

@@ -6,6 +6,7 @@ export const SeriesEdit = (props: EditProps) => (
       <TextInput source="id" disabled />
       <TextInput source="slug" validate={required()} />
       <TextInput source="name" validate={required()} />
+      <TextInput source="description" validate={required()} />
       <TextInput source="url" validate={required()} />
     </SimpleForm>
   </Edit>
