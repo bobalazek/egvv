@@ -1,17 +1,10 @@
 import { Button, Card, Container, Grid, Group, Text, Title, useMantineTheme } from '@mantine/core';
 import { InferGetStaticPropsType } from 'next';
+import Link from 'next/link';
 import { gql } from '@apollo/client';
 
 import client from '@egvv/shared-apollo-client';
-import Link from 'next/link';
-
-interface SeriesInterface {
-  id: string;
-  slug: string;
-  name: string;
-  description: string;
-  url: string;
-}
+import { SeriesInterface } from '../interfaces/series';
 
 export const getStaticProps = async () => {
   const response = await client.query({
