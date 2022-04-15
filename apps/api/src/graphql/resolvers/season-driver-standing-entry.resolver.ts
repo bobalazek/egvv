@@ -25,12 +25,12 @@ export class SeasonDriverStandingEntryResolver extends AbstractResolver {
 
   @Query(() => [SeasonDriverStandingEntry])
   async allSeasonDriverStandingEntries(@Args() args: AllSeasonDriverStandingEntriesArgs) {
-    return this._prismaService.seasonDriverStandingEntry.findMany(await this.getAllArgs(args, false));
+    return this._prismaService.seasonDriverStandingEntry.findMany(await this.getPrismaArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allSeasonDriverStandingEntriesMeta(@Args() args: AllSeasonDriverStandingEntriesArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.seasonDriverStandingEntry.count(await this.getAllArgs(args, true));
+    const count = await this._prismaService.seasonDriverStandingEntry.count(await this.getPrismaArgs(args, true));
     return {
       count,
     };

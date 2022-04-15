@@ -30,13 +30,13 @@ export class AbstractResolver {
    * @param allowedExactFilterFields Which exact filters from args.filters should we choose and filter by the exact match?
    * @returns array
    */
-  async getAllArgs<T extends AllArgs>(
+  async getPrismaArgs<T extends AllArgs>(
     args: T,
     skipPagination: boolean = false,
     queryFilterFields: string[] = [],
     allowedExactFilterFields: ExactFilterField[] = []
   ) {
-    const skip = !skipPagination && args.perPage ? args.page * args.perPage : undefined;
+    const skip = !skipPagination && args.perPage ? (args.page ?? 0) * args.perPage : undefined;
     const take = !skipPagination && args.perPage ? args.perPage : undefined;
     const orderBy =
       args.sortField && args.sortOrder

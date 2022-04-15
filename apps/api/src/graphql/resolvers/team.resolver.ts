@@ -25,14 +25,14 @@ export class TeamResolver extends AbstractResolver {
   @Query(() => [Team])
   async allTeams(@Args() args: AllTeamsArgs) {
     return this._prismaService.team.findMany(
-      await this.getAllArgs(args, false, ['slug', 'name', 'location', 'countryCode'])
+      await this.getPrismaArgs(args, false, ['slug', 'name', 'location', 'countryCode'])
     );
   }
 
   @Query(() => ListMetadata)
   async _allTeamsMeta(@Args() args: AllTeamsArgs): Promise<ListMetadata> {
     const count = await this._prismaService.team.count(
-      await this.getAllArgs(args, true, ['slug', 'name', 'location', 'countryCode'])
+      await this.getPrismaArgs(args, true, ['slug', 'name', 'location', 'countryCode'])
     );
     return {
       count,

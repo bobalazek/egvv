@@ -10,6 +10,7 @@ import { ListMetadata } from '../models/list-metadata.model';
 import { AllEventsArgs } from '../args/event/all-events.args';
 import { CreateEventArgs } from '../args/event/create-event.args';
 import { UpdateEventArgs } from '../args/event/update-event.args';
+import { AllEventSessionsArgs } from '../args/event-session/all-event-sessions.args';
 
 @Resolver(Event)
 export class EventResolver extends AbstractResolver {
@@ -24,12 +25,12 @@ export class EventResolver extends AbstractResolver {
 
   @Query(() => [Event])
   async allEvents(@Args() args: AllEventsArgs) {
-    return this._prismaService.event.findMany(await this.getAllArgs(args, false, ['slug', 'name']));
+    return this._prismaService.event.findMany(await this.getPrismaArgs(args, false, ['slug', 'name']));
   }
 
   @Query(() => ListMetadata)
   async _allEventsMeta(@Args() args: AllEventsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.event.count(await this.getAllArgs(args, true, ['slug', 'name']));
+    const count = await this._prismaService.event.count(await this.getPrismaArgs(args, true, ['slug', 'name']));
     return {
       count,
     };
@@ -80,14 +81,20 @@ export class EventResolver extends AbstractResolver {
   }
 
   @ResolveField('eventSessions', () => [EventSession])
-  async eventSessions(@Parent() parent: Event) {
-    return this._prismaService.eventSession.findMany({
-      where: {
-        eventId: parent.id,
-      },
-      orderBy: {
-        startAt: 'asc',
-      },
-    });
+  async eventSessions(@Parent() parent: Event, @Args() args: AllEventSessionsArgs) {
+    if (!args.sortField) {
+      args.sortField = 'startAt';
+    }
+    if (!args.sortOrder) {
+      args.sortOrder = 'asc';
+    }
+
+    const prismaArgs = await this.getPrismaArgs(args, false, ['slug', 'name', 'type']);
+    if (!prismaArgs.where) {
+      prismaArgs.where = {};
+    }
+    prismaArgs.where.eventId = parent.id;
+
+    return this._prismaService.eventSession.findMany(prismaArgs);
   }
 }

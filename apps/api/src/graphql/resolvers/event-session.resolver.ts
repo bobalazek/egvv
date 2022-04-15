@@ -27,10 +27,10 @@ export class EventSessionResolver extends AbstractResolver {
   @Query(() => [EventSession])
   async allEventSessions(@Args() args: AllEventSessionsArgs) {
     return this._prismaService.eventSession.findMany(
-      await this.getAllArgs(
+      await this.getPrismaArgs(
         args,
         false,
-        ['slug', 'name'],
+        ['slug', 'name', 'type'],
         [
           {
             filterField: 'eventId',
@@ -56,10 +56,10 @@ export class EventSessionResolver extends AbstractResolver {
   @Query(() => ListMetadata)
   async _allEventSessionsMeta(@Args() args: AllEventSessionsArgs): Promise<ListMetadata> {
     const count = await this._prismaService.eventSession.count(
-      await this.getAllArgs(
+      await this.getPrismaArgs(
         args,
         true,
-        [],
+        ['slug', 'name', 'type'],
         [
           {
             filterField: 'eventId',

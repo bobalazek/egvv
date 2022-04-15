@@ -27,13 +27,13 @@ export class UserResolver extends AbstractResolver {
   @Query(() => [User])
   @UseGuards(GqlAuthGuard)
   async allUsers(@Args() args: AllUsersArgs) {
-    return this._prismaService.user.findMany(await this.getAllArgs(args, false, ['username', 'email']));
+    return this._prismaService.user.findMany(await this.getPrismaArgs(args, false, ['username', 'email']));
   }
 
   @Query(() => ListMetadata)
   @UseGuards(GqlAuthGuard)
   async _allUsersMeta(@Args() args: AllUsersArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.user.count(await this.getAllArgs(args, true, ['username', 'email']));
+    const count = await this._prismaService.user.count(await this.getPrismaArgs(args, true, ['username', 'email']));
     return {
       count,
     };

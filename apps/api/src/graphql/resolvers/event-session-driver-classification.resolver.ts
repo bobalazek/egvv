@@ -24,14 +24,16 @@ export class EventSessionDriverClassificationResolver extends AbstractResolver {
 
   @Query(() => [EventSessionDriverClassification])
   async allEventSessionDriverClassifications(@Args() args: AllEventSessionDriverClassificationsArgs) {
-    return this._prismaService.eventSessionDriverClassification.findMany(await this.getAllArgs(args, false));
+    return this._prismaService.eventSessionDriverClassification.findMany(await this.getPrismaArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionDriverClassificationsMeta(
     @Args() args: AllEventSessionDriverClassificationsArgs
   ): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionDriverClassification.count(await this.getAllArgs(args, true));
+    const count = await this._prismaService.eventSessionDriverClassification.count(
+      await this.getPrismaArgs(args, true)
+    );
     return {
       count,
     };

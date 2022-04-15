@@ -24,12 +24,12 @@ export class EventSessionDriverLapResolver extends AbstractResolver {
 
   @Query(() => [EventSessionDriverLap])
   async allEventSessionDriverLaps(@Args() args: AllEventSessionDriverLapsArgs) {
-    return this._prismaService.eventSessionDriverLap.findMany(await this.getAllArgs(args, false));
+    return this._prismaService.eventSessionDriverLap.findMany(await this.getPrismaArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionDriverLapsMeta(@Args() args: AllEventSessionDriverLapsArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionDriverLap.count(await this.getAllArgs(args, true));
+    const count = await this._prismaService.eventSessionDriverLap.count(await this.getPrismaArgs(args, true));
     return {
       count,
     };

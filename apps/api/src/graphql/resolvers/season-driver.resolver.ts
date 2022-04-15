@@ -27,7 +27,7 @@ export class SeasonDriverResolver extends AbstractResolver {
   @Query(() => [SeasonDriver])
   async allSeasonDrivers(@Args() args: AllSeasonDriversArgs) {
     return this._prismaService.seasonDriver.findMany(
-      await this.getAllArgs(
+      await this.getPrismaArgs(
         args,
         false,
         ['code'],
@@ -47,7 +47,7 @@ export class SeasonDriverResolver extends AbstractResolver {
   @Query(() => ListMetadata)
   async _allSeasonDriversMeta(@Args() args: AllSeasonDriversArgs): Promise<ListMetadata> {
     const count = await this._prismaService.seasonDriver.count(
-      await this.getAllArgs(
+      await this.getPrismaArgs(
         args,
         true,
         ['code'],

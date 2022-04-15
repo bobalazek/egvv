@@ -24,14 +24,14 @@ export class EventSessionDriverStartingGridResolver extends AbstractResolver {
 
   @Query(() => [EventSessionDriverStartingGrid])
   async allEventSessionDriverStartingGrids(@Args() args: AllEventSessionDriverStartingGridsArgs) {
-    return this._prismaService.eventSessionDriverStartingGrid.findMany(await this.getAllArgs(args, false));
+    return this._prismaService.eventSessionDriverStartingGrid.findMany(await this.getPrismaArgs(args, false));
   }
 
   @Query(() => ListMetadata)
   async _allEventSessionDriverStartingGridsMeta(
     @Args() args: AllEventSessionDriverStartingGridsArgs
   ): Promise<ListMetadata> {
-    const count = await this._prismaService.eventSessionDriverStartingGrid.count(await this.getAllArgs(args, true));
+    const count = await this._prismaService.eventSessionDriverStartingGrid.count(await this.getPrismaArgs(args, true));
     return {
       count,
     };

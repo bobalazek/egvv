@@ -24,12 +24,12 @@ export class SeriesResolver extends AbstractResolver {
 
   @Query(() => [Series])
   async allSeries(@Args() args: AllSeriesArgs) {
-    return this._prismaService.series.findMany(await this.getAllArgs(args, false, ['slug', 'name']));
+    return this._prismaService.series.findMany(await this.getPrismaArgs(args, false, ['slug', 'name']));
   }
 
   @Query(() => ListMetadata)
   async _allSeriesMeta(@Args() args: AllSeriesArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.series.count(await this.getAllArgs(args, true, ['slug', 'name']));
+    const count = await this._prismaService.series.count(await this.getPrismaArgs(args, true, ['slug', 'name']));
     return {
       count,
     };

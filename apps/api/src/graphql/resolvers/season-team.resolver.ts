@@ -28,7 +28,7 @@ export class SeasonTeamResolver extends AbstractResolver {
   @Query(() => [SeasonTeam])
   async allSeasonTeams(@Args() args: AllSeasonTeamsArgs) {
     return this._prismaService.seasonTeam.findMany(
-      await this.getAllArgs(
+      await this.getPrismaArgs(
         args,
         false,
         ['name', 'shortName', 'powerUnit', 'chassis', 'season.name'],
@@ -40,7 +40,7 @@ export class SeasonTeamResolver extends AbstractResolver {
   @Query(() => ListMetadata)
   async _allSeasonTeamsMeta(@Args() args: AllSeasonTeamsArgs): Promise<ListMetadata> {
     const count = await this._prismaService.seasonTeam.count(
-      await this.getAllArgs(
+      await this.getPrismaArgs(
         args,
         true,
         ['name', 'shortName', 'powerUnit', 'chassis', 'season.name'],

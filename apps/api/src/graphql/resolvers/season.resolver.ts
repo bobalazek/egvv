@@ -26,14 +26,14 @@ export class SeasonResolver extends AbstractResolver {
   @Query(() => [Season])
   async allSeasons(@Args() args: AllSeasonsArgs) {
     return this._prismaService.season.findMany(
-      await this.getAllArgs(args, false, ['slug', 'name'], [{ filterField: 'seriesId' }])
+      await this.getPrismaArgs(args, false, ['slug', 'name'], [{ filterField: 'seriesId' }])
     );
   }
 
   @Query(() => ListMetadata)
   async _allSeasonsMeta(@Args() args: AllSeasonsArgs): Promise<ListMetadata> {
     const count = await this._prismaService.season.count(
-      await this.getAllArgs(args, true, ['slug', 'name'], [{ filterField: 'seriesId' }])
+      await this.getPrismaArgs(args, true, ['slug', 'name'], [{ filterField: 'seriesId' }])
     );
     return {
       count,
