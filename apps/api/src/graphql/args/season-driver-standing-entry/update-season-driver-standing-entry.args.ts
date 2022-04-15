@@ -1,22 +1,9 @@
-import { ArgsType, Field, Float, ID } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
+
+import { CreateSeasonDriverStandingEntryArgs } from './create-season-driver-standing-entry.args';
 
 @ArgsType()
-export class UpdateSeasonDriverStandingEntryArgs {
+export class UpdateSeasonDriverStandingEntryArgs extends CreateSeasonDriverStandingEntryArgs {
   @Field(() => ID)
   id: string;
-
-  @Field(() => Float)
-  points: number;
-
-  @Field()
-  dateAt: Date;
-
-  @Field({ nullable: true })
-  note?: string;
-
-  @Field()
-  seasonDriverId: string;
-
-  @Field({ nullable: true })
-  eventSessionId?: string;
 }

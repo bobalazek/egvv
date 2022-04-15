@@ -7,7 +7,7 @@ import { EventSessionDriverPitStop } from '../models/event-session-driver-pit-st
 import { AbstractResolver } from './abstract.resolver';
 import { AllEventSessionDriverPitStopsArgs } from '../args/event-session-driver-pit-stop/all-event-session-driver-pit-stops.args';
 import { CreateEventSessionDriverPitStopArgs } from '../args/event-session-driver-pit-stop/create-event-session-driver-pit-stop.args';
-import { UpdateEventSessionDriverDriverPitStopArgs } from '../args/event-session-driver-pit-stop/update-event-session-driver-pit-stop.args';
+import { UpdateEventSessionDriverPitStopArgs } from '../args/event-session-driver-pit-stop/update-event-session-driver-pit-stop.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 import { EventSessionDriver } from '../models/event-session-driver.model';
 
@@ -45,7 +45,7 @@ export class EventSessionDriverPitStopResolver extends AbstractResolver {
 
   @Mutation(() => EventSessionDriverPitStop)
   @UseGuards(GqlAuthGuard)
-  async updateEventSessionDriverPitStop(@Args() args: UpdateEventSessionDriverDriverPitStopArgs) {
+  async updateEventSessionDriverPitStop(@Args() args: UpdateEventSessionDriverPitStopArgs) {
     return this._prismaService.eventSessionDriverPitStop.update({
       where: {
         id: args.id,

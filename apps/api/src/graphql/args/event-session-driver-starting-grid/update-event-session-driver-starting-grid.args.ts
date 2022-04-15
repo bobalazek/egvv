@@ -1,22 +1,9 @@
-import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
+
+import { CreateEventSessionDriverStartingGridArgs } from './create-event-session-driver-starting-grid.args';
 
 @ArgsType()
-export class UpdateEventSessionDriverDriverStartingGridArgs {
+export class UpdateEventSessionDriverStartingGridArgs extends CreateEventSessionDriverStartingGridArgs {
   @Field(() => ID)
   id: string;
-
-  @Field()
-  status: string;
-
-  @Field(() => Int, { nullable: true })
-  position?: number;
-
-  @Field(() => Int, { nullable: true })
-  timeMilliseconds?: number;
-
-  @Field({ nullable: true })
-  note?: string;
-
-  @Field()
-  eventSessionDriverId: string;
 }

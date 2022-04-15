@@ -1,25 +1,9 @@
 import { ArgsType, Field, ID } from '@nestjs/graphql';
 
+import { CreateDriverArgs } from './create-driver.args';
+
 @ArgsType()
-export class UpdateDriverArgs {
+export class UpdateDriverArgs extends CreateDriverArgs {
   @Field(() => ID)
   id: string;
-
-  @Field()
-  slug: string;
-
-  @Field()
-  firstName: string;
-
-  @Field()
-  lastName: string;
-
-  @Field()
-  countryCode: string;
-
-  @Field()
-  url: string;
-
-  @Field({ nullable: true })
-  nickname?: string;
 }

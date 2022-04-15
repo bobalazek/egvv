@@ -7,7 +7,7 @@ import { EventSessionDriverStartingGrid } from '../models/event-session-driver-s
 import { AbstractResolver } from './abstract.resolver';
 import { AllEventSessionDriverStartingGridsArgs } from '../args/event-session-driver-starting-grid/all-event-session-driver-starting-grids.args';
 import { CreateEventSessionDriverStartingGridArgs } from '../args/event-session-driver-starting-grid/create-event-session-driver-starting-grid.args';
-import { UpdateEventSessionDriverDriverStartingGridArgs } from '../args/event-session-driver-starting-grid/update-event-session-driver-starting-grid.args';
+import { UpdateEventSessionDriverStartingGridArgs } from '../args/event-session-driver-starting-grid/update-event-session-driver-starting-grid.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 import { EventSessionDriver } from '../models/event-session-driver.model';
 
@@ -47,7 +47,7 @@ export class EventSessionDriverStartingGridResolver extends AbstractResolver {
 
   @Mutation(() => EventSessionDriverStartingGrid)
   @UseGuards(GqlAuthGuard)
-  async updateEventSessionDriverStartingGrid(@Args() args: UpdateEventSessionDriverDriverStartingGridArgs) {
+  async updateEventSessionDriverStartingGrid(@Args() args: UpdateEventSessionDriverStartingGridArgs) {
     return this._prismaService.eventSessionDriverStartingGrid.update({
       where: {
         id: args.id,

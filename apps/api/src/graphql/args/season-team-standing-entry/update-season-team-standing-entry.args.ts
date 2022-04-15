@@ -1,22 +1,9 @@
-import { ArgsType, Field, Float, ID } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
+
+import { CreateSeasonTeamStandingEntryArgs } from './create-season-team-standing-entry.args';
 
 @ArgsType()
-export class UpdateSeasonTeamStandingEntryArgs {
+export class UpdateSeasonTeamStandingEntryArgs extends CreateSeasonTeamStandingEntryArgs {
   @Field(() => ID)
   id: string;
-
-  @Field(() => Float)
-  points: number;
-
-  @Field()
-  dateAt: Date;
-
-  @Field({ nullable: true })
-  note?: string;
-
-  @Field()
-  seasonTeamId: string;
-
-  @Field({ nullable: true })
-  eventSessionId?: string;
 }

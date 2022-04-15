@@ -1,25 +1,9 @@
-import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
+
+import { CreateSeasonArgs } from './create-season.args';
 
 @ArgsType()
-export class UpdateSeasonArgs {
+export class UpdateSeasonArgs extends CreateSeasonArgs {
   @Field(() => ID)
   id: string;
-
-  @Field()
-  slug: string;
-
-  @Field()
-  name: string;
-
-  @Field(() => Int)
-  year: number;
-
-  @Field()
-  startAt: Date;
-
-  @Field({ nullable: true })
-  endAt?: Date;
-
-  @Field()
-  seriesId: string;
 }

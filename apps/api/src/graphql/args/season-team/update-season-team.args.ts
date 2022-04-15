@@ -1,25 +1,9 @@
 import { ArgsType, Field, ID } from '@nestjs/graphql';
 
+import { CreateSeasonTeamArgs } from './create-season-team.args';
+
 @ArgsType()
-export class UpdateSeasonTeamArgs {
+export class UpdateSeasonTeamArgs extends CreateSeasonTeamArgs {
   @Field(() => ID)
   id: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  shortName: string;
-
-  @Field()
-  powerUnit: string;
-
-  @Field()
-  chassis: string;
-
-  @Field()
-  seasonId: string;
-
-  @Field()
-  teamId: string;
 }

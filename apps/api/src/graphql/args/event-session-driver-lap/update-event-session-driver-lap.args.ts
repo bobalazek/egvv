@@ -1,19 +1,9 @@
-import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
+
+import { CreateEventSessionDriverLapArgs } from './create-event-session-driver-lap.args';
 
 @ArgsType()
-export class UpdateEventSessionDriverDriverLapArgs {
+export class UpdateEventSessionDriverLapArgs extends CreateEventSessionDriverLapArgs {
   @Field(() => ID)
   id: string;
-
-  @Field(() => Int)
-  lap: number;
-
-  @Field(() => Int, { nullable: true })
-  timeMilliseconds?: number;
-
-  @Field({ nullable: true })
-  position?: number;
-
-  @Field()
-  eventSessionDriverId: string;
 }

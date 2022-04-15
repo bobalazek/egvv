@@ -1,25 +1,9 @@
 import { ArgsType, Field, ID } from '@nestjs/graphql';
 
+import { CreateEventSessionArgs } from './create-event-session.args';
+
 @ArgsType()
-export class UpdateEventSessionArgs {
+export class UpdateEventSessionArgs extends CreateEventSessionArgs {
   @Field(() => ID)
   id: string;
-
-  @Field()
-  slug: string;
-
-  @Field()
-  name: string;
-
-  @Field()
-  type: string;
-
-  @Field()
-  startAt: Date;
-
-  @Field({ nullable: true })
-  endAt?: Date;
-
-  @Field()
-  eventId: string;
 }

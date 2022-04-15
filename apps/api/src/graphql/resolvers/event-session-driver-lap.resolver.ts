@@ -7,7 +7,7 @@ import { EventSessionDriverLap } from '../models/event-session-driver-lap.model'
 import { AbstractResolver } from './abstract.resolver';
 import { AllEventSessionDriverLapsArgs } from '../args/event-session-driver-lap/all-event-session-driver-laps.args';
 import { CreateEventSessionDriverLapArgs } from '../args/event-session-driver-lap/create-event-session-driver-lap.args';
-import { UpdateEventSessionDriverDriverLapArgs } from '../args/event-session-driver-lap/update-event-session-driver-lap.args';
+import { UpdateEventSessionDriverLapArgs } from '../args/event-session-driver-lap/update-event-session-driver-lap.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 import { EventSessionDriver } from '../models/event-session-driver.model';
 
@@ -45,7 +45,7 @@ export class EventSessionDriverLapResolver extends AbstractResolver {
 
   @Mutation(() => EventSessionDriverLap)
   @UseGuards(GqlAuthGuard)
-  async updateEventSessionDriverLap(@Args() args: UpdateEventSessionDriverDriverLapArgs) {
+  async updateEventSessionDriverLap(@Args() args: UpdateEventSessionDriverLapArgs) {
     return this._prismaService.eventSessionDriverLap.update({
       where: {
         id: args.id,

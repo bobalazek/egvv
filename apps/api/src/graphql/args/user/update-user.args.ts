@@ -1,19 +1,9 @@
 import { ArgsType, Field, ID } from '@nestjs/graphql';
 
+import { CreateUserArgs } from './create-user.args';
+
 @ArgsType()
-export class UpdateUserArgs {
+export class UpdateUserArgs extends CreateUserArgs {
   @Field(() => ID)
   id: string;
-
-  @Field()
-  email: string;
-
-  @Field()
-  username: string;
-
-  @Field({ nullable: true })
-  password?: string;
-
-  @Field(() => [String], { nullable: true })
-  roles?: string[];
 }

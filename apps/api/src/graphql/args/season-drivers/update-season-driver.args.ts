@@ -1,22 +1,9 @@
-import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
+
+import { CreateSeasonDriverArgs } from './create-season-driver.args';
 
 @ArgsType()
-export class UpdateSeasonDriverArgs {
+export class UpdateSeasonDriverArgs extends CreateSeasonDriverArgs {
   @Field(() => ID)
   id: string;
-
-  @Field(() => Int)
-  number: number;
-
-  @Field()
-  code: string;
-
-  @Field()
-  isTemporary: boolean;
-
-  @Field()
-  seasonTeamId: string;
-
-  @Field()
-  driverId: string;
 }

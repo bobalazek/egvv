@@ -1,19 +1,9 @@
-import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
+
+import { CreateEventSessionDriverPitStopArgs } from './create-event-session-driver-pit-stop.args';
 
 @ArgsType()
-export class UpdateEventSessionDriverDriverPitStopArgs {
+export class UpdateEventSessionDriverPitStopArgs extends CreateEventSessionDriverPitStopArgs {
   @Field(() => ID)
   id: string;
-
-  @Field(() => Int)
-  lap: number;
-
-  @Field(() => Int, { nullable: true })
-  stopTimeMilliseconds?: number;
-
-  @Field(() => Int, { nullable: true })
-  timeMilliseconds?: number;
-
-  @Field()
-  eventSessionDriverId: string;
 }

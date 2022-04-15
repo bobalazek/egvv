@@ -1,16 +1,9 @@
-import { ArgsType, Field, ID, Int } from '@nestjs/graphql';
+import { ArgsType, Field, ID } from '@nestjs/graphql';
+
+import { CreateEventSessionDriverArgs } from './create-event-session-driver.args';
 
 @ArgsType()
-export class UpdateEventSessionDriverDriverArgs {
+export class UpdateEventSessionDriverDriverArgs extends CreateEventSessionDriverArgs {
   @Field(() => ID)
   id: string;
-
-  @Field(() => Int, { nullable: true })
-  number: number;
-
-  @Field()
-  eventSessionId: string;
-
-  @Field()
-  seasonDriverId: string;
 }
