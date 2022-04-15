@@ -1,20 +1,20 @@
 {
-  "root": "libs/shared/helpers",
-  "sourceRoot": "libs/shared/helpers/src",
+  "root": "libs/shared/apollo-client",
+  "sourceRoot": "libs/shared/apollo-client/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/helpers/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/apollo-client/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/shared/helpers"],
+      "outputs": ["coverage/libs/shared/apollo-client"],
       "options": {
-        "jestConfig": "libs/shared/helpers/jest.config.js",
+        "jestConfig": "libs/shared/apollo-client/jest.config.js",
         "passWithNoTests": true
       }
     }
