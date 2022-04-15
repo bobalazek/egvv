@@ -1,15 +1,10 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 import decodeJwt from 'jwt-decode';
 
-import { HTTP_SERVER_GRAPHQL_URL } from '@egvv/shared-constants';
+import client from '@egvv/shared-apollo-client';
 
 const authProvider = {
   login: async (data: { username: string; password: string }) => {
-    const client = new ApolloClient({
-      uri: HTTP_SERVER_GRAPHQL_URL,
-      cache: new InMemoryCache(),
-    });
-
     const response = await client.mutate({
       mutation: gql`
         mutation doLogin($username: String!, $password: String!) {
