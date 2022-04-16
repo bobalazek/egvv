@@ -25,3 +25,13 @@ export const sleep = async (time: number) => {
 export const convertToDashCase = (value: string) => {
   return value.toLowerCase().replace(/ /g, '-');
 };
+
+export const convertToHumanCase = (text: string) => {
+  var words = text.match(/[A-Za-z][a-z]*/g) || [];
+
+  return words.map(capitalizeText).join(' ');
+};
+
+export const capitalizeText = (text: string) => {
+  return text.charAt(0).toUpperCase() + text.substring(1);
+};
