@@ -1,8 +1,9 @@
-import { Button, Card, Container, Grid, Space, Text, Title, useMantineTheme } from '@mantine/core';
+import { Button, Container, Grid, Space, Text, Title } from '@mantine/core';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
+import SeasonCard from '../../../components/cards/season-card';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params?.slug as string;
@@ -37,8 +38,6 @@ export const getStaticPaths = async () => {
 };
 
 export function SeriesDetail({ series }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const theme = useMantineTheme();
-
   return (
     <Container mt={40}>
       <Title order={1}>
@@ -68,21 +67,7 @@ export function SeriesDetail({ series }: InferGetStaticPropsType<typeof getStati
                 textAlign: 'center',
               }}
             >
-              <Card
-                shadow="sm"
-                p="lg"
-                style={{
-                  background: theme.colors.blue[1],
-                }}
-              >
-                <Title order={4}>{season.name}</Title>
-                <Space h="md" />
-                <Link href={`/seasons/${season.slug}`} passHref>
-                  <Button variant="light" color="blue" component="a" fullWidth>
-                    View season
-                  </Button>
-                </Link>
-              </Card>
+              <SeasonCard season={season} />
             </Grid.Col>
           );
         })}
