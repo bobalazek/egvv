@@ -23,6 +23,8 @@ function App({ Component, pageProps }: AppProps) {
           links={[
             { href: '/', label: 'Home' },
             { href: '/series', label: 'Series' },
+            { href: '/teams', label: 'Teams' },
+            { href: '/drivers', label: 'Drivers' },
           ]}
         />
         <Component {...pageProps} />
