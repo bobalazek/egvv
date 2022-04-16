@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { gql } from '@apollo/client';
 
 import client from '@egvv/shared-apollo-client';
-import { SeriesInterface } from '../interfaces/series';
+import { SeriesInterface } from '../../interfaces/series';
 
 export const getStaticProps = async () => {
   const response = await client.query({
@@ -69,7 +69,7 @@ export function Series({ series }: InferGetStaticPropsType<typeof getStaticProps
                     padding: theme.spacing.sm,
                   }}
                 ></Group>
-                <Link href={`/series/${single.id}`} passHref>
+                <Link href={`/series/${single.slug}`} passHref>
                   <Button variant="light" color="blue" component="a" fullWidth>
                     View seasons
                   </Button>

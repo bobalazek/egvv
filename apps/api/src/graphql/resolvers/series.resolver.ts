@@ -6,10 +6,12 @@ import { Season } from '../models/season.model';
 import { Series } from '../models/series.model';
 import { ListMetadata } from '../models/list-metadata.model';
 import { IdArgs } from '../args/id.args';
+import { SlugArgs } from '../args/slug.args';
 import { AllSeriesArgs } from '../args/series/all-series.args';
 import { CreateSeriesArgs } from '../args/series/create-series.args';
 import { UpdateSeriesArgs } from '../args/series/update-series.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
+import { AllSeasonsArgs } from '../args/season/all-seasons.args';
 
 @Resolver(Series)
 export class SeriesResolver extends AbstractResolver {
@@ -18,6 +20,15 @@ export class SeriesResolver extends AbstractResolver {
     return this._prismaService.series.findFirst({
       where: {
         id: args.id,
+      },
+    });
+  }
+
+  @Query(() => Series)
+  async SeriesBySlug(@Args() args: SlugArgs) {
+    return this._prismaService.series.findFirst({
+      where: {
+        slug: args.slug,
       },
     });
   }
@@ -65,11 +76,20 @@ export class SeriesResolver extends AbstractResolver {
   }
 
   @ResolveField('seasons', () => [Season])
-  async seasons(@Parent() parent: Series) {
-    return this._prismaService.season.findMany({
-      where: {
-        seriesId: parent.id,
-      },
-    });
+  async seasons(@Parent() parent: Series, @Args() args: AllSeasonsArgs) {
+    if (!args.sortField) {
+      args.sortField = 'startAt';
+    }
+    if (!args.sortOrder) {
+      args.sortOrder = 'desc';
+    }
+
+    const prismaArgs = await this.getPrismaArgs(args, false, ['slug', 'name']);
+    if (!prismaArgs.where) {
+      prismaArgs.where = {};
+    }
+    prismaArgs.where.seriesId = parent.id;
+
+    return this._prismaService.season.findMany(prismaArgs);
   }
 }
