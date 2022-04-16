@@ -27,9 +27,9 @@ export const convertToDashCase = (value: string) => {
 };
 
 export const convertToHumanCase = (text: string) => {
-  var words = text.match(/[A-Za-z][a-z]*/g) || [];
+  var tokens = text.split(/[ -]+/) || [];
 
-  return words.map(capitalizeText).join(' ');
+  return tokens.map(capitalizeText).join(' ');
 };
 
 export const capitalizeText = (text: string) => {

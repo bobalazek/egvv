@@ -43,23 +43,11 @@ export function SeriesDetail({ series }: InferGetStaticPropsType<typeof getStati
     <>
       <Breadcrumbs links={[{ label: 'Series', href: '/series' }, { label: series.name }]} />
       <Container mt={40}>
-        <Title order={1} mb={10}>
-          <Grid justify="space-between">
-            <Grid.Col span={9}>{series.name}</Grid.Col>
-            <Grid.Col span={3}>
-              <Text align="right">
-                <Link href={`/series`} passHref>
-                  <Button variant="light" color="blue" component="a" size="xs">
-                    Back
-                  </Button>
-                </Link>
-              </Text>
-            </Grid.Col>
-          </Grid>
-        </Title>
-        <Title order={2} mb={10}>
-          {series.description}
-        </Title>
+        <Text align="center">
+          <Title order={2} mb={10}>
+            {series.description}
+          </Title>
+        </Text>
         <Grid>
           {series.seasons.length === 0 && <Alert style={{ width: '100%' }}>No seasons found for this series</Alert>}
           {series.seasons.map((season) => {

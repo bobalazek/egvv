@@ -1,4 +1,4 @@
-import { Container, Grid } from '@mantine/core';
+import { Container, Grid, Text, Title } from '@mantine/core';
 import { InferGetStaticPropsType } from 'next';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
@@ -20,7 +20,11 @@ export function Series({ series }: InferGetStaticPropsType<typeof getStaticProps
     <>
       <Breadcrumbs links={[{ label: 'Series' }]} />
       <Container mt={40}>
-        <h1>Series</h1>
+        <Text align="center">
+          <Title order={2} mb={10}>
+            Which series are you the most interested in? We have a few of them!
+          </Title>
+        </Text>
         <Grid>
           {series.map((single) => {
             return (

@@ -49,26 +49,6 @@ export function EventDetail({ event }: InferGetStaticPropsType<typeof getStaticP
         ]}
       />
       <Container mt={40}>
-        <Title order={1} mb={10}>
-          <Grid justify="space-between">
-            <Grid.Col span={9}>{event.season.series.name}</Grid.Col>
-            <Grid.Col span={3}>
-              <Text align="right">
-                <Link href={`/seasons/${event.season.slug}`} passHref>
-                  <Button variant="light" color="blue" component="a" size="xs">
-                    Back
-                  </Button>
-                </Link>
-              </Text>
-            </Grid.Col>
-          </Grid>
-        </Title>
-        <Title order={2} mb={10}>
-          {event.season.name}
-        </Title>
-        <Title order={3} mb={10}>
-          {event.name}
-        </Title>
         <Grid>
           {event.eventSessions.length === 0 && (
             <Alert style={{ width: '100%' }}>No sessions found for this event</Alert>

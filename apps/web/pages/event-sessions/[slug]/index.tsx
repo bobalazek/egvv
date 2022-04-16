@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
+import { convertToHumanCase } from '@egvv/shared-helpers';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params?.slug as string;
@@ -51,30 +52,10 @@ export function EventDetail({ eventSession }: InferGetStaticPropsType<typeof get
           { label: eventSession.event.season.series.name, href: `/series/${eventSession.event.season.series.slug}` },
           { label: eventSession.event.season.name, href: `/seasons/${eventSession.event.season.slug}` },
           { label: eventSession.event.name, href: `/events/${eventSession.event.slug}` },
-          { label: eventSession.name },
+          { label: convertToHumanCase(eventSession.type) },
         ]}
       />
       <Container mt={40}>
-        <Title order={1} mb={10}>
-          <Grid justify="space-between">
-            <Grid.Col span={9}>{eventSession.event.season.series.name}</Grid.Col>
-            <Grid.Col span={3}>
-              <Text align="right">
-                <Link href={`/events/${eventSession.event.slug}`} passHref>
-                  <Button variant="light" color="blue" component="a" size="xs">
-                    Back
-                  </Button>
-                </Link>
-              </Text>
-            </Grid.Col>
-          </Grid>
-        </Title>
-        <Title order={2} mb={10}>
-          {eventSession.event.season.name}
-        </Title>
-        <Title order={3} mb={10}>
-          {eventSession.name}
-        </Title>
         <List>
           <List.Item>Type: {eventSession.type}</List.Item>
           <List.Item>

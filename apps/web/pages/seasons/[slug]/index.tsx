@@ -45,23 +45,6 @@ export function SeasonDetail({ season }: InferGetStaticPropsType<typeof getStati
         ]}
       />
       <Container mt={40}>
-        <Title order={1} mb={10}>
-          <Grid justify="space-between">
-            <Grid.Col span={9}>{season.series.name}</Grid.Col>
-            <Grid.Col span={3}>
-              <Text align="right">
-                <Link href={`/series/${season.series.slug}`} passHref>
-                  <Button variant="light" color="blue" component="a" size="xs">
-                    Back
-                  </Button>
-                </Link>
-              </Text>
-            </Grid.Col>
-          </Grid>
-        </Title>
-        <Title order={2} mb={10}>
-          {season.name}
-        </Title>
         <Grid>
           {season.events.length === 0 && <Alert style={{ width: '100%' }}>No events found for this season</Alert>}
           {season.events.map((event) => {
