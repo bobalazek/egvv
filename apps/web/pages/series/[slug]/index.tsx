@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { prismaClient } from '@egvv/shared-prisma-client';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
-  const seriesSlug = context.params?.seriesSlug as string;
+  const slug = context.params?.slug as string;
 
   const series = await prismaClient.series.findFirst({
     where: {
-      slug: seriesSlug,
+      slug,
     },
     include: {
       seasons: {
@@ -41,7 +41,7 @@ export function SeriesDetail({ series }: InferGetStaticPropsType<typeof getStati
 
   return (
     <Container mt={40}>
-      <h1>
+      <Title order={1}>
         <Grid justify="space-between">
           <Grid.Col span={9}>{series.name}</Grid.Col>
           <Grid.Col span={3}>
@@ -54,8 +54,9 @@ export function SeriesDetail({ series }: InferGetStaticPropsType<typeof getStati
             </Text>
           </Grid.Col>
         </Grid>
-      </h1>
-      <h2>{series.description}</h2>
+      </Title>
+      <Title order={2}>{series.description}</Title>
+      <Space h="md" />
       <Grid>
         {series.seasons.map((season) => {
           return (
@@ -76,7 +77,7 @@ export function SeriesDetail({ series }: InferGetStaticPropsType<typeof getStati
               >
                 <Title order={4}>{season.name}</Title>
                 <Space h="md" />
-                <Link href={`/season/${season.slug}`} passHref>
+                <Link href={`/seasons/${season.slug}`} passHref>
                   <Button variant="light" color="blue" component="a" fullWidth>
                     View season
                   </Button>
