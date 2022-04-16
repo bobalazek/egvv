@@ -1,5 +1,5 @@
-import { Button, Card, Group, Text, Title, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
+import { Button, Card, Group, Text, Title, useMantineTheme } from '@mantine/core';
 import { Series } from '@prisma/client';
 
 export function SeriesCard({ series }: { series: Series }) {

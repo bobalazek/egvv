@@ -1,6 +1,6 @@
-import { Badge, Container, List, Tabs, Title } from '@mantine/core';
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Error from 'next/error';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import { Badge, Container, Tabs, Title } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';

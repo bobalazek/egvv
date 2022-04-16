@@ -1,5 +1,5 @@
-import { Button, Card, Title, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
+import { Button, Card, Title, useMantineTheme } from '@mantine/core';
 import { Event } from '@prisma/client';
 
 export function EventCard({ event }: { event: Event }) {

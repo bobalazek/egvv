@@ -1,5 +1,5 @@
-import { Container, Grid, Text, Title } from '@mantine/core';
 import { InferGetStaticPropsType } from 'next';
+import { Container, Grid, Text, Title } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { SeriesCard } from '../../components/cards/series-card';

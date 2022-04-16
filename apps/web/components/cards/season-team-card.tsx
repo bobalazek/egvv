@@ -1,5 +1,5 @@
-import { Button, Card, Title, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
+import { Button, Card, Title, useMantineTheme } from '@mantine/core';
 import { SeasonTeam, Team } from '@prisma/client';
 
 export function SeasonTeamCard({

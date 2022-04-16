@@ -1,6 +1,6 @@
-import { Alert, Container, Grid, Text, Title } from '@mantine/core';
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Error from 'next/error';
+import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import { Alert, Container, Grid, Text, Title } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { SeasonCard } from '../../../components/cards/season-card';

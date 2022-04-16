@@ -1,5 +1,5 @@
-import { Button, Text, Container } from '@mantine/core';
 import Link from 'next/link';
+import { Button, Text, Container } from '@mantine/core';
 
 export function Index() {
   return (
