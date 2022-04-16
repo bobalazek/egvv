@@ -8,7 +8,7 @@ declare global {
 }
 
 export const apolloClient =
-  global.apolloClient ||
+  (typeof global !== 'undefined' && global.apolloClient) ||
   new ApolloClient({
     cache: new InMemoryCache(),
     link: from([
@@ -30,4 +30,4 @@ export const apolloClient =
     ]),
   });
 
-if (process.env.NODE_ENV !== 'production') global.apolloClient = apolloClient;
+if (typeof global !== 'undefined' && process.env.NODE_ENV !== 'production') global.apolloClient = apolloClient;
