@@ -19,7 +19,7 @@ export default [
   },
   {
     slug: 'gp3-series',
-    name: 'FP3 3',
+    name: 'GP3 Series',
     description: 'A series, where the engines go Vroom Vroom!',
     url: 'https://www.fiaformula3.com',
   },
