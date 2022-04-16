@@ -1,4 +1,4 @@
-import { Button, Card, Space, Title, useMantineTheme } from '@mantine/core';
+import { Button, Card, Title, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
 import { EventSession } from '@prisma/client';
 
@@ -16,10 +16,9 @@ export function EventSessionCard({ eventSession }: { eventSession: EventSession 
       }}
     >
       <Title order={4}>{eventSession.name}</Title>
-      <Title order={5}>
+      <Title order={5} mb={10}>
         {startDate.toLocaleDateString()} {startDate.toLocaleTimeString()}
       </Title>
-      <Space h="md" />
       <Link href={`/event-sessions/${eventSession.slug}`} passHref>
         <Button variant="light" color="blue" component="a" fullWidth>
           View event session

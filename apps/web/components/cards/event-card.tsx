@@ -1,4 +1,4 @@
-import { Button, Card, Space, Title, useMantineTheme } from '@mantine/core';
+import { Button, Card, Title, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
 import { Event } from '@prisma/client';
 
@@ -16,8 +16,9 @@ export function EventCard({ event }: { event: Event }) {
       }}
     >
       <Title order={4}>{event.name}</Title>
-      <Title order={5}>{raceAt.toLocaleDateString()}</Title>
-      <Space h="md" />
+      <Title order={5} mb={10}>
+        {raceAt.toLocaleDateString()}
+      </Title>
       <Link href={`/events/${event.slug}`} passHref>
         <Button variant="light" color="blue" component="a" fullWidth>
           View event
