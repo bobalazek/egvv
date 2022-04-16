@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
 import decodeJwt from 'jwt-decode';
 
-import client from '@egvv/shared-apollo-client';
+import { apolloClient } from '@egvv/shared-apollo-client';
 
 const authProvider = {
   login: async (data: { username: string; password: string }) => {
-    const response = await client.mutate({
+    const response = await apolloClient.mutate({
       mutation: gql`
         mutation doLogin($username: String!, $password: String!) {
           login(username: $username, password: $password) {

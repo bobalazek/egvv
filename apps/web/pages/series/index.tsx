@@ -2,10 +2,10 @@ import { Button, Card, Container, Grid, Group, Text, Title, useMantineTheme } fr
 import { InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
-import client from '@egvv/shared-prisma-client';
+import { prismaClient } from '@egvv/shared-prisma-client';
 
 export const getStaticProps = async () => {
-  const series = await client.series.findMany();
+  const series = await prismaClient.series.findMany();
 
   return {
     props: {

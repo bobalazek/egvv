@@ -2,23 +2,29 @@ import { Button, Card, Container, Grid, Space, Text, Title, useMantineTheme } fr
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
 
-import client from '@egvv/shared-prisma-client';
+import { prismaClient } from '@egvv/shared-prisma-client';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const seriesSlug = context.params?.seriesSlug as string;
 
-  const series = await client.series.findFirst({
+  const series = await prismaClient.series.findFirst({
     where: {
       slug: seriesSlug,
     },
     include: {
-      seasons: true,
+      seasons: {
+        orderBy: [
+          {
+            startAt: 'desc',
+          },
+        ],
+      },
     },
   });
 
   return {
     props: {
-      series,
+      series: JSON.parse(JSON.stringify(series)) as typeof series,
     },
   };
 };

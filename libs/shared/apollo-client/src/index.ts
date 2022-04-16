@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloLink, InMemoryCache, from, HttpLink } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache, from, HttpLink, NormalizedCacheObject } from '@apollo/client';
 
 import { HTTP_SERVER_GRAPHQL_URL } from '../../constants/src';
 
@@ -18,9 +18,14 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 const httpLink = new HttpLink({ uri: HTTP_SERVER_GRAPHQL_URL });
 
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: from([authLink, httpLink]),
-});
+declare global {
+  // eslint-disable-next-line no-var
+  var apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
+}
 
-export default client;
+export const apolloClient =
+  global.apolloClient ||
+  new ApolloClient({
+    cache: new InMemoryCache(),
+    link: from([authLink, httpLink]),
+  });
