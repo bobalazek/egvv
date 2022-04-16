@@ -53,7 +53,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export function SeasonDetail({ season, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function SeasonDetail({ season, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
@@ -137,5 +137,3 @@ export function SeasonDetail({ season, errorCode }: InferGetStaticPropsType<type
     </>
   );
 }
-
-export default SeasonDetail;

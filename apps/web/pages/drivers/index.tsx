@@ -2,41 +2,41 @@ import { InferGetStaticPropsType } from 'next';
 import { Container, Grid, Text, Title } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
-import { SeriesCard } from '../../components/cards/series-card';
+import { DriverCard } from '../../components/cards/driver-card';
 import { Breadcrumbs } from '../../components/layout/breadcrumbs';
 
 export const getStaticProps = async () => {
-  const series = await prismaClient.series.findMany();
+  const drivers = await prismaClient.driver.findMany();
 
   return {
     props: {
-      series,
+      drivers: JSON.parse(JSON.stringify(drivers)) as typeof drivers,
     },
   };
 };
 
-export default function Series({ series }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Drivers({ drivers }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Breadcrumbs links={[{ label: 'Series' }]} />
+      <Breadcrumbs links={[{ label: 'Drivers' }]} />
       <Container mt={40}>
         <Text align="center">
           <Title order={2} mb={10}>
-            Which series are you the most interested in? We have a few of them!
+            Here is a selection of all the drivers.
           </Title>
         </Text>
         <Grid>
-          {series.map((single) => {
+          {drivers.map((driver) => {
             return (
               <Grid.Col
-                key={single.id}
+                key={driver.id}
                 lg={4}
                 md={6}
                 style={{
                   textAlign: 'center',
                 }}
               >
-                <SeriesCard series={single} />
+                <DriverCard driver={driver} />
               </Grid.Col>
             );
           })}

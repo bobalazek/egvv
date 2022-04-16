@@ -45,7 +45,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export function SeriesDetail({ series, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function SeriesDetail({ series, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
@@ -80,5 +80,3 @@ export function SeriesDetail({ series, errorCode }: InferGetStaticPropsType<type
     </>
   );
 }
-
-export default SeriesDetail;

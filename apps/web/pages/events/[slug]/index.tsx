@@ -44,7 +44,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export function EventDetail({ event, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function EventDetail({ event, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
@@ -83,5 +83,3 @@ export function EventDetail({ event, errorCode }: InferGetStaticPropsType<typeof
     </>
   );
 }
-
-export default EventDetail;

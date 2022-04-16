@@ -2,41 +2,41 @@ import { InferGetStaticPropsType } from 'next';
 import { Container, Grid, Text, Title } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
-import { SeriesCard } from '../../components/cards/series-card';
+import { TeamCard } from '../../components/cards/team-card';
 import { Breadcrumbs } from '../../components/layout/breadcrumbs';
 
 export const getStaticProps = async () => {
-  const series = await prismaClient.series.findMany();
+  const teams = await prismaClient.team.findMany();
 
   return {
     props: {
-      series,
+      teams: JSON.parse(JSON.stringify(teams)) as typeof teams,
     },
   };
 };
 
-export default function Series({ series }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Teams({ teams }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <>
-      <Breadcrumbs links={[{ label: 'Series' }]} />
+      <Breadcrumbs links={[{ label: 'Teams' }]} />
       <Container mt={40}>
         <Text align="center">
           <Title order={2} mb={10}>
-            Which series are you the most interested in? We have a few of them!
+            Here is a selection of all the teams.
           </Title>
         </Text>
         <Grid>
-          {series.map((single) => {
+          {teams.map((team) => {
             return (
               <Grid.Col
-                key={single.id}
+                key={team.id}
                 lg={4}
                 md={6}
                 style={{
                   textAlign: 'center',
                 }}
               >
-                <SeriesCard series={single} />
+                <TeamCard team={team} />
               </Grid.Col>
             );
           })}
