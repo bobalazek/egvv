@@ -1,4 +1,4 @@
-import { Container, List } from '@mantine/core';
+import { Badge, Container, List, Tabs, Title } from '@mantine/core';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Error from 'next/error';
 
@@ -66,16 +66,25 @@ export function EventDetail({ eventSession, errorCode }: InferGetStaticPropsType
           { label: convertToHumanCase(eventSession.type) },
         ]}
       />
-      <Container mt={40}>
-        <List>
-          <List.Item>Type: {eventSession.type}</List.Item>
-          <List.Item>
-            Start at: {startDate.toLocaleDateString()} {startDate.toLocaleTimeString()}
-          </List.Item>
-          <List.Item>
-            End at: {endDate.toLocaleDateString()} {endDate.toLocaleTimeString()}
-          </List.Item>
-        </List>
+      <Container mt={30}>
+        <Title order={2} mb={20}>
+          <span>{eventSession.name}</span>
+          <Badge variant="filled" color="blue" ml={20}>
+            <span>
+              {startDate.toLocaleDateString()} {startDate.toLocaleTimeString()}
+            </span>
+            <span> - </span>
+            <span>
+              {endDate.toLocaleDateString()} {endDate.toLocaleTimeString()}
+            </span>
+          </Badge>
+        </Title>
+        <Tabs>
+          <Tabs.Tab label="Starting Grid">TODO: STARTING GRID</Tabs.Tab>
+          <Tabs.Tab label="Classification">TODO: CLASSIFICATION</Tabs.Tab>
+          <Tabs.Tab label="Pit Stops">TODO: PIT STOPS</Tabs.Tab>
+          <Tabs.Tab label="Laps">TODO: LAPS</Tabs.Tab>
+        </Tabs>
       </Container>
     </>
   );

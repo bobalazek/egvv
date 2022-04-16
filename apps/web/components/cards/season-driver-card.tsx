@@ -1,11 +1,19 @@
 import { Button, Card, Title, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
-import { Event } from '@prisma/client';
+import { SeasonTeam, SeasonDriver, Driver, Team } from '@prisma/client';
 
-export function EventCard({ event }: { event: Event }) {
+export function SeasonDriverCard({
+  seasonDriver,
+  seasonTeam,
+}: {
+  seasonDriver: SeasonDriver & {
+    driver: Driver;
+  };
+  seasonTeam: SeasonTeam & {
+    team: Team;
+  };
+}) {
   const theme = useMantineTheme();
-
-  const raceAt = new Date(event.raceAt as unknown as string);
 
   return (
     <Card
@@ -16,14 +24,14 @@ export function EventCard({ event }: { event: Event }) {
       }}
     >
       <Title order={4} mb={10}>
-        {event.name}
+        {seasonDriver.driver.firstName} {seasonDriver.driver.lastName}
       </Title>
       <Title order={5} mb={10}>
-        {raceAt.toLocaleDateString()}
+        {seasonTeam.name}
       </Title>
-      <Link href={`/events/${event.slug}`} passHref>
+      <Link href={`/drivers/${seasonDriver.driver.slug}`} passHref>
         <Button variant="light" color="blue" component="a" fullWidth>
-          View event
+          View driver
         </Button>
       </Link>
     </Card>
