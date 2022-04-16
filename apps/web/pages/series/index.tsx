@@ -1,35 +1,11 @@
 import { Button, Card, Container, Grid, Group, Text, Title, useMantineTheme } from '@mantine/core';
 import { InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
-import { gql } from '@apollo/client';
 
-import client from '@egvv/shared-apollo-client';
-import { SeriesInterface } from '../../interfaces/series';
+import client from '@egvv/shared-prisma-client';
 
 export const getStaticProps = async () => {
-  const response = await client.query({
-    query: gql`
-      query {
-        allSeries {
-          id
-          slug
-          name
-          description
-          url
-        }
-      }
-    `,
-  });
-
-  const series: SeriesInterface[] = response.data.allSeries.map((series: SeriesInterface) => {
-    return {
-      id: series.id,
-      slug: series.slug,
-      name: series.name,
-      description: series.description,
-      url: series.url,
-    };
-  });
+  const series = await client.series.findMany();
 
   return {
     props: {
@@ -45,7 +21,7 @@ export function Series({ series }: InferGetStaticPropsType<typeof getStaticProps
     <Container mt={40}>
       <h1>Series</h1>
       <Grid>
-        {series.map((single: SeriesInterface) => {
+        {series.map((single) => {
           return (
             <Grid.Col
               key={single.id}

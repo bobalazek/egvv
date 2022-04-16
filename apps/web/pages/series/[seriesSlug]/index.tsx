@@ -1,45 +1,20 @@
 import { Button, Card, Container, Grid, Space, Text, Title, useMantineTheme } from '@mantine/core';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import Link from 'next/link';
-import { gql } from '@apollo/client';
 
-import client from '@egvv/shared-apollo-client';
-import { SeriesInterface } from '../../../interfaces/series';
-import { SeasonInterface } from '../../../interfaces/season';
-
-interface SeriesWithSeasonsInterface extends SeriesInterface {
-  seasons: SeasonInterface[];
-}
+import client from '@egvv/shared-prisma-client';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const seriesSlug = context.params?.seriesSlug as string;
 
-  const response = await client.query({
-    query: gql`
-      query getSeries($seriesSlug: String!) {
-        SeriesBySlug(slug: $seriesSlug) {
-          id
-          slug
-          name
-          description
-          url
-          seasons {
-            id
-            slug
-            name
-            year
-            startAt
-            endAt
-          }
-        }
-      }
-    `,
-    variables: {
-      seriesSlug,
+  const series = await client.series.findFirst({
+    where: {
+      slug: seriesSlug,
+    },
+    include: {
+      seasons: true,
     },
   });
-
-  const series: SeriesWithSeasonsInterface = response.data.SeriesBySlug;
 
   return {
     props: {

@@ -10,6 +10,7 @@
     "shared-constants": "libs/shared/constants",
     "shared-helpers": "libs/shared/helpers",
     "shared-apollo-client": "libs/shared/apollo-client",
+    "shared-prisma-client": "libs/shared/prisma-client",
     "shared-assets": "libs/shared/assets"
   }
 }

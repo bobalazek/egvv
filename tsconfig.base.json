@@ -17,7 +17,8 @@
     "paths": {
       "@egvv/shared-constants": ["libs/shared/constants/src/index.ts"],
       "@egvv/shared-helpers": ["libs/shared/helpers/src/index.ts"],
-      "@egvv/shared-apollo-client": ["libs/shared/apollo-client/src/index.ts"]
+      "@egvv/shared-apollo-client": ["libs/shared/apollo-client/src/index.ts"],
+      "@egvv/shared-prisma-client": ["libs/shared/prisma-client/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

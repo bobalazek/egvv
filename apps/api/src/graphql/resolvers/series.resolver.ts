@@ -24,15 +24,6 @@ export class SeriesResolver extends AbstractResolver {
     });
   }
 
-  @Query(() => Series)
-  async SeriesBySlug(@Args() args: SlugArgs) {
-    return this._prismaService.series.findFirst({
-      where: {
-        slug: args.slug,
-      },
-    });
-  }
-
   @Query(() => [Series])
   async allSeries(@Args() args: AllSeriesArgs) {
     return this._prismaService.series.findMany(await this.getPrismaArgs(args, false, ['slug', 'name']));
