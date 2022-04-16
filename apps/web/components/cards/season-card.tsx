@@ -24,5 +24,3 @@ export function SeasonCard({ season }: { season: Season }) {
     </Card>
   );
 }
-
-export default SeasonCard;

@@ -28,5 +28,3 @@ export function SeriesCard({ series }: { series: Series }) {
     </Card>
   );
 }
-
-export default SeriesCard;

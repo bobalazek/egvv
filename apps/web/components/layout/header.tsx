@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { createStyles, Header, Container, Group, Burger, Paper, Transition } from '@mantine/core';
+import { createStyles, Header as MantineHeader, Container, Group, Burger, Paper, Transition } from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
 
 // Not optimal, but for some reason the assets aren't working otherwise. Need to figure that out
@@ -76,7 +76,7 @@ interface HeaderResponsiveProps {
   links: { href: string; label: string }[];
 }
 
-export function HeaderResponsive({ links }: HeaderResponsiveProps) {
+export function Header({ links }: HeaderResponsiveProps) {
   const router = useRouter();
   const [opened, toggleOpened] = useBooleanToggle(false);
   const { classes, cx } = useStyles();
@@ -96,7 +96,7 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   ));
 
   return (
-    <Header height={HEADER_HEIGHT} className={classes.root}>
+    <MantineHeader height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
         <Link href="/" passHref>
           <a>
@@ -115,6 +115,6 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
           )}
         </Transition>
       </Container>
-    </Header>
+    </MantineHeader>
   );
 }

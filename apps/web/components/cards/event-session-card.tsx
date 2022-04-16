@@ -27,5 +27,3 @@ export function EventSessionCard({ eventSession }: { eventSession: EventSession 
     </Card>
   );
 }
-
-export default EventSessionCard;

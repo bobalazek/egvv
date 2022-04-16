@@ -2,7 +2,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 
-import { HeaderResponsive } from '../components/layout/header-responsive';
+import { Header } from '../components/layout/header';
 
 import './styles.css';
 
@@ -19,7 +19,7 @@ function App({ Component, pageProps }: AppProps) {
           colorScheme: 'light',
         }}
       >
-        <HeaderResponsive
+        <Header
           links={[
             { href: '/', label: 'Home' },
             { href: '/series', label: 'Series' },

@@ -27,5 +27,3 @@ export function EventCard({ event }: { event: Event }) {
     </Card>
   );
 }
-
-export default EventCard;
