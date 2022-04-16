@@ -1,6 +1,6 @@
-import { Alert, Button, Container, Grid, Text, Title } from '@mantine/core';
+import { Alert, Container, Grid, Text, Title } from '@mantine/core';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
+import Error from 'next/error';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { SeasonCard } from '../../../components/cards/season-card';
@@ -23,6 +23,13 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       },
     },
   });
+  if (!series) {
+    return {
+      props: {
+        errorCode: 404,
+      },
+    };
+  }
 
   return {
     props: {
@@ -38,7 +45,11 @@ export const getStaticPaths = async () => {
   };
 };
 
-export function SeriesDetail({ series }: InferGetStaticPropsType<typeof getStaticProps>) {
+export function SeriesDetail({ series, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (errorCode) {
+    return <Error statusCode={errorCode} />;
+  }
+
   return (
     <>
       <Breadcrumbs links={[{ label: 'Series', href: '/series' }, { label: series.name }]} />

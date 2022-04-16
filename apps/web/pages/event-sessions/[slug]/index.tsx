@@ -1,6 +1,6 @@
-import { Button, Container, Grid, List, Text, Title } from '@mantine/core';
+import { Container, List } from '@mantine/core';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import Link from 'next/link';
+import Error from 'next/error';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
@@ -25,6 +25,13 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       },
     },
   });
+  if (!eventSession) {
+    return {
+      props: {
+        errorCode: 404,
+      },
+    };
+  }
 
   return {
     props: {
@@ -40,7 +47,11 @@ export const getStaticPaths = async () => {
   };
 };
 
-export function EventDetail({ eventSession }: InferGetStaticPropsType<typeof getStaticProps>) {
+export function EventDetail({ eventSession, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
+  if (errorCode) {
+    return <Error statusCode={errorCode} />;
+  }
+
   const startDate = new Date(eventSession.startAt as unknown as string);
   const endDate = new Date(eventSession.endAt as unknown as string);
 
