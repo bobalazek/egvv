@@ -72,28 +72,31 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface HeaderResponsiveProps {
+interface HeaderProps {
   links: { href: string; label: string }[];
 }
 
-export function Header({ links }: HeaderResponsiveProps) {
+export function Header({ links }: HeaderProps) {
   const router = useRouter();
   const [opened, toggleOpened] = useBooleanToggle(false);
   const { classes, cx } = useStyles();
 
-  const items = links.map((link) => (
-    <Link key={link.href} href={link.href} passHref>
-      <a
-        key={link.label}
-        className={cx(classes.link, { [classes.linkActive]: router.asPath === link.href })}
-        onClick={() => {
-          toggleOpened(false);
-        }}
-      >
-        {link.label}
-      </a>
-    </Link>
-  ));
+  const items = links.map((link) => {
+    const isActive = link.href === '/' ? router.asPath === link.href : router.asPath.startsWith(link.href);
+    return (
+      <Link key={link.href} href={link.href} passHref>
+        <a
+          key={link.label}
+          className={cx(classes.link, { [classes.linkActive]: isActive })}
+          onClick={() => {
+            toggleOpened(false);
+          }}
+        >
+          {link.label}
+        </a>
+      </Link>
+    );
+  });
 
   return (
     <MantineHeader height={HEADER_HEIGHT} className={classes.root}>

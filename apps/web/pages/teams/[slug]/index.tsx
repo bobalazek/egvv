@@ -57,7 +57,7 @@ export const getStaticPaths = async () => {
   };
 };
 
-export default function TeamDetail({ team, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function TeamsDetail({ team, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
@@ -91,7 +91,7 @@ export default function TeamDetail({ team, errorCode }: InferGetStaticPropsType<
                       textAlign: 'center',
                     }}
                   >
-                    <SeasonTeamCard seasonTeam={seasonTeam} hideButton={true} />
+                    <SeasonTeamCard seasonTeam={seasonTeam} hideViewTeamButton={true} />
                   </Grid.Col>
                 );
               })}

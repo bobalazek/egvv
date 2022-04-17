@@ -1,6 +1,6 @@
 import Error from 'next/error';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Alert, Container, Grid, Tabs } from '@mantine/core';
+import { Alert, Container, Grid, Table, Tabs } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { EventCard } from '../../../components/cards/event-card';
@@ -40,9 +40,66 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     };
   }
 
+  const teamStandingsPoints = await prismaClient.seasonTeamStandingEntry.groupBy({
+    by: ['seasonTeamId'],
+    orderBy: [{ _sum: { points: 'desc' } }],
+    _sum: {
+      points: true,
+    },
+  });
+  const teamStandingsMap = new Map(
+    teamStandingsPoints.map((teamStanding) => {
+      return [teamStanding.seasonTeamId, teamStanding._sum.points];
+    })
+  );
+  const teamStandings: {
+    seasonTeam: typeof season.seasonTeams[number];
+    points: number;
+  }[] = [];
+  for (const seasonTeam of season.seasonTeams) {
+    teamStandings.push({
+      seasonTeam,
+      points: teamStandingsMap.get(seasonTeam.id) || 0,
+    });
+  }
+  teamStandings.sort((a, b) => {
+    return b.points - a.points;
+  });
+
+  const driverStandingsPoints = await prismaClient.seasonDriverStandingEntry.groupBy({
+    by: ['seasonDriverId'],
+    orderBy: [{ _sum: { points: 'desc' } }],
+    _sum: {
+      points: true,
+    },
+  });
+  const driverStandingsMap = new Map(
+    driverStandingsPoints.map((driverStanding) => {
+      return [driverStanding.seasonDriverId, driverStanding._sum.points];
+    })
+  );
+  const driverStandings: {
+    seasonDriver: typeof season.seasonTeams[number]['seasonDrivers'][number];
+    points: number;
+  }[] = [];
+  const seasonDrivers = season.seasonTeams.flatMap((seasonTeam) => {
+    return seasonTeam.seasonDrivers;
+  });
+  for (const seasonDriver of seasonDrivers) {
+    driverStandings.push({
+      seasonDriver,
+      points: driverStandingsMap.get(seasonDriver.id) || 0,
+    });
+  }
+  driverStandings.sort((a, b) => {
+    return b.points - a.points;
+  });
+
   return {
     props: {
       season: JSON.parse(JSON.stringify(season)) as typeof season,
+      teamStandings: JSON.parse(JSON.stringify(teamStandings)) as typeof teamStandings,
+      driverStandings: JSON.parse(JSON.stringify(driverStandings)) as typeof driverStandings,
     },
   };
 };
@@ -54,7 +111,12 @@ export const getStaticPaths = async () => {
   };
 };
 
-export default function SeasonDetail({ season, errorCode }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function SeasonsDetail({
+  season,
+  teamStandings,
+  driverStandings,
+  errorCode,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   if (errorCode) {
     return <Error statusCode={errorCode} />;
   }
@@ -104,7 +166,7 @@ export default function SeasonDetail({ season, errorCode }: InferGetStaticPropsT
                       textAlign: 'center',
                     }}
                   >
-                    <SeasonTeamCard seasonTeam={seasonTeam} />
+                    <SeasonTeamCard seasonTeam={seasonTeam} hideSeason={true} hideViewSeasonButton={true} />
                   </Grid.Col>
                 );
               })}
@@ -126,12 +188,58 @@ export default function SeasonDetail({ season, errorCode }: InferGetStaticPropsT
                         textAlign: 'center',
                       }}
                     >
-                      <SeasonDriverCard seasonTeam={seasonTeam} seasonDriver={seasonDriver} />
+                      <SeasonDriverCard
+                        hideSeason={true}
+                        seasonTeam={seasonTeam}
+                        seasonDriver={seasonDriver}
+                        hideViewSeasonButton={true}
+                      />
                     </Grid.Col>
                   );
                 });
               })}
             </Grid>
+          </Tabs.Tab>
+          <Tabs.Tab label="Team standings">
+            <Table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {teamStandings.map((teamStanding) => {
+                  return (
+                    <tr key={teamStanding.seasonTeam.id}>
+                      <td>{teamStanding.seasonTeam.name}</td>
+                      <td>{teamStanding.points}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </Tabs.Tab>
+          <Tabs.Tab label="Driver standings">
+            <Table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {driverStandings.map((driverStanding) => {
+                  const fullName = `${driverStanding.seasonDriver.driver.firstName} ${driverStanding.seasonDriver.driver.lastName}`;
+                  return (
+                    <tr key={driverStanding.seasonDriver.id}>
+                      <td>{fullName}</td>
+                      <td>{driverStanding.points}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
           </Tabs.Tab>
         </Tabs>
       </Container>

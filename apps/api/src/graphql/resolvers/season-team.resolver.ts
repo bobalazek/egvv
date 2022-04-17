@@ -31,7 +31,7 @@ export class SeasonTeamResolver extends AbstractResolver {
       await this.getPrismaArgs(
         args,
         false,
-        ['name', 'shortName', 'powerUnit', 'chassis', 'season.name'],
+        ['name', 'shortName', 'powerUnit', 'chassis', 'season.name', 'team.name'],
         [{ filterField: 'seasonId' }]
       )
     );
@@ -43,7 +43,7 @@ export class SeasonTeamResolver extends AbstractResolver {
       await this.getPrismaArgs(
         args,
         true,
-        ['name', 'shortName', 'powerUnit', 'chassis', 'season.name'],
+        ['name', 'shortName', 'powerUnit', 'chassis', 'season.name', 'team.name'],
         [{ filterField: 'seasonId' }]
       )
     );

@@ -5,6 +5,9 @@ import { SeasonTeam, SeasonDriver, Driver, Team, Season } from '@prisma/client';
 export function SeasonDriverCard({
   seasonDriver,
   seasonTeam,
+  hideSeason = false,
+  hideViewDriverButton = false,
+  hideViewSeasonButton = false,
 }: {
   seasonDriver: SeasonDriver & {
     driver: Driver;
@@ -13,6 +16,9 @@ export function SeasonDriverCard({
     season: Season;
     team: Team;
   };
+  hideSeason?: boolean;
+  hideViewDriverButton?: boolean;
+  hideViewSeasonButton?: boolean;
 }) {
   const theme = useMantineTheme();
 
@@ -30,14 +36,21 @@ export function SeasonDriverCard({
       <Title order={5} mb={10}>
         {seasonTeam.name}
       </Title>
-      <Title order={6} mb={10}>
-        {seasonTeam.season.name}
-      </Title>
-      <Link href={`/drivers/${seasonDriver.driver.slug}`} passHref>
-        <Button variant="light" color="blue" component="a" fullWidth>
-          View driver
-        </Button>
-      </Link>
+      {!hideSeason && <Title order={6}>{seasonTeam.season.name}</Title>}
+      {!hideViewDriverButton && (
+        <Link href={`/drivers/${seasonDriver.driver.slug}`} passHref>
+          <Button variant="light" color="blue" component="a" fullWidth mt={10}>
+            View driver
+          </Button>
+        </Link>
+      )}
+      {!hideViewSeasonButton && (
+        <Link href={`/seasons/${seasonTeam.season.slug}`} passHref>
+          <Button variant="light" color="blue" component="a" fullWidth mt={10}>
+            View season
+          </Button>
+        </Link>
+      )}
     </Card>
   );
 }
