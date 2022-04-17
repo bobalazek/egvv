@@ -1,4 +1,13 @@
-import { Create, SimpleForm, TextInput, required, ReferenceInput, AutocompleteInput, CreateProps } from 'react-admin';
+import {
+  Create,
+  SimpleForm,
+  TextInput,
+  required,
+  ReferenceInput,
+  AutocompleteInput,
+  CreateProps,
+  DateTimeInput,
+} from 'react-admin';
 
 export const EventCreate = (props: CreateProps) => (
   <Create {...props}>
@@ -9,7 +18,7 @@ export const EventCreate = (props: CreateProps) => (
       <TextInput source="round" validate={required()} />
       <TextInput source="laps" validate={required()} />
       <TextInput source="lapDistance" validate={required()} />
-      <TextInput source="raceAt" validate={required()} />
+      <DateTimeInput source="raceAt" validate={required()} />
       <TextInput source="url" validate={required()} />
       <TextInput source="circuitLayout" />
       <ReferenceInput source="seasonId" reference="Season">

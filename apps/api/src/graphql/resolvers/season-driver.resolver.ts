@@ -30,7 +30,7 @@ export class SeasonDriverResolver extends AbstractResolver {
       await this.getPrismaArgs(
         args,
         false,
-        ['code'],
+        ['code', 'seasonTeam.name', 'seasonTeam.season.name'],
         [
           {
             filterField: 'seasonId',
@@ -50,7 +50,7 @@ export class SeasonDriverResolver extends AbstractResolver {
       await this.getPrismaArgs(
         args,
         true,
-        ['code'],
+        ['code', 'seasonTeam.name', 'seasonTeam.season.name'],
         [
           {
             filterField: 'seasonId',

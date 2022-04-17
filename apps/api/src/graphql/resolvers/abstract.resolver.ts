@@ -57,18 +57,34 @@ export class AbstractResolver {
       const orWhere: KeyValueMap[] = [];
 
       for (const field of queryFilterFields) {
-        if (field.includes('.')) {
-          const fieldSplit = field.split('.');
-          if (fieldSplit.length !== 2) {
-            new Error(`You are only allowed to to have 2 fields.`);
-          }
+        // TODO: figure out a better, recursive way to do this
+        const fieldSplit = field.split('.');
+        if (fieldSplit.length > 3) {
+          new Error(`You are only allowed to have up to 3 fields.`);
+        }
 
-          const fieldParent = fieldSplit[0];
-          const fieldChild = fieldSplit[1];
-          if (!fieldParent || !fieldChild) {
-            new Error(`The parent or child field is empty.`);
-          }
+        const fieldParent = fieldSplit[0];
+        if (!fieldParent) {
+          new Error(`The parent field can not be empty.`);
+        }
 
+        if (fieldSplit.length === 1) {
+          orWhere.push({
+            [fieldParent]: {
+              contains: query,
+              mode: 'insensitive',
+            },
+          });
+
+          continue;
+        }
+
+        const fieldChild = fieldSplit[1];
+        if (!fieldChild) {
+          new Error(`The child field can not be empty.`);
+        }
+
+        if (fieldSplit.length === 2) {
           orWhere.push({
             [fieldParent]: {
               [fieldChild]: {
@@ -77,14 +93,25 @@ export class AbstractResolver {
               },
             },
           });
-        } else {
-          orWhere.push({
-            [field]: {
-              contains: query,
-              mode: 'insensitive',
-            },
-          });
+
+          continue;
         }
+
+        const fieldGrandChild = fieldSplit[2];
+        if (!fieldGrandChild) {
+          new Error(`The grand child field can not be empty.`);
+        }
+
+        orWhere.push({
+          [fieldParent]: {
+            [fieldChild]: {
+              [fieldGrandChild]: {
+                contains: query,
+                mode: 'insensitive',
+              },
+            },
+          },
+        });
       }
 
       where['OR'] = orWhere;

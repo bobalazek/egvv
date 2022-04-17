@@ -20,7 +20,7 @@ export const EventSessionEdit = (props: EditProps) => (
       <TextInput source="name" validate={required()} />
       <TextInput source="type" validate={required()} />
       <DateTimeInput source="startAt" validate={required()} />
-      <DateTimeInput source="endAt" validate={required()} />
+      <DateTimeInput source="endAt" />
     </SimpleForm>
   </Edit>
 );

@@ -1,4 +1,13 @@
-import { SimpleForm, TextInput, required, ReferenceInput, AutocompleteInput, Edit, EditProps } from 'react-admin';
+import {
+  SimpleForm,
+  TextInput,
+  required,
+  ReferenceInput,
+  AutocompleteInput,
+  Edit,
+  EditProps,
+  DateTimeInput,
+} from 'react-admin';
 
 export const EventEdit = (props: EditProps) => (
   <Edit {...props}>
@@ -10,7 +19,7 @@ export const EventEdit = (props: EditProps) => (
       <TextInput source="round" validate={required()} />
       <TextInput source="laps" validate={required()} />
       <TextInput source="lapDistance" validate={required()} />
-      <TextInput source="raceAt" validate={required()} />
+      <DateTimeInput source="raceAt" validate={required()} />
       <TextInput source="url" validate={required()} />
       <TextInput source="circuitLayout" />
       <ReferenceInput source="seasonId" reference="Season">

@@ -25,7 +25,7 @@ export const EventSessionCreate = (props: CreateProps) => {
         <TextInput source="name" validate={required()} />
         <TextInput source="type" validate={required()} />
         <DateTimeInput source="startAt" validate={required()} />
-        <DateTimeInput source="endAt" validate={required()} />
+        <DateTimeInput source="endAt" />
       </SimpleForm>
     </Create>
   );
