@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button, Card, Title, useMantineTheme } from '@mantine/core';
-import { SeasonTeam, SeasonDriver, Driver, Team } from '@prisma/client';
+import { SeasonTeam, SeasonDriver, Driver, Team, Season } from '@prisma/client';
 
 export function SeasonDriverCard({
   seasonDriver,
@@ -10,6 +10,7 @@ export function SeasonDriverCard({
     driver: Driver;
   };
   seasonTeam: SeasonTeam & {
+    season: Season;
     team: Team;
   };
 }) {
@@ -28,6 +29,9 @@ export function SeasonDriverCard({
       </Title>
       <Title order={5} mb={10}>
         {seasonTeam.name}
+      </Title>
+      <Title order={6} mb={10}>
+        {seasonTeam.season.name}
       </Title>
       <Link href={`/drivers/${seasonDriver.driver.slug}`} passHref>
         <Button variant="light" color="blue" component="a" fullWidth>

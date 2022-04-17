@@ -6,7 +6,7 @@ import { Header } from '../components/layout/header';
 
 import './styles.css';
 
-function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -32,5 +32,3 @@ function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
-
-export default App;

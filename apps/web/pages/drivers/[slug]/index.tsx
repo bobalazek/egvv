@@ -1,9 +1,11 @@
 import Error from 'next/error';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Container, Text, Title } from '@mantine/core';
+import { Container, Grid, List, ListItem, Tabs, Text, Title } from '@mantine/core';
+import countryCodeLookup from 'country-code-lookup';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
+import { SeasonTeamCard } from '../../../components/cards/season-team-card';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params?.slug as string;
@@ -11,6 +13,25 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const driver = await prismaClient.driver.findFirst({
     where: {
       slug,
+    },
+    include: {
+      seasonDrivers: {
+        include: {
+          seasonTeam: {
+            include: { season: true, team: true },
+          },
+          driver: true,
+        },
+        orderBy: [
+          {
+            seasonTeam: {
+              season: {
+                startAt: 'desc',
+              },
+            },
+          },
+        ],
+      },
     },
   });
   if (!driver) {
@@ -51,7 +72,45 @@ export default function DriverDetail({ driver, errorCode }: InferGetStaticPropsT
             {fullName}
           </Title>
         </Text>
-        <div>TODO</div>
+        <Tabs>
+          <Tabs.Tab label="Information">
+            <List>
+              <ListItem>
+                First name: <b>{driver.firstName}</b>
+              </ListItem>
+              <ListItem>
+                Last name: <b>{driver.lastName}</b>
+              </ListItem>
+              <ListItem>
+                Country: <b>{countryCodeLookup.byIso(driver.countryCode).country}</b>
+              </ListItem>
+              <ListItem>
+                Url:{' '}
+                <a href={driver.url} target="_blank" rel="noreferrer">
+                  {driver.url}
+                </a>
+              </ListItem>
+            </List>
+          </Tabs.Tab>
+          <Tabs.Tab label="Teams">
+            <Grid>
+              {driver.seasonDrivers.map((seasonDriver) => {
+                return (
+                  <Grid.Col
+                    key={seasonDriver.id}
+                    lg={4}
+                    md={6}
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    <SeasonTeamCard seasonTeam={seasonDriver.seasonTeam} />
+                  </Grid.Col>
+                );
+              })}
+            </Grid>
+          </Tabs.Tab>
+        </Tabs>
       </Container>
     </>
   );

@@ -22,6 +22,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       seasonTeams: {
         include: {
           team: true,
+          season: true,
           seasonDrivers: {
             include: {
               driver: true,
