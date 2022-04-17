@@ -1,6 +1,7 @@
 import Error from 'next/error';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Alert, Container, Grid } from '@mantine/core';
+import { Alert, Container, Grid, List, ListItem, Tabs } from '@mantine/core';
+import countryCodeLookup from 'country-code-lookup';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { EventSessionCard } from '../../../components/cards/event-session-card';
@@ -14,6 +15,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       slug,
     },
     include: {
+      circuit: true,
       season: {
         include: {
           series: true,
@@ -49,6 +51,8 @@ export default function EventsDetail({ event, errorCode }: InferGetStaticPropsTy
     return <Error statusCode={errorCode} />;
   }
 
+  const raceDate = new Date(event.raceAt as unknown as string);
+
   return (
     <>
       <Breadcrumbs
@@ -60,25 +64,87 @@ export default function EventsDetail({ event, errorCode }: InferGetStaticPropsTy
         ]}
       />
       <Container mt={40}>
-        <Grid>
-          {event.eventSessions.length === 0 && (
-            <Alert style={{ width: '100%' }}>No sessions found for this event</Alert>
-          )}
-          {event.eventSessions.map((eventSession) => {
-            return (
-              <Grid.Col
-                key={eventSession.id}
-                lg={4}
-                md={6}
-                style={{
-                  textAlign: 'center',
-                }}
-              >
-                <EventSessionCard eventSession={eventSession} />
-              </Grid.Col>
-            );
-          })}
-        </Grid>
+        <Tabs>
+          <Tabs.Tab label="Information">
+            <List>
+              <ListItem>
+                Name: <b>{event.name}</b>
+              </ListItem>
+              <ListItem>
+                Full name: <b>{event.fullName}</b>
+              </ListItem>
+              <ListItem>
+                Round: <b>{event.round}</b>
+              </ListItem>
+              <ListItem>
+                Laps: <b>{event.laps}</b>
+              </ListItem>
+              <ListItem>
+                Lap distance: <b>{event.lapDistance}</b>
+              </ListItem>
+              <ListItem>
+                Race at:{' '}
+                <b>
+                  {raceDate.toLocaleDateString()} {raceDate.toLocaleTimeString()} UTC
+                </b>
+              </ListItem>
+              <ListItem>
+                Url:{' '}
+                <a href={event.url} target="_blank" rel="noreferrer">
+                  {event.url}
+                </a>
+              </ListItem>
+            </List>
+          </Tabs.Tab>
+          <Tabs.Tab label="Circuit">
+            <List>
+              <ListItem>
+                Name: <b>{event.circuit.name}</b>
+              </ListItem>
+              {event.circuitLayout && (
+                <ListItem>
+                  Layout: <b>{event.circuitLayout}</b>
+                </ListItem>
+              )}
+              <ListItem>
+                Timezone: <b>{event.circuit.timezone}</b>
+              </ListItem>
+              <ListItem>
+                Location: <b>{event.circuit.location}</b>
+              </ListItem>
+              <ListItem>
+                Country: <b>{countryCodeLookup.byIso(event.circuit.countryCode).country}</b>
+              </ListItem>
+              <ListItem>
+                Url:{' '}
+                <a href={event.circuit.url} target="_blank" rel="noreferrer">
+                  {event.circuit.url}
+                </a>
+              </ListItem>
+            </List>
+          </Tabs.Tab>
+          <Tabs.Tab label="Sessions">
+            <Grid>
+              {event.eventSessions.length === 0 && (
+                <Alert style={{ width: '100%' }}>No sessions found for this event</Alert>
+              )}
+              {event.eventSessions.map((eventSession) => {
+                return (
+                  <Grid.Col
+                    key={eventSession.id}
+                    lg={4}
+                    md={6}
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    <EventSessionCard eventSession={eventSession} />
+                  </Grid.Col>
+                );
+              })}
+            </Grid>
+          </Tabs.Tab>
+        </Tabs>
       </Container>
     </>
   );

@@ -80,6 +80,7 @@ export default function EventSessionsDetail({
             <span>
               {endDate.toLocaleDateString()} {endDate.toLocaleTimeString()}
             </span>
+            <span> UTC</span>
           </Badge>
         </Title>
         <Tabs>
