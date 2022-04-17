@@ -204,14 +204,16 @@ export default function SeasonsDetail({
             <Table>
               <thead>
                 <tr>
+                  <th>Position</th>
                   <th>Name</th>
                   <th>Points</th>
                 </tr>
               </thead>
               <tbody>
-                {teamStandings.map((teamStanding) => {
+                {teamStandings.map((teamStanding, index) => {
                   return (
                     <tr key={teamStanding.seasonTeam.id}>
+                      <td>{index + 1}</td>
                       <td>{teamStanding.seasonTeam.name}</td>
                       <td>{teamStanding.points}</td>
                     </tr>
@@ -224,15 +226,17 @@ export default function SeasonsDetail({
             <Table>
               <thead>
                 <tr>
+                  <th>Position</th>
                   <th>Name</th>
                   <th>Points</th>
                 </tr>
               </thead>
               <tbody>
-                {driverStandings.map((driverStanding) => {
+                {driverStandings.map((driverStanding, index) => {
                   const fullName = `${driverStanding.seasonDriver.driver.firstName} ${driverStanding.seasonDriver.driver.lastName}`;
                   return (
                     <tr key={driverStanding.seasonDriver.id}>
+                      <td>{index + 1}</td>
                       <td>{fullName}</td>
                       <td>{driverStanding.points}</td>
                     </tr>
