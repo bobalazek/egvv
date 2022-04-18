@@ -1,7 +1,7 @@
 [
-  { "name": "Pirelli Soft", "key": "pirelli-soft" },
-  { "name": "Pirelli Medium", "key": "pirelli-medium" },
-  { "name": "Pirelli Hard", "key": "pirelli-hard" },
-  { "name": "Pirelli Intermediate", "key": "pirelli-intermediate" },
-  { "name": "Pirelli Wet", "key": "pirelli-wet" }
+  { "name": "Pirelli Soft", "key": "soft" },
+  { "name": "Pirelli Medium", "key": "medium" },
+  { "name": "Pirelli Hard", "key": "hard" },
+  { "name": "Pirelli Intermediate", "key": "intermediate" },
+  { "name": "Pirelli Wet", "key": "wet" }
 ]
