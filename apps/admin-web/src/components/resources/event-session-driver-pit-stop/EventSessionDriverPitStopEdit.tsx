@@ -19,6 +19,7 @@ export const EventSessionDriverPitStopEdit = (props: EditProps) => (
       <TextInput source="lap" validate={required()} />
       <NumberInput source="stopTimeMilliseconds" />
       <NumberInput source="timeMilliseconds" />
+      <TextInput source="tyres" />
     </SimpleForm>
   </Edit>
 );

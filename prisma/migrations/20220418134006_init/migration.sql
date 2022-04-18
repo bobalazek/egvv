@@ -173,6 +173,7 @@ CREATE TABLE "EventSessionDriverPitStop" (
     "lap" INTEGER NOT NULL,
     "stopTimeMilliseconds" INTEGER,
     "timeMilliseconds" INTEGER,
+    "tyres" TEXT,
     "eventSessionDriverId" TEXT NOT NULL,
 
     CONSTRAINT "EventSessionDriverPitStop_pkey" PRIMARY KEY ("id")
@@ -183,6 +184,7 @@ CREATE TABLE "EventSessionDriverStartingGrid" (
     "id" TEXT NOT NULL,
     "position" INTEGER,
     "timeMilliseconds" INTEGER,
+    "tyres" TEXT,
     "note" TEXT,
     "eventSessionDriverId" TEXT NOT NULL,
 

@@ -183,6 +183,7 @@ model EventSessionDriverPitStop {
   lap                  Int
   stopTimeMilliseconds Int? // How long was the time for only the pitstop?
   timeMilliseconds     Int? // How long was the total time for the pitstop?
+  tyres                String?
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverPitStop_EventSessionDriver", fields: [eventSessionDriverId], references: [id])
 }
@@ -191,6 +192,7 @@ model EventSessionDriverStartingGrid {
   id                   String             @id @default(uuid())
   position             Int?
   timeMilliseconds     Int? // What was the time to reach the position in the qualification?
+  tyres                String?
   note                 String? // if the racer for example starts in the pit or has a penalty
   eventSessionDriverId String
   eventSessionDriver   EventSessionDriver @relation(name: "EventSessionDriverStartingGrid_EventSessionDriver", fields: [eventSessionDriverId], references: [id])

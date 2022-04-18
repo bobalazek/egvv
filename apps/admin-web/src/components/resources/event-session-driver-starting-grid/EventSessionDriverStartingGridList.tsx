@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  DateField,
   ReferenceField,
   ShowButton,
   EditButton,
@@ -27,6 +26,7 @@ export const EventSessionDriverStartingGridList = (props: ListProps) => (
       </ReferenceField>
       <TextField source="position" />
       <NumberField source="timeMilliseconds" />
+      <TextField source="tyres" />
       <TextField source="note" />
       <ShowButton />
       <EditButton />

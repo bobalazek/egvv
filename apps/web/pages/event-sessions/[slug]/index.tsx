@@ -201,6 +201,7 @@ export default function EventSessionsDetail({
                     <th>Position</th>
                     <th>Driver</th>
                     <th>Team</th>
+                    <th>Status</th>
                     <th>Time</th>
                     <th>Note</th>
                   </tr>
@@ -215,6 +216,7 @@ export default function EventSessionsDetail({
                         <td>{classification.position}</td>
                         <td>{driverName}</td>
                         <td>{seasonDriver.seasonTeam.name}</td>
+                        <td>{classification.status}</td>
                         <td>{convertMillisecondsToTime(classification.timeMilliseconds)}</td>
                         <td>{classification.note}</td>
                       </tr>

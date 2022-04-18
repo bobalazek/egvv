@@ -2,7 +2,6 @@ import {
   List,
   Datagrid,
   TextField,
-  DateField,
   ReferenceField,
   NumberField,
   ShowButton,

@@ -18,6 +18,7 @@ export const EventSessionDriverStartingGridEdit = (props: EditProps) => (
       </ReferenceInput>
       <TextInput source="position" />
       <NumberInput source="timeMilliseconds" />
+      <TextInput source="tyres" />
       <TextInput source="note" multiline />
     </SimpleForm>
   </Edit>

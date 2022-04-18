@@ -8,6 +8,7 @@ export const EventSessionDriverStartingGridShow = (props: ShowProps) => (
       </ReferenceField>
       <TextField source="position" />
       <NumberField source="timeMilliseconds" />
+      <TextField source="tyres" />
       <TextField source="note" />
     </SimpleShowLayout>
   </Show>

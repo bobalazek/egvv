@@ -133,7 +133,7 @@ export const saveEventRaceResults = async (
       const seasonDriver = await prismaClient.seasonDriver.findFirst({
         where: {
           code: eventRaceResult.driverCode,
-          number: eventRaceResult.driverNumber,
+          // number: eventRaceResult.driverNumber,
           seasonTeam: {
             season: {
               slug: seasonSlug,

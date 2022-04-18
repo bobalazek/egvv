@@ -27,6 +27,7 @@ export const EventSessionDriverPitStopList = (props: ListProps) => (
       <TextField source="lap" />
       <NumberField source="stopTimeMilliseconds" />
       <NumberField source="timeMilliseconds" />
+      <TextField source="tyres" />
       <ShowButton />
       <EditButton />
       <DeleteButton />

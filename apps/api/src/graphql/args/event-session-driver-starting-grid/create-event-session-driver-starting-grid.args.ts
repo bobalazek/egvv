@@ -12,6 +12,9 @@ export class CreateEventSessionDriverStartingGridArgs {
   timeMilliseconds?: number;
 
   @Field({ nullable: true })
+  tyres?: string;
+
+  @Field({ nullable: true })
   note?: string;
 
   @Field()

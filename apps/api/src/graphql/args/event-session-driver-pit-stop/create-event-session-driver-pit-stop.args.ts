@@ -11,6 +11,9 @@ export class CreateEventSessionDriverPitStopArgs {
   @Field(() => Int, { nullable: true })
   timeMilliseconds?: number;
 
+  @Field({ nullable: true })
+  tyres?: string;
+
   @Field()
   eventSessionDriverId: string;
 }

@@ -9,6 +9,7 @@ export const EventSessionDriverPitStopShow = (props: ShowProps) => (
       <TextField source="lap" />
       <NumberField source="stopTimeMilliseconds" />
       <NumberField source="timeMilliseconds" />
+      <TextField source="tyres" />
     </SimpleShowLayout>
   </Show>
 );

@@ -1,4 +1,13 @@
-import { Create, SimpleForm, required, TextInput, ReferenceInput, AutocompleteInput, CreateProps, NumberInput } from 'react-admin';
+import {
+  Create,
+  SimpleForm,
+  required,
+  TextInput,
+  ReferenceInput,
+  AutocompleteInput,
+  CreateProps,
+  NumberInput,
+} from 'react-admin';
 
 export const EventSessionDriverPitStopCreate = (props: CreateProps) => (
   <Create {...props}>
@@ -9,6 +18,7 @@ export const EventSessionDriverPitStopCreate = (props: CreateProps) => (
       <TextInput source="lap" validate={required()} />
       <NumberInput source="stopTimeMilliseconds" />
       <NumberInput source="timeMilliseconds" />
+      <TextInput source="tyres" />
     </SimpleForm>
   </Create>
 );
