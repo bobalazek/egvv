@@ -9,7 +9,8 @@ import {
   NumberInput,
   CreateProps,
 } from 'react-admin';
-import { SeasonDriverStandingEntrySessionDriverInput } from './SeasonDriverStandingEntrySessionDriverInput';
+
+import { FilterInput } from '../../inputs/FilterInput';
 
 export const SeasonDriverStandingEntryCreate = (props: CreateProps) => (
   <Create {...props}>
@@ -17,7 +18,7 @@ export const SeasonDriverStandingEntryCreate = (props: CreateProps) => (
       <ReferenceInput source="seasonDriverId" reference="SeasonDriver" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
-      <SeasonDriverStandingEntrySessionDriverInput source="eventSessionId" reference="EventSession" />
+      <FilterInput source="eventSessionId" reference="EventSession" filterId="seasonDriverId" />
       <NumberInput source="points" validate={required()} />
       <DateInput source="dateAt" validate={required()} helperText="When were the points awarded?" />
       <TextInput source="note" multiline />

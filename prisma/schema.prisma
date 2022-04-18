@@ -144,7 +144,6 @@ model EventSession {
   slug                        String                      @unique
   name                        String
   type                        String // practice-1, practice-2, qualifying-1, qualifying-2, sprint, race, feature-race, ...
-  tyreChoices                 Json?
   startAt                     DateTime
   endAt                       DateTime?
   eventId                     String

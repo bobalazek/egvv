@@ -33,6 +33,11 @@ export class SeasonDriverResolver extends AbstractResolver {
         ['code', 'seasonTeam.name', 'seasonTeam.season.name'],
         [
           {
+            filterField: 'eventSessionId',
+            model: 'eventSessionDrivers',
+            isModelManyToMany: true,
+          },
+          {
             filterField: 'seasonId',
             model: 'seasonTeam',
           },
@@ -53,8 +58,16 @@ export class SeasonDriverResolver extends AbstractResolver {
         ['code', 'seasonTeam.name', 'seasonTeam.season.name'],
         [
           {
+            filterField: 'eventSessionId',
+            model: 'eventSessionDrivers',
+            isModelManyToMany: true,
+          },
+          {
             filterField: 'seasonId',
             model: 'seasonTeam',
+          },
+          {
+            filterField: 'seasonTeamId',
           },
         ]
       )

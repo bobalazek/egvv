@@ -1,21 +1,11 @@
 import slugify from 'slugify';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
+import { prismaClient } from '@egvv/shared-prisma-client';
 import { EventRaceInterface, EventRaceResultInterface, EventWithSessionsInterface } from './Interfaces';
-
-let prismaClient: PrismaClient = null;
-export const getPrismaClient = () => {
-  if (!prismaClient) {
-    prismaClient = new PrismaClient();
-  }
-
-  return prismaClient;
-};
 
 export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlug: string) => {
   console.log(`Saving ${eventData.slug} event ...`);
-
-  const prisma = getPrismaClient();
 
   let raceAt: Date;
   for (const eventSessionData of eventData.sessions) {
@@ -31,7 +21,7 @@ export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlu
     process.exit(1);
   }
 
-  const season = await prisma.season.findFirst({
+  const season = await prismaClient.season.findFirst({
     where: {
       slug: seasonSlug,
     },
@@ -42,7 +32,7 @@ export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlu
     process.exit(1);
   }
 
-  const circuit = await prisma.circuit.findFirst({
+  const circuit = await prismaClient.circuit.findFirst({
     where: {
       name: eventData.circuitName,
     },
@@ -67,7 +57,7 @@ export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlu
     circuitId: circuit.id,
   };
 
-  const event = await prisma.event.upsert({
+  const event = await prismaClient.event.upsert({
     where: {
       slug: finalData.slug,
     },
@@ -91,7 +81,7 @@ export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlu
       eventId: event.id,
     };
 
-    await prisma.eventSession.upsert({
+    await prismaClient.eventSession.upsert({
       where: {
         eventId_type: {
           eventId: eventSessionFinalData.eventId,
@@ -114,9 +104,7 @@ export const saveEventRaceResults = async (
 ) => {
   console.log(`Saving ${eventRace.name} event race results ...`);
 
-  const prisma = getPrismaClient();
-
-  const eventRaceSession = await prisma.eventSession.findFirst({
+  const eventRaceSession = await prismaClient.eventSession.findFirst({
     where: {
       type: 'race',
       event: {
@@ -132,7 +120,7 @@ export const saveEventRaceResults = async (
   }
 
   for (const eventRaceResult of eventRaceResults) {
-    let eventSessionDriver = await prisma.eventSessionDriver.findFirst({
+    let eventSessionDriver = await prismaClient.eventSessionDriver.findFirst({
       where: {
         eventSessionId: eventRaceSession.id,
         seasonDriver: {
@@ -142,7 +130,7 @@ export const saveEventRaceResults = async (
       },
     });
     if (!eventSessionDriver) {
-      const seasonDriver = await prisma.seasonDriver.findFirst({
+      const seasonDriver = await prismaClient.seasonDriver.findFirst({
         where: {
           code: eventRaceResult.driverCode,
           number: eventRaceResult.driverNumber,
@@ -157,7 +145,7 @@ export const saveEventRaceResults = async (
         throw new Error(`Season driver ${eventRaceResult.driverCode} (${eventRaceResult.driverNumber}) not found.`);
       }
 
-      eventSessionDriver = await prisma.eventSessionDriver.create({
+      eventSessionDriver = await prismaClient.eventSessionDriver.create({
         data: {
           eventSessionId: eventRaceSession.id,
           seasonDriverId: seasonDriver.id,
@@ -167,7 +155,7 @@ export const saveEventRaceResults = async (
     }
 
     console.log(`Removing existing race result for ${eventRaceResult.driverCode} ...`);
-    await prisma.eventSessionDriverClassification.deleteMany({
+    await prismaClient.eventSessionDriverClassification.deleteMany({
       where: {
         eventSessionDriverId: eventSessionDriver.id,
       },
@@ -185,16 +173,15 @@ export const saveEventRaceResults = async (
       eventSessionDriverId: eventSessionDriver.id,
     };
 
-    await prisma.eventSessionDriverClassification.create({
+    await prismaClient.eventSessionDriverClassification.create({
       data: finalData,
     });
   }
 };
 
 export const exportEventData = async (seasonSlug: string) => {
-  const prisma = getPrismaClient();
   const eventsData = (
-    await prisma.event.findMany({
+    await prismaClient.event.findMany({
       where: {
         season: {
           slug: seasonSlug,

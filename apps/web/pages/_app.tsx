@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>EGGV</title>
+        <title>EGVV</title>
       </Head>
       <MantineProvider
         withGlobalStyles

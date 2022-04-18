@@ -138,7 +138,6 @@ CREATE TABLE "EventSession" (
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "type" TEXT NOT NULL,
-    "tyreChoices" JSONB,
     "startAt" TIMESTAMP(3) NOT NULL,
     "endAt" TIMESTAMP(3),
     "eventId" TEXT NOT NULL,
