@@ -72,6 +72,13 @@ export default [
     driverSlug: 'lance-stroll',
   },
   {
+    number: 27,
+    code: 'HUL',
+    teamSlug: 'aston-martin',
+    driverSlug: 'nico-hulkenberg',
+    isTemporary: true,
+  },
+  {
     number: 14,
     code: 'ALO',
     teamSlug: 'alpine',

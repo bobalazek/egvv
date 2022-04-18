@@ -113,7 +113,7 @@ export default [
     slug: 'kimi-raikkonen',
     countryCode: 'FI',
     url: 'https://en.wikipedia.org/wiki/Kimi_R%C3%A4ikk%C3%B6nen',
-    nickname: 'Woah',
+    nickname: 'Bwoah',
   },
   {
     firstName: 'Antonio',

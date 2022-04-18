@@ -6,3 +6,10 @@ export const HTTP_SERVER_GRAPHQL_URL = 'http://localhost:' + HTTP_SERVER_PORT + 
 export const JWT_SECRET = <string>process.env.API_JWT_SECRET;
 
 export const USER_ROLES = ['ROLE_ADMIN'];
+
+export const CLASSIFICATION_STATUSES = [
+  { id: 'FINISHED', name: 'Finished' },
+  { id: 'DNF', name: 'DNF (Did Not Finish)' },
+  { id: 'DNS', name: 'DNS (Did Not Start)' },
+  { id: 'DSQ', name: 'DSQ (Disqualified)' },
+];

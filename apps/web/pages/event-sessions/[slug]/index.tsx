@@ -4,7 +4,7 @@ import { Container, List, ListItem, Table, Tabs, Title } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
-import { convertToHumanCase } from '@egvv/shared-helpers';
+import { convertMillisecondsToTime, convertToHumanCase } from '@egvv/shared-helpers';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params?.slug as string;
@@ -59,7 +59,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     include,
     orderBy: [
       {
-        position: 'desc',
+        position: 'asc',
       },
     ],
   });
@@ -73,7 +73,21 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     include,
     orderBy: [
       {
-        position: 'desc',
+        position: 'asc',
+      },
+    ],
+  });
+
+  const eventSessionPitStops = await prismaClient.eventSessionDriverPitStop.findMany({
+    where: {
+      eventSessionDriverId: {
+        in: eventSessionDriverIds,
+      },
+    },
+    include,
+    orderBy: [
+      {
+        lap: 'asc',
       },
     ],
   });
@@ -85,6 +99,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       eventSessionClassification: JSON.parse(
         JSON.stringify(eventSessionClassification)
       ) as typeof eventSessionClassification,
+      eventSessionPitStops: JSON.parse(JSON.stringify(eventSessionPitStops)) as typeof eventSessionPitStops,
     },
   };
 };
@@ -100,6 +115,7 @@ export default function EventSessionsDetail({
   eventSession,
   eventSessionStartingGrid,
   eventSessionClassification,
+  eventSessionPitStops,
   errorCode,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (errorCode) {
@@ -162,12 +178,14 @@ export default function EventSessionsDetail({
                 </thead>
                 <tbody>
                   {eventSessionStartingGrid.map((startingGrid) => {
-                    const driverName = `${startingGrid.eventSessionDriver.seasonDriver.driver.firstName} ${startingGrid.eventSessionDriver.seasonDriver.driver.lastName}`;
+                    const { seasonDriver } = startingGrid.eventSessionDriver;
+                    const driverName = `${seasonDriver.driver.firstName} ${seasonDriver.driver.lastName}`;
+
                     return (
                       <tr key={startingGrid.id}>
                         <td>{startingGrid.position}</td>
                         <td>{driverName}</td>
-                        <td>{startingGrid.eventSessionDriver.seasonDriver.seasonTeam.name}</td>
+                        <td>{seasonDriver.seasonTeam.name}</td>
                       </tr>
                     );
                   })}
@@ -188,13 +206,17 @@ export default function EventSessionsDetail({
                   </tr>
                 </thead>
                 <tbody>
-                  {eventSessionStartingGrid.map((startingGrid) => {
-                    const driverName = `${startingGrid.eventSessionDriver.seasonDriver.driver.firstName} ${startingGrid.eventSessionDriver.seasonDriver.driver.lastName}`;
+                  {eventSessionClassification.map((classification) => {
+                    const { seasonDriver } = classification.eventSessionDriver;
+                    const driverName = `${seasonDriver.driver.firstName} ${seasonDriver.driver.lastName}`;
+
                     return (
-                      <tr key={startingGrid.id}>
-                        <td>{startingGrid.position}</td>
+                      <tr key={classification.id}>
+                        <td>{classification.position}</td>
                         <td>{driverName}</td>
-                        <td>{startingGrid.eventSessionDriver.seasonDriver.seasonTeam.name}</td>
+                        <td>{seasonDriver.seasonTeam.name}</td>
+                        <td>{convertMillisecondsToTime(classification.timeMilliseconds)}</td>
+                        <td>{classification.note}</td>
                       </tr>
                     );
                   })}
@@ -202,7 +224,37 @@ export default function EventSessionsDetail({
               </Table>
             </Tabs.Tab>
           )}
-          <Tabs.Tab label="Pit Stops">TODO: PIT STOPS</Tabs.Tab>
+          {eventSessionPitStops.length > 0 && (
+            <Tabs.Tab label="Pit Stops">
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Lap</th>
+                    <th>Driver</th>
+                    <th>Team</th>
+                    <th>Time</th>
+                    <th>Stop time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {eventSessionPitStops.map((pitStop) => {
+                    const { seasonDriver } = pitStop.eventSessionDriver;
+                    const driverName = `${seasonDriver.driver.firstName} ${seasonDriver.driver.lastName}`;
+
+                    return (
+                      <tr key={pitStop.id}>
+                        <td>{pitStop.lap}</td>
+                        <td>{driverName}</td>
+                        <td>{seasonDriver.seasonTeam.name}</td>
+                        <td>{convertMillisecondsToTime(pitStop.timeMilliseconds)}</td>
+                        <td>{convertMillisecondsToTime(pitStop.stopTimeMilliseconds)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </Tabs.Tab>
+          )}
         </Tabs>
       </Container>
     </>

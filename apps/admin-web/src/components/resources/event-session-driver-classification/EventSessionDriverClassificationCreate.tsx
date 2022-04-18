@@ -9,13 +9,15 @@ import {
   NumberInput,
 } from 'react-admin';
 
+import { CLASSIFICATION_STATUSES } from '@egvv/shared-constants';
+
 export const EventSessionDriverClassificationCreate = (props: CreateProps) => (
   <Create {...props}>
     <SimpleForm>
       <ReferenceInput source="eventSessionDriverId" reference="EventSessionDriver" validate={required()}>
         <AutocompleteInput optionText="name" />
       </ReferenceInput>
-      <TextInput source="status" validate={required()} />
+      <AutocompleteInput source="status" choices={CLASSIFICATION_STATUSES} validate={required()} />
       <TextInput source="position" />
       <NumberInput source="timeMilliseconds" />
       <TextInput source="laps" />

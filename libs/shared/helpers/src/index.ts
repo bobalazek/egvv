@@ -14,6 +14,30 @@ export const convertTimeToMilliseconds = (time: string): number => {
   );
 };
 
+export const convertMillisecondsToTime = (duration?: number): string => {
+  if (!duration) {
+    return '';
+  }
+
+  const milliseconds = Math.floor(duration % 1000);
+  const seconds = Math.floor((duration / 1000) % 60);
+  const minutes = Math.floor((duration / (1000 * 60)) % 60);
+  const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  const hoursString = String(hours).padStart(2, '0');
+  const minutesString = String(minutes).padStart(2, '0');
+  const secondsString = String(seconds).padStart(2, '0');
+  const millisecondsString = String(milliseconds).padStart(3, '0');
+
+  if (!hours && !minutes) {
+    return `${secondsString}:${millisecondsString}`;
+  } else if (!hours) {
+    return `${minutesString}:${secondsString}:${millisecondsString}`;
+  }
+
+  return `${hoursString}:${minutesString}:${secondsString}:${millisecondsString}`;
+};
+
 export const sleep = async (time: number) => {
   return new Promise((resolve) => {
     setTimeout(() => {
