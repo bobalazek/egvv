@@ -6,6 +6,7 @@ import { prismaClient } from '@egvv/shared-prisma-client';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
 import { SeasonTeamCard } from '../../../components/cards/season-team-card';
 import { SeasonDriverCard } from '../../../components/cards/season-driver-card';
+import { TeamVehiclesViewer } from '../../../components/viewers/team-vehicles-viewer';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params?.slug as string;
@@ -122,6 +123,9 @@ export default function TeamsDetail({ team, errorCode }: InferGetStaticPropsType
                 </div>
               );
             })}
+          </Tabs.Tab>
+          <Tabs.Tab label="Vehicles">
+            <TeamVehiclesViewer team={team} />
           </Tabs.Tab>
         </Tabs>
       </Container>
