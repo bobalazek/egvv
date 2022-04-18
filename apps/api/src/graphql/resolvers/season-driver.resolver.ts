@@ -13,6 +13,9 @@ import { CreateSeasonDriverArgs } from '../args/season-drivers/create-season-dri
 import { UpdateSeasonDriverArgs } from '../args/season-drivers/update-season-driver.args';
 import { GqlAuthGuard } from '../guards/gql-auth.guard';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AsyncReturnType<T extends (...args: any) => Promise<any>> = T extends (...args: any) => Promise<infer R> ? R : any;
+
 @Resolver(SeasonDriver)
 export class SeasonDriverResolver extends AbstractResolver {
   @Query(() => SeasonDriver)
@@ -26,52 +29,44 @@ export class SeasonDriverResolver extends AbstractResolver {
 
   @Query(() => [SeasonDriver])
   async allSeasonDrivers(@Args() args: AllSeasonDriversArgs) {
-    return this._prismaService.seasonDriver.findMany(
-      await this.getPrismaArgs(
-        args,
-        false,
-        ['code', 'seasonTeam.name', 'seasonTeam.season.name'],
-        [
-          {
-            filterField: 'eventSessionId',
-            model: 'eventSessionDrivers',
-            isModelManyToMany: true,
-          },
-          {
-            filterField: 'seasonId',
-            model: 'seasonTeam',
-          },
-          {
-            filterField: 'seasonTeamId',
-          },
-        ]
-      )
+    let prismaArgs = await this.getPrismaArgs(
+      args,
+      false,
+      ['code', 'seasonTeam.name', 'seasonTeam.season.name'],
+      [
+        {
+          filterField: 'seasonId',
+          model: 'seasonTeam',
+        },
+        {
+          filterField: 'seasonTeamId',
+        },
+      ]
     );
+    prismaArgs = this._updatePrismaArgs(prismaArgs, args);
+
+    return this._prismaService.seasonDriver.findMany(prismaArgs);
   }
 
   @Query(() => ListMetadata)
   async _allSeasonDriversMeta(@Args() args: AllSeasonDriversArgs): Promise<ListMetadata> {
-    const count = await this._prismaService.seasonDriver.count(
-      await this.getPrismaArgs(
-        args,
-        true,
-        ['code', 'seasonTeam.name', 'seasonTeam.season.name'],
-        [
-          {
-            filterField: 'eventSessionId',
-            model: 'eventSessionDrivers',
-            isModelManyToMany: true,
-          },
-          {
-            filterField: 'seasonId',
-            model: 'seasonTeam',
-          },
-          {
-            filterField: 'seasonTeamId',
-          },
-        ]
-      )
+    let prismaArgs = await this.getPrismaArgs(
+      args,
+      true,
+      ['code', 'seasonTeam.name', 'seasonTeam.season.name'],
+      [
+        {
+          filterField: 'seasonId',
+          model: 'seasonTeam',
+        },
+        {
+          filterField: 'seasonTeamId',
+        },
+      ]
     );
+    prismaArgs = this._updatePrismaArgs(prismaArgs, args);
+
+    const count = await this._prismaService.seasonDriver.count(prismaArgs);
 
     return {
       count,
@@ -146,5 +141,33 @@ export class SeasonDriverResolver extends AbstractResolver {
         seasonDriverId: parent.id,
       },
     });
+  }
+
+  private _updatePrismaArgs(prismaArgs: AsyncReturnType<typeof this.getPrismaArgs>, args: AllSeasonDriversArgs) {
+    if (args.filter.eventSessionId) {
+      if (!prismaArgs.where) {
+        prismaArgs.where = {};
+      }
+      if (!prismaArgs.where.AND) {
+        prismaArgs.where.AND = [];
+      }
+      prismaArgs.where.AND.push({
+        seasonTeam: {
+          season: {
+            events: {
+              some: {
+                eventSessions: {
+                  some: {
+                    id: args.filter.eventSessionId,
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+    }
+
+    return prismaArgs;
   }
 }

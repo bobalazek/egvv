@@ -13,7 +13,6 @@ type ExactFilterField = {
   sourceField?: string;
   sourceModel?: string; // if the filter links to another entity, which one is it? Ex. event-session.resolver.ts
   sourceModelParent?: string;
-  isModelManyToMany?: boolean;
 };
 
 @Injectable()
@@ -148,15 +147,7 @@ export class AbstractResolver {
         }
 
         let exactFilterFieldWhere = {};
-        if (field.isModelManyToMany && field.model) {
-          exactFilterFieldWhere = {
-            [field.model]: {
-              every: {
-                [whereField]: filterFieldValue,
-              },
-            },
-          };
-        } else if (field.model) {
+        if (field.model) {
           exactFilterFieldWhere = {
             [field.model]: {
               [whereField]: filterFieldValue,
