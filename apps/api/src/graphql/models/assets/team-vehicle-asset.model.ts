@@ -6,14 +6,17 @@ export class TeamVehicleAsset {
   url: string;
 
   @Field()
+  key: string;
+
+  @Field()
   name: string;
 
   @Field()
-  teamId: string;
+  seasonTeamName: string;
 
   @Field()
-  seasonTeamId: string;
+  teamSlug: string;
 
   @Field()
-  seasonId: string;
+  seasonSlug: string;
 }

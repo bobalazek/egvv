@@ -1,6 +1,6 @@
 import { ApolloClient, ApolloLink, InMemoryCache, from, HttpLink, NormalizedCacheObject } from '@apollo/client';
 
-import { HTTP_SERVER_GRAPHQL_URL } from '../../constants/src';
+import { API_SERVER_GRAPHQL_URL } from '../../constants/src';
 
 declare global {
   // eslint-disable-next-line no-var
@@ -26,7 +26,7 @@ export const apolloClient =
 
         return forward(operation);
       }),
-      new HttpLink({ uri: HTTP_SERVER_GRAPHQL_URL }),
+      new HttpLink({ uri: API_SERVER_GRAPHQL_URL }),
     ]),
   });
 

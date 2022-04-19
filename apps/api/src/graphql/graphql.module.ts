@@ -6,10 +6,13 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
-import { HTTP_SERVER_GRAPHQL_PATH, JWT_SECRET } from '@egvv/shared-constants';
+import { API_SERVER_GRAPHQL_PATH, JWT_SECRET } from '@egvv/shared-constants';
 import { PrismaService } from '../app/services/prisma.service';
 import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
-import { ComplexityPlugin } from '../graphql/plugins/complexity.plugin';
+import { ComplexityPlugin } from './plugins/complexity.plugin';
+import { AuthService } from './services/auth.service';
+import { JwtStrategy } from './auth/strategies/jwt.strategy';
+import { AbstractResolver } from './resolvers/abstract.resolver';
 import { SeriesResolver } from '../graphql/resolvers/series.resolver';
 import { SeasonResolver } from '../graphql/resolvers/season.resolver';
 import { DriverResolver } from '../graphql/resolvers/driver.resolver';
@@ -28,16 +31,14 @@ import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-tea
 import { SeasonDriverStandingEntryResolver } from './resolvers/season-driver-standing-entry.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { AuthResolver } from './resolvers/auth.resolver';
-import { AuthService } from './services/auth.service';
-import { JwtStrategy } from './auth/strategies/jwt.strategy';
-import { AbstractResolver } from './resolvers/abstract.resolver';
+import { AssetsResolver } from './resolvers/assets.resolver';
 
 @Module({
   imports: [
     NestGraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
-      path: HTTP_SERVER_GRAPHQL_PATH,
+      path: API_SERVER_GRAPHQL_PATH,
       context: ({ req, res }) => ({ req, res }),
     }),
     PassportModule,
@@ -78,6 +79,7 @@ import { AbstractResolver } from './resolvers/abstract.resolver';
     EventSessionDriverClassificationResolver,
     UserResolver,
     AuthResolver,
+    AssetsResolver,
   ],
 })
 export class GraphQLModule {}
