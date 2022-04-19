@@ -26,7 +26,7 @@ export class AssetsController {
       throw new Error('This vehicle does not exist.');
     }
 
-    const file = createReadStream(join(process.cwd(), 'package.json'));
+    const file = createReadStream(VEHICLE_BODY_PATH);
 
     return new StreamableFile(file);
   }
