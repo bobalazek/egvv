@@ -8,6 +8,7 @@ import { TeamVehicleAssetsArgs } from '../args/assets/team-vehicle-assets.args';
 import { TeamVehicleAsset } from '../models/assets/team-vehicle-asset.model';
 import { AbstractResolver } from './abstract.resolver';
 import { ASSETS_SERIES_DIRECTORY } from '../../constants';
+import { Prisma } from '@prisma/client';
 
 @Resolver()
 export class AssetsResolver extends AbstractResolver {
@@ -17,46 +18,39 @@ export class AssetsResolver extends AbstractResolver {
 
   @Query(() => [TeamVehicleAsset])
   async teamVehicleAssets(@Args() args: TeamVehicleAssetsArgs) {
-    const season = await this._prismaService.season.findFirst({
-      where: {
-        slug: args.seasonSlug,
-      },
-      include: {
-        series: true,
-      },
-    });
-    if (!season) {
-      throw new Error(`Season "${args.seasonSlug}" not found.`);
+    if (!args.seasonSlug && !args.teamSlug) {
+      throw new Error(`You need to either specify the season, or the team slug argument.`);
     }
 
-    const SEASON_DIRECTORY = join(ASSETS_SERIES_DIRECTORY, season.series.slug, season.slug);
-    const SEASON_TEAMS_DIRECTORY = join(SEASON_DIRECTORY, 'teams');
+    const seasonTeamWhere: Prisma.SeasonTeamWhereInput = {};
 
-    const teamsDirectories = readdirSync(SEASON_TEAMS_DIRECTORY);
+    if (args.seasonSlug) {
+      seasonTeamWhere.season = {
+        slug: args.seasonSlug,
+      };
+    }
+    if (args.teamSlug) {
+      seasonTeamWhere.team = {
+        slug: args.teamSlug,
+      };
+    }
 
     const seasonTeams = await this._prismaService.seasonTeam.findMany({
-      where: {
-        season: {
-          slug: season.slug,
-        },
-        team: {
-          slug: {
-            in: teamsDirectories,
-          },
-        },
-      },
+      where: seasonTeamWhere,
       include: {
         team: true,
-        season: true,
+        season: {
+          include: {
+            series: true,
+          },
+        },
       },
     });
 
     const teamVehicleAssets: TeamVehicleAsset[] = [];
     for (const seasonTeam of seasonTeams) {
-      if (args.teamSlug && args.teamSlug !== seasonTeam.team.slug) {
-        continue;
-      }
-
+      const SEASON_DIRECTORY = join(ASSETS_SERIES_DIRECTORY, seasonTeam.season.series.slug, seasonTeam.season.slug);
+      const SEASON_TEAMS_DIRECTORY = join(SEASON_DIRECTORY, 'teams');
       const VEHICLES_JSON_PATH = join(SEASON_TEAMS_DIRECTORY, seasonTeam.team.slug, 'vehicles.json');
       if (!existsSync(VEHICLES_JSON_PATH)) {
         continue;
@@ -65,18 +59,18 @@ export class AssetsResolver extends AbstractResolver {
       const vehiclesRawData = readFileSync(VEHICLES_JSON_PATH);
       const vehiclesData = JSON.parse(vehiclesRawData.toString());
 
-      const vehicleData = vehiclesData[0]; // TODO: that depends on the round
+      for (const vehicleData of vehiclesData) {
+        const url = `${API_SERVER_URL}/assets/team-vehicles/${seasonTeam.season.series.slug}/${seasonTeam.season.slug}/${seasonTeam.team.slug}/${vehicleData.key}/vehicle-body.glb`;
 
-      const url = `${API_SERVER_URL}/assets/team-vehicles/${season.series.slug}/${seasonTeam.season.slug}/${seasonTeam.team.slug}/${vehicleData.key}/vehicle-body.glb`;
-
-      teamVehicleAssets.push({
-        url,
-        key: vehicleData.key,
-        name: vehicleData.name,
-        seasonTeamName: seasonTeam.name,
-        teamSlug: seasonTeam.team.slug,
-        seasonSlug: seasonTeam.season.slug,
-      });
+        teamVehicleAssets.push({
+          url,
+          key: vehicleData.key,
+          name: vehicleData.name,
+          seasonTeamName: seasonTeam.name,
+          teamSlug: seasonTeam.team.slug,
+          seasonSlug: seasonTeam.season.slug,
+        });
+      }
     }
 
     return teamVehicleAssets;
