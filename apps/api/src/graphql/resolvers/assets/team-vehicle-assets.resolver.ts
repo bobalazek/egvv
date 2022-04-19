@@ -61,7 +61,12 @@ export class TeamVehicleAssetsResolver extends AbstractResolver {
       const vehiclesData = JSON.parse(vehiclesRawData.toString());
 
       for (const vehicleData of vehiclesData) {
-        const url = `${API_SERVER_URL}/assets/series/${seasonTeam.season.series.slug}/${seasonTeam.season.slug}/teams/${seasonTeam.team.slug}/vehicles/${vehicleData.key}/vehicle-body.glb`;
+        const url =
+          `${API_SERVER_URL}/assets/series/{seriesSlug}/{seasonSlug}/teams/{teamSlug}/vehicles/{vehicleKey}/vehicle-body.glb`
+            .replace('{seriesSlug}', seasonTeam.season.series.slug)
+            .replace('{seasonSlug}', seasonTeam.season.slug)
+            .replace('{teamSlug}', seasonTeam.team.slug)
+            .replace('{vehicleKey}', vehicleData.key);
 
         teamVehicleAssets.push({
           url,

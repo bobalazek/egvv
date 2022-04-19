@@ -13,12 +13,12 @@ export class AssetsController {
       throw new Error('You are not allowed to use double dots.');
     }
 
-    const VEHICLE_BODY_PATH = join(ASSETS_DIRECTORY, ...pathSplit);
-    if (!existsSync(VEHICLE_BODY_PATH)) {
-      throw new Error('This vehicle does not exist.');
+    const ASSET_PATH = join(ASSETS_DIRECTORY, ...pathSplit);
+    if (!existsSync(ASSET_PATH)) {
+      throw new Error('This asset does not exist.');
     }
 
-    const file = createReadStream(VEHICLE_BODY_PATH);
+    const file = createReadStream(ASSET_PATH);
 
     return new StreamableFile(file);
   }
