@@ -1,38 +1,51 @@
-import { useRef, useState } from 'react';
-import { Canvas, MeshProps, useFrame } from '@react-three/fiber';
+import { useEffect, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Team } from '@prisma/client';
+import { gql, useQuery } from '@apollo/client';
+import { TeamVehicle } from '../three/models/team-vehicle';
 
 interface TeamVehiclesViewerProps {
   team: Team;
 }
 
-function Box(props: MeshProps) {
-  const ref = useRef<MeshProps>();
-
-  const [hovered, setHovered] = useState(false);
-  const [clicked, setClicked] = useState(false);
-
-  useFrame(() => {
-    ref.current.rotation.x += 0.01;
-  });
-
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={clicked ? 1.5 : 1}
-      onClick={() => setClicked(!clicked)}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    </mesh>
-  );
-}
+const TEAM_VEHICLE_ASSETS_QUERY = gql`
+  query GetTeamVehicleAssets($teamSlug: String!) {
+    teamVehicleAssets(teamSlug: $teamSlug) {
+      url
+      key
+      name
+      seasonTeamName
+      teamSlug
+      seasonSlug
+    }
+  }
+`;
 
 export function TeamVehiclesViewer(props: TeamVehiclesViewerProps) {
+  const { loading, data, error } = useQuery(TEAM_VEHICLE_ASSETS_QUERY, {
+    variables: {
+      teamSlug: props.team.slug,
+    },
+  });
+  const [teamVehicles, setTeamVehicles] = useState([]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setTeamVehicles(data.teamVehicleAssets);
+  }, [data]);
+
+  if (loading) {
+    return <>Loading ...</>;
+  }
+
+  if (error) {
+    return <>Something went wrong</>;
+  }
+
   return (
     <Canvas
       shadows
@@ -43,10 +56,12 @@ export function TeamVehiclesViewer(props: TeamVehiclesViewerProps) {
         height: 600,
       }}
     >
-      <OrbitControls autoRotate makeDefault enableZoom={false} />
+      <OrbitControls autoRotate makeDefault />
       <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <Box position={[0, 0, 0]} />
+      <pointLight position={[4, 4, 4]} />
+      {teamVehicles.map((teamVehicleProps, index) => {
+        return <TeamVehicle key={index} url={teamVehicleProps.url} name={teamVehicleProps.name} />;
+      })}
     </Canvas>
   );
 }

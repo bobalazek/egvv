@@ -1,17 +1,17 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
-import { readdirSync, existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 
-import { API_SERVER_URL } from '@egvv/shared-constants';
-import { PrismaService } from '../../app/services/prisma.service';
-import { TeamVehicleAssetsArgs } from '../args/assets/team-vehicle-assets.args';
-import { TeamVehicleAsset } from '../models/assets/team-vehicle-asset.model';
-import { AbstractResolver } from './abstract.resolver';
-import { ASSETS_SERIES_DIRECTORY } from '../../constants';
 import { Prisma } from '@prisma/client';
+import { API_SERVER_URL } from '@egvv/shared-constants';
+import { PrismaService } from '../../../app/services/prisma.service';
+import { TeamVehicleAssetsArgs } from '../../args/assets/team-vehicle-assets.args';
+import { TeamVehicleAsset } from '../../models/assets/team-vehicle-asset.model';
+import { AbstractResolver } from '../abstract.resolver';
+import { ASSETS_SERIES_DIRECTORY } from '../../../constants';
 
-@Resolver()
-export class AssetsResolver extends AbstractResolver {
+@Resolver(TeamVehicleAsset)
+export class TeamVehicleAssetsResolver extends AbstractResolver {
   constructor(prismaService: PrismaService) {
     super(prismaService);
   }
@@ -29,6 +29,7 @@ export class AssetsResolver extends AbstractResolver {
         slug: args.seasonSlug,
       };
     }
+
     if (args.teamSlug) {
       seasonTeamWhere.team = {
         slug: args.teamSlug,
@@ -60,7 +61,7 @@ export class AssetsResolver extends AbstractResolver {
       const vehiclesData = JSON.parse(vehiclesRawData.toString());
 
       for (const vehicleData of vehiclesData) {
-        const url = `${API_SERVER_URL}/assets/team-vehicles/${seasonTeam.season.series.slug}/${seasonTeam.season.slug}/${seasonTeam.team.slug}/${vehicleData.key}/vehicle-body.glb`;
+        const url = `${API_SERVER_URL}/assets/series/${seasonTeam.season.series.slug}/${seasonTeam.season.slug}/teams/${seasonTeam.team.slug}/vehicles/${vehicleData.key}/vehicle-body.glb`;
 
         teamVehicleAssets.push({
           url,
