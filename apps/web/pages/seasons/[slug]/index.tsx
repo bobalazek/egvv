@@ -1,12 +1,16 @@
 import Error from 'next/error';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Alert, Container, Grid, Table, Tabs } from '@mantine/core';
+import { Alert, Container, Grid, Tabs } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
+import { TeamStandingInterface } from '../../../interfaces/team-standing-interface';
+import { DriverStandingInterface } from '../../../interfaces/driver-standing-interface';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
 import { SeasonTeamCard } from '../../../components/cards/season-team-card';
 import { SeasonDriverCard } from '../../../components/cards/season-driver-card';
 import { EventsTable } from '../../../components/tables/events-table';
+import { TeamStandingsTable } from '../../../components/tables/team-standings-table';
+import { DriverStandingsTable } from '../../../components/tables/driver-standings-table';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params?.slug as string;
@@ -56,19 +60,23 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       return [teamStanding.seasonTeamId, teamStanding._sum.points];
     })
   );
-  const teamStandings: {
-    seasonTeam: typeof season.seasonTeams[number];
-    points: number;
-  }[] = [];
-  for (const seasonTeam of season.seasonTeams) {
-    teamStandings.push({
-      seasonTeam,
-      points: teamStandingsMap.get(seasonTeam.id) || 0,
+  const teamStandings: TeamStandingInterface[] = season.seasonTeams
+    .map((seasonTeam) => {
+      return {
+        seasonTeam,
+        points: teamStandingsMap.get(seasonTeam.id) || 0,
+        position: 0,
+      };
+    })
+    .sort((a, b) => {
+      return b.points - a.points;
+    })
+    .map((seasonTeam, index) => {
+      return {
+        ...seasonTeam,
+        position: index + 1,
+      };
     });
-  }
-  teamStandings.sort((a, b) => {
-    return b.points - a.points;
-  });
 
   const driverStandingsPoints = await prismaClient.seasonDriverStandingEntry.groupBy({
     by: ['seasonDriverId'],
@@ -82,22 +90,26 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       return [driverStanding.seasonDriverId, driverStanding._sum.points];
     })
   );
-  const driverStandings: {
-    seasonDriver: typeof season.seasonTeams[number]['seasonDrivers'][number];
-    points: number;
-  }[] = [];
-  const seasonDrivers = season.seasonTeams.flatMap((seasonTeam) => {
-    return seasonTeam.seasonDrivers;
-  });
-  for (const seasonDriver of seasonDrivers) {
-    driverStandings.push({
-      seasonDriver,
-      points: driverStandingsMap.get(seasonDriver.id) || 0,
+  const driverStandings: DriverStandingInterface[] = season.seasonTeams
+    .flatMap((seasonTeam) => {
+      return seasonTeam.seasonDrivers;
+    })
+    .map((seasonDriver) => {
+      return {
+        seasonDriver,
+        points: driverStandingsMap.get(seasonDriver.id) || 0,
+        position: 0,
+      };
+    })
+    .sort((a, b) => {
+      return b.points - a.points;
+    })
+    .map((seasonDriver, index) => {
+      return {
+        ...seasonDriver,
+        position: index + 1,
+      };
     });
-  }
-  driverStandings.sort((a, b) => {
-    return b.points - a.points;
-  });
 
   return {
     props: {
@@ -190,49 +202,10 @@ export default function SeasonsDetail({
             </Grid>
           </Tabs.Tab>
           <Tabs.Tab label="Team standings">
-            <Table>
-              <thead>
-                <tr>
-                  <th>Position</th>
-                  <th>Name</th>
-                  <th>Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                {teamStandings.map((teamStanding, index) => {
-                  return (
-                    <tr key={teamStanding.seasonTeam.id}>
-                      <td>{index + 1}</td>
-                      <td>{teamStanding.seasonTeam.name}</td>
-                      <td>{teamStanding.points}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
+            <TeamStandingsTable teamStandings={teamStandings} />
           </Tabs.Tab>
           <Tabs.Tab label="Driver standings">
-            <Table>
-              <thead>
-                <tr>
-                  <th>Position</th>
-                  <th>Name</th>
-                  <th>Points</th>
-                </tr>
-              </thead>
-              <tbody>
-                {driverStandings.map((driverStanding, index) => {
-                  const fullName = `${driverStanding.seasonDriver.driver.firstName} ${driverStanding.seasonDriver.driver.lastName}`;
-                  return (
-                    <tr key={driverStanding.seasonDriver.id}>
-                      <td>{index + 1}</td>
-                      <td>{fullName}</td>
-                      <td>{driverStanding.points}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
+            <DriverStandingsTable driverStandings={driverStandings} />
           </Tabs.Tab>
         </Tabs>
       </Container>
