@@ -11,6 +11,7 @@ import { PrismaService } from '../app/services/prisma.service';
 import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 import { ComplexityPlugin } from './plugins/complexity.plugin';
 import { AuthService } from './services/auth.service';
+import { AssetsService } from './services/assets.service';
 import { JwtStrategy } from './auth/strategies/jwt.strategy';
 import { AbstractResolver } from './resolvers/abstract.resolver';
 import { SeriesResolver } from '../graphql/resolvers/series.resolver';
@@ -32,6 +33,7 @@ import { SeasonDriverStandingEntryResolver } from './resolvers/season-driver-sta
 import { UserResolver } from './resolvers/user.resolver';
 import { AuthResolver } from './resolvers/auth.resolver';
 import { TeamVehicleAssetResolver } from './resolvers/assets/team-vehicle-asset.resolver';
+import { SeasonTyreAssetResolver } from './resolvers/assets/season-tyre-asset.resolver';
 
 @Module({
   imports: [
@@ -59,6 +61,7 @@ import { TeamVehicleAssetResolver } from './resolvers/assets/team-vehicle-asset.
     ComplexityPlugin,
     PrismaService,
     AuthService,
+    AssetsService,
     JwtStrategy,
     AbstractResolver,
     SeriesResolver,
@@ -80,6 +83,7 @@ import { TeamVehicleAssetResolver } from './resolvers/assets/team-vehicle-asset.
     UserResolver,
     AuthResolver,
     TeamVehicleAssetResolver,
+    SeasonTyreAssetResolver,
   ],
 })
 export class GraphQLModule {}

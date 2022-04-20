@@ -1,19 +1,22 @@
-import { Resolver, Query, Args } from '@nestjs/graphql';
-import { existsSync, readFileSync } from 'fs';
-import { join } from 'path';
+import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 
 import { Prisma } from '@prisma/client';
-import { API_SERVER_URL } from '@egvv/shared-constants';
+import { AbstractResolver } from '../abstract.resolver';
 import { PrismaService } from '../../../app/services/prisma.service';
+import { AssetsService } from '../../services/assets.service';
 import { TeamVehicleAssetsArgs } from '../../args/assets/team-vehicle-assets.args';
 import { TeamVehicleAsset } from '../../models/assets/team-vehicle-asset.model';
-import { AbstractResolver } from '../abstract.resolver';
-import { ASSETS_SERIES_DIRECTORY } from '../../../constants';
+import { SeasonTeam } from '../../models/season-team.model';
+import { SeasonTyreAsset } from '../../models/assets/season-tyre-asset.model';
 
 @Resolver(TeamVehicleAsset)
 export class TeamVehicleAssetResolver extends AbstractResolver {
-  constructor(prismaService: PrismaService) {
+  private _assetsService: AssetsService;
+
+  constructor(prismaService: PrismaService, assetsService: AssetsService) {
     super(prismaService);
+
+    this._assetsService = assetsService;
   }
 
   @Query(() => [TeamVehicleAsset])
@@ -48,37 +51,33 @@ export class TeamVehicleAssetResolver extends AbstractResolver {
       },
     });
 
-    const teamVehicleAssets: TeamVehicleAsset[] = [];
-    for (const seasonTeam of seasonTeams) {
-      const SEASON_DIRECTORY = join(ASSETS_SERIES_DIRECTORY, seasonTeam.season.series.slug, seasonTeam.season.slug);
-      const SEASON_TEAMS_DIRECTORY = join(SEASON_DIRECTORY, 'teams');
-      const VEHICLES_JSON_PATH = join(SEASON_TEAMS_DIRECTORY, seasonTeam.team.slug, 'vehicles.json');
-      if (!existsSync(VEHICLES_JSON_PATH)) {
-        continue;
-      }
+    return this._assetsService.getTeamVehicleAssets(seasonTeams);
+  }
 
-      const vehiclesRawData = readFileSync(VEHICLES_JSON_PATH);
-      const vehiclesData = JSON.parse(vehiclesRawData.toString());
+  @ResolveField('seasonTeam', () => SeasonTeam)
+  async season(@Parent() parent: TeamVehicleAsset) {
+    return this._prismaService.seasonTeam.findFirst({
+      where: {
+        id: parent.seasonTeamId,
+      },
+    });
+  }
 
-      for (const vehicleData of vehiclesData) {
-        const url =
-          `${API_SERVER_URL}/assets/series/{seriesSlug}/{seasonSlug}/teams/{teamSlug}/vehicles/{vehicleKey}/vehicle-body.glb`
-            .replace('{seriesSlug}', seasonTeam.season.series.slug)
-            .replace('{seasonSlug}', seasonTeam.season.slug)
-            .replace('{teamSlug}', seasonTeam.team.slug)
-            .replace('{vehicleKey}', vehicleData.key);
+  @ResolveField('seasonTyreAssets', () => [SeasonTyreAsset])
+  async seasonTyreAssets(@Parent() parent: TeamVehicleAsset) {
+    const seasonTeam = await this._prismaService.seasonTeam.findFirst({
+      where: {
+        id: parent.seasonTeamId,
+      },
+      include: {
+        season: {
+          include: {
+            series: true,
+          },
+        },
+      },
+    });
 
-        teamVehicleAssets.push({
-          url,
-          key: vehicleData.key,
-          name: vehicleData.name,
-          seasonTeamName: seasonTeam.name,
-          teamSlug: seasonTeam.team.slug,
-          seasonSlug: seasonTeam.season.slug,
-        });
-      }
-    }
-
-    return teamVehicleAssets;
+    return this._assetsService.getSeasonTyreAssets(seasonTeam.season);
   }
 }

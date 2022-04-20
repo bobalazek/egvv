@@ -15,9 +15,6 @@ const TEAM_VEHICLE_ASSETS_QUERY = gql`
       url
       key
       name
-      seasonTeamName
-      teamSlug
-      seasonSlug
     }
   }
 `;

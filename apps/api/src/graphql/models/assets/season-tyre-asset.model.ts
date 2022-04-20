@@ -1,7 +1,7 @@
 import { ObjectType, Field } from '@nestjs/graphql';
 
 @ObjectType()
-export class TeamVehicleAsset {
+export class SeasonTyreAsset {
   @Field()
   url: string;
 
@@ -9,8 +9,11 @@ export class TeamVehicleAsset {
   key: string;
 
   @Field()
+  type: string;
+
+  @Field()
   name: string;
 
   @Field()
-  seasonTeamId: string;
+  seasonId: string;
 }
