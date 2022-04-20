@@ -1,6 +1,7 @@
 import Error from 'next/error';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Container, List, ListItem, Table, Tabs, Title } from '@mantine/core';
+import { Anchor, Container, List, ListItem, Table, Tabs, Title } from '@mantine/core';
+import Link from 'next/link';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
@@ -40,7 +41,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
         seasonDriver: {
           include: {
             driver: true,
-            seasonTeam: true,
+            seasonTeam: {
+              include: {
+                team: true,
+              },
+            },
           },
         },
       },
@@ -153,14 +158,16 @@ export default function EventSessionsDetail({
               <ListItem>
                 Start at:{' '}
                 <b>
-                  {startDate.toLocaleDateString()} {startDate.toLocaleTimeString()} UTC
+                  {startDate.toLocaleDateString()} {startDate.toLocaleTimeString()}
                 </b>
+                <small> (track time)</small>
               </ListItem>
               <ListItem>
                 End at:{' '}
                 <b>
-                  {endDate.toLocaleDateString()} {endDate.toLocaleTimeString()} UTC
+                  {endDate.toLocaleDateString()} {endDate.toLocaleTimeString()}
                 </b>
+                <small> (track time)</small>
               </ListItem>
             </List>
           </Tabs.Tab>
@@ -203,7 +210,6 @@ export default function EventSessionsDetail({
                     <th>Team</th>
                     <th>Status</th>
                     <th>Time</th>
-                    <th>Note</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -214,11 +220,22 @@ export default function EventSessionsDetail({
                     return (
                       <tr key={classification.id}>
                         <td>{classification.position}</td>
-                        <td>{driverName}</td>
-                        <td>{seasonDriver.seasonTeam.name}</td>
+                        <td>
+                          <Link href={`/drivers/${seasonDriver.driver.slug}`} passHref>
+                            <Anchor>{driverName}</Anchor>
+                          </Link>
+                        </td>
+                        <td>
+                          <Link href={`/teams/${seasonDriver.seasonTeam.team.slug}`} passHref>
+                            <Anchor>{seasonDriver.seasonTeam.name}</Anchor>
+                          </Link>
+                        </td>
                         <td>{classification.status}</td>
-                        <td>{convertMillisecondsToTime(classification.timeMilliseconds)}</td>
-                        <td>{classification.note}</td>
+                        <td>
+                          {classification.lapsBehind
+                            ? `+${classification.lapsBehind} laps`
+                            : convertMillisecondsToTime(classification.timeMilliseconds)}
+                        </td>
                       </tr>
                     );
                   })}

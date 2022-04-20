@@ -1,6 +1,6 @@
 import Error from 'next/error';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Container, Grid, List, ListItem, Tabs, Text, Title } from '@mantine/core';
+import { Anchor, Container, Grid, List, ListItem, Tabs, Text, Title } from '@mantine/core';
 import countryCodeLookup from 'country-code-lookup';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
@@ -86,9 +86,9 @@ export default function DriversDetail({ driver, errorCode }: InferGetStaticProps
               </ListItem>
               <ListItem>
                 Url:{' '}
-                <a href={driver.url} target="_blank" rel="noreferrer">
+                <Anchor href={driver.url} target="_blank" rel="noreferrer">
                   {driver.url}
-                </a>
+                </Anchor>
               </ListItem>
             </List>
           </Tabs.Tab>

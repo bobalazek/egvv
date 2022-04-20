@@ -1,11 +1,11 @@
 import Error from 'next/error';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Alert, Container, Grid, List, ListItem, Tabs } from '@mantine/core';
+import { Alert, Anchor, Container, List, ListItem, Tabs } from '@mantine/core';
 import countryCodeLookup from 'country-code-lookup';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
-import { EventSessionCard } from '../../../components/cards/event-session-card';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
+import { EventSessionsTable } from '../../../components/tables/event-sessions-table';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params?.slug as string;
@@ -85,14 +85,15 @@ export default function EventsDetail({ event, errorCode }: InferGetStaticPropsTy
               <ListItem>
                 Race at:{' '}
                 <b>
-                  {raceDate.toLocaleDateString()} {raceDate.toLocaleTimeString()} UTC
+                  {raceDate.toLocaleDateString()} {raceDate.toLocaleTimeString()}
                 </b>
+                <small> (track time)</small>
               </ListItem>
               <ListItem>
                 Url:{' '}
-                <a href={event.url} target="_blank" rel="noreferrer">
+                <Anchor href={event.url} target="_blank" rel="noreferrer">
                   {event.url}
-                </a>
+                </Anchor>
               </ListItem>
             </List>
           </Tabs.Tab>
@@ -107,42 +108,27 @@ export default function EventsDetail({ event, errorCode }: InferGetStaticPropsTy
                 </ListItem>
               )}
               <ListItem>
-                Timezone: <b>{event.circuit.timezone}</b>
-              </ListItem>
-              <ListItem>
                 Location: <b>{event.circuit.location}</b>
               </ListItem>
               <ListItem>
                 Country: <b>{countryCodeLookup.byIso(event.circuit.countryCode).country}</b>
               </ListItem>
               <ListItem>
+                Timezone: <b>{event.circuit.timezone}</b>
+              </ListItem>
+              <ListItem>
                 Url:{' '}
-                <a href={event.circuit.url} target="_blank" rel="noreferrer">
+                <Anchor href={event.circuit.url} target="_blank" rel="noreferrer">
                   {event.circuit.url}
-                </a>
+                </Anchor>
               </ListItem>
             </List>
           </Tabs.Tab>
           <Tabs.Tab label="Sessions">
-            <Grid>
-              {event.eventSessions.length === 0 && (
-                <Alert style={{ width: '100%' }}>No sessions found for this event</Alert>
-              )}
-              {event.eventSessions.map((eventSession) => {
-                return (
-                  <Grid.Col
-                    key={eventSession.id}
-                    lg={4}
-                    md={6}
-                    style={{
-                      textAlign: 'center',
-                    }}
-                  >
-                    <EventSessionCard eventSession={eventSession} />
-                  </Grid.Col>
-                );
-              })}
-            </Grid>
+            {event.eventSessions.length === 0 && (
+              <Alert style={{ width: '100%' }}>No sessions found for this event</Alert>
+            )}
+            {event.eventSessions.length > 0 && <EventSessionsTable eventSessions={event.eventSessions} />}
           </Tabs.Tab>
         </Tabs>
       </Container>

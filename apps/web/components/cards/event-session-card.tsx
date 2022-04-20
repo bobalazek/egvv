@@ -17,7 +17,7 @@ export function EventSessionCard({ eventSession }: { eventSession: EventSession 
     >
       <Title order={4}>{eventSession.name}</Title>
       <Title order={5} mb={10}>
-        {startDate.toLocaleDateString()} {startDate.toLocaleTimeString()} UTC
+        {startDate.toLocaleDateString()} {startDate.toLocaleTimeString()} <small>(track time)</small>
       </Title>
       <Link href={`/event-sessions/${eventSession.slug}`} passHref>
         <Button variant="light" color="blue" component="a" fullWidth>

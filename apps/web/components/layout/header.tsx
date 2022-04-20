@@ -1,7 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { createStyles, Header as MantineHeader, Container, Group, Burger, Paper, Transition } from '@mantine/core';
+import {
+  createStyles,
+  Header as MantineHeader,
+  Container,
+  Group,
+  Burger,
+  Paper,
+  Transition,
+  Anchor,
+} from '@mantine/core';
 import { useBooleanToggle } from '@mantine/hooks';
 
 // Not optimal, but for some reason the assets aren't working otherwise. Need to figure that out
@@ -102,9 +111,9 @@ export function Header({ links }: HeaderProps) {
     <MantineHeader height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
         <Link href="/" passHref>
-          <a>
+          <Anchor>
             <Image src={logoImage} alt="Logo" height={42} width={220} />
-          </a>
+          </Anchor>
         </Link>
         <Group spacing={5} className={classes.links}>
           {items}

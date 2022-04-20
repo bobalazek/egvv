@@ -19,7 +19,7 @@ export function EventCard({ event }: { event: Event }) {
         {event.name}
       </Title>
       <Title order={5} mb={10}>
-        {raceAt.toLocaleDateString()} UTC
+        {raceAt.toLocaleDateString()} <small>(track time)</small>
       </Title>
       <Link href={`/events/${event.slug}`} passHref>
         <Button variant="light" color="blue" component="a" fullWidth>

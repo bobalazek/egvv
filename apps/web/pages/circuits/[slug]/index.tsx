@@ -1,6 +1,6 @@
 import Error from 'next/error';
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { Container, List, ListItem, Tabs, Text, Title } from '@mantine/core';
+import { Anchor, Container, List, ListItem, Tabs, Text, Title } from '@mantine/core';
 import countryCodeLookup from 'country-code-lookup';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
@@ -67,9 +67,9 @@ export default function CircuitsDetail({ circuit, errorCode }: InferGetStaticPro
               </ListItem>
               <ListItem>
                 Url:{' '}
-                <a href={circuit.url} target="_blank" rel="noreferrer">
+                <Anchor href={circuit.url} target="_blank" rel="noreferrer">
                   {circuit.url}
-                </a>
+                </Anchor>
               </ListItem>
             </List>
           </Tabs.Tab>
