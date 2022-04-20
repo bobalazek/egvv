@@ -15,6 +15,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     },
     include: {
       seasons: {
+        where: {
+          events: {
+            some: {},
+          },
+        },
         orderBy: [
           {
             startAt: 'desc',

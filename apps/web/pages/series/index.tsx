@@ -6,7 +6,17 @@ import { SeriesCard } from '../../components/cards/series-card';
 import { Breadcrumbs } from '../../components/layout/breadcrumbs';
 
 export const getStaticProps = async () => {
-  const series = await prismaClient.series.findMany();
+  const series = await prismaClient.series.findMany({
+    where: {
+      seasons: {
+        some: {
+          events: {
+            some: {},
+          },
+        },
+      },
+    },
+  });
 
   return {
     props: {

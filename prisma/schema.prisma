@@ -60,11 +60,12 @@ model Team {
   location          String
   countryCode       String
   url               String
+  color             String?
   debutAt           DateTime
   defunctAt         DateTime?
   predecessorTeamId String?      @unique
-  predecessorTeam   Team?        @relation("Team_PredecessorTeam", fields: [predecessorTeamId], references: [id])
-  successorTeam     Team?        @relation("Team_PredecessorTeam")
+  predecessorTeam   Team?        @relation(name: "Team_PredecessorTeam", fields: [predecessorTeamId], references: [id])
+  successorTeam     Team?        @relation(name: "Team_PredecessorTeam")
   seasonTeams       SeasonTeam[] @relation(name: "SeasonTeam_Team")
 }
 
@@ -74,6 +75,7 @@ model SeasonTeam {
   shortName                 String // "Mercedes", "Ferrari", "McLaren Mercedes", "Williams Mercedes", ...
   powerUnit                 String
   chassis                   String
+  color                     String?
   seasonId                  String
   season                    Season                    @relation(name: "SeasonTeam_Season", fields: [seasonId], references: [id])
   teamId                    String

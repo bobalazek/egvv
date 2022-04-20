@@ -10,7 +10,7 @@ export class AssetsController {
   get(@Param('path') path: string): StreamableFile {
     const pathSplit = path.split('/');
     if (pathSplit.includes('..')) {
-      throw new Error('You are not allowed to use double dots.');
+      throw new Error('You are not allowed to do this.');
     }
 
     const ASSET_PATH = join(ASSETS_DIRECTORY, ...pathSplit);

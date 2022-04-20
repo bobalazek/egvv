@@ -3,10 +3,10 @@ import { GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { Alert, Container, Grid, Table, Tabs } from '@mantine/core';
 
 import { prismaClient } from '@egvv/shared-prisma-client';
-import { EventCard } from '../../../components/cards/event-card';
 import { Breadcrumbs } from '../../../components/layout/breadcrumbs';
 import { SeasonTeamCard } from '../../../components/cards/season-team-card';
 import { SeasonDriverCard } from '../../../components/cards/season-driver-card';
+import { EventsTable } from '../../../components/tables/events-table';
 
 export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params?.slug as string;
@@ -18,7 +18,11 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     orderBy: [{ startAt: 'asc' }],
     include: {
       series: true,
-      events: true,
+      events: {
+        include: {
+          circuit: true,
+        },
+      },
       seasonTeams: {
         include: {
           team: true,
@@ -133,23 +137,8 @@ export default function SeasonsDetail({
       <Container mt={20}>
         <Tabs>
           <Tabs.Tab label="Events">
-            <Grid>
-              {season.events.length === 0 && <Alert style={{ width: '100%' }}>No events found for this season</Alert>}
-              {season.events.map((event) => {
-                return (
-                  <Grid.Col
-                    key={event.id}
-                    lg={4}
-                    md={6}
-                    style={{
-                      textAlign: 'center',
-                    }}
-                  >
-                    <EventCard event={event} />
-                  </Grid.Col>
-                );
-              })}
-            </Grid>
+            {season.events.length === 0 && <Alert style={{ width: '100%' }}>No events found for this season</Alert>}
+            {season.events.length > 0 && <EventsTable events={season.events} />}
           </Tabs.Tab>
           <Tabs.Tab label="Teams">
             <Grid>
