@@ -31,7 +31,7 @@ import { SeasonTeamStandingEntryResolver } from '../graphql/resolvers/season-tea
 import { SeasonDriverStandingEntryResolver } from './resolvers/season-driver-standing-entry.resolver';
 import { UserResolver } from './resolvers/user.resolver';
 import { AuthResolver } from './resolvers/auth.resolver';
-import { TeamVehicleAssetsResolver } from './resolvers/assets/team-vehicle-assets.resolver';
+import { TeamVehicleAssetResolver } from './resolvers/assets/team-vehicle-asset.resolver';
 
 @Module({
   imports: [
@@ -79,7 +79,7 @@ import { TeamVehicleAssetsResolver } from './resolvers/assets/team-vehicle-asset
     EventSessionDriverClassificationResolver,
     UserResolver,
     AuthResolver,
-    TeamVehicleAssetsResolver,
+    TeamVehicleAssetResolver,
   ],
 })
 export class GraphQLModule {}

@@ -11,7 +11,7 @@ import { AbstractResolver } from '../abstract.resolver';
 import { ASSETS_SERIES_DIRECTORY } from '../../../constants';
 
 @Resolver(TeamVehicleAsset)
-export class TeamVehicleAssetsResolver extends AbstractResolver {
+export class TeamVehicleAssetResolver extends AbstractResolver {
   constructor(prismaService: PrismaService) {
     super(prismaService);
   }
