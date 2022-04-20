@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
               { href: '/series', label: 'Series' },
               { href: '/teams', label: 'Teams' },
               { href: '/drivers', label: 'Drivers' },
+              { href: '/circuits', label: 'Circuits' },
             ]}
           />
           <Component {...pageProps} />

@@ -13,7 +13,7 @@ export function TeamStandingsTable({ teamStandings }: { teamStandings: TeamStand
         </tr>
       </thead>
       <tbody>
-        {teamStandings.map((teamStanding, index) => {
+        {teamStandings.map((teamStanding) => {
           return (
             <tr key={teamStanding.seasonTeam.id}>
               <td>{teamStanding.position}</td>

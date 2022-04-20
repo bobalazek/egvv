@@ -65,7 +65,6 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       return {
         seasonTeam,
         points: teamStandingsMap.get(seasonTeam.id) || 0,
-        position: 0,
       };
     })
     .sort((a, b) => {
@@ -98,7 +97,6 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
       return {
         seasonDriver,
         points: driverStandingsMap.get(seasonDriver.id) || 0,
-        position: 0,
       };
     })
     .sort((a, b) => {
