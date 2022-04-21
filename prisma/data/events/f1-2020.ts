@@ -1,7 +1,7 @@
 export default [
   {
     name: '2020 Austrian Grand Prix',
-    fullName: 'FORMULA 1 ROLEX GROSSER PREIS VON ÖSTERREICH 2020',
+    fullName: 'Formula 1 Rolex Grosser Preis Von Österreich 2020',
     slug: '2020-austrian-grand-prix',
     laps: 71,
     lapDistance: 4318,
@@ -57,7 +57,7 @@ export default [
   },
   {
     name: '2020 Styrian Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI GROSSER PREIS DER STEIERMARK 2020',
+    fullName: 'Formula 1 Pirelli Grosser Preis Der Steiermark 2020',
     slug: '2020-styrian-grand-prix',
     laps: 71,
     lapDistance: 4318,
@@ -113,7 +113,7 @@ export default [
   },
   {
     name: '2020 Hungarian Grand Prix',
-    fullName: 'FORMULA 1 ARAMCO MAGYAR NAGYDÍJ 2020',
+    fullName: 'Formula 1 Aramco Magyar Nagydíj 2020',
     slug: '2020-hungarian-grand-prix',
     laps: 70,
     lapDistance: 4381,
@@ -169,7 +169,7 @@ export default [
   },
   {
     name: '2020 British Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI BRITISH GRAND PRIX 2020',
+    fullName: 'Formula 1 Pirelli British Grand Prix 2020',
     slug: '2020-british-grand-prix',
     laps: 52,
     lapDistance: 5891,
@@ -225,7 +225,7 @@ export default [
   },
   {
     name: '2020 70th Anniversary Grand Prix',
-    fullName: 'EMIRATES FORMULA 1 70TH ANNIVERSARY GRAND PRIX 2020',
+    fullName: 'Emirates Formula 1 70th Anniversary Grand Prix 2020',
     slug: '2020-70th-anniversary-grand-prix',
     laps: 52,
     lapDistance: 5891,
@@ -281,7 +281,7 @@ export default [
   },
   {
     name: '2020 Spanish Grand Prix',
-    fullName: 'FORMULA 1 ARAMCO GRAN PREMIO DE ESPAÑA 2020',
+    fullName: 'Formula 1 Aramco Gran Premio De España 2020',
     slug: '2020-spanish-grand-prix',
     laps: 66,
     lapDistance: 4655,
@@ -337,7 +337,7 @@ export default [
   },
   {
     name: '2020 Belgian Grand Prix',
-    fullName: 'FORMULA 1 ROLEX BELGIAN GRAND PRIX 2020',
+    fullName: 'Formula 1 Rolex Belgian Grand Prix 2020',
     slug: '2020-belgian-grand-prix',
     laps: 44,
     lapDistance: 7004,
@@ -393,7 +393,7 @@ export default [
   },
   {
     name: '2020 Italian Grand Prix',
-    fullName: 'FORMULA 1 GRAN PREMIO HEINEKEN D’ITALIA 2020',
+    fullName: 'Formula 1 Gran Premio Heineken D’italia 2020',
     slug: '2020-italian-grand-prix',
     laps: 53,
     lapDistance: 5793,
@@ -449,7 +449,7 @@ export default [
   },
   {
     name: '2020 Tuscan Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI GRAN PREMIO DELLA TOSCANA FERRARI 1000 2020',
+    fullName: 'Formula 1 Pirelli Gran Premio Della Toscana Ferrari 1000 2020',
     slug: '2020-tuscan-grand-prix',
     laps: 59,
     lapDistance: 5245,
@@ -505,7 +505,7 @@ export default [
   },
   {
     name: '2020 Russian Grand Prix',
-    fullName: 'FORMULA 1 VTB RUSSIAN GRAND PRIX 2020',
+    fullName: 'Formula 1 Vtb Russian Grand Prix 2020',
     slug: '2020-russian-grand-prix',
     laps: 53,
     lapDistance: 5848,
@@ -561,7 +561,7 @@ export default [
   },
   {
     name: '2020 Eifel Grand Prix',
-    fullName: 'FORMULA 1 ARAMCO GROSSER PREIS DER EIFEL 2020',
+    fullName: 'Formula 1 Aramco Grosser Preis Der Eifel 2020',
     slug: '2020-eifel-grand-prix',
     laps: 60,
     lapDistance: 5148,
@@ -617,7 +617,7 @@ export default [
   },
   {
     name: '2020 Portuguese Grand Prix',
-    fullName: 'FORMULA 1 HEINEKEN GRANDE PRÉMIO DE PORTUGAL 2020',
+    fullName: 'Formula 1 Heineken Grande Prémio De Portugal 2020',
     slug: '2020-portuguese-grand-prix',
     laps: 66,
     lapDistance: 4653,
@@ -673,7 +673,7 @@ export default [
   },
   {
     name: '2020 Emilia Romagna Grand Prix',
-    fullName: 'FORMULA 1 EMIRATES GRAN PREMIO DELL&#39;EMILIA ROMAGNA 2020',
+    fullName: 'Formula 1 Emirates Gran Premio Dell&#39;emilia Romagna 2020',
     slug: '2020-emilia-romagna-grand-prix',
     laps: 63,
     lapDistance: 4909,
@@ -717,7 +717,7 @@ export default [
   },
   {
     name: '2020 Turkish Grand Prix',
-    fullName: 'FORMULA 1 DHL TURKISH GRAND PRIX 2020',
+    fullName: 'Formula 1 Dhl Turkish Grand Prix 2020',
     slug: '2020-turkish-grand-prix',
     laps: 58,
     lapDistance: 5338,
@@ -773,7 +773,7 @@ export default [
   },
   {
     name: '2020 Bahrain Grand Prix',
-    fullName: 'FORMULA 1 GULF AIR BAHRAIN GRAND PRIX 2020',
+    fullName: 'Formula 1 Gulf Air Bahrain Grand Prix 2020',
     slug: '2020-bahrain-grand-prix',
     laps: 57,
     lapDistance: 5412,
@@ -829,7 +829,7 @@ export default [
   },
   {
     name: '2020 Sakhir Grand Prix',
-    fullName: 'FORMULA 1 ROLEX SAKHIR GRAND PRIX 2020',
+    fullName: 'Formula 1 Rolex Sakhir Grand Prix 2020',
     slug: '2020-sakhir-grand-prix',
     laps: 87,
     lapDistance: 3543,
@@ -885,7 +885,7 @@ export default [
   },
   {
     name: '2020 Abu Dhabi Grand Prix',
-    fullName: 'FORMULA 1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2020',
+    fullName: 'Formula 1 Etihad Airways Abu Dhabi Grand Prix 2020',
     slug: '2020-abu-dhabi-grand-prix',
     laps: 55,
     lapDistance: 5554,

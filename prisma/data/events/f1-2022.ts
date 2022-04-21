@@ -1,7 +1,7 @@
 export default [
   {
     name: '2022 Bahrain Grand Prix',
-    fullName: 'FORMULA 1 GULF AIR BAHRAIN GRAND PRIX 2022',
+    fullName: 'Formula 1 Gulf Air Bahrain Grand Prix 2022',
     slug: '2022-bahrain-grand-prix',
     laps: 57,
     lapDistance: 5412,
@@ -57,7 +57,7 @@ export default [
   },
   {
     name: '2022 Saudi Arabian Grand Prix',
-    fullName: 'FORMULA 1 STC SAUDI ARABIAN GRAND PRIX 2022',
+    fullName: 'Formula 1 Stc Saudi Arabian Grand Prix 2022',
     slug: '2022-saudi-arabian-grand-prix',
     laps: 50,
     lapDistance: 6174,
@@ -113,7 +113,7 @@ export default [
   },
   {
     name: '2022 Australian Grand Prix',
-    fullName: 'FORMULA 1 HEINEKEN AUSTRALIAN GRAND PRIX 2022',
+    fullName: 'Formula 1 Heineken Australian Grand Prix 2022',
     slug: '2022-australian-grand-prix',
     laps: 58,
     lapDistance: 5278,
@@ -169,7 +169,7 @@ export default [
   },
   {
     name: '2022 Emilia Romagna Grand Prix',
-    fullName: 'FORMULA 1 ROLEX GRAN PREMIO DEL MADE IN ITALY E DELL&#39;EMILIA-ROMAGNA 2022',
+    fullName: 'Formula 1 Rolex Gran Premio Del Made In Italy E Dell&#39;emilia-romagna 2022',
     slug: '2022-emilia-romagna-grand-prix',
     laps: 63,
     lapDistance: 4909,
@@ -225,7 +225,7 @@ export default [
   },
   {
     name: '2022 Miami Grand Prix',
-    fullName: 'FORMULA 1 CRYPTO.COM MIAMI GRAND PRIX 2022',
+    fullName: 'Formula 1 Crypto.com Miami Grand Prix 2022',
     slug: '2022-miami-grand-prix',
     laps: 57,
     lapDistance: 541,
@@ -281,7 +281,7 @@ export default [
   },
   {
     name: '2022 Spanish Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI GRAN PREMIO DE ESPAÑA 2022',
+    fullName: 'Formula 1 Pirelli Gran Premio De España 2022',
     slug: '2022-spanish-grand-prix',
     laps: 66,
     lapDistance: 4675,
@@ -337,7 +337,7 @@ export default [
   },
   {
     name: '2022 Monaco Grand Prix',
-    fullName: 'FORMULA 1 GRAND PRIX DE MONACO 2022',
+    fullName: 'Formula 1 Grand Prix De Monaco 2022',
     slug: '2022-monaco-grand-prix',
     laps: 78,
     lapDistance: 3337,
@@ -393,7 +393,7 @@ export default [
   },
   {
     name: '2022 Azerbaijan Grand Prix',
-    fullName: 'FORMULA 1 AZERBAIJAN GRAND PRIX 2022',
+    fullName: 'Formula 1 Azerbaijan Grand Prix 2022',
     slug: '2022-azerbaijan-grand-prix',
     laps: 51,
     lapDistance: 6003,
@@ -449,7 +449,7 @@ export default [
   },
   {
     name: '2022 Canadian Grand Prix',
-    fullName: 'FORMULA 1 GRAND PRIX DU CANADA 2022',
+    fullName: 'Formula 1 Grand Prix Du Canada 2022',
     slug: '2022-canadian-grand-prix',
     laps: 70,
     lapDistance: 4361,
@@ -505,7 +505,7 @@ export default [
   },
   {
     name: '2022 British Grand Prix',
-    fullName: 'FORMULA 1 BRITISH GRAND PRIX 2022',
+    fullName: 'Formula 1 British Grand Prix 2022',
     slug: '2022-british-grand-prix',
     laps: 52,
     lapDistance: 5891,
@@ -561,7 +561,7 @@ export default [
   },
   {
     name: '2022 Austrian Grand Prix',
-    fullName: 'FORMULA 1 GROSSER PREIS VON ÖSTERREICH 2022',
+    fullName: 'Formula 1 Grosser Preis Von Österreich 2022',
     slug: '2022-austrian-grand-prix',
     laps: 71,
     lapDistance: 4318,
@@ -617,7 +617,7 @@ export default [
   },
   {
     name: '2022 French Grand Prix',
-    fullName: 'FORMULA 1 GRAND PRIX DE FRANCE 2022',
+    fullName: 'Formula 1 Grand Prix De France 2022',
     slug: '2022-french-grand-prix',
     laps: 53,
     lapDistance: 5842,
@@ -673,7 +673,7 @@ export default [
   },
   {
     name: '2022 Hungarian Grand Prix',
-    fullName: 'FORMULA 1 MAGYAR NAGYDÍJ 2022',
+    fullName: 'Formula 1 Magyar Nagydíj 2022',
     slug: '2022-hungarian-grand-prix',
     laps: 70,
     lapDistance: 4381,
@@ -729,7 +729,7 @@ export default [
   },
   {
     name: '2022 Belgian Grand Prix',
-    fullName: 'FORMULA 1 ROLEX BELGIAN GRAND PRIX 2022',
+    fullName: 'Formula 1 Rolex Belgian Grand Prix 2022',
     slug: '2022-belgian-grand-prix',
     laps: 44,
     lapDistance: 7004,
@@ -785,7 +785,7 @@ export default [
   },
   {
     name: '2022 Dutch Grand Prix',
-    fullName: 'FORMULA 1 HEINEKEN DUTCH GRAND PRIX 2022',
+    fullName: 'Formula 1 Heineken Dutch Grand Prix 2022',
     slug: '2022-dutch-grand-prix',
     laps: 72,
     lapDistance: 4259,
@@ -841,7 +841,7 @@ export default [
   },
   {
     name: '2022 Italian Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI GRAN PREMIO D’ITALIA 2022',
+    fullName: 'Formula 1 Pirelli Gran Premio D’italia 2022',
     slug: '2022-italian-grand-prix',
     laps: 53,
     lapDistance: 5793,
@@ -897,7 +897,7 @@ export default [
   },
   {
     name: '2022 Singapore Grand Prix',
-    fullName: 'FORMULA 1 SINGAPORE GRAND PRIX 2022',
+    fullName: 'Formula 1 Singapore Grand Prix 2022',
     slug: '2022-singapore-grand-prix',
     laps: 61,
     lapDistance: 5063,
@@ -953,7 +953,7 @@ export default [
   },
   {
     name: '2022 Japanese Grand Prix',
-    fullName: 'FORMULA 1 JAPANESE GRAND PRIX 2022',
+    fullName: 'Formula 1 Japanese Grand Prix 2022',
     slug: '2022-japanese-grand-prix',
     laps: 53,
     lapDistance: 5807,
@@ -1009,7 +1009,7 @@ export default [
   },
   {
     name: '2022 United States Grand Prix',
-    fullName: 'FORMULA 1 ARAMCO UNITED STATES GRAND PRIX 2022',
+    fullName: 'Formula 1 Aramco United States Grand Prix 2022',
     slug: '2022-united-states-grand-prix',
     laps: 56,
     lapDistance: 5513,
@@ -1065,7 +1065,7 @@ export default [
   },
   {
     name: '2022 Mexico City Grand Prix',
-    fullName: 'FORMULA 1 GRAN PREMIO DE LA CIUDAD DE MÉXICO 2022',
+    fullName: 'Formula 1 Gran Premio De La Ciudad De México 2022',
     slug: '2022-mexico-city-grand-prix',
     laps: 71,
     lapDistance: 4304,
@@ -1121,7 +1121,7 @@ export default [
   },
   {
     name: '2022 São Paulo Grand Prix',
-    fullName: 'FORMULA 1 HEINEKEN GRANDE PRÊMIO DE SÃO PAULO 2022',
+    fullName: 'Formula 1 Heineken Grande Prêmio De São Paulo 2022',
     slug: '2022-sao-paulo-grand-prix',
     laps: 71,
     lapDistance: 4309,
@@ -1177,7 +1177,7 @@ export default [
   },
   {
     name: '2022 Abu Dhabi Grand Prix',
-    fullName: 'FORMULA 1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2022',
+    fullName: 'Formula 1 Etihad Airways Abu Dhabi Grand Prix 2022',
     slug: '2022-abu-dhabi-grand-prix',
     laps: 58,
     lapDistance: 5281,

@@ -1,7 +1,7 @@
 export default [
   {
     name: '2021 Bahrain Grand Prix',
-    fullName: 'FORMULA 1 GULF AIR BAHRAIN GRAND PRIX 2021',
+    fullName: 'Formula 1 Gulf Air Bahrain Grand Prix 2021',
     slug: '2021-bahrain-grand-prix',
     laps: 57,
     lapDistance: 5412,
@@ -57,7 +57,7 @@ export default [
   },
   {
     name: '2021 Emilia Romagna Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI GRAN PREMIO DEL MADE IN ITALY E DELL&#39;EMILIA ROMAGNA 2021',
+    fullName: 'Formula 1 Pirelli Gran Premio Del Made In Italy E Dell&#39;emilia Romagna 2021',
     slug: '2021-emilia-romagna-grand-prix',
     laps: 63,
     lapDistance: 4909,
@@ -113,7 +113,7 @@ export default [
   },
   {
     name: '2021 Portuguese Grand Prix',
-    fullName: 'FORMULA 1 HEINEKEN GRANDE PRÉMIO DE PORTUGAL 2021',
+    fullName: 'Formula 1 Heineken Grande Prémio De Portugal 2021',
     slug: '2021-portuguese-grand-prix',
     laps: 66,
     lapDistance: 4653,
@@ -169,7 +169,7 @@ export default [
   },
   {
     name: '2021 Spanish Grand Prix',
-    fullName: 'FORMULA 1 ARAMCO GRAN PREMIO DE ESPAÑA 2021',
+    fullName: 'Formula 1 Aramco Gran Premio De España 2021',
     slug: '2021-spanish-grand-prix',
     laps: 66,
     lapDistance: 4675,
@@ -225,7 +225,7 @@ export default [
   },
   {
     name: '2021 Monaco Grand Prix',
-    fullName: 'FORMULA 1 GRAND PRIX DE MONACO 2021',
+    fullName: 'Formula 1 Grand Prix De Monaco 2021',
     slug: '2021-monaco-grand-prix',
     laps: 78,
     lapDistance: 3337,
@@ -281,7 +281,7 @@ export default [
   },
   {
     name: '2021 Azerbaijan Grand Prix',
-    fullName: 'FORMULA 1 AZERBAIJAN GRAND PRIX 2021',
+    fullName: 'Formula 1 Azerbaijan Grand Prix 2021',
     slug: '2021-azerbaijan-grand-prix',
     laps: 51,
     lapDistance: 6003,
@@ -337,7 +337,7 @@ export default [
   },
   {
     name: '2021 French Grand Prix',
-    fullName: 'FORMULA 1 EMIRATES GRAND PRIX DE FRANCE 2021',
+    fullName: 'Formula 1 Emirates Grand Prix De France 2021',
     slug: '2021-french-grand-prix',
     laps: 53,
     lapDistance: 5842,
@@ -393,7 +393,7 @@ export default [
   },
   {
     name: '2021 Styrian Grand Prix',
-    fullName: 'FORMULA 1 BWT GROSSER PREIS DER STEIERMARK 2021',
+    fullName: 'Formula 1 Bwt Grosser Preis Der Steiermark 2021',
     slug: '2021-styrian-grand-prix',
     laps: 71,
     lapDistance: 4318,
@@ -449,7 +449,7 @@ export default [
   },
   {
     name: '2021 Austrian Grand Prix',
-    fullName: 'FORMULA 1 BWT GROSSER PREIS VON ÖSTERREICH 2021',
+    fullName: 'Formula 1 Bwt Grosser Preis Von Österreich 2021',
     slug: '2021-austrian-grand-prix',
     laps: 71,
     lapDistance: 4318,
@@ -505,7 +505,7 @@ export default [
   },
   {
     name: '2021 British Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI BRITISH GRAND PRIX 2021',
+    fullName: 'Formula 1 Pirelli British Grand Prix 2021',
     slug: '2021-british-grand-prix',
     laps: 52,
     lapDistance: 5891,
@@ -561,7 +561,7 @@ export default [
   },
   {
     name: '2021 Hungarian Grand Prix',
-    fullName: 'FORMULA 1 ROLEX MAGYAR NAGYDÍJ 2021',
+    fullName: 'Formula 1 Rolex Magyar Nagydíj 2021',
     slug: '2021-hungarian-grand-prix',
     laps: 70,
     lapDistance: 4381,
@@ -617,7 +617,7 @@ export default [
   },
   {
     name: '2021 Belgian Grand Prix',
-    fullName: 'FORMULA 1 ROLEX BELGIAN GRAND PRIX 2021',
+    fullName: 'Formula 1 Rolex Belgian Grand Prix 2021',
     slug: '2021-belgian-grand-prix',
     laps: 44,
     lapDistance: 7004,
@@ -673,7 +673,7 @@ export default [
   },
   {
     name: '2021 Dutch Grand Prix',
-    fullName: 'FORMULA 1 HEINEKEN DUTCH GRAND PRIX 2021',
+    fullName: 'Formula 1 Heineken Dutch Grand Prix 2021',
     slug: '2021-dutch-grand-prix',
     laps: 72,
     lapDistance: 4259,
@@ -729,7 +729,7 @@ export default [
   },
   {
     name: '2021 Italian Grand Prix',
-    fullName: 'FORMULA 1 HEINEKEN GRAN PREMIO D’ITALIA 2021',
+    fullName: 'Formula 1 Heineken Gran Premio D’italia 2021',
     slug: '2021-italian-grand-prix',
     laps: 53,
     lapDistance: 5793,
@@ -785,7 +785,7 @@ export default [
   },
   {
     name: '2021 Russian Grand Prix',
-    fullName: 'FORMULA 1 VTB RUSSIAN GRAND PRIX 2021',
+    fullName: 'Formula 1 Vtb Russian Grand Prix 2021',
     slug: '2021-russian-grand-prix',
     laps: 53,
     lapDistance: 5848,
@@ -841,7 +841,7 @@ export default [
   },
   {
     name: '2021 Turkish Grand Prix',
-    fullName: 'FORMULA 1 ROLEX TURKISH GRAND PRIX 2021',
+    fullName: 'Formula 1 Rolex Turkish Grand Prix 2021',
     slug: '2021-turkish-grand-prix',
     laps: 58,
     lapDistance: 5338,
@@ -897,7 +897,7 @@ export default [
   },
   {
     name: '2021 United States Grand Prix',
-    fullName: 'FORMULA 1 ARAMCO UNITED STATES GRAND PRIX 2021',
+    fullName: 'Formula 1 Aramco United States Grand Prix 2021',
     slug: '2021-united-states-grand-prix',
     laps: 56,
     lapDistance: 5513,
@@ -953,7 +953,7 @@ export default [
   },
   {
     name: '2021 Mexico City Grand Prix',
-    fullName: 'FORMULA 1 GRAN PREMIO DE LA CIUDAD DE MÉXICO 2021',
+    fullName: 'Formula 1 Gran Premio De La Ciudad De México 2021',
     slug: '2021-mexico-city-grand-prix',
     laps: 71,
     lapDistance: 4304,
@@ -1009,7 +1009,7 @@ export default [
   },
   {
     name: '2021 São Paulo Grand Prix',
-    fullName: 'FORMULA 1 HEINEKEN GRANDE PRÊMIO DE SÃO PAULO 2021',
+    fullName: 'Formula 1 Heineken Grande Prêmio De São Paulo 2021',
     slug: '2021-sao-paulo-grand-prix',
     laps: 71,
     lapDistance: 4309,
@@ -1065,7 +1065,7 @@ export default [
   },
   {
     name: '2021 Qatar Grand Prix',
-    fullName: 'FORMULA 1 OOREDOO QATAR GRAND PRIX 2021',
+    fullName: 'Formula 1 Ooredoo Qatar Grand Prix 2021',
     slug: '2021-qatar-grand-prix',
     laps: 57,
     lapDistance: 538,
@@ -1121,7 +1121,7 @@ export default [
   },
   {
     name: '2021 Saudi Arabian Grand Prix',
-    fullName: 'FORMULA 1 STC SAUDI ARABIAN GRAND PRIX 2021',
+    fullName: 'Formula 1 Stc Saudi Arabian Grand Prix 2021',
     slug: '2021-saudi-arabian-grand-prix',
     laps: 50,
     lapDistance: 6174,
@@ -1177,7 +1177,7 @@ export default [
   },
   {
     name: '2021 Abu Dhabi Grand Prix',
-    fullName: 'FORMULA 1 ETIHAD AIRWAYS ABU DHABI GRAND PRIX 2021',
+    fullName: 'Formula 1 Etihad Airways Abu Dhabi Grand Prix 2021',
     slug: '2021-abu-dhabi-grand-prix',
     laps: 58,
     lapDistance: 5281,

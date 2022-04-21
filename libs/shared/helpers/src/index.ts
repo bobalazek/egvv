@@ -56,6 +56,16 @@ export const convertToHumanCase = (text: string) => {
   return tokens.map(capitalizeText).join(' ');
 };
 
+export const convertToTitleCase = (text: string) => {
+  const splitText = text.toLowerCase().split(' ');
+
+  for (let i = 0; i < splitText.length; i++) {
+    splitText[i] = capitalizeText(splitText[i]);
+  }
+
+  return splitText.join(' ');
+};
+
 export const capitalizeText = (text: string) => {
   return text.charAt(0).toUpperCase() + text.substring(1);
 };

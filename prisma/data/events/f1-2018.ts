@@ -1,7 +1,7 @@
 export default [
   {
     name: '2018 Australian Grand Prix',
-    fullName: 'FORMULA 1 2018 ROLEX AUSTRALIAN GRAND PRIX',
+    fullName: 'Formula 1 2018 Rolex Australian Grand Prix',
     slug: '2018-australian-grand-prix',
     laps: 58,
     lapDistance: 5303,
@@ -57,7 +57,7 @@ export default [
   },
   {
     name: '2018 Bahrain Grand Prix',
-    fullName: 'FORMULA 1 2018 GULF AIR BAHRAIN GRAND PRIX',
+    fullName: 'Formula 1 2018 Gulf Air Bahrain Grand Prix',
     slug: '2018-bahrain-grand-prix',
     laps: 57,
     lapDistance: 5412,
@@ -113,7 +113,7 @@ export default [
   },
   {
     name: '2018 Chinese Grand Prix',
-    fullName: 'FORMULA 1 2018 HEINEKEN CHINESE GRAND PRIX',
+    fullName: 'Formula 1 2018 Heineken Chinese Grand Prix',
     slug: '2018-chinese-grand-prix',
     laps: 56,
     lapDistance: 5451,
@@ -169,7 +169,7 @@ export default [
   },
   {
     name: '2018 Azerbaijan Grand Prix',
-    fullName: 'FORMULA 1 2018 AZERBAIJAN GRAND PRIX',
+    fullName: 'Formula 1 2018 Azerbaijan Grand Prix',
     slug: '2018-azerbaijan-grand-prix',
     laps: 51,
     lapDistance: 6003,
@@ -225,7 +225,7 @@ export default [
   },
   {
     name: '2018 Spanish Grand Prix',
-    fullName: 'FORMULA 1 GRAN PREMIO DE ESPAÑA EMIRATES 2018',
+    fullName: 'Formula 1 Gran Premio De España Emirates 2018',
     slug: '2018-spanish-grand-prix',
     laps: 66,
     lapDistance: 4655,
@@ -281,7 +281,7 @@ export default [
   },
   {
     name: '2018 Monaco Grand Prix',
-    fullName: 'FORMULA 1 GRAND PRIX DE MONACO 2018',
+    fullName: 'Formula 1 Grand Prix De Monaco 2018',
     slug: '2018-monaco-grand-prix',
     laps: 78,
     lapDistance: 3337,
@@ -337,7 +337,7 @@ export default [
   },
   {
     name: '2018 Canadian Grand Prix',
-    fullName: 'FORMULA 1 GRAND PRIX HEINEKEN DU CANADA 2018',
+    fullName: 'Formula 1 Grand Prix Heineken Du Canada 2018',
     slug: '2018-canadian-grand-prix',
     laps: 70,
     lapDistance: 4361,
@@ -393,7 +393,7 @@ export default [
   },
   {
     name: '2018 French Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI GRAND PRIX DE FRANCE 2018',
+    fullName: 'Formula 1 Pirelli Grand Prix De France 2018',
     slug: '2018-french-grand-prix',
     laps: 53,
     lapDistance: 5842,
@@ -449,7 +449,7 @@ export default [
   },
   {
     name: '2018 Austrian Grand Prix',
-    fullName: 'FORMULA 1 EYETIME GROSSER PREIS VON ÖSTERREICH 2018',
+    fullName: 'Formula 1 Eyetime Grosser Preis Von Österreich 2018',
     slug: '2018-austrian-grand-prix',
     laps: 71,
     lapDistance: 4318,
@@ -505,7 +505,7 @@ export default [
   },
   {
     name: '2018 British Grand Prix',
-    fullName: 'FORMULA 1 2018 ROLEX BRITISH GRAND PRIX',
+    fullName: 'Formula 1 2018 Rolex British Grand Prix',
     slug: '2018-british-grand-prix',
     laps: 52,
     lapDistance: 5891,
@@ -561,7 +561,7 @@ export default [
   },
   {
     name: '2018 German Grand Prix',
-    fullName: 'FORMULA 1 EMIRATES GROSSER PREIS VON DEUTSCHLAND 2018',
+    fullName: 'Formula 1 Emirates Grosser Preis Von Deutschland 2018',
     slug: '2018-german-grand-prix',
     laps: 67,
     lapDistance: 4574,
@@ -617,7 +617,7 @@ export default [
   },
   {
     name: '2018 Hungarian Grand Prix',
-    fullName: 'FORMULA 1 ROLEX MAGYAR NAGYDÍJ 2018',
+    fullName: 'Formula 1 Rolex Magyar Nagydíj 2018',
     slug: '2018-hungarian-grand-prix',
     laps: 70,
     lapDistance: 4381,
@@ -673,7 +673,7 @@ export default [
   },
   {
     name: '2018 Belgian Grand Prix',
-    fullName: 'FORMULA 1 2018 JOHNNIE WALKER BELGIAN GRAND PRIX',
+    fullName: 'Formula 1 2018 Johnnie Walker Belgian Grand Prix',
     slug: '2018-belgian-grand-prix',
     laps: 44,
     lapDistance: 7004,
@@ -729,7 +729,7 @@ export default [
   },
   {
     name: '2018 Italian Grand Prix',
-    fullName: 'FORMULA 1 GRAN PREMIO HEINEKEN D&#39;ITALIA 2018',
+    fullName: 'Formula 1 Gran Premio Heineken D&#39;italia 2018',
     slug: '2018-italian-grand-prix',
     laps: 53,
     lapDistance: 5793,
@@ -785,7 +785,7 @@ export default [
   },
   {
     name: '2018 Singapore Grand Prix',
-    fullName: 'FORMULA 1 2018 SINGAPORE AIRLINES SINGAPORE GRAND PRIX',
+    fullName: 'Formula 1 2018 Singapore Airlines Singapore Grand Prix',
     slug: '2018-singapore-grand-prix',
     laps: 61,
     lapDistance: 5063,
@@ -841,7 +841,7 @@ export default [
   },
   {
     name: '2018 Russian Grand Prix',
-    fullName: 'FORMULA 1 2018 VTB RUSSIAN GRAND PRIX',
+    fullName: 'Formula 1 2018 Vtb Russian Grand Prix',
     slug: '2018-russian-grand-prix',
     laps: 53,
     lapDistance: 5848,
@@ -897,7 +897,7 @@ export default [
   },
   {
     name: '2018 Japanese Grand Prix',
-    fullName: 'FORMULA 1 2018 HONDA JAPANESE GRAND PRIX',
+    fullName: 'Formula 1 2018 Honda Japanese Grand Prix',
     slug: '2018-japanese-grand-prix',
     laps: 53,
     lapDistance: 5807,
@@ -953,7 +953,7 @@ export default [
   },
   {
     name: '2018 United States Grand Prix',
-    fullName: 'FORMULA 1 PIRELLI 2018 UNITED STATES GRAND PRIX',
+    fullName: 'Formula 1 Pirelli 2018 United States Grand Prix',
     slug: '2018-united-states-grand-prix',
     laps: 56,
     lapDistance: 5513,
@@ -1009,7 +1009,7 @@ export default [
   },
   {
     name: '2018 Mexican Grand Prix',
-    fullName: 'FORMULA 1 GRAN PREMIO DE MÉXICO 2018',
+    fullName: 'Formula 1 Gran Premio De México 2018',
     slug: '2018-mexican-grand-prix',
     laps: 71,
     lapDistance: 4304,
@@ -1065,7 +1065,7 @@ export default [
   },
   {
     name: '2018 Brazilian Grand Prix',
-    fullName: 'FORMULA 1 GRANDE PRÊMIO HEINEKEN DO BRASIL 2018',
+    fullName: 'Formula 1 Grande Prêmio Heineken Do Brasil 2018',
     slug: '2018-brazilian-grand-prix',
     laps: 71,
     lapDistance: 4309,
@@ -1121,7 +1121,7 @@ export default [
   },
   {
     name: '2018 Abu Dhabi Grand Prix',
-    fullName: 'FORMULA 1 2018 ETIHAD AIRWAYS ABU DHABI GRAND PRIX',
+    fullName: 'Formula 1 2018 Etihad Airways Abu Dhabi Grand Prix',
     slug: '2018-abu-dhabi-grand-prix',
     laps: 55,
     lapDistance: 5554,
