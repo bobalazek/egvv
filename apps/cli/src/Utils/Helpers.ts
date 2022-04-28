@@ -16,9 +16,7 @@ export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlu
   }
 
   if (!raceAt) {
-    console.error(`Could not find raceAt for "${eventData.name}"`);
-
-    process.exit(1);
+    throw new Error(`Could not find raceAt for "${eventData.name}"`);
   }
 
   const season = await prismaClient.season.findFirst({
@@ -27,9 +25,7 @@ export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlu
     },
   });
   if (!season) {
-    console.error(`Season "${seasonSlug}" not found`);
-
-    process.exit(1);
+    throw new Error(`Season "${seasonSlug}" not found`);
   }
 
   const circuit = await prismaClient.circuit.findFirst({
@@ -38,9 +34,7 @@ export const saveEvent = async (eventData: EventWithSessionsInterface, seasonSlu
     },
   });
   if (!circuit) {
-    console.error(`Circuit "${eventData.circuitName}" not found`);
-
-    process.exit(1);
+    throw new Error(`Circuit "${eventData.circuitName}" not found`);
   }
 
   const finalData: Prisma.EventUncheckedCreateInput = {

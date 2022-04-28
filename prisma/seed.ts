@@ -63,9 +63,7 @@ async function main() {
       },
     });
     if (!series) {
-      console.error(`Series "${data.seriesSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Series "${data.seriesSlug}" not found`);
     }
 
     const finalData: Prisma.SeasonUncheckedCreateInput = {
@@ -126,9 +124,7 @@ async function main() {
       },
     });
     if (!season) {
-      console.error(`Season "${data.seasonSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Season "${data.seasonSlug}" not found`);
     }
 
     const team = await prisma.team.findFirst({
@@ -137,9 +133,7 @@ async function main() {
       },
     });
     if (!team) {
-      console.error(`Team "${data.teamSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Team "${data.teamSlug}" not found`);
     }
 
     const finalData: Prisma.SeasonTeamUncheckedCreateInput = {
@@ -173,9 +167,7 @@ async function main() {
       },
     });
     if (!season) {
-      console.error(`Season "${data.seasonSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Season "${data.seasonSlug}" not found`);
     }
 
     const team = await prisma.team.findFirst({
@@ -184,9 +176,7 @@ async function main() {
       },
     });
     if (!team) {
-      console.error(`Team "${data.teamSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Team "${data.teamSlug}" not found`);
     }
 
     const seasonTeam = await prisma.seasonTeam.findFirst({
@@ -196,9 +186,7 @@ async function main() {
       },
     });
     if (!seasonTeam) {
-      console.error(`Season team "${data.teamSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Season team "${data.teamSlug}" not found`);
     }
 
     const driver = await prisma.driver.findFirst({
@@ -207,9 +195,7 @@ async function main() {
       },
     });
     if (!driver) {
-      console.error(`Driver "${data.driverSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Driver "${data.driverSlug}" not found`);
     }
 
     const finalData = {
@@ -242,9 +228,7 @@ async function main() {
       },
     });
     if (!season) {
-      console.error(`Season "${data.seasonSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Season "${data.seasonSlug}" not found`);
     }
 
     const circuit = await prisma.circuit.findFirst({
@@ -253,9 +237,7 @@ async function main() {
       },
     });
     if (!circuit) {
-      console.error(`Circuit "${data.circuitSlug}" not found`);
-
-      process.exit(1);
+      throw new Error(`Circuit "${data.circuitSlug}" not found`);
     }
 
     const finalData: Prisma.EventUncheckedCreateInput = {
