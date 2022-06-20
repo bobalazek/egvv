@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "build": "npx nx build",
-    "start": "npx nx serve",
+    "dev": "npx nx run-many --target=serve --all",
     "cli": "npx nx run cli:build && node dist/apps/cli/main.js"
   },
   "private": true,
