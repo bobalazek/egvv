@@ -112,7 +112,7 @@ export function Header({ links }: HeaderProps) {
       <Container className={classes.header}>
         <Link href="/" passHref>
           <Anchor>
-            <Image src={logoImage} alt="Logo" height={42} width={220} />
+            <Image src={logoImage} alt="Logo" height={42} width={133} />
           </Anchor>
         </Link>
         <Group spacing={5} className={classes.links}>
