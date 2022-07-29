@@ -2,11 +2,9 @@
   "version": 2,
   "projects": {
     "admin-web": "apps/admin-web",
-    "admin-web-e2e": "apps/admin-web-e2e",
     "api": "apps/api",
     "cli": "apps/cli",
     "web": "apps/web",
-    "web-e2e": "apps/web-e2e",
     "shared-constants": "libs/shared/constants",
     "shared-helpers": "libs/shared/helpers",
     "shared-apollo-client": "libs/shared/apollo-client",
