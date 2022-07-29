@@ -1,6 +1,6 @@
 # EGVV - Engine Goes Vroom Vroom
 
-The number one AutoMoto project.
+The last racing platform you'll event need.
 
 **This project is still in active development**
 
