@@ -29,16 +29,16 @@ Once you've installed all the dependencies, you simply run `yarn dev` in your te
 
 ## Screenshots
 
-![Admin Event Sessions Page](docs/screehshots/admin_event_sessions_page.png)
+![Team Drivers Page](docs/screenshots/team_drivers_page.png)
 
-![Admin Seasons Page](docs/screehshots/admin_seasons_page.png)
+![Season Drivers Page](docs/screenshots/season_drivers_page.png)
 
-![Admin Season Team Drivers Page](docs/screehshots/admin_season_team_drivers_page.png)
+![Season Events Page](docs/screenshots/season_events_page.png)
 
-![Admin Series Page](docs/screehshots/admin_series_page.png)
+![Admin Event Sessions Page](docs/screenshots/admin_event_sessions_page.png)
 
-![Season Drivers Page](docs/screehshots/season_drivers_page.png)
+![Admin Seasons Page](docs/screenshots/admin_seasons_page.png)
 
-![Season Events Page](docs/screehshots/season_events_page.png)
+![Admin Season Team Drivers Page](docs/screenshots/admin_season_team_drivers_page.png)
 
-![Team Drivers Page](docs/screehshots/team_drivers_page.png)
+![Admin Series Page](docs/screenshots/admin_series_page.png)
