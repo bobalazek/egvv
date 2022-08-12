@@ -1,6 +1,6 @@
 # EGVV - Engine Goes Vroom Vroom
 
-The last racing platform you'll event need.
+A racing news platform aggregator.
 
 **This project is still in active development**
 
