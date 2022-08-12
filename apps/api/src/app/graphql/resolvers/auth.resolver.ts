@@ -1,7 +1,7 @@
 import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 
-import { PrismaService } from '../../app/services/prisma.service';
+import { PrismaService } from '../../services/prisma.service';
 import { AbstractResolver } from './abstract.resolver';
 import { AuthService } from '../services/auth.service';
 import { LoginArgs } from '../args/auth/login.args';

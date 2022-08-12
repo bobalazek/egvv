@@ -7,7 +7,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
 import { API_SERVER_GRAPHQL_PATH, JWT_SECRET } from '@egvv/shared-constants';
-import { PrismaService } from '../app/services/prisma.service';
+import { PrismaService } from '../services/prisma.service';
 import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 import { ComplexityPlugin } from './plugins/complexity.plugin';
 import { AuthService } from './services/auth.service';

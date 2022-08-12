@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../app/services/prisma.service';
+import { PrismaService } from '../../services/prisma.service';
 import { AllArgs } from '../args/all.args';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -2,7 +2,7 @@ import { Resolver, Query, Args, ResolveField, Parent } from '@nestjs/graphql';
 
 import { Prisma } from '@prisma/client';
 import { AbstractResolver } from '../abstract.resolver';
-import { PrismaService } from '../../../app/services/prisma.service';
+import { PrismaService } from '../../../services/prisma.service';
 import { AssetsService } from '../../services/assets.service';
 import { TeamVehicleAssetsArgs } from '../../args/assets/team-vehicle-assets.args';
 import { TeamVehicleAsset } from '../../models/assets/team-vehicle-asset.model';

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from '../models/user.model';
 import { JwtService } from '@nestjs/jwt';
 
-import { PrismaService } from '../../app/services/prisma.service';
+import { PrismaService } from '../../services/prisma.service';
 import { JwtUserDynamicFieldsInterface } from '../auth/interfaces/jwt-user.interface';
 
 @Injectable()
